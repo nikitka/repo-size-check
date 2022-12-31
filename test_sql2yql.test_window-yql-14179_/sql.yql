@@ -1,0 +1,38 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (Int32 '"1"))) (AsStruct '('"x" (Int32 '"2"))) (AsStruct '('"x" (Int32 '"3"))))) '('"x")))
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Int32 '0)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Uint64 '0)))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+          (let res (Member row '"x"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lst" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"x")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"x" '"lst")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,3 @@
+/dev/stdin:<main>:3:8: Error: Failed to use function: TablePath with aggregation, join, flatten by or window functions
+	  key, TablePath() as tab_path, ROW_NUMBER() over w1
+	       ^

@@ -1,0 +1,143 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joincollectcolumnarstatistics" '"async"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<=" (Member row '"subkey") (String '"3")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Take select (Coalesce (Int32 '"100") (Uint64 '18446744073709551615))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"yang_ids") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table3 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"yang_ids") (Void) '()))
+  (let table4 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table3) '"j") '((RemoveSystemMembers table4) '"yang_ids:@") '('LeftOnly '"j" '"yang_ids:@" '('"j" '"key") '('"yang_ids:@" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let flatSameKeys row)
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('j.key 'yang_ids:@.key)))
+          (let row flatSameKeys)
+          (let res (DivePrefixMembers row '('"j." '"yang_ids:@.")))
+          (return res)
+        ))) '('('divePrefix '('"j." '"yang_ids:@.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"yang_ids") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table6 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"yang_ids") (Void) '()))
+  (let table7 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table6) '"j") '((RemoveSystemMembers table7) '"yang_ids:@") '('LeftOnly '"j" '"yang_ids:@" '('"j" '"key") '('"yang_ids:@" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let flatSameKeys row)
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('j.key 'yang_ids:@.key)))
+          (let row flatSameKeys)
+          (let res (DivePrefixMembers row '('"j." '"yang_ids:@.")))
+          (return res)
+        ))) '('('divePrefix '('"j." '"yang_ids:@.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"yang_ids") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"yang_ids") (Void) '()))
+  (let table8 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table8)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,76 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrFolder '"" '"") (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"Type") (String '"table")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Path" (lambda '(row) (block '(
+              (let res (Member row '"Path"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"Path")))))
+        (let select (Take select (Coalesce (Int32 '"30") (Uint64 '18446744073709551615))))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"Path")) (Uint64 '0)))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableEach (Key '('table (EvaluateExpr (EnsureType (Coalesce (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0) (List (ListType (DataType 'String)))) (ListType (DataType 'String))))))) (Void) '('('"ignorenonexisting") '('"warnnonexisting"))))
+  (let table2 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'renew))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

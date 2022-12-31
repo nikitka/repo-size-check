@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgAgg '"count" '()))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))))))) '('set_ops '('push)))) '"a" '('"x")) '((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))))))) '('set_ops '('push)))) '"b" '('"x")))) '('join_ops '('() '())) '('where (PgWhere (Void) (lambda '() (PgAnd (PgOp '"=" (PgColumnRef '"a" '"x") (PgColumnRef '"b" '"x")) (PgOp '"<" (PgColumnRef '"a" '"x") (PgConst '2 (PgType 'int4))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgAgg '"count" '()))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))))))) '('set_ops '('push)))) '"a" '('"x")) '((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))))))) '('set_ops '('push)))) '"b" '('"x")))) '('join_ops '('() '())) '('where (PgWhere (Void) (lambda '() (PgAnd (PgOp '"=" (PgColumnRef '"a" '"x") (PgColumnRef '"b" '"x")) (PgOp '">" (PgColumnRef '"a" '"x") (PgConst '1 (PgType 'int4))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

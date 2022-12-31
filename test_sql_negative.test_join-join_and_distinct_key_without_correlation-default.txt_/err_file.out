@@ -1,0 +1,3 @@
+/dev/stdin:<main>:4:20: Error: DISTINCT columns for JOIN in SELECT should have table aliases (correlation name), add it if necessary to FROM section over 'AS <alias>' keyword and put it like '<alias>.key'
+	    count(distinct key) as uniq_count -- distinct qualifier required correlation name
+	                   ^

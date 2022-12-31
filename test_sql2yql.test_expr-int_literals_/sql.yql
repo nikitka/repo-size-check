@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"small_int" (lambda '(row) (block '(
+          (let res (Int32 '"23"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"unsigned_long" (lambda '(row) (block '(
+          (let res (Uint64 '"9262583611491805930"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i32max" (lambda '(row) (block '(
+          (let res (Int32 '"2147483647"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i32max_plus1" (lambda '(row) (block '(
+          (let res (Int64 '"2147483648"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i64max" (lambda '(row) (block '(
+          (let res (Int64 '"9223372036854775807"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i64max_plus1" (lambda '(row) (block '(
+          (let res (Uint64 '"9223372036854775808"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"small_int" '"unsigned_long" '"i32max" '"i32max_plus1" '"i64max" '"i64max_plus1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

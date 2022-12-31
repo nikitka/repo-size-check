@@ -1,0 +1,58 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFlatMap core (lambda '(row) (AsList row))))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverSessionWindow partitioning '('"user") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf partitioning) (lambda '(row) (Member row '"ts")) (Uint64 '0))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Int32 '"1"))))))) (SessionWindowTraits (TypeOf partitioning) (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) (lambda '(row) (Member row '"ts")) (lambda '(prev curr) (And (AggrNotEquals curr prev) (Coalesce (< (Int32 '"10") (If (Coalesce (< prev curr) (Bool 'true)) (- curr prev) (- prev curr))) (Bool 'true))))) '('"ss0")))
+        (let partitioning (CalcOverSessionWindow partitioning '('"user") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))))) (SessionWindowTraits (TypeOf partitioning) (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) (lambda '(row) (Member row '"ts")) (lambda '(prev curr) (And (AggrNotEquals curr prev) (Coalesce (< (Int32 '"10") (If (Coalesce (< prev curr) (Bool 'true)) (- curr prev) (- prev curr))) (Bool 'true))))) '('"group_w1_0")))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"user" (lambda '(row) (block '(
+          (let res (Member row '"user"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+          (let res (Member row '"ts"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ss1" (lambda '(row) (block '(
+          (let res (Member (Member row '"group_w1_0") '"start"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ss" (lambda '(row) (block '(
+          (let res (Member (Member row '"ss0") '"start"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ts_session" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session_len" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"user")) (PersistableRepr (Member row '"ts"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"user" '"ts" '"ss1" '"ss" '"ts_session" '"session_len")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,64 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two"))))) '"l") '((ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
+        (return (AsStruct '('"y" "$i")))
+      ))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"l." '"r.")))
+          (return res)
+        ))) '('('divePrefix '('"l." '"r.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
+        (return (AsStruct '('"y" "$i")))
+      ))))) '"l") '((ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two"))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"l." '"r.")))
+          (return res)
+        ))) '('('divePrefix '('"l." '"r.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

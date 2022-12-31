@@ -1,0 +1,38 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (EquiJoin '((ToList (AsList (AsStruct '('"x" (Int32 '"1"))))) '"a") '((ToList (AsList (AsStructUnordered '('"x" (Int32 '"1")) '('"y" (Null))))) '"b") '('Left '"a" '"b" '('"a" '"x") '('"b" '"x") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let flatSameKeys row)
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('a.x 'b.x)))
+          (let row flatSameKeys)
+          (let res (DivePrefixMembers row '('"a." '"b.")))
+          (return res)
+        ))) '('('divePrefix '('"a." '"b.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

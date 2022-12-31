@@ -1,0 +1,40 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"rtmr" '"plato") (Key '('table (String '"Input"))) (Void) '()))
+  (let world (Left! x))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value"))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Timestamp))) (Interval '10000000) (Interval '10000000) (Interval '300000000) 'true 'v1)))) '('"key")) (lambda '(row) (Coalesce (">" (Member row 'Count0) (Int32 '"2")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"time" (lambda '(row) (block '(
+          (let res (Member row '_yql_time))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"time" '"count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

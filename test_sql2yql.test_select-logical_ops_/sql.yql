@@ -1,0 +1,42 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"and_res" (lambda '(row) (block '(
+          (let res (And ("==" (Size (Member row '"key")) (Int32 '"3")) ("==" (Size (Member row '"value")) (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"or_res" (lambda '(row) (block '(
+          (let res (Or ("==" (Size (Member row '"key")) (Int32 '"3")) ("==" (Size (Member row '"value")) (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_res" (lambda '(row) (block '(
+          (let res (Xor ("==" (Size (Member row '"key")) (Int32 '"3")) ("==" (Size (Member row '"value")) (Int32 '"3"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"and_res" '"or_res" '"xor_res")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

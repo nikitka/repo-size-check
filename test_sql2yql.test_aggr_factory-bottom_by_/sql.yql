@@ -1,0 +1,91 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Aggregate (AsList (AsStructUnordered '('"key" (Int32 '"1")) '('"value" (Int32 '"101"))) (AsStructUnordered '('"key" (Int32 '"6")) '('"value" (Int32 '"34"))) (AsStructUnordered '('"key" (Int32 '"4")) '('"value" (Int32 '"22"))) (AsStructUnordered '('"key" (Int32 '"2")) '('"value" (Int32 '"256"))) (AsStructUnordered '('"key" (Int32 '"7")) '('"value" (Int32 '"111")))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"bottom_by_traits_factory") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0)) (Int32 '"3"))) (ListItemType (TypeOf (AsList (AsStructUnordered '('"key" (Int32 '"1")) '('"value" (Int32 '"101"))) (AsStructUnordered '('"key" (Int32 '"6")) '('"value" (Int32 '"34"))) (AsStructUnordered '('"key" (Int32 '"4")) '('"value" (Int32 '"22"))) (AsStructUnordered '('"key" (Int32 '"2")) '('"value" (Int32 '"256"))) (AsStructUnordered '('"key" (Int32 '"7")) '('"value" (Int32 '"111")))))) (lambda '("$z") (block '(
+            (return '((SqlAccess 'struct "$z" '"value" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$z" '"key" '('"yson_strict" '"yson_fast"))))
+          ))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStructUnordered '('"key" (Int32 '"1")) '('"value" (Int32 '"101"))) (AsStructUnordered '('"key" (Int32 '"6")) '('"value" (Int32 '"34"))) (AsStructUnordered '('"key" (Int32 '"4")) '('"value" (Int32 '"22"))) (AsStructUnordered '('"key" (Int32 '"2")) '('"value" (Int32 '"256"))) (AsStructUnordered '('"key" (Int32 '"7")) '('"value" (Int32 '"111"))))) (lambda '(row) (SelectMembers row '('"key" '"value")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"vk" (lambda '(row) (block '(
+          (let res '((Member row '"value") (Member row '"key")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"a") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"a") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"bottom_by_traits_factory") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0)) (Int32 '"3"))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"vk")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

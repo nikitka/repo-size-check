@@ -1,0 +1,204 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"scriptcpu" '"1.0"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output1"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table3 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"2"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output2"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table5 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table5)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"3"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output2"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table7 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table7)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"4"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output1"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"scriptcpu" '"2.0"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table9 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table9)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"5"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output1"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table11 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table11)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (String '"6"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output1"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"structs" (lambda '(row) (block '(
+          (let res (StaticZip (AsStructUnordered '('"k1" (Int32 '"1")) '('"k2" (String '"2")) '('"k3" (AsList (String '"3") (String '"4")))) (AsStructUnordered '('"k1" (String '"10")) '('"k2" (AsList (Int32 '"20") (Int32 '"30"))) '('"k3" (Int32 '"40"))) (AsStructUnordered '('"k1" (AsList (Int32 '"100") (Int32 '"200"))) '('"k2" (Int32 '"300")) '('"k3" (String '"400")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"tuples" (lambda '(row) (block '(
+          (let res (StaticZip '((Int32 '"1") (String '"2") (AsList (String '"3") (String '"4"))) '((String '"10") (AsList (Int32 '"20") (Int32 '"30")) (Int32 '"40")) '((AsList (Int32 '"100") (Int32 '"200")) (Int32 '"300") (String '"400"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"empty_structs" (lambda '(row) (block '(
+          (let res (StaticZip (AsStruct) (AsStruct)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"empty_tuples" (lambda '(row) (block '(
+          (let res (StaticZip '() '()))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"single_struct" (lambda '(row) (block '(
+          (let res (StaticZip (AsStructUnordered '('"k1" (Int32 '"1")) '('"k2" (String '"2")) '('"k3" (AsList (String '"3") (String '"4"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"single_tuple" (lambda '(row) (block '(
+          (let res (StaticZip '((Int32 '"1") (String '"2") (AsList (String '"3") (String '"4")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"structs" '"tuples" '"empty_structs" '"empty_tuples" '"single_struct" '"single_tuple")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,3 @@
+/dev/stdin:<main>:2:6: Error: Column reference "a" is not allowed in current scope
+	$x = a.b[0];
+	     ^

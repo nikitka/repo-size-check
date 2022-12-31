@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgCast (PgConst '"foo" (PgType 'text)) (PgType '"varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column1" (Void) (lambda '() (PgCast (PgConst '12345 (PgType 'int4)) (PgType '"varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column2" (Void) (lambda '() (PgCast (PgConst '"{foo,bar}" (PgType 'text)) (PgType '"_varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column3" (Void) (lambda '() (PgCast (PgArray (PgConst '"foo" (PgType 'text)) (PgConst '"bar" (PgType 'text))) (PgType '"_varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column4" (Void) (lambda '() (PgCast (PgArray (PgConst '12345 (PgType 'int4)) (PgConst '67890 (PgType 'int4))) (PgType '"_varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column5" (Void) (lambda '() (PgCast (PgArray (PgConst '"foo" (PgType 'text)) (PgConst '"bar" (PgType 'text))) (PgType '"varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))) (PgResultItem '"column6" (Void) (lambda '() (PgCast (PgArray (PgConst '12345 (PgType 'int4)) (PgConst '67890 (PgType 'int4))) (PgType '"varchar") (PgCall 'varchartypmodin '() (PgArray (PgConst '"2" (PgType 'cstring))))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

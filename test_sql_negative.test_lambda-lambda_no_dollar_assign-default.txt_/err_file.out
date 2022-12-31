@@ -1,0 +1,8 @@
+/dev/stdin:<main>:8:2: Error: Unexpected token absence : Missing RETURN 
+
+	  res = Math::Floor(Math::Pi() * $shift($v)); -- no '$' in variable, should be $res = ...
+	 ^
+/dev/stdin:<main>:9:2: Error: Unexpected token absence : Missing RBRACE_CURLY 
+
+	  return $res
+	 ^

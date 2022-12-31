@@ -1,0 +1,88 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Uint32 '"100")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery0 '"i1") '(subquery1 '"i2") '(subquery0 '"i3") '('Inner '('LeftOnly '"i1" '"i2" '('"i1" '"key") '('"i2" '"key") '()) '"i3" '('"i1" '"key") '('"i3" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"i1" (lambda '(row) (block '(
+          (let res (SelectMembers row '('"i1.")))
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"i1."))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,45 @@
+(
+(let scriptudf0 (String '@@
+def f(f):
+  def ft(s):
+    return True
+  def ff(s):
+    return False
+  return f and ft or ff
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (Key '('table (MrTableRange '"" (lambda '(item) (Apply (Apply (ScriptUdf 'Python3 '"f" (CallableType '() '((CallableType '() '((DataType 'Bool)) '((DataType 'String)))) '((DataType 'Bool))) scriptudf0) (SqlCall '"String.StartsWith" '((PositionalArgs (String '"testfets") (String '"test"))))) item)) '""))) (Void) '('('"ignorenonexisting"))))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

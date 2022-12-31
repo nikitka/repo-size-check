@@ -1,0 +1,302 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergetableslimit" '"10"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergeunsortedfactor" '"0"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinallowcolumnrenames" '"true"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergesettoplevelfullsort" '"true"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a")) (PersistableRepr (SqlColumn row '"key" '"b"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key" '"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"a") '((RemoveSystemMembers table3) '"b") '('Right '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"b")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key" '"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table4 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table5 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table4) '"a") '((RemoveSystemMembers table5) '"b") '('Left '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key" '"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table6 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table7 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table6) '"a") '((RemoveSystemMembers table7) '"b") '('Full '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"key" '"b")) (PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key" '"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table8 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table9 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table8) '"a") '((RemoveSystemMembers table9) '"b") '('RightOnly '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"b")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table10 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table11 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table10) '"a") '((RemoveSystemMembers table11) '"b") '('LeftOnly '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table12 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table13 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table12) '"a") '((RemoveSystemMembers table13) '"b") '('Exclusion '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"key" '"b")) (PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key" '"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table14 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table15 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table14) '"a") '((RemoveSystemMembers table15) '"b") '('RightSemi '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"b.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"b")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"b.key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedBySubkeyValue")))) (Void) '()))
+  (let table16 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"SortedByKey")))) (Void) '()))
+  (let table17 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table16) '"a") '((RemoveSystemMembers table17) '"b") '('LeftSemi '"a" '"b" '('"a" '"subkey") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"subkey" '"a")) (PersistableRepr (SqlColumn row '"value" '"a"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a.subkey" '"a.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

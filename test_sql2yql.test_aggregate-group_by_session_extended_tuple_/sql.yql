@@ -1,0 +1,50 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650624253")) '('"video_content_id" (Null))) (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650624255")) '('"video_content_id" (String '"b"))) (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650624256")) '('"video_content_id" (Null))) (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650624257")) '('"video_content_id" (String '"b"))) (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650634257")) '('"video_content_id" (String '"b"))) (AsStructUnordered '('"vsid" (String '"v")) '('"unixtime" (Int32 '"1650634258")) '('"video_content_id" (String '"c"))))))
+      (let core (FlatMap core (lambda '(row) (AsList (ForceRemoveMember row 'session_start)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"vsid" '"session_start") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '('('session '('"session_start" (SessionWindowTraits (TypeOf core) (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"unixtime")))) (lambda '("$row") (block '(
+        (return '((SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"video_content_id" '('"yson_strict" '"yson_fast"))))
+      ))) (lambda '("$row" "$state") (block '(
+        (let $is_end_session (Or (">=" ("-" (SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$state" '"1" '('"yson_strict" '"yson_fast"))) ("*" (Int32 '"60") (Int32 '"30"))) (Coalesce (And (Not (Not (Exists (SqlAccess 'struct "$row" '"video_content_id" '('"yson_strict" '"yson_fast"))))) ("!=" (SqlAccess 'struct "$row" '"video_content_id" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$state" '"2" '('"yson_strict" '"yson_fast")) (String '"-")))) (Bool '"false"))))
+        (let $new_state '((If (Coalesce "$is_end_session" (Bool 'false)) (SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$state" '"0" '('"yson_strict" '"yson_fast"))) (SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (If (Coalesce "$is_end_session" (Bool 'false)) (SqlAccess 'struct "$row" '"video_content_id" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$state" '"2" '('"yson_strict" '"yson_fast")))))
+        (return '("$is_end_session" "$new_state"))
+      ))) (lambda '("$row" "$state") (block '(
+        (return '((SqlAccess 'struct "$row" '"unixtime" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$state" '"2" '('"yson_strict" '"yson_fast"))))
+      )))))))) '('"vsid" '"session_start")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"vsid" (lambda '(row) (block '(
+          (let res (Member row '"vsid"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session_start" (lambda '(row) (block '(
+          (let res (Member row '"session_start"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session_size" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"vsid")) (PersistableRepr (Member row '"session_start"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"vsid" '"session_start" '"session_size")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,271 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Int32 '"1"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (Member row '"key") (String '"foo")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table4 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite table4)
+      (return (UnionAll (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"key" '"subkey")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"key")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"key" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'key) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref) '('columns '('"column0" '"key" '"subkey")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table5 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table6 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((block '(
+        (let select (block '(
+          (let core table5)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Concat (Concat (Member row '"key") (String '"a")) (String '"b")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) '"a") '((block '(
+        (let select (block '(
+          (let core table6)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Concat (Member row '"key") (String '"ab")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

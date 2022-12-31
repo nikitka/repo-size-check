@@ -1,0 +1,77 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember row 'group__yql_anonymous_window0_0 (SafeCast (TableName (TablePath (DependsOn row)) '"yt") (DataType 'Utf8)))))))
+      (let core (CalcOverWindow core '('"group__yql_anonymous_window0_0") (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (SafeCast (TableName (TablePath (DependsOn row)) '"yt") (DataType 'Utf8)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (SafeCast (TableName (TablePath (DependsOn row)) '"yt") (DataType 'Utf8))))) '((WinOnRows '('('begin (Void)) '('end (Void))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (SafeCast (TableName (TablePath (DependsOn row)) '"yt") (DataType 'Utf8)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

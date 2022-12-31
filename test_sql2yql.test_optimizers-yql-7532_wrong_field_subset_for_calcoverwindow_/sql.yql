@@ -1,0 +1,77 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Date" (lambda '(row) (block '(
+          (let res (Date '"17959"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Permalink" (lambda '(row) (block '(
+          (let res (Int64 '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ClusterPermalink" (lambda '(row) (block '(
+          (let res (Int64 '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"IsHead" (lambda '(row) (block '(
+          (let res (Bool '"false"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"WasHead" (lambda '(row) (block '(
+          (let res (Bool '"false"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"source") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"source") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (CalcOverWindow core '('"Permalink") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"Date")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (AsStructUnordered '('"Permalink" (Member row '"Permalink")) '('"Date" (Member row '"Date")) '('"ClusterPermalink" (Member row '"ClusterPermalink")))) (Uint64 '0)))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Occurence" (lambda '(row) (block '(
+          (let res (If (Coalesce (And (Not (Member row '"WasHead")) (Not (Member row '"IsHead"))) (Bool 'false)) (Member row 'AggregateList0) (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Occurence")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

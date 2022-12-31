@@ -1,0 +1,3 @@
+/dev/stdin:<main>:5:16: Error: Invalid label: Input.with.dot, unable to use name with dot symbol, you should use AS <simple alias name>
+	LEFT SEMI JOIN `Input.with.dot`
+	               ^

@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgColumnRef '"x"))))) '('from '('((PgCall '"upper" '() (PgConst '"abc" (PgType 'text))) '"x" '()))) '('join_ops '('())))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"a" (Void) (lambda '() (PgColumnRef '"a"))))) '('from '('((PgCall '"upper" '() (PgConst '"abc" (PgType 'text))) '"x" '('"a")))) '('join_ops '('())))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

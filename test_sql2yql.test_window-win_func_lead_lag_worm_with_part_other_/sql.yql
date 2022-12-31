@@ -1,0 +1,95 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key_quad" (lambda '(row) (block '(
+          (let res ("%" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"4")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Int32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Int32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (CalcOverWindow core '('"key_quad") (SortTraits (TypeOf core) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"value"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"3"))) '('_yql_Lead1 (Lead (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"2"))) '('_yql_Lead2 (Lead (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"1"))) '('_yql_Lag0 (Lag (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"1"))) '('_yql_Lag1 (Lag (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"2"))) '('_yql_Lag2 (Lag (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"3"))) '('_yql_Lag3 (Lag (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"4"))) '('_yql_Lag4 (Lag (TypeOf core) (lambda '(row) (Member row '"key")) (Int32 '"5")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a_part" (lambda '(row) (block '(
+          (let res (Member row '"key_quad"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"keyL" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"keyM" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"keyN" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"keyO" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_1" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_2" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_3" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_4" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_5" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag4))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"a_part")) (PersistableRepr (Member row '"keyO")) (PersistableRepr (Member row '"value"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a_part" '"keyL" '"keyM" '"keyN" '"keyO" '"key_1" '"key_2" '"key_3" '"key_4" '"key_5" '"value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

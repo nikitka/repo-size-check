@@ -1,0 +1,54 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input4")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (CalcOverWindow core '('"key") (SortTraits (TypeOf core) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"subkey")) (PersistableRepr (Member row '"value"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Rank0 (Rank (TypeOf core) (lambda '(row) '((Member row '"subkey") (Member row '"value"))) '())) '('_yql_DenseRank0 (DenseRank (TypeOf core) (lambda '(row) '((Member row '"subkey") (Member row '"value"))) '())) '('_yql_Rank1 (Rank (TypeOf core) (lambda '(row) (Member row '"subkey")) '())) '('_yql_DenseRank1 (DenseRank (TypeOf core) (lambda '(row) (Member row '"subkey")) '()))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"rank_noarg" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dense_rank_noarg" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rank" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dense_rank" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank1))
+          (return res)
+        )))) (SqlProjectStarItem projectCoreType '"zz" (lambda '(row) (block '(
+          (let row (RemoveMember row '_yql_Rank0))
+          (let row (RemoveMember row '_yql_DenseRank0))
+          (let row (RemoveMember row '_yql_Rank1))
+          (let row (RemoveMember row '_yql_DenseRank1))
+          (let res (FlattenMembers '('"zz." row)))
+          (return res)
+        ))) '('('addPrefix '"zz."))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemovePrefixMembers select '('zz._yql_)))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"rank_noarg" '"dense_rank_noarg" '"rank" '"dense_rank" '('prefix '"zz."))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

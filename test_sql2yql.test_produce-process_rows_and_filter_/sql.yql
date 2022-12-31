@@ -1,0 +1,61 @@
+(
+(let scriptudf0 (String '@@
+def processRows(prefix, rowList, separator):
+	result = [];
+	for row in rowList:
+		result.append({"Data" : prefix + row.Name + separator + row.Value});
+	
+	return result;
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Name" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let inputRowsList subquery0)
+      (let inputRowsList (OrderedFilter inputRowsList (lambda '(row) (Coalesce ("!=" (Member row '"Name") (String '"foo")) (Bool 'false)))))
+      (let core (SqlProcess (ScriptUdf 'Python3 '"processRows" (CallableType '() '((StreamType (StructType '('"Data" (DataType 'String))))) '((DataType 'String)) '((StreamType (StructType '('"Name" (DataType 'String)) '('"Value" (DataType 'String)))) '"") '((DataType 'String) '"")) scriptudf0) (String '">>") (RemoveSystemMembers inputRowsList) (String '"=") '1))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

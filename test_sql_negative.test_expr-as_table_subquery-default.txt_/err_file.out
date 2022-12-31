@@ -1,0 +1,3 @@
+/dev/stdin:<main>:3:24: Error: AS_TABLE shouldn't be used for table sources
+	SELECT * FROM AS_TABLE($data);
+	                       ^

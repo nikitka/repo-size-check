@@ -1,0 +1,53 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergetableslimit" '"10"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergeunsortedfactor" '"0"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinallowcolumnrenames" '"true"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergesettoplevelfullsort" '"true"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input3")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '((RemoveSystemMembers table2) '"c") '('Cross '('Inner '"a" '"b" '('"a" '"k1") '('"b" '"k2") '()) '"c" '() '() '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ck3" (lambda '(row) (block '(
+          (let res (SqlColumn row '"k3" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ck3_extra" (lambda '(row) (block '(
+          (let res (SqlColumn row '"k3" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c.v3" (lambda '(row) (block '(
+          (let res (SqlColumn row '"v3" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ak1" (lambda '(row) (block '(
+          (let res (SqlColumn row '"k1" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"ak1")) (PersistableRepr (SqlColumn row '"ck3"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"ck3" '"ck3_extra" '"c.v3" '"ak1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

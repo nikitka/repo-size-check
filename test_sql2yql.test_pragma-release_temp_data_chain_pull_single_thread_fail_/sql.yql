@@ -1,0 +1,198 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"releasetempdata" '"immediate"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"inflighttemptableslimit" '"2"))
+(let world (EvaluateFor! world (EvaluateExpr (ListFromRange (Int32 '"1") (Int32 '"2"))) (lambda '(world "$param") (Apply (lambda '(world "$param") (block '(
+  (let subquerynode0 (block '(
+    (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+    (let table7 (Right! x))
+    (return '(world (block '(
+      (let select (block '(
+        (let core table7)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".1"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode0 '0))
+  (let subquery0 (Nth subquerynode0 '1))
+  (let subquerynode1 (block '(
+    (return '(world (block '(
+      (let select (block '(
+        (let core subquery0)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".2"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode1 '0))
+  (let subquery1 (Nth subquerynode1 '1))
+  (let subquerynode2 (block '(
+    (return '(world (block '(
+      (let select (block '(
+        (let core subquery1)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".3"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode2 '0))
+  (let subquery2 (Nth subquerynode2 '1))
+  (let subquerynode3 (block '(
+    (return '(world (block '(
+      (let select (block '(
+        (let core subquery2)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".4"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode3 '0))
+  (let subquery3 (Nth subquerynode3 '1))
+  (let subquerynode4 (block '(
+    (return '(world (block '(
+      (let select (block '(
+        (let core subquery3)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".5"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode4 '0))
+  (let subquery4 (Nth subquerynode4 '1))
+  (let subquerynode5 (block '(
+    (return '(world (block '(
+      (let select (block '(
+        (let core subquery4)
+        (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (Concat (SafeCast "$param" (DataType 'String)) (String '".6"))) (Bool 'false)))))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"value") '() '()) '('"key" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let res (Member row '"value"))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+      (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode5 '0))
+  (let subquery5 (Nth subquerynode5 '1))
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core subquery5)
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let res row)
+            (return res)
+          ))) '()))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (RemoveSystemMembers select))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$param"))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

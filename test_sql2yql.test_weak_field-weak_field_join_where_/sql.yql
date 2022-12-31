@@ -1,0 +1,61 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" (WeakField row 'String '('value1))))
+        (return row)
+      ))))) '"i1") '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_1" (WeakField row 'String '('value2))))
+        (return row)
+      ))))) '"i2") '('Inner '"i1" '"i2" '('"i1" '"_equijoin_column_0") '('"i2" '"_equijoin_column_1") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"i1._equijoin_column_0"))
+        (let row (ForceRemoveMember row '"i2._equijoin_column_1"))
+        (return row)
+      )))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Or ("==" (WeakField row 'String '('key 'i2)) (String '"150")) ("==" (WeakField row 'String '('key 'i1)) (String '"075"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"sk" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"i1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i1v1" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value1 'i1) (String '"funny")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i1v2" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value2 'i1) (String '"bunny")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2v1" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value1 'i2) (String '"short")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2v2" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value2 'i2) (String '"circuit")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"sk")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"sk" '"i1v1" '"i1v2" '"i2v1" '"i2v2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

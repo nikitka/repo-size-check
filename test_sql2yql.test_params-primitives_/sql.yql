@@ -1,0 +1,123 @@
+(
+(declare $x17 (DataType 'Timestamp))
+(declare $x5 (DataType 'String))
+(declare $x1 (DataType 'Int32))
+(declare $x8 (DataType 'String))
+(declare $x2 (DataType 'Double))
+(declare $x7 (DataType 'Uint64))
+(declare $x12 (OptionalType (DataType 'String)))
+(declare $x22 (VoidType))
+(declare $x18 (DataType 'Interval))
+(declare $x10 (DataType 'Uuid))
+(declare $x20 (DataType 'TzTimestamp))
+(declare $x15 (DataType 'Datetime))
+(declare $x4 (DataType 'Float))
+(declare $x3 (DataType 'Bool))
+(declare $x11 (OptionalType (DataType 'String)))
+(declare $x6 (DataType 'Int64))
+(declare $x21 (DataType 'TzDate))
+(declare $x23 (DataType 'Decimal '"21" '"8"))
+(declare $x14 (DataType 'Json))
+(declare $x16 (DataType 'Date))
+(declare $x9 (DataType 'Utf8))
+(declare $x19 (DataType 'TzDatetime))
+(declare $x13 (DataType 'Yson))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res ("*" (Int32 '"2") "$x1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res ("*" (Minus "$x2") (Int32 '"10")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Not "$x3"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Minus "$x4"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Concat "$x5" (String '"2018")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Minus "$x6"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res ("+" "$x7" (Int32 '"1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (Size "$x8"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (SqlCall '"Unicode.GetLength" '((PositionalArgs "$x9"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (SafeCast "$x10" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (Coalesce "$x11" (String '"XYZ")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (Coalesce "$x12" (String '"XYZ")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.LookupInt64" '((PositionalArgs "$x13" (String '"a") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.ConvertToInt64" '((PositionalArgs (SqlAccess 'struct "$x14" '"b" '('"yson_strict" '"yson_fast")) (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res (SafeCast "$x15" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+          (let res (SafeCast "$x16" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+          (let res (SafeCast "$x17" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+          (let res (SafeCast "$x18" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+          (let res (SafeCast "$x19" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+          (let res (SafeCast "$x20" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+          (let res (SafeCast "$x21" (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+          (let res "$x22")
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+          (let res (SafeCast "$x23" (DataType 'String)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21" '"column22")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,122 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input4")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Unwrap (SafeCast (Member row '"key") (DataType 'Uint32))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Unwrap (SafeCast (Member row '"subkey") (DataType 'Uint32))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"unused" (lambda '(row) (block '(
+          (let res (Concat (Member row '"value") (Member row '"value")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"data") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"data") (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"subkey" '"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('FirstValue0 (Apply (bind window_module '"first_value_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"subkey")))))))))
+        (let partitioning (CalcOverWindow partitioning '('"key" '"subkey") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('LastValue0 (Apply (bind window_module '"last_value_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key")))))))))
+        (let partitioning (CalcOverWindow partitioning '('"subkey" '"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Lead0 (Lead (TypeOf partitioning) (lambda '(row) (Member row '"value"))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w1_first_value" (lambda '(row) (block '(
+          (let res (Member row 'FirstValue0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w2_sum_subkey" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w3_last_value" (lambda '(row) (block '(
+          (let res (Member row 'LastValue0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w4_sum_key" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w5_next_value" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"w1_first_value" '"w2_sum_subkey" '"w3_last_value" '"w4_sum_key" '"w5_next_value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

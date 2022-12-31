@@ -1,0 +1,11 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let read0 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"Input"))) (Void) '()))
+(let world (Left! read0))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgQualifiedStar '"a"))) (PgResultItem '"column0" (Void) (lambda '() (PgConst '1 (PgType 'int4)))) (PgResultItem '"foo" (Void) (lambda '() (PgColumnRef '"value"))))) '('from '('((Right! read0) '"a" '()))) '('join_ops '('())))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

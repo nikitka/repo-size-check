@@ -1,0 +1,81 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite (EquiJoin '((RemoveSystemMembers table0) '"t1") '((RemoveSystemMembers table1) '"t2") '('Inner '"t1" '"t2" '('"t1" '"key") '('"t2" '"key") '()) '()))
+      (return (UnionAll (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '() '()) '('"kk" '"sk")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let flatSameKeys row)
+            (let flatSameKeys (CoalesceMembers flatSameKeys '('t1.key 't2.key)))
+            (let row flatSameKeys)
+            (let res (FlattenMembers '('"" (AsStruct '('"kk" (Member row '"kk")) '('"sk" (Member row '"sk")))) '('"" (DivePrefixMembers row '('"t1." '"t2.")))))
+            (return res)
+          ))) '('('divePrefix '('"t1." '"t2.")))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '() '()) '('"kk")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let flatSameKeys row)
+            (let flatSameKeys (CoalesceMembers flatSameKeys '('t1.key 't2.key)))
+            (let row flatSameKeys)
+            (let res (FlattenMembers '('"" (AsStruct '('"kk" (Member row '"kk")))) '('"" (DivePrefixMembers row '('"t1." '"t2.")))))
+            (return res)
+          ))) '('('divePrefix '('"t1." '"t2.")))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '() '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let flatSameKeys row)
+            (let flatSameKeys (CoalesceMembers flatSameKeys '('t1.key 't2.key)))
+            (let row flatSameKeys)
+            (let res (FlattenMembers '('"" (AsStruct)) '('"" (DivePrefixMembers row '('"t1." '"t2.")))))
+            (return res)
+          ))) '('('divePrefix '('"t1." '"t2.")))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"kk")) (PersistableRepr (SqlColumn row '"sk"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

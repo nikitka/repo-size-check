@@ -1,0 +1,12 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"EvaluateForLimit" '"3"))
+(let world (EvaluateFor! world (EvaluateExpr (ListFromRange (Int32 '"0") (Int32 '"10"))) (lambda '(world "$_i") (Apply (lambda '(x) x) world))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

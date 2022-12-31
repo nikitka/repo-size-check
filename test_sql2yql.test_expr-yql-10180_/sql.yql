@@ -1,0 +1,154 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (UnorderedSubquery (Apply (lambda '(world "$path" "$limit") (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrFolder (EvaluateAtom "$path") '"") (Void) '()))
+          (let table0 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core (block '(
+                (let select (block '(
+                  (let core table0)
+                  (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"Type") (String '"table")) (Bool 'false)))))
+                  (let core (PersistableRepr (block '(
+                    (let projectCoreType (TypeOf core))
+                    (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Name" (lambda '(row) (block '(
+                      (let res (ListLast (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"Path") (String '"/"))))))
+                      (return res)
+                    )))))))
+                    (return core)
+                  ))))
+                  (return core)
+                )))
+                (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"Name")))))
+                (let select (Take select (Coalesce "$limit" (Uint64 '18446744073709551615))))
+                (return select)
+              )))
+              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"Name")) (Uint64 '0)))) '()) '()))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                  (let res (Member row 'AggregateList0))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (String '"//logs/antirobot-daemon-log2/1d") (Int32 '"10"))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (UnorderedSubquery (Apply (lambda '(world "$path" "$limit") (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrFolder (EvaluateAtom "$path") '"") (Void) '()))
+          (let table0 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core (block '(
+                (let select (block '(
+                  (let core table0)
+                  (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"Type") (String '"table")) (Bool 'false)))))
+                  (let core (PersistableRepr (block '(
+                    (let projectCoreType (TypeOf core))
+                    (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Name" (lambda '(row) (block '(
+                      (let res (ListLast (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"Path") (String '"/"))))))
+                      (return res)
+                    )))))))
+                    (return core)
+                  ))))
+                  (return core)
+                )))
+                (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"Name")))))
+                (let select (Take select (Coalesce "$limit" (Uint64 '18446744073709551615))))
+                (return select)
+              )))
+              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"Name")) (Uint64 '0)))) '()) '()))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                  (let res (Member row 'AggregateList0))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (String '"//home/antispam/antirobot/sharding_daily") (Int32 '"10"))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"SetDifference") (Apply (bind core_module '"ToSet") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (Apply (bind core_module '"ToSet") (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

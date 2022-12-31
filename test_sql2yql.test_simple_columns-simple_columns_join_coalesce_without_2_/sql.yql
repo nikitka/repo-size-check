@@ -1,0 +1,213 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (AsList (AsStruct)))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'x 'y))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) '"a") '((block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (AsList (AsStruct)))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'x 'y))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"b" (lambda '(row) (block '(
+          (let row (RemoveMember row 'b.x))
+          (let flatSameKeys row)
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('b.x 'a.x)))
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('b.y 'a.y)))
+          (let row flatSameKeys)
+          (let res (DivePrefixMembers row '('"b.")))
+          (return res)
+        ))) '('('divePrefix '('"b.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (AsList (AsStruct)))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'x 'y))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) '"a") '((block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (AsList (AsStruct)))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"2") (Int32 '"3")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'x 'y))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let row (RemoveMember row 'b.x))
+          (let flatSameKeys row)
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('a.x 'b.x)))
+          (let flatSameKeys (CoalesceMembers flatSameKeys '('a.y 'b.y)))
+          (let row flatSameKeys)
+          (let res (DivePrefixMembers row '('"a." '"b.")))
+          (return res)
+        ))) '('('divePrefix '('"a." '"b.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

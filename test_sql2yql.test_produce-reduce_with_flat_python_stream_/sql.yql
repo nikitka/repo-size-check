@@ -1,0 +1,66 @@
+(
+(let scriptudf0 (String '@@
+def f(input):
+   s = []
+   last_key = None
+   for i in input:
+      if last_key is not None and last_key != i.key:
+        s = []
+      s.append(i.value)
+      last_key = i.key
+      yield {
+        'key': i.key,
+        'subkey1': i.subkey,
+        'value': b''.join(s),
+      }
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let inputRowsList table0)
+      (let core inputRowsList)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Bool 'true) (lambda '(row) (SqlExtractKey row (lambda '(row) (PersistableRepr (Member row '"value"))))) (lambda '(partitionStream) (SqlReduce partitionStream 'byAllList (ScriptUdf 'Python3 '"f" (CallableType '() '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey1" (DataType 'String)) '('"value" (DataType 'String))))) '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey" (DataType 'String)) '('"value" (DataType 'String)))))) scriptudf0) "partitionStream")))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"value"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

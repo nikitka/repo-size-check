@@ -1,0 +1,34 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (AsStructUnordered '('"val" (Apply (Udf '"SimpleUdf.Echo" (Void) (TupleType (TupleType (TypeOf (Member row '"value"))) (StructType) (TupleType))) (Member row '"value")))))
+        (let res (Just res))
+        (return res)
+      )))))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"val")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

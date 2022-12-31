@@ -1,0 +1,383 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"key" (Int32 '"1")) '('"value" (Just (Int32 '"2")))) (AsStructUnordered '('"key" (Int32 '"1")) '('"value" (Just (Int32 '"3")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (AggregateCombine core '('"key") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery1))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let subquerynode3 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (AssumeColumnOrderPartial (AggregateCombineState core '('"key") '('('Min0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let subquerynode4 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery3))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode4 '0))
+(let subquery4 (Nth subquerynode4 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery4)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let subquerynode5 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery4)
+      (let core (AssumeColumnOrderPartial (AggregateMergeState core '('"key") '('('Min0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode5 '0))
+(let subquery5 (Nth subquerynode5 '1))
+(let subquerynode6 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery5))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode6 '0))
+(let subquery6 (Nth subquerynode6 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery6)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let subquerynode7 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery6)
+      (let core (AssumeColumnOrderPartial (AggregateMergeFinalize core '('"key") '('('Min0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode7 '0))
+(let subquery7 (Nth subquerynode7 '1))
+(let subquerynode8 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery7))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode8 '0))
+(let subquery8 (Nth subquerynode8 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery8)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let subquerynode9 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core subquery6)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Member row '"key"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+              (let res (Just (Member row '"a")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (AggregateMergeManyFinalize core '('"key") '('('Min0 (AggOverState (lambda '(row) (PersistableRepr (Unwrap (Member row '"a")))) (lambda '() (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Unwrap (Member row '"a"))))))))) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode9 '0))
+(let subquery9 (Nth subquerynode9 '1))
+(let subquerynode10 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery9))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode10 '0))
+(let subquery10 (Nth subquerynode10 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery10)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let subquerynode11 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (AggregateFinalize core '('"key") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode11 '0))
+(let subquery11 (Nth subquerynode11 '1))
+(let subquerynode12 (block '(
+  (return '(world (block '(
+    (let select (RemoveSystemMembers subquery11))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode12 '0))
+(let subquery12 (Nth subquerynode12 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery12)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

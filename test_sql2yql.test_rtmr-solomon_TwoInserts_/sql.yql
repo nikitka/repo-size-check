@@ -1,0 +1,119 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let sink (DataSink '"rtmr" '"plato"))
+  (let world (Write! world sink (Key '('tablescheme (String '"tmp"))) (Void) '('('mode 'create) '('columns '('('"ts" (OptionalType (DataType 'Timestamp))) '('"value" (OptionalType (DataType 'Uint64))) '('"label" (OptionalType (DataType 'String))))) '('partitionby '('"label")) '('orderby '('('"ts" '0))))))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"rtmr" '"plato") (Key '('table (String '"Input"))) (Void) '()))
+  (let world (Left! x))
+  (let table2 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"value") (DataType 'Uint64))))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Timestamp))) (Interval '5000000) (Interval '5000000) (Interval '5000000) 'true 'v1)))) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"label" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+          (let res (Sub (Member row '_yql_time) (Interval '5000000)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"rtmr" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"tmp"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"rtmr" '"plato") (Key '('table (String '"tmp"))) (Void) '()))
+  (let world (Left! x))
+  (let table3 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"solomon" '"local_solomon"))
+    (let world (Write! world sink (Key '('table (String '"my_project/my_cluster/my_service"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"solomon" '"local_solomon"))
+    (let world (Write! world sink (Key '('table (String '"my_project/my_cluster/my_service"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

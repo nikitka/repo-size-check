@@ -1,0 +1,185 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world "$input") (block '(
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core (OrderedMap (UnorderedSubquery (Apply "$input" world)) (lambda '(row) (SelectMembers row '('"key" '"strongest_id" '"subkey" '"value")))))
+              (let core (OrderedFilter core (lambda '(row) (Coalesce (And ("==" (Member row '"subkey") (String '"native")) (SqlIn '((String '"click") (String '"show")) (Member row '"key") '('('warnNoAnsi)))) (Bool 'false)))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+                  (let res (Member row '"value"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"strongest_id" (lambda '(row) (block '(
+                  (let res (Member row '"strongest_id"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Member row '"key"))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (lambda '(world) (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input"))) (Key '('table (String '"Input")))) (Void) '()))
+          (let table0 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table0)
+              (let core (OrderedFilter core (lambda '(row) (Coalesce (And (SqlIn '((String '"heartbeat") (String '"show") (String '"click")) (Member row '"key") '('('warnNoAnsi))) (SqlIn '((String '"native") (String '"gif")) (Member row '"subkey") '('('warnNoAnsi)))) (Bool 'false)))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+                  (let res (Member row '"value"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"strongest_id" (lambda '(row) (block '(
+                  (let res (WeakField row 'String '('strongest_id)))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"video_position_sec" (lambda '(row) (block '(
+                  (let res (WeakField row 'String '('video_position_sec)))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Member row '"key"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+                  (let res (Member row '"subkey"))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))))) (lambda '(row) (SelectMembers row '('"strongest_id")))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id")) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"native_users" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"native_users")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world "$input") (block '(
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core (OrderedMap (UnorderedSubquery (Apply "$input" world)) (lambda '(row) (SelectMembers row '('"key" '"strongest_id" '"subkey" '"value")))))
+              (let core (OrderedFilter core (lambda '(row) (Coalesce (And ("==" (Member row '"subkey") (String '"native")) (SqlIn '((String '"click") (String '"show")) (Member row '"key") '('('warnNoAnsi)))) (Bool 'false)))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+                  (let res (Member row '"value"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"strongest_id" (lambda '(row) (block '(
+                  (let res (Member row '"strongest_id"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Member row '"key"))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (lambda '(world) (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input"))) (Key '('table (String '"Input")))) (Void) '()))
+          (let table0 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table0)
+              (let core (OrderedFilter core (lambda '(row) (Coalesce (And (SqlIn '((String '"heartbeat") (String '"show") (String '"click")) (Member row '"key") '('('warnNoAnsi))) (SqlIn '((String '"native") (String '"gif")) (Member row '"subkey") '('('warnNoAnsi)))) (Bool 'false)))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+                  (let res (Member row '"value"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"strongest_id" (lambda '(row) (block '(
+                  (let res (WeakField row 'String '('strongest_id)))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"video_position_sec" (lambda '(row) (block '(
+                  (let res (WeakField row 'String '('video_position_sec)))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Member row '"key"))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+                  (let res (Member row '"subkey"))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))))) (lambda '(row) (SelectMembers row '('"key" '"strongest_id")))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"click")) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id")) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"native_users_with_click" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"native_users_with_click")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,51 @@
+(
+(let scriptudf0 (String '@@
+def majority_vote(values):
+    counters = {}
+    for value in values:
+        counters[value] = counters.get(value, 0) + 1
+    return sorted((count, value) for value, count in counters.items())[-1][1]
+    @@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'val) 'val ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"2")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"val") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))) '()) '('"val")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+          (let res (Member row '"val"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Apply (ScriptUdf 'Python3 '"majority_vote" (CallableType '() '((DataType 'String)) '((ListType (OptionalType (DataType 'String))))) scriptudf0) (Member row 'AggregateList0)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"val" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

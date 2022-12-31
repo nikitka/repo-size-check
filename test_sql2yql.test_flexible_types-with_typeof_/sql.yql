@@ -1,0 +1,108 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (UnionAll (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"int32" (lambda '(row) (block '(
+          (let res (Date '"18993"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Int32 '"2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"int32" (lambda '(row) (block '(
+          (let res (Date '"18992"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Int32 '"1"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"t" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()) (SqlProjectItem projectCoreType '"date_bytes" (lambda '(row) (block '(
+          (let res (ToBytes (SqlPlainColumnOrType row '"int32")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"int_bytes" (lambda '(row) (block '(
+          (let res (ToBytes (Member row '"value")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"int32" (lambda '(row) (block '(
+          (let res (SqlPlainColumnOrType row '"int32"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"d" (lambda '(row) (block '(
+          (let res (FromBytes (Member row '"date_bytes") (EvaluateAtom (FormatType (TypeOf (SqlPlainColumnOrType row '"int32"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i" (lambda '(row) (block '(
+          (let res (FromBytes (Member row '"int_bytes") (EvaluateAtom (FormatType (DataType 'Int32)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlPlainColumnOrType row '"int32")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"int32" '"value" '"d" '"i")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

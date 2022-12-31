@@ -1,0 +1,42 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (FormatType (EvaluateType (SqlAccess 'struct (AsStructUnordered '('"KekFromString" (Callable (CallableType '() '((StructType '('"kek" (DataType 'Int32)))) '((DataType 'String))) (lambda '("$string") (block '(
+            (return (Apply (lambda '("$struct") (block '(
+              (return (EvaluateCode (FuncCode (String '"AsStruct") (ListMap (StructTypeComponents (TypeHandle (TypeOf "$struct"))) (lambda '("$_component") (block '(
+                (return (ListCode (AtomCode (String '"kek")) (ReprCode (Int32 '"42"))))
+              )))))))
+            ))) (Apply (Callable (CallableType '() '((StructType '('"lel" (DataType 'Int32)))) '((DataType 'String))) (lambda '("$_string") (block '(
+              (return (AsStruct '('"lel" (Int32 '"5"))))
+            )))) "$string")))
+          ))))) '('"IntHandle" (TypeHandle (DataType 'Int32)))) '"IntHandle" '('"yson_strict" '"yson_fast")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

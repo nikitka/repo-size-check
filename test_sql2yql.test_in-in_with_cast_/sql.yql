@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"void" (lambda '(row) (block '(
+          (let res (SqlIn '((Int32 '"100500")) (Null) '('('warnNoAnsi))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"byte_wrap_match" (lambda '(row) (block '(
+          (let res (SqlIn '((Int32 '"23") (Null) (Int32 '"32") (Null) (Int32 '"255")) (Just (SafeCast (Int32 '"1") (DataType 'Uint8))) '('('warnNoAnsi))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"different_types" (lambda '(row) (block '(
+          (let res (SqlIn '((Int32 '"1") (Int32 '"5") (Int64 '"42")) (SafeCast (Int32 '"5") (DataType 'Int64)) '('('warnNoAnsi))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"pi_not_exact" (lambda '(row) (block '(
+          (let res (SqlIn '((Int32 '"1") (Int32 '"3") (Int32 '"4")) (Double '"3.14") '('('warnNoAnsi))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"pi_in_expr" (lambda '(row) (block '(
+          (let res (SqlIn '((Int32 '"1") (Int32 '"3") (Int32 '"4") ("+" (Int32 '"3") (Double '"0.14"))) (Double '"3.14") '('('warnNoAnsi))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"end" (lambda '(row) (block '(
+          (let res (String '"end"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"void" '"byte_wrap_match" '"different_types" '"pi_not_exact" '"pi_in_expr" '"end")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

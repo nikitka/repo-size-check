@@ -1,0 +1,52 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
+        (return row)
+      ))))) '"i1") '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_1" ("/" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"100"))))
+        (return row)
+      ))))) '"i2") '('Inner '"i1" '"i2" '('"i1" '"_equijoin_column_0") '('"i2" '"_equijoin_column_1") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"i1._equijoin_column_0"))
+        (let row (ForceRemoveMember row '"i2._equijoin_column_1"))
+        (return row)
+      )))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"i1"))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"i1.key")) (lambda '(row) (PersistableRepr row))) '"i1.key")) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"uniq_count" (lambda '(row) (block '(
+          (let res (Member row 'Count1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count" '"uniq_count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

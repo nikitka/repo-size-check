@@ -1,0 +1,218 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (SubqueryExtend (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"1"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"2"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    )))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (SubqueryUnionAll (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"1"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                (let res (Int32 '"3"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    )))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (SubqueryMerge (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"1"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"2"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    )))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (SubqueryUnionMerge (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+                (let res (Int32 '"1"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"y" (lambda '(row) (block '(
+                (let res (Int32 '"3"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    )))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

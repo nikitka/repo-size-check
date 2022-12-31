@@ -1,0 +1,96 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'age_dec) 'age_dec ("/" (Member row '"age") (Int32 '"10")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"age_dec") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"age_dec")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"age_dec" (lambda '(row) (block '(
+          (let res (Member row '"age_dec"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"age_dec_count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"age_dec_count")))))
+    (let select (Take select (Coalesce (Int32 '"2") (Uint64 '18446744073709551615))))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '(subquery1 '"top") '((OrderedMap subquery0 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" ("/" (Member row '"age") (Int32 '"10"))))
+        (return row)
+      )))) '"info") '('Inner '"top" '"info" '('"top" '"age_dec") '('"info" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"info._equijoin_column_0"))
+        (return row)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age_dec" (lambda '(row) (block '(
+          (let res (SqlColumn row '"age_dec"))
+          (return res)
+        )))) (SqlProjectStarItem projectCoreType '"info" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"info.")))
+          (return res)
+        ))) '('('divePrefix '('"info.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"name")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

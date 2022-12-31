@@ -1,0 +1,91 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (UnorderedSubquery (Apply (lambda '(world "$x") (block '(
+        (let world (block '(
+          (let output (UnionAll (block '(
+            (let select (block '(
+              (let core (UnorderedSubquery (Apply "$x" world (Int32 '"1"))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+                  (let res row)
+                  (return res)
+                ))) '()))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (let select (RemoveSystemMembers select))
+            (return select)
+          )) (block '(
+            (let select (block '(
+              (let core (UnorderedSubquery (Apply "$x" world (Int32 '"2"))))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+                  (let res row)
+                  (return res)
+                ))) '()))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (let select (RemoveSystemMembers select))
+            (return select)
+          ))))
+          (return output)
+        )))
+        (return world)
+      ))) world (lambda '(world "$n") (block '(
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core (WithWorld (AsList (AsStruct)) world))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                  (let res ("*" "$n" (Int32 '"10")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

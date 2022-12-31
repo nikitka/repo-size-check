@@ -1,0 +1,6 @@
+/dev/stdin:<main>:11:6: Error: Unable to find window specification for window 'w1'
+	from $data
+	     ^
+/dev/stdin:<main>:12:7: Error: Failed to use window function Lag without window specification or in wrong place
+	where lag(avg(age), 2) over w1 > 30
+	      ^

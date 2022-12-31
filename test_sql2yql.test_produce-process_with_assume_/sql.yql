@@ -1,0 +1,30 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let inputRowsList table1)
+      (let core (SqlProcess (lambda '(x) (FlatMap x (lambda '(y) (Just (AsStruct '('key (Concat (String '"0") (Member y 'key))) '('subkey (Member y 'subkey)) '('value (Member y 'value))))))) (RemoveSystemMembers inputRowsList) '0))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (let select (AssumeSorted select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'renew))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

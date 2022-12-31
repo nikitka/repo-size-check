@@ -1,0 +1,64 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (EvaluateFor! world (EvaluateExpr (AsList '((String '"Input") (String '"foo")) '((String '"Input") (String '"bar")))) (lambda '(world "$z") (Apply (lambda '(world "$z") (block '(
+  (let subquerynode0 (block '(
+    (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom (SqlAccess 'struct "$z" '"0" '('"yson_strict" '"yson_fast"))))))) (Void) '()))
+    (let table3 (Right! x))
+    (return '(world (block '(
+      (let select (block '(
+        (let core table3)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Concat (Member row '"key") (SqlAccess 'struct "$z" '"1" '('"yson_strict" '"yson_fast")))))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res (Member row 'Min0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode0 '0))
+  (let subquery0 (Nth subquerynode0 '1))
+  (let world (Apply (EvaluateCode (QuoteCode (lambda '(world "$n") (block '(
+    (let world (block '(
+      (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom (SqlAccess 'struct "$z" '"0" '('"yson_strict" '"yson_fast"))))))) (Void) '()))
+      (let table2 (Right! x))
+      (let output (block '(
+        (let select (block '(
+          (let core table2)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+              (let res (Concat "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let output (Unordered output))
+      (let world (block '(
+        (let result_sink (DataSink 'result))
+        (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+        (return (Commit! world result_sink))
+      )))
+      (return world)
+    )))
+    (return world)
+  ))))) world (String '"1")))
+  (return world)
+))) world "$z"))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

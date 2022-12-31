@@ -1,0 +1,71 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (String '"a,b,c,d"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b" (lambda '(row) (block '(
+          (let res (String '"e,f,g,h"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
+          (let res (String '"x"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'a) 'a (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"a") (String '","))))) 'bb) 'bb (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"b") (String '",")))))))))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'auto row 'a 'bb))
+        (return res)
+      )))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"bb") (String '"h")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bb" (lambda '(row) (block '(
+          (let res (Member row '"bb"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
+          (let res (Member row '"c"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"a")) (PersistableRepr (Member row '"bb"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a" '"bb" '"c")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

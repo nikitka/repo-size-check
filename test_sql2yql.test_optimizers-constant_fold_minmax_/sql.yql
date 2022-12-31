@@ -1,0 +1,79 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"MinByte" (lambda '(row) (block '(
+          (let res (Min (Uint8 '"50") (Minus (Uint8 '"255")) (Uint8 '"5") (Uint8 '"15")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxByte" (lambda '(row) (block '(
+          (let res (Max (Uint8 '"50") (Minus (Uint8 '"255")) (Uint8 '"5") (Uint8 '"15")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinInt32" (lambda '(row) (block '(
+          (let res (Min (Int32 '"300000") (Int32 '"-600000") (Int32 '"4")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxInt32" (lambda '(row) (block '(
+          (let res (Max (Int32 '"300000") (Int32 '"-600000") (Int32 '"4")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinUInt32" (lambda '(row) (block '(
+          (let res (Min (Uint32 '"300000") (Uint32 '"600") (Minus (Uint32 '"4000000000"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxUInt32" (lambda '(row) (block '(
+          (let res (Max (Uint32 '"300000") (Uint32 '"600") (Minus (Uint32 '"4000000000"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinInt64" (lambda '(row) (block '(
+          (let res (Min (Int64 '"80") (Int64 '"5000000000") (Int64 '"90") (Int64 '"-6000000000")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxInt64" (lambda '(row) (block '(
+          (let res (Max (Int64 '"80") (Int64 '"5000000000") (Int64 '"90") (Int64 '"-6000000000")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinUInt64" (lambda '(row) (block '(
+          (let res (Min (Uint64 '"80") (Minus (Uint64 '"5000000000")) (Uint64 '"90") (Uint64 '"6000000000")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxUInt64" (lambda '(row) (block '(
+          (let res (Max (Uint64 '"80") (Minus (Uint64 '"5000000000")) (Uint64 '"90") (Uint64 '"6000000000")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinMixed1" (lambda '(row) (block '(
+          (let res (Min (Uint8 '"50") (Int32 '"-10") (Int64 '"56") (Uint32 '"17") (Uint64 '"78")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxMixed1" (lambda '(row) (block '(
+          (let res (Max (Uint8 '"50") (Int32 '"-10") (Int64 '"56") (Uint32 '"17") (Uint64 '"78")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinMixed2" (lambda '(row) (block '(
+          (let res (Min (Uint8 '"50") (Int32 '"30") (Int32 '"40")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxMixed2" (lambda '(row) (block '(
+          (let res (Max (Uint8 '"50") (Int32 '"30") (Int32 '"40")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MinSingle" (lambda '(row) (block '(
+          (let res (Min (Int32 '"1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"MaxSingle" (lambda '(row) (block '(
+          (let res (Max (Int32 '"-1")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"MinByte" '"MaxByte" '"MinInt32" '"MaxInt32" '"MinUInt32" '"MaxUInt32" '"MinInt64" '"MaxInt64" '"MinUInt64" '"MaxUInt64" '"MinMixed1" '"MaxMixed1" '"MinMixed2" '"MaxMixed2" '"MinSingle" '"MaxSingle")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

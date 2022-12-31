@@ -1,0 +1,193 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world "$name" "$a") (block '(
+        (let subquerynode0 (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$name"))))) (Void) '()))
+          (let table5 (Right! x))
+          (return '(world (block '(
+            (let select (block '(
+              (let core table5)
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+                  (let res row)
+                  (return res)
+                ))) '()))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (let select (RemoveSystemMembers select))
+            (return select)
+          ))))
+        )))
+        (let world (Nth subquerynode0 '0))
+        (let subquery0 (Nth subquerynode0 '1))
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core subquery0)
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Concat (Concat (Member row '"key") "$a") (String '"_foo")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (String '"Input") (String '"_bar"))) (lambda '(row) (SelectMembers row '('"key")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'key))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world "$name" "$a") (block '(
+        (let subquerynode0 (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$name"))))) (Void) '()))
+          (let table5 (Right! x))
+          (return '(world (block '(
+            (let select (block '(
+              (let core table5)
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+                  (let res row)
+                  (return res)
+                ))) '()))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (let select (RemoveSystemMembers select))
+            (return select)
+          ))))
+        )))
+        (let world (Nth subquerynode0 '0))
+        (let subquery0 (Nth subquerynode0 '1))
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core subquery0)
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                  (let res (Concat (Concat (Member row '"key") "$a") (String '"_foo")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (String '"Input") (String '"_baz"))) (lambda '(row) (SelectMembers row '('"key")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                (let res (String '"hello"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

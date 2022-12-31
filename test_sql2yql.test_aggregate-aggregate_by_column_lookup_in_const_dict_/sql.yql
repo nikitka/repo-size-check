@@ -1,0 +1,38 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'lookup_result) 'lookup_result (Coalesce (SqlAccess 'dict (AsDict '((String '"800") (String '"foo"))) (Member row '"key") '('"yson_strict" '"yson_fast")) (String '"bar")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"lookup_result") '() '()) '('"lookup_result")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"lookup_result" (lambda '(row) (block '(
+          (let res (Member row '"lookup_result"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"lookup_result")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"lookup_result")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,218 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinenablestarjoin" '"true"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"b") '((RemoveSystemMembers table1) '"a") '('RightSemi '"b" '"a" '('"b" '"v2" '"b" '"k2") '('"a" '"v1" '"a" '"k1") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"b." '"a.")))
+          (return res)
+        ))) '('('divePrefix '('"b." '"a.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input3")))) (Void) '()))
+  (let table3 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery0 '"rs") '((RemoveSystemMembers table3) '"c") '('LeftOnly '"rs" '"c" '('"rs" '"k1" '"rs" '"v1") '('"c" '"k3" '"c" '"v3") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"rs." '"c.")))
+          (return res)
+        ))) '('('divePrefix '('"rs." '"c.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input4")))) (Void) '()))
+  (let table4 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table4) '"d") '(subquery1 '"lo") '('Right '"d" '"lo" '('"d" '"v4" '"d" '"k4") '('"lo" '"v1" '"lo" '"k1") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"d." '"lo.")))
+          (return res)
+        ))) '('('divePrefix '('"d." '"lo.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let subquerynode3 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input5")))) (Void) '()))
+  (let table7 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery2 '"r") '((RemoveSystemMembers table7) '"e") '('Inner '"r" '"e" '('"r" '"k1" '"r" '"v1") '('"e" '"k5" '"e" '"v5") '('('right 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"r." '"e.")))
+          (return res)
+        ))) '('('divePrefix '('"r." '"e.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let subquerynode4 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table8 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table9 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table8) '"a1") '((RemoveSystemMembers table9) '"b1") '('LeftSemi '"a1" '"b1" '('"a1" '"k1" '"a1" '"v1") '('"b1" '"k2" '"b1" '"v2") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"a1." '"b1.")))
+          (return res)
+        ))) '('('divePrefix '('"a1." '"b1.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode4 '0))
+(let subquery4 (Nth subquerynode4 '1))
+(let subquerynode5 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input3")))) (Void) '()))
+  (let table10 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table10) '"c1") '(subquery4 '"ls") '('RightOnly '"c1" '"ls" '('"c1" '"k3" '"c1" '"v3") '('"ls" '"k1" '"ls" '"v1") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"c1." '"ls.")))
+          (return res)
+        ))) '('('divePrefix '('"c1." '"ls.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode5 '0))
+(let subquery5 (Nth subquerynode5 '1))
+(let subquerynode6 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input4")))) (Void) '()))
+  (let table13 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery5 '"ro") '((RemoveSystemMembers table13) '"d1") '('Left '"ro" '"d1" '('"ro" '"v1" '"ro" '"k1") '('"d1" '"v4" '"d1" '"k4") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"ro." '"d1.")))
+          (return res)
+        ))) '('('divePrefix '('"ro." '"d1.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode6 '0))
+(let subquery6 (Nth subquerynode6 '1))
+(let subquerynode7 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input5")))) (Void) '()))
+  (let table14 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table14) '"e1") '(subquery6 '"l") '('Inner '"e1" '"l" '('"e1" '"k5" '"e1" '"v5") '('"l" '"k1" '"l" '"v1") '('('left 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"e1." '"l.")))
+          (return res)
+        ))) '('('divePrefix '('"e1." '"l.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode7 '0))
+(let subquery7 (Nth subquerynode7 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery3 '"left") '(subquery7 '"right") '('Inner '"left" '"right" '('"left" '"k1" '"left" '"v1") '('"right" '"k1" '"right" '"v1") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"k1" (lambda '(row) (block '(
+          (let res (SqlColumn row '"k1" '"left"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"v1" (lambda '(row) (block '(
+          (let res (SqlColumn row '"v1" '"right"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"k1")) (PersistableRepr (SqlColumn row '"v1"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"v1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

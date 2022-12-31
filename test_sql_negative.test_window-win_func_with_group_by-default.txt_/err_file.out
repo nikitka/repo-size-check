@@ -1,0 +1,3 @@
+/dev/stdin:<main>:6:5: Error: Failed to use window function: Rank without window
+	    RANK(), -- unable to use window function with GROUP BY
+	    ^

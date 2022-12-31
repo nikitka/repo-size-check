@@ -1,0 +1,6 @@
+/dev/stdin:<main>:7:13: Error: Invalid lambda arguments syntax. Lambda arguments should start with '$' as named value.
+	  $shift = (item) -> {return $item << $shiftSteps}; -- must use '$' for lambda arguments, should be $item
+	            ^
+/dev/stdin:<main>:8:35: Error: Unknown name: $shift
+	  $res = Math::Floor(Math::Pi() * $shift($v));
+	                                  ^

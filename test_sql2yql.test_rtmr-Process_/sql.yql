@@ -1,0 +1,55 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"rtmr" '"plato") (Key '('table (String '"Input"))) (Void) '()))
+  (let world (Left! x))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (block '(
+        (let res (ToSequence (Apply (lambda '("$r") (block '(
+          (return (AsStructUnordered '('"key" (Concat (SqlAccess 'struct "$r" '"key" '('"yson_strict" '"yson_fast")) (String '"_1"))) '('"subkey" (Concat (SqlAccess 'struct "$r" '"subkey" '('"yson_strict" '"yson_fast")) (String '"_2"))) '('"value" (Concat (SqlAccess 'struct "$r" '"value" '('"yson_strict" '"yson_fast")) (String '"_3")))))
+        ))) (RemoveSystemMembers row))))
+        (return res)
+      )))))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

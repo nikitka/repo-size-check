@@ -1,0 +1,107 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world) (block '(
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core (WithWorld (AsList (AsStruct)) world))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ks" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world)) (lambda '(row) (SelectMembers row '('"key" '"ks")))))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'list row '('ks 'key)))
+        (return res)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (UnorderedSubquery (Apply (lambda '(world) (block '(
+        (let world (block '(
+          (let output (block '(
+            (let select (block '(
+              (let core (WithWorld (AsList (AsStruct)) world))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ks" (lambda '(row) (block '(
+                  (let res (AsList (Int32 '"1") (Int32 '"2")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world)) (lambda '(row) (SelectMembers row '('"key" '"ks")))))
+      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'key) 'key (ListExtend (Member row '"ks") (AsList (Int32 '"3"))))))))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'list row 'key))
+        (return res)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

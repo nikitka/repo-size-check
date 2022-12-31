@@ -1,0 +1,94 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'prefix) 'prefix (Substring (Member row '"name") (Int32 '"0") (Int32 '"1")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"region" '"prefix") '('('Avg0 (Apply (bind aggregate_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Avg1 (Apply (bind aggregate_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"name")) (Uint64 '0)))) '()) '('"region" '"prefix")))
+      (let core (CalcOverWindow core '('"region") (SortTraits (TypeOf core) (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"prefix")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row 'Avg1))))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"prefix")) (Uint64 '0))) '('_yql_Lag0 (Lag (TypeOf core) (lambda '(row) (Member row '"region")))) '('_yql_Lag1 (Lag (TypeOf core) (lambda '(row) (Member row '"prefix")))) '('_yql_Lag2 (Lag (TypeOf core) (lambda '(row) (Member row 'AggregateList1))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"prefix" (lambda '(row) (block '(
+          (let res (Member row '"prefix"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (Member row '"region"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region_2" (lambda '(row) (block '(
+          (let res ("+" (Member row '"region") (Int32 '"2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg_age" (lambda '(row) (block '(
+          (let res (Member row 'Avg0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_age" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_by_avg_age" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"prev_region" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"prefix_list" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"prev_prefix_list" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"prev_region_list" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (String '"test"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'false) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"region")) (PersistableRepr (Member row '"prefix")) (PersistableRepr (Member row '"sum_by_avg_age"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"prefix" '"region" '"region_2" '"avg_age" '"sum_age" '"sum_by_avg_age" '"prev_region" '"prefix_list" '"prev_prefix_list" '"prev_region_list" '"column10")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

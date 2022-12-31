@@ -1,0 +1,111 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite (EquiJoin '((RemoveSystemMembers table0) '"t1") '((RemoveSystemMembers table1) '"t2") '('Inner '"t1" '"t2" '('"t1" '"key") '('"t2" '"key") '()) '()))
+      (return (UnionAll (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk" '"sk")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"kk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"sk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"sk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"sk" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'sk) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"kk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"sk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"sk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"kk" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'kk) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"sk" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'sk) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"kk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"sk" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"sk"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Sum0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"kk")) (PersistableRepr (SqlColumn row '"sk"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"kk" '"sk" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,51 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"pq" '"$all") '"Attr" '"consumer" '"test_client"))
+(let world (block '(
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input")))) (Void) '('('"format" '"json_each_row") '('"userschema" (StructType '('"value" (AsOptionalType (DataType 'String))) '('"color" (AsOptionalType (DataType 'String)))) '('"value" '"color")))))
+  (let world (Left! x))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"offset" (lambda '(row) (block '(
+              (let res (SystemMetadata (String '"offset") (DependsOn row)))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"offset" (lambda '(row) (block '(
+          (let res (Member row '"offset"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"offset")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

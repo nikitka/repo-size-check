@@ -1,0 +1,3 @@
+/dev/stdin:<main>:3:8: Error: Expected string or 'default' keyword as pragma value for pragma: ClassicDivision
+	PRAGMA ClassicDivision = $x;
+	       ^

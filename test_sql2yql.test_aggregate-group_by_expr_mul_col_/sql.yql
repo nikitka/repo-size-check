@@ -1,0 +1,41 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'mod_k) 'mod_k ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'mod_sk) 'mod_sk ("%" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"mod_sk" '"mod_k") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"mod_sk" '"mod_k")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"mod_sum" (lambda '(row) (block '(
+          (let res ("+" (Member row '"mod_sk") (Member row '"mod_k")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"count")) (PersistableRepr (Member row '"mod_sum"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count" '"mod_sum")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

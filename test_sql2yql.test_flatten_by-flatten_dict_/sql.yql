@@ -1,0 +1,88 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0))) '('AggregateList2 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0)))) '()) '('"mod")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
+          (let res (Member row '"mod"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dk" (lambda '(row) (block '(
+          (let res (ToIndexDict (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ls" (lambda '(row) (block '(
+          (let res (ListSort (Member row 'AggregateList1) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lv" (lambda '(row) (block '(
+          (let res (ListSort (Member row 'AggregateList2) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'auto row '('dk 'di) '('lv 'iv) 'ls))
+        (return res)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
+          (let res (Member row '"mod"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"iv" (lambda '(row) (block '(
+          (let res (Member row '"iv"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ls" (lambda '(row) (block '(
+          (let res (Member row '"ls"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"di") '"0" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"di") '"1" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"mod")) (PersistableRepr (Member row '"iv")) (PersistableRepr (Member row '"ls")) (PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"value"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"mod" '"iv" '"ls" '"key" '"value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,146 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+              (let res (Null))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+              (let res (Null))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      ))))
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Min0 (Apply (bind window_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count1 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('AggregateListDistinct0 (Apply (bind window_module '"set_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Uint64 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Uint64 '0))) '('BoolAnd0 (Apply (bind window_module '"and_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row 'Count1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row 'AggregateListDistinct0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row 'BoolAnd0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+              (let res (Null))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+              (let res (Null))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      ))))
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('Min0 (Apply (bind window_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count1 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('AggregateListDistinct0 (Apply (bind window_module '"set_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Uint64 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Uint64 '0))) '('BoolAnd0 (Apply (bind window_module '"and_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row 'Count1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row 'AggregateListDistinct0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row 'BoolAnd0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

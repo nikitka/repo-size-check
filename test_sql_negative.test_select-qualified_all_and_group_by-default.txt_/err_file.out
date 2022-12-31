@@ -1,0 +1,3 @@
+/dev/stdin:<main>:7:28: Error: Column data is not in source column set. Did you mean data.*?
+	    hundred_keys, sum(cast(data.subkey as uint32)) -- should use backticks or brackets
+	                           ^

@@ -1,0 +1,3 @@
+/dev/stdin:<main>:1:8: Error: AsStruct requires all argument to be named
+	select AsStruct(1, 2, 3)
+	       ^

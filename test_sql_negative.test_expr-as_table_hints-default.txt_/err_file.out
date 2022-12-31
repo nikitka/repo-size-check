@@ -1,0 +1,3 @@
+/dev/stdin:<main>:5:15: Error: No hints expected for AS_TABLE source
+	SELECT * FROM AS_TABLE($data) WITH "hint";
+	              ^

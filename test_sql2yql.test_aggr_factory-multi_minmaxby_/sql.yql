@@ -1,0 +1,88 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStruct '('"x" '((Int32 '"1") (Int32 '"6")))) (AsStruct '('"x" '((Int32 '"3") (Int32 '"4")))) (AsStruct '('"x" '((Int32 '"5") (Int32 '"2")))))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+              (let res (RemoveSystemMembers row))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"min_by_traits_factory1") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStruct '('"x" '((Int32 '"1") (Int32 '"6")))) (AsStruct '('"x" '((Int32 '"3") (Int32 '"4")))) (AsStruct '('"x" '((Int32 '"5") (Int32 '"2")))))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+              (let res (RemoveSystemMembers row))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"max_by_traits_factory2") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0)) (Int32 '"2")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

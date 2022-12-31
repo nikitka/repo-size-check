@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgCast (PgArray (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))) (PgType '"text")))) (PgResultItem '"column1" (Void) (lambda '() (PgCast (PgConst '"{1,2,3}" (PgType 'text)) (PgType '"_int4")))) (PgResultItem '"column2" (Void) (lambda '() (PgCast (PgArray (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))) (PgType '"_int8")))) (PgResultItem '"column3" (Void) (lambda '() (PgCast (PgArray (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))) (PgType '"_text")))) (PgResultItem '"column4" (Void) (lambda '() (PgCast (PgArray (PgConst '"1" (PgType 'text)) (PgCast (Null) (PgType 'text)) (PgConst '"3" (PgType 'text))) (PgType '"_int4")))) (PgResultItem '"column5" (Void) (lambda '() (PgCast (PgArray (PgCast (PgConst '"{\"a\":1}" (PgType 'text)) (PgType '"json")) (PgCast (PgConst '"{\"b\":2}" (PgType 'text)) (PgType '"json"))) (PgType '"_jsonb")))) (PgResultItem '"column6" (Void) (lambda '() (PgCast (PgArray (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))) (PgType '"_oid")))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

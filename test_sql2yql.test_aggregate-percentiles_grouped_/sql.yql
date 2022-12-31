@@ -1,0 +1,60 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Member row '"key"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+              (let res (SafeCast (Member row '"value") (DataType 'Int32)))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('('Median0 'Percentile0) (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"val")) '((Double '0.5) (Double '"0.8")))) '('Median1 (Apply (bind aggregate_module '"percentile_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"val")) (lambda '(row) row) (Double '0.5)) '"val")) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"med" (lambda '(row) (block '(
+          (let res (Member row 'Median0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"distinct_med" (lambda '(row) (block '(
+          (let res (Member row 'Median1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"p80" (lambda '(row) (block '(
+          (let res (Member row 'Percentile0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"med")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"med" '"distinct_med" '"p80")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

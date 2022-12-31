@@ -1,0 +1,85 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Roots")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Leaves")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Roots")))) (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Branches")))) (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((RemoveSystemMembers table1) '"i2") '('Inner '"i1" '"i2" '('"i1" '"leaf") '('"i2" '"key") '()) '()))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Key" (lambda '(row) (block '(
+              (let res (SqlColumn row '"key" '"i1"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Value" (lambda '(row) (block '(
+              (let res (SqlColumn row '"value" '"i1"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Join" (lambda '(row) (block '(
+              (let res (SqlColumn row '"value" '"i2"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (let core (PersistableRepr (SqlAggregateAll (RemoveSystemMembers core))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (EquiJoin '((RemoveSystemMembers table2) '"i1") '((RemoveSystemMembers table3) '"i2") '('Inner '"i1" '"i2" '('"i1" '"branch") '('"i2" '"key") '()) '()))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Key" (lambda '(row) (block '(
+              (let res (SqlColumn row '"key" '"i1"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Value" (lambda '(row) (block '(
+              (let res (SqlColumn row '"value" '"i1"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Join" (lambda '(row) (block '(
+              (let res (SqlColumn row '"value" '"i2"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (let core (PersistableRepr (SqlAggregateAll (RemoveSystemMembers core))))
+          (return core)
+        )))
+        (return select)
+      ))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"Key")) (PersistableRepr (Member row '"Value")) (PersistableRepr (Member row '"Join"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

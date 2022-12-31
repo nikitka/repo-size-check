@@ -1,0 +1,122 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"lookupjoinlimit" '"64k"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"lookupjoinmaxrows" '"100"))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStruct '('"id" (Just (Int32 '"1")))) (AsStruct '('"id" (Just (Int32 '"2")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"id")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"campaigns") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStruct '('"id" (Just (Int32 '"1")))) (AsStruct '('"id" (Just (Int32 '"2")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"id")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"strategies") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"id" (Just (Int32 '"1"))) '('"campaign_id" (Just (Int32 '"2"))) '('"strategy_id" (Just (Int32 '"3")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"id")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"lottery") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"lottery") (Void) '()))
+  (let table3 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"campaigns") (Void) '()))
+  (let table4 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"strategies") (Void) '()))
+  (let table5 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table3) '"lottery") '((RemoveSystemMembers table4) '"campaigns") '((RemoveSystemMembers table5) '"strategies") '('Inner '('Inner '"lottery" '"campaigns" '('"lottery" '"campaign_id") '('"campaigns" '"id") '()) '"strategies" '('"lottery" '"strategy_id") '('"strategies" '"id") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (Int32 '"1") (Int32 '"0")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"lottery_id" (lambda '(row) (block '(
+          (let res (SqlColumn row '"id" '"lottery"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"lottery_id")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

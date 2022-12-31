@@ -1,0 +1,58 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
+          (let res (TryMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"c" (String '"foo")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"d" (lambda '(row) (block '(
+          (let res (TryMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"d" (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"acd" (lambda '(row) (block '(
+          (let res (AddMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"c" (Int32 '"3")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a5" (lambda '(row) (block '(
+          (let res (ReplaceMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"a" (Int32 '"5")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (RemoveMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"d"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ad" (lambda '(row) (block '(
+          (let res (ForceRemoveMember (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4"))) '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ab" (lambda '(row) (block '(
+          (let res (FlattenMembers '('"" (AsStruct '('"b" (Int32 '"2")))) '('"" (AsStruct '('"a" (Int32 '"1"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"abd" (lambda '(row) (block '(
+          (let res (FlattenMembers '('"" (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4")))) '('"" (AsStruct '('"b" (Int32 '"2"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"foobar" (lambda '(row) (block '(
+          (let res (FlattenMembers '((EvaluateAtom (Concat (String '"fo") (String '"o"))) (AsStructUnordered '('"a" (Int32 '"1")) '('"d" (Int32 '"4")))) '('"bar" (AsStruct '('"b" (Int32 '"2"))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"c" '"d" '"acd" '"a5" '"a" '"ad" '"ab" '"abd" '"foobar")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

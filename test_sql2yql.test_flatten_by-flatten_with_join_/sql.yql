@@ -1,0 +1,81 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0)))) '()) '('"mod")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
+          (let res (Member row '"mod"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lv" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '((block '(
+        (let flatten subquery0)
+        (let flatten (OrderedFlatMap flatten (lambda '(row) (block '(
+          (let res (FlattenByColumns 'auto row 'lv))
+          (return res)
+        )))))
+        (return flatten)
+      )) '"d") '((RemoveSystemMembers (OrderedMap table2 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" ("%" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"10"))))
+        (return row)
+      ))))) '"j") '('Inner '"d" '"j" '('"d" '"mod") '('"j" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"j._equijoin_column_0"))
+        (return row)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d.mod" (lambda '(row) (block '(
+          (let res (SqlColumn row '"mod" '"d"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"d.lv" (lambda '(row) (block '(
+          (let res (SqlColumn row '"lv" '"d"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"j.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"j"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"mod" '"d")) (PersistableRepr (SqlColumn row '"lv" '"d"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"d.mod" '"d.lv" '"j.key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

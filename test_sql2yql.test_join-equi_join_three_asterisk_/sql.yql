@@ -1,0 +1,46 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"A")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"B")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"C")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"A") '((RemoveSystemMembers table1) '"B") '((RemoveSystemMembers table2) '"C") '('Inner '('Inner '"A" '"B" '('"A" '"key") '('"B" '"key") '()) '"C" '('"B" '"subkey") '('"C" '"subkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"A" (lambda '(row) (block '(
+          (let res (SelectMembers row '('"A.")))
+          (return res)
+        ))) '()) (SqlProjectItem projectCoreType '"goal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"C"))
+          (return res)
+        )))) (SqlProjectStarItem projectCoreType '"B" (lambda '(row) (block '(
+          (let res (SelectMembers row '('"B.")))
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"A")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"A.") '"goal" '('prefix '"B."))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

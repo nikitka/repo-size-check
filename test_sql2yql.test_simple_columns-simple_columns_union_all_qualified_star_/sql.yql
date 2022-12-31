@@ -1,0 +1,80 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (PersistableRepr '((AsStruct '('"key" (String '"x")) '('"value" (Int32 '"1"))) (AsStruct '('"key" (String '"y")) '('"value" (Int32 '"2"))))))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"A") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (PersistableRepr '((AsStruct '('"key" (String '"y")) '('"value" (Int32 '"3"))) (AsStruct '('"key" (String '"z")) '('"value" (Int32 '"4"))))))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"B") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"A") (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"B") (Void) '()))
+  (let table3 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"A") (Void) '()))
+  (let table4 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"B") (Void) '()))
+  (let table5 (Right! x))
+  (let output (UnionAll (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"A") '((RemoveSystemMembers table3) '"B") '('LeftOnly '"A" '"B" '('"A" '"key") '('"B" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"A" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"A.")))
+          (return res)
+        ))) '('('divePrefix '('"A.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table4) '"A") '((RemoveSystemMembers table5) '"B") '('RightOnly '"A" '"B" '('"A" '"key") '('"B" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"B" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"B.")))
+          (return res)
+        ))) '('('divePrefix '('"B.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

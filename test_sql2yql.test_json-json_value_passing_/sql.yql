@@ -1,0 +1,119 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var1 + $var2 + $var3 + $var4 + $var5 + $var6 + $var7 + $var8 + $var9 + $var10") (JsonVariables '('"var1" (SafeCast (Int32 '"1") (DataType 'Int8))) '('"var2" (SafeCast (Int32 '"2") (DataType 'Uint8))) '('"var3" (SafeCast (Int32 '"3") (DataType 'Int16))) '('"var4" (SafeCast (Int32 '"4") (DataType 'Uint16))) '('"var5" (SafeCast (Int32 '"5") (DataType 'Int32))) '('"var6" (SafeCast (Int32 '"6") (DataType 'Uint32))) '('"var7" (SafeCast (Int32 '"7") (DataType 'Int64))) '('"var8" (SafeCast (Int32 '"8") (DataType 'Uint64))) '('"var9" (SafeCast (Int32 '"9") (DataType 'Double))) '('"var10" (SafeCast (Int32 '"10") (DataType 'Float)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (SafeCast (Int32 '"1582044622") (DataType 'Datetime)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (SafeCast (Int32 '"1582044622") (DataType 'Timestamp)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (SafeCast (String '"2020-02-18") (DataType 'Date)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (SafeCast (String '"\u043F\u0440\u0438\u0432\u0435\u0442") (DataType 'Utf8)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (Bool '"true"))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var.key") (JsonVariables '('"var" (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (Nothing (OptionalType (DataType 'Int64))))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var") (JsonVariables '('"var" (Null))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var1") (JsonVariables '('"var1" (Int32 '"123"))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $VaR1") (JsonVariables '('"VaR1" (Int32 '"123"))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $var1") (JsonVariables '('"var1" (Int32 '"123"))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{
+    "key": 123
+}@@) (DataType 'Json)) (Utf8 '"strict $VaR1") (JsonVariables '('"VaR1" (Int32 '"123"))) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,283 @@
+(
+(let scriptudf0 (String '@@
+def asIs(arg):
+    return arg
+@@))
+(let scriptudf1 (String '@@
+def asIs(arg):
+    return arg
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"value") (DataType 'Decimal '"15" '"10")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"decimal") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table3 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table4 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table5 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table6 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table7 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table8 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let core table2)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce (And ("<" (Member row '"value") (Decimal '"4.1" '"15" '"10")) (">" (Member row '"value") (Decimal '"10.5" '"15" '"10"))) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table3)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (Member row '"value") (Decimal '"inf" '"15" '"10")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table4)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (Member row '"value") (Decimal '"-inf" '"15" '"10")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table5)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (Decimal '"nan" '"15" '"10")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table6)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (Decimal '"inf" '"15" '"10")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table7)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (Decimal '"-inf" '"15" '"10")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core table8)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce (Or (">" (Member row '"value") (Decimal '"3.3" '"15" '"10")) (">=" (Member row '"value") (Decimal '"3.30001" '"15" '"10"))) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      ))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table9 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table9)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (SafeCast (String '"6.6") (DataType 'Decimal '"15" '"10"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table10 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table10)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (SafeCast (Apply (ScriptUdf 'Python3 '"asIs" (CallableType '() '((DataType 'String)) '((DataType 'String))) scriptudf0) (String '"3.3")) (DataType 'Decimal '"15" '"10"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"decimal") (Void) '()))
+  (let table11 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table11)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"value") (SafeCast (Apply (ScriptUdf 'Python3 '"asIs" (CallableType '() '((DataType 'String)) '((DataType 'String))) scriptudf1) (String '"bad")) (DataType 'Decimal '"15" '"10"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,6 @@
+/dev/stdin:<main>:5:15: Warning: ORDER BY without LIMIT in subquery will be ignored
+	$data_dict = (select mod, some(AsStruct(key as s, subkey as subkey)) as list_struct from Input group by cast(key as uint32) % 10 as mod order by mod);
+	              ^
+/dev/stdin:<main>:8:3: Error: Column zz is not in source column set
+	  zz.s -- try with invalid correlation (show as wrong column)
+	  ^

@@ -1,0 +1,43 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input3")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row '_yql_preagg_Sum0) '_yql_preagg_Sum0 (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (SafeCast (Member row '"subkey") (DataType 'Utf8))))) (DataType 'Int32))) '_yql_preagg_Sum1) '_yql_preagg_Sum1 (SafeCast (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"subkey") (DataType 'Utf8))))) (DataType 'Uint64))) '_yql_preagg_AggregateList0) '_yql_preagg_AggregateList0 (Concat (Member row '"key") (String '"_")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Sum0")) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Sum0") '('Sum1 (Apply (bind aggregate_module '"sum_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Sum1")) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Sum1") '('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_AggregateList0")) (lambda '(row) row) (Uint64 '0)) '"_yql_preagg_AggregateList0")) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"sks" (lambda '(row) (block '(
+          (let res ("+" (Member row 'Sum0) (Member row 'Sum1)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"kl" (lambda '(row) (block '(
+          (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"sks" '"kl")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

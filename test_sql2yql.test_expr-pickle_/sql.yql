@@ -1,0 +1,73 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Pickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Ensure (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) ("!=" (Pickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Ensure (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One))) ("==" (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Ensure (Pickle (ToDict (ListReverse (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6")))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) ("!=" (Pickle (ToDict (ListReverse (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6")))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (Pickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Ensure (StablePickle (ToDict (ListReverse (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6")))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) ("==" (StablePickle (ToDict (ListReverse (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6")))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Unpickle (TypeOf (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (Pickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Unpickle (TypeOf (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))) (StablePickle (ToDict (AsList '((Int32 '"13") (Int32 '"4")) '((Int32 '"11") (Int32 '"2")) '((Int32 '"17") (Int32 '"8")) '((Int32 '"5") (Int32 '"6"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,78 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (UnionAll (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"names" (lambda '(row) (block '(
+          (let res (AsList (String '"a") (String '"b")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"indices" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"0") (Int32 '"0") (Int32 '"1")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"names" (lambda '(row) (block '(
+          (let res (AsList (String '"c") (String '"d")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"indices" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"0") (Int32 '"1") (Int32 '"1")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Apply (lambda '("$names" "$indices") (block '(
+        (return (ListFlatMap "$indices" (lambda '("$index") (block '(
+          (return (SqlAccess 'dict "$names" "$index" '('"yson_strict" '"yson_fast")))
+        )))))
+      ))) (Member row '"names") (Member row '"indices"))) (Uint64 '0)))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

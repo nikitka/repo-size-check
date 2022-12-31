@@ -1,0 +1,3 @@
+/dev/stdin:<main>:1:8: Error: "co_a_lesc____e__" looks weird, has multiple consecutive underscores
+	select co_a_lesc____e__(1);
+	       ^

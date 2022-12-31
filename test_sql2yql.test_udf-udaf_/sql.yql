@@ -1,0 +1,217 @@
+(
+(let scriptudf0 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(let scriptudf1 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(let scriptudf2 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(let scriptudf3 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(let scriptudf4 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(let scriptudf5 (String '@@
+import heapq
+import json
+
+N_SMALLEST = 3
+
+def create(item):
+    return [item]
+
+def add(state, item):
+    heapq.heappush(state, item)
+    return heapq.nsmallest(N_SMALLEST, state)
+
+def merge(state_a, state_b):
+    merged = heapq.merge(state_a, state_b)
+    return heapq.nsmallest(N_SMALLEST, merged)
+
+def get_result(state):
+    result = heapq.nsmallest(N_SMALLEST, state)
+    return '%d smallest items: %s' % (
+        N_SMALLEST,
+        ', '.join(map(str, result))
+    )
+
+def serialize(state):
+    return json.dumps(state)
+
+def deserialize(serialized):
+    return json.loads(serialized)
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('UDAF0 (Apply (bind aggregate_module '"udaf_traits_factory") (TypeOf core) (lambda '(row) (SafeCast (Member row '"key") (DataType 'Double))) (lambda '(value parent) (NamedApply (ScriptUdf 'Python3 '"create" (CallableType '() '((ResourceType '"Python3")) '((DataType 'Double))) scriptudf0) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (ScriptUdf 'Python3 '"add" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((DataType 'Double) '"")) scriptudf1) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (ScriptUdf 'Python3 '"merge" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((ResourceType '"Python3") '"")) scriptudf2) (NullType) (lambda '() (Void)) (lambda '() (Apply (ScriptUdf 'Python3 '"merge" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((ResourceType '"Python3") '"")) scriptudf2) one two)))) (lambda '(state) (Apply (ScriptUdf 'Python3 '"get_result" (CallableType '() '((DataType 'String)) '((ResourceType '"Python3"))) scriptudf3) state)) (lambda '(state) (Apply (ScriptUdf 'Python3 '"serialize" (CallableType '() '((DataType 'String)) '((ResourceType '"Python3"))) scriptudf4) state)) (lambda '(state) (Apply (ScriptUdf 'Python3 '"deserialize" (CallableType '() '((ResourceType '"Python3")) '((DataType 'String))) scriptudf5) state)) (Null)))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'UDAF0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

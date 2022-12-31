@@ -1,0 +1,115 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"level1_null" (lambda '(row) (block '(
+          (let res (Nothing (OptionalType (DataType '"String"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level1_just_val" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (DataType '"String")) (String '"val")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_null" (lambda '(row) (block '(
+          (let res (Nothing (OptionalType (OptionalType (DataType '"String")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_just_null" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (OptionalType (DataType '"String"))) (Nothing (OptionalType (DataType '"String")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_just_just_val" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (OptionalType (DataType '"String"))) (Just (String '"val"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_null" (lambda '(row) (block '(
+          (let res (Nothing (OptionalType (OptionalType (OptionalType (DataType '"String"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_null" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (OptionalType (OptionalType (DataType '"String")))) (Nothing (OptionalType (OptionalType (DataType '"String"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_just_null" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (OptionalType (OptionalType (DataType '"String")))) (Just (Nothing (OptionalType (DataType '"String"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_just_just_val" (lambda '(row) (block '(
+          (let res (Optional (OptionalType (OptionalType (OptionalType (DataType '"String")))) (Just (Just (String '"val")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"const" (lambda '(row) (block '(
+          (let res (String '"const"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"a") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"a") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"level1_null" (lambda '(row) (block '(
+          (let res (Member row '"level1_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level1_just_val" (lambda '(row) (block '(
+          (let res (Member row '"level1_just_val"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_null" (lambda '(row) (block '(
+          (let res (Member row '"level2_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_just_null" (lambda '(row) (block '(
+          (let res (Member row '"level2_just_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level2_just_just_val" (lambda '(row) (block '(
+          (let res (Member row '"level2_just_just_val"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_null" (lambda '(row) (block '(
+          (let res (Member row '"level3_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_null" (lambda '(row) (block '(
+          (let res (Member row '"level3_just_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_just_null" (lambda '(row) (block '(
+          (let res (Member row '"level3_just_just_null"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"level3_just_just_just_val" (lambda '(row) (block '(
+          (let res (Member row '"level3_just_just_just_val"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"level1_null" '"level1_just_val" '"level2_null" '"level2_just_null" '"level2_just_just_val" '"level3_null" '"level3_just_null" '"level3_just_just_null" '"level3_just_just_just_val")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

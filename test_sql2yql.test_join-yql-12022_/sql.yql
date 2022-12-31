@@ -1,0 +1,60 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((UnorderedSubquery (Apply (lambda '(world "$name") (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$name"))))) (Void) '()))
+          (let table3 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table3)
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+                  (let res row)
+                  (return res)
+                ))) '()))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (let select (RemoveSystemMembers select))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world (String '"Input"))) '"a") '((RemoveSystemMembers table2) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlAccess 'struct (RemoveSystemMembers row) '"a.subkey" '('"yson_strict" '"yson_fast")) (String '"wat")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"a"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a.key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

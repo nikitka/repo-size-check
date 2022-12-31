@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgConst '1 (PgType 'int4)))) (PgResultItem '"y" (Void) (lambda '() (PgConst '3 (PgType 'int4)))))))))) '('set_ops '('push)))) '"u" '()))) '('join_ops '('())))) (PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"y" (Void) (lambda '() (PgCast (PgCast (Null) (PgType 'text)) (PgType '"int4")))) (PgResultItem '"x" (Void) (lambda '() (PgConst '2 (PgType 'int4)))))))))) '('set_ops '('push)))) '"v" '()))) '('join_ops '('())))) (PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"y" (Void) (lambda '() (PgConst '4 (PgType 'int4)))) (PgResultItem '"x" (Void) (lambda '() (PgCast (PgCast (Null) (PgType 'text)) (PgType '"int4")))))))))) '('set_ops '('push)))) '"v" '()))) '('join_ops '('())))))) '('set_ops '('push 'push 'union_all 'push 'union_all)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

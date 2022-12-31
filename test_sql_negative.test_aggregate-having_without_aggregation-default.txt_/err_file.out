@@ -1,0 +1,3 @@
+/dev/stdin:<main>:5:12: Error: HAVING with meaning GROUP BY () should be with aggregation function.
+	HAVING key < '100' -- using having mean aggregation GROUP BY (), should use aggregation functions
+	           ^

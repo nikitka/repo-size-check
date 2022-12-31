@@ -1,0 +1,86 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+          (let res (AsStructUnordered '('"key" (Member row '"key")) '('"subkey" (Just (Member row '"subkey"))) '('"value" (Just (Member row '"value")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"count_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy1 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"min_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy2 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"max_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy3 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy4 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"avg_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy5 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"variance_1_1_traits_factory") (ListType type) extractor)))) '('MultiAggregateBy6 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"percentile_traits_factory") (ListType type) extractor (Double '"0.5"))))) '('MultiAggregateBy7 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"list2_traits_factory") (ListType type) extractor (Uint64 '0))))) '('MultiAggregateBy8 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"set_traits_factory") (ListType type) extractor (Uint64 '0))))) '('MultiAggregateBy9 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"topfreq_traits_factory") (ListType type) extractor (Coalesce (Null) (Uint32 '1)) (Max (Coalesce (Coalesce (Null) (SafeCast (* (Coalesce (Null) (Uint32 '1)) (Double '1.5)) 'Uint32)) (Uint32 '100)) (Uint32 '100)))))) '('MultiAggregateBy10 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"top_traits_factory") (ListType type) extractor (Int32 '"3")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy4))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"stddev" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy5))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"p50" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy6))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"agg_list" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy7))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"agg_list_distinct" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy8))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"mode" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy9))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"top" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy10))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count" '"min" '"max" '"sum" '"avg" '"stddev" '"p50" '"agg_list" '"agg_list_distinct" '"mode" '"top")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

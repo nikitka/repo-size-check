@@ -1,0 +1,132 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Coalesce (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"0")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Coalesce (SafeCast (Member row '"subkey") (DataType 'Int32)) (Int32 '"0")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let composite subquery0)
+      (let composite (OrderedFilter composite (lambda '(row) (Coalesce (SqlIn '((Int32 '"23") (Int32 '"37") (Int32 '"75") (Int32 '"150")) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
+      (return (UnionAll (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key" '"subkey")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"total_count" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"total_count" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"key" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'key) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"total_count" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey")) (PersistableRepr (Member row '"total_count"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"total_count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

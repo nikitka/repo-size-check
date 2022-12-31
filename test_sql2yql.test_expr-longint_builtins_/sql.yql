@@ -1,0 +1,61 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"binary" (lambda '(row) (block '(
+          (let res (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"to_string" (lambda '(row) (block '(
+          (let res (ToString (Dec (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"abs" (lambda '(row) (block '(
+          (let res (SafeCast (Inc (Abs (SafeCast (Int64 '"-1000000000000") (DataType 'Decimal '"32" '"0")))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"add" (lambda '(row) (block '(
+          (let res (SafeCast (Minus ("+" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0")))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"div" (lambda '(row) (block '(
+          (let res (SafeCast ("/" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
+          (let res (SafeCast ("%" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"mul" (lambda '(row) (block '(
+          (let res (SafeCast ("*" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int64 '"333333333333333333") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sub" (lambda '(row) (block '(
+          (let res (SafeCast ("-" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"eq" (lambda '(row) (block '(
+          (let res ("==" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (Abs (SafeCast (Int64 '"-1000000000000") (DataType 'Decimal '"32" '"0")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"cmp" (lambda '(row) (block '(
+          (let res ("<=" ("/" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"binary" '"to_string" '"abs" '"add" '"div" '"mod" '"mul" '"sub" '"eq" '"cmp")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

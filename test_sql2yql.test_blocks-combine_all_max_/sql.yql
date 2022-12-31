@@ -1,0 +1,80 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Max1 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int8)))))) '('Max2 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Uint16)))))) '('Max3 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Max4 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") (Uint32 '"0")))))) '('Max5 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"2"))))) '('Max6 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Member row '"key") (Null)))))) '('Max7 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Member row '"key") (Null)))))) '('Max8 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Bool '"false"))))) '('Max9 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("==" (Member row '"key") (Uint32 '"10")))))) '('Max10 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (">=" (Member row '"key") (Uint32 '"10")))))) '('Max11 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("==" (Member row '"key") (Uint32 '"20")))))) '('Max12 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Bool '"true") (Null)))))) '('Max13 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Bool '"true") (Null)))))) '('Max14 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (">=" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Bool '"true") (Null))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'Max1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row 'Max2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row 'Max3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row 'Max4))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row 'Max5))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (Member row 'Max6))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (Member row 'Max7))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (Member row 'Max8))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (Member row 'Max9))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (Member row 'Max10))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (Member row 'Max11))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res (Member row 'Max12))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res (Member row 'Max13))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res (Member row 'Max14))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

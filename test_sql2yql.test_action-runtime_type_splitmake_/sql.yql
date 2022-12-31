@@ -1,0 +1,134 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (DataTypeComponents (ParseTypeHandle (String '"Int32"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (DataTypeComponents (ParseTypeHandle (String '"Decimal(4,1)"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (FormatType (DataTypeHandle (AsList (String '"Int32")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (FormatType (DataTypeHandle (AsList (String '"Decimal") (String '"4") (String '"1")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (FormatType (OptionalItemType (ParseTypeHandle (String '"Int32?")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (FormatType (OptionalTypeHandle (ParseTypeHandle (String '"Int32")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (FormatType (ListItemType (ParseTypeHandle (String '"List<Int32>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (FormatType (ListTypeHandle (ParseTypeHandle (String '"Int32")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (FormatType (StreamItemType (ParseTypeHandle (String '"Stream<Int32>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (FormatType (StreamTypeHandle (ParseTypeHandle (String '"Int32")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (ListMap (TupleTypeComponents (ParseTypeHandle (String '"Tuple<Int32,String>"))) (lambda '("$x") (block '(
+            (return (FormatType "$x"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (FormatType (TupleTypeHandle (ListMap (AsList (String '"Int32") (String '"String")) (lambda '("$x") (block '(
+            (return (ParseTypeHandle "$x"))
+          )))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res (ListMap (StructTypeComponents (ParseTypeHandle (String '"Struct<foo:Int32,bar:String>"))) (lambda '("$x") (block '(
+            (return '((SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast")) (FormatType (SqlAccess 'struct "$x" '"Type" '('"yson_strict" '"yson_fast")))))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res (FormatType (StructTypeHandle (ListMap (AsList '((String '"foo") (String '"Int32")) '((String '"bar") (String '"String"))) (lambda '("$x") (block '(
+            (return (AsStructUnordered '('"Name" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast"))) '('"Type" (ParseTypeHandle (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))))
+          )))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res (StaticMap (DictTypeComponents (ParseTypeHandle (String '"Dict<String,Int32>"))) (lambda '("$x") (block '(
+            (return (FormatType "$x"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+          (let res (FormatType (DictTypeHandle (ParseTypeHandle (String '"String")) (ParseTypeHandle (String '"Int32")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+          (let res (ResourceTypeTag (ParseTypeHandle (String '"Resource<foo>"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+          (let res (FormatType (ResourceTypeHandle (String '"foo"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$x") (block '(
+            (return (AsStructUnordered '('"Base" (FormatType (SqlAccess 'struct "$x" '"Base" '('"yson_strict" '"yson_fast")))) '('"Tag" (SqlAccess 'struct "$x" '"Tag" '('"yson_strict" '"yson_fast")))))
+          ))) (TaggedTypeComponents (ParseTypeHandle (String '"Tagged<String,foo>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+          (let res (FormatType (TaggedTypeHandle (ParseTypeHandle (String '"String")) (String '"foo"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+          (let res (FormatType (VariantUnderlyingType (ParseTypeHandle (String '"Variant<Int32,String>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+          (let res (FormatType (VariantTypeHandle (ParseTypeHandle (String '"Tuple<Int32,String>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+          (let res (FormatType (VariantUnderlyingType (ParseTypeHandle (String '"Variant<a:Int32,b:String>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
+          (let res (FormatType (VariantTypeHandle (ParseTypeHandle (String '"Struct<a:Int32,b:String>")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
+          (let res (FormatType (VoidTypeHandle)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
+          (let res (FormatType (NullTypeHandle)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column26" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$x") (block '(
+            (return (AsStructUnordered '('"OptionalArgumentsCount" (SqlAccess 'struct "$x" '"OptionalArgumentsCount" '('"yson_strict" '"yson_fast"))) '('"Payload" (SqlAccess 'struct "$x" '"Payload" '('"yson_strict" '"yson_fast"))) '('"Result" (FormatType (SqlAccess 'struct "$x" '"Result" '('"yson_strict" '"yson_fast")))) '('"Arguments" (ListMap (SqlAccess 'struct "$x" '"Arguments" '('"yson_strict" '"yson_fast")) (lambda '("$x") (block '(
+              (return (AsStructUnordered '('"Type" (FormatType (SqlAccess 'struct "$x" '"Type" '('"yson_strict" '"yson_fast")))) '('"Name" (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast"))) '('"Flags" (SqlAccess 'struct "$x" '"Flags" '('"yson_strict" '"yson_fast")))))
+            )))))))
+          ))) (CallableTypeComponents (ParseTypeHandle (String '"(Int32,[bar:Double?{Flags:AutoMap}])->String{Payload:foo}")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column27" (lambda '(row) (block '(
+          (let res (FormatType (CallableTypeHandle (ParseTypeHandle (String '"String")) (AsList (CallableArgument (ParseTypeHandle (String '"Int32"))) (CallableArgument (ParseTypeHandle (String '"Double?")) (String '"bar") (AsList (String '"AutoMap")))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column28" (lambda '(row) (block '(
+          (let res (FormatType (CallableTypeHandle (ParseTypeHandle (String '"String")) (AsList (CallableArgument (ParseTypeHandle (String '"Int32"))) (CallableArgument (ParseTypeHandle (String '"Double?")) (String '"bar") (AsList (String '"AutoMap")))) (Int32 '"1") (String '"foo"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21" '"column22" '"column23" '"column24" '"column25" '"column26" '"column27" '"column28")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

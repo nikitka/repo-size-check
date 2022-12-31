@@ -1,0 +1,117 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table3 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (block '(
+        (let src0 (block '(
+          (let select (block '(
+            (let core table1)
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                (let res (Member row '"key"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+                (let res (Member row '"subkey"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"t1" (lambda '(row) (block '(
+                (let res (RemoveSystemMembers row))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (let src0 (RemoveSystemMembers src0))
+        (let src1 (block '(
+          (let select (block '(
+            (let core table2)
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                (let res (Member row '"key"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+                (let res (Member row '"subkey"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"t2" (lambda '(row) (block '(
+                (let res (RemoveSystemMembers row))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (let src1 (RemoveSystemMembers src1))
+        (let src2 (block '(
+          (let select (block '(
+            (let core table3)
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+                (let res (Member row '"key"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+                (let res (Member row '"subkey"))
+                (return res)
+              )))) (SqlProjectItem projectCoreType '"t3" (lambda '(row) (block '(
+                (let res (RemoveSystemMembers row))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (let src2 (RemoveSystemMembers src2))
+        (return (Mux '(src0 src1 src2)))
+      )))
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) '((Member row '"key") (Member row '"subkey"))))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) '((Member row '"key") (Member row '"subkey"))))) (lambda '("$key" "$stream") (block '(
+        (let $stream (OrderedMap "$stream" (lambda '("$item") (block '(
+          (return (AsStructUnordered '('"t1" (SqlAccess 'struct (Guess "$item" '"0") '"t1" '('"yson_strict" '"yson_fast"))) '('"t2" (SqlAccess 'struct (Guess "$item" '"1") '"t2" '('"yson_strict" '"yson_fast"))) '('"t3" (SqlAccess 'struct (Guess "$item" '"2") '"t3" '('"yson_strict" '"yson_fast")))))
+        )))))
+        (let $recs (Collect (Condense1 "$stream" (lambda '("$item") (block '(
+          (return (AsStructUnordered '('"t1" (SqlAccess 'struct "$item" '"t1" '('"yson_strict" '"yson_fast"))) '('"t2" (SqlAccess 'struct "$item" '"t2" '('"yson_strict" '"yson_fast"))) '('"t3" (SqlAccess 'struct "$item" '"t3" '('"yson_strict" '"yson_fast")))))
+        ))) (lambda '("$_item" "$_state") (block '(
+          (return (Bool '"false"))
+        ))) (lambda '("$item" "$state") (block '(
+          (return (AsStructUnordered '('"t1" (Coalesce (SqlAccess 'struct "$state" '"t1" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$item" '"t1" '('"yson_strict" '"yson_fast")))) '('"t2" (Coalesce (SqlAccess 'struct "$state" '"t2" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$item" '"t2" '('"yson_strict" '"yson_fast")))) '('"t3" (Coalesce (SqlAccess 'struct "$state" '"t3" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$item" '"t3" '('"yson_strict" '"yson_fast"))))))
+        ))))))
+        (let $rec (SqlAccess 'dict (Ensure "$recs" ("==" (Length "$recs") (Uint64 '"1"))) (Int32 '"0") '('"yson_strict" '"yson_fast")))
+        (return (Apply (lambda '("$key" "$t1" "$t2" "$t3") (block '(
+          (return (AsStructUnordered '('"key" (SqlAccess 'struct "$key" '"0" '('"yson_strict" '"yson_fast"))) '('"subkey" ("+" ("+" (Coalesce (SafeCast (SqlAccess 'struct "$t1" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0")) (Coalesce (SafeCast (SqlAccess 'struct "$t2" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))) (Coalesce (SafeCast (SqlAccess 'struct "$t3" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))))))
+        ))) "$key" (SqlAccess 'struct "$rec" '"t1" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$rec" '"t2" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$rec" '"t3" '('"yson_strict" '"yson_fast"))))
+      ))) (lambda '(row) (RemoveSystemMembers row)))))))
+      (return core)
+    )))
+    (let select (AssumeSorted select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'renew))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

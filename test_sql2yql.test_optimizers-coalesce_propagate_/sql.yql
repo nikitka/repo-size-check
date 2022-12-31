@@ -1,0 +1,36 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"x" ("/" (Int32 '"1") (Int32 '"0"))) '('"y" ("/" (Int32 '"2") (Int32 '"0")))) (AsStructUnordered '('"x" ("/" (Int32 '"1") (Int32 '"0"))) '('"y" (Int32 '"1"))) (AsStructUnordered '('"x" (Int32 '"1")) '('"y" ("/" (Int32 '"1") (Int32 '"0")))) (AsStructUnordered '('"x" (Int32 '"2")) '('"y" (Int32 '"2"))) (AsStructUnordered '('"x" (Int32 '"3")) '('"y" (Int32 '"3"))) (AsStructUnordered '('"x" (Int32 '"4")) '('"y" (Int32 '"4"))) (AsStructUnordered '('"x" (Int32 '"5")) '('"y" (Int32 '"5"))))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Not (Or ("<" (Member row '"x") (Int32 '"3")) (">" (Member row '"y") (Int32 '"3")))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

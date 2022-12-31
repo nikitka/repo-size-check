@@ -1,0 +1,12 @@
+/dev/stdin:<main>:2:8: Info: Hello, world! And best wishes from the YQL Team!
+	PRAGMA Greetings;
+	       ^
+/dev/stdin:<main>:3:18: Info: It's a good day!
+	PRAGMA Greetings("It's a good day!");
+	                 ^
+/dev/stdin:<main>:4:19: Warning: Ready to fight!
+	PRAGMA WarningMsg("Ready to fight!");
+	                  ^
+/dev/stdin:<main>:5:17: Error: Loose!
+	PRAGMA ErrorMsg("Loose!");
+	                ^

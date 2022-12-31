@@ -1,0 +1,189 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"LLVM" '"OFF"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"rtmr" '"plato") (Key '('table (String '"Input"))) (Void) '()))
+  (let world (Left! x))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"input_ts" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Timestamp)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core subquery0)
+              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (AsDict '((String '"project") (String '"first")) '((String '"first") (String '"first")))) (Uint64 '0)))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Member row '"input_ts")) (Interval '10000000) (Interval '30000000) (Interval '300000000) 'true 'v1)))) '()))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+                  (let res (Member row '_yql_time))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"aggr_dict" (lambda '(row) (block '(
+                  (let res (Member row 'AggregateList0))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (FlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'aggr_dict))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+              (let res (Member row '"ts"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"project" (lambda '(row) (block '(
+              (let res (Lookup (Member row '"aggr_dict") (String '"project")))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"first" (lambda '(row) (block '(
+              (let res (Lookup (Member row '"aggr_dict") (String '"first")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"project" '"first") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Member row '"ts")) (Interval '10000000) (Interval '30000000) (Interval '300000000) 'true 'v1)))) '('"project" '"first")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+          (let res (Sub (Member row '_yql_time) (Interval '30000000)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_by_project_name" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"project" (lambda '(row) (block '(
+          (let res (Member row '"project"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"first" (lambda '(row) (block '(
+          (let res (Member row '"first"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rtmr_cluster" (lambda '(row) (block '(
+          (let res (String '"alpha"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"ts" '"count_by_project_name" '"project" '"first" '"rtmr_cluster")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core subquery0)
+              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (AsDict '((String '"project") (String '"second")) '((String '"second") (String '"second")))) (Uint64 '0)))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Member row '"input_ts")) (Interval '10000000) (Interval '30000000) (Interval '300000000) 'true 'v1)))) '()))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+                  (let res (Member row '_yql_time))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"aggr_dict" (lambda '(row) (block '(
+                  (let res (Member row 'AggregateList0))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (FlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row 'aggr_dict))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+              (let res (Member row '"ts"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"project" (lambda '(row) (block '(
+              (let res (Lookup (Member row '"aggr_dict") (String '"project")))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"second" (lambda '(row) (block '(
+              (let res (Lookup (Member row '"aggr_dict") (String '"second")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"project" '"second") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Member row '"ts")) (Interval '10000000) (Interval '30000000) (Interval '300000000) 'true 'v1)))) '('"project" '"second")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+          (let res (Sub (Member row '_yql_time) (Interval '30000000)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_by_project_name" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"project" (lambda '(row) (block '(
+          (let res (Member row '"project"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"second" (lambda '(row) (block '(
+          (let res (Member row '"second"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rtmr_cluster" (lambda '(row) (block '(
+          (let res (String '"alpha"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"ts" '"count_by_project_name" '"project" '"second" '"rtmr_cluster")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

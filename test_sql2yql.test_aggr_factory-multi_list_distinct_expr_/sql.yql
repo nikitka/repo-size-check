@@ -1,0 +1,98 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (UnionAll (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"4") (Int32 '"5")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"nums" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row '_yql_preagg_MultiAggregateBy0) '_yql_preagg_MultiAggregateBy0 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5")))) '_yql_preagg_MultiAggregateBy1) '_yql_preagg_MultiAggregateBy1 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5")))) '_yql_preagg_MultiAggregateBy2) '_yql_preagg_MultiAggregateBy2 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5")))) '_yql_preagg_MultiAggregateBy3) '_yql_preagg_MultiAggregateBy3 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5")))) '_yql_preagg_MultiAggregateBy4) '_yql_preagg_MultiAggregateBy4 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5")))) '_yql_preagg_MultiAggregateBy5) '_yql_preagg_MultiAggregateBy5 (ListExtend (Member row '"nums") (AsList (Int32 '"1") (Int32 '"5"))))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy0"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"count_traits_factory") (ListType type) extractor))) '"_yql_preagg_MultiAggregateBy0") '('MultiAggregateBy1 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy1"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"min_traits_factory") (ListType type) extractor))) '"_yql_preagg_MultiAggregateBy1") '('MultiAggregateBy2 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy2"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"max_traits_factory") (ListType type) extractor))) '"_yql_preagg_MultiAggregateBy2") '('MultiAggregateBy3 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy3"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))) '"_yql_preagg_MultiAggregateBy3") '('MultiAggregateBy4 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy4"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"percentile_traits_factory") (ListType type) extractor (Double '"0.5")))) '"_yql_preagg_MultiAggregateBy4") '('MultiAggregateBy5 (MultiAggregate (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_MultiAggregateBy5"))) (lambda '(row) (PersistableRepr row)) (lambda '(type extractor) (Apply (bind aggregate_module '"list2_traits_factory") (ListType type) extractor (Uint64 '0)))) '"_yql_preagg_MultiAggregateBy5")) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"p50" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy4))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"agg_list" (lambda '(row) (block '(
+          (let res (Member row 'MultiAggregateBy5))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count" '"min" '"max" '"sum" '"p50" '"agg_list")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

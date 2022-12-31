@@ -1,0 +1,48 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"test_join_1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"test_join_2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '('Full '"a" '"b" '('"a" '"key") '('"b" '"subkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a_key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b_key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a_value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b_value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"b"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"b_key")) (PersistableRepr (SqlColumn row '"a_key"))))))
+    (let select (Take select (Coalesce (Int32 '"25") (Uint64 '18446744073709551615))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a_key" '"b_key" '"a_value" '"b_value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

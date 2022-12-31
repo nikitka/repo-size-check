@@ -1,0 +1,15 @@
+/dev/stdin:<main>:5:7: Error: ORDER BY without LIMIT in subquery will be ignored
+	$x = (select * from Input order by value);
+	      ^
+/dev/stdin:<main>:8:16: Error: ORDER BY without LIMIT in subquery will be ignored
+	select * from (select * from Input order by value);
+	               ^
+/dev/stdin:<main>:10:16: Error: ORDER BY without LIMIT in subquery will be ignored
+	select * from (select * from Input as a join Input as b using(key) order by a.value);
+	               ^
+/dev/stdin:<main>:13:1: Error: ORDER BY without LIMIT in subquery will be ignored
+	select * from Input
+	^
+/dev/stdin:<main>:19:1: Error: ORDER BY without LIMIT in subquery will be ignored
+	SELECT
+	^

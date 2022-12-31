@@ -1,0 +1,181 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (EvaluateFor! world (EvaluateExpr (ListMap (ListFromRange (Int32 '"0") (Int32 '"3")) (lambda '("$i") (block '(
+  (return (SafeCast (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast "$i" (DataType 'Utf8))))) (DataType 'String)))
+))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$i"))))
+(let world (EvaluateFor! world (EvaluateExpr (ListMap (ListFromRange (Int32 '"0") (Int32 '"0")) (lambda '("$i") (block '(
+  (return (SafeCast (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast "$i" (DataType 'Utf8))))) (DataType 'String)))
+))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$i")) (lambda '(world) (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world (Int32 '"100")))))
+(let world (EvaluateFor! world (EvaluateExpr (ListMap (ListFromRange (Int32 '"0") (Int32 '"0")) (lambda '("$i") (block '(
+  (return (SafeCast (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast "$i" (DataType 'Utf8))))) (DataType 'String)))
+))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$i"))))
+(let world (EvaluateFor! world (EvaluateExpr (Map ("/" (Int32 '"1") (Int32 '"1")) (lambda '("$x") (block '(
+  (return (AsList "$x"))
+))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$i"))))
+(let world (EvaluateFor! world (EvaluateExpr (Map ("/" (Int32 '"1") (Int32 '"0")) (lambda '("$x") (block '(
+  (return (AsList "$x"))
+))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (AsList (AsStruct)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res "$x")
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$i"))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

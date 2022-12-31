@@ -1,0 +1,3 @@
+/dev/stdin:<main>:4:51: Error: Source used in expression should contain one concrete column
+	$data = (SELECT key as kk, subkey as sk, value as val FROM plato.Input WHERE key == '075');
+	                                                  ^

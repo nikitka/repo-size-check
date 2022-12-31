@@ -1,0 +1,41 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"asc" (lambda '(row) (block '(
+          (let res (ListSort (AsList (AsVariant (Int32 '"1") '"int") (AsVariant (Float '"1.") '"float") (AsVariant (Double '"1.0") '"double") (AsVariant (Uint32 '"1") '"unsigned")) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"desc" (lambda '(row) (block '(
+          (let res (ListSort (AsList (AsVariant (Int32 '"1") '"int") (AsVariant (Float '"1.") '"float") (AsVariant (Double '"1.0") '"double") (AsVariant (Uint32 '"1") '"unsigned")) (Bool 'false) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"asc" '"desc")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

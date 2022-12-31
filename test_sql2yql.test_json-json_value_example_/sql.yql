@@ -1,0 +1,205 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"strict $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"strict $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (String '"no where there")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Friend" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.friends.name") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (String '"*** error ***")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali" '"Friend")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table4 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table4)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"strict $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"strict $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Friend" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"strict $.friends[*].name") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (String '"*** error ***")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali" '"Friend")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table5 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table5)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Rank" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.friends[0].rank") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int64)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Rank")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

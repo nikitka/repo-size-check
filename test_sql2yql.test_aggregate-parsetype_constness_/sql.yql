@@ -1,0 +1,35 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStruct '('"key" (Int32 '"1"))) (AsStruct '('"key" (Int32 '"2"))))) (lambda '(row) (SelectMembers row '('"key")))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '() '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.ConvertTo" '((PositionalArgs (Json '"[1,2]") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true")))))) (ListType (DataType 'Int32))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"x")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

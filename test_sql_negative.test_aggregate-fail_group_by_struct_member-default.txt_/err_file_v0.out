@@ -1,0 +1,3 @@
+/dev/stdin:<main>:16:38: Error: Please use a full form (corellation.struct.field) or an alias (struct.field as alias) to access struct's field in the GROUP BY
+	SELECT count(*) FROM $input GROUP BY s.value;
+	                                     ^

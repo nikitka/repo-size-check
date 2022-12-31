@@ -1,0 +1,39 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let Udf2 (Udf '"Re2.Options"))
+(let Udf1 (Udf '"Re2.PatternFromLike"))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"match" (lambda '(row) (block '(
+          (let res (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%f")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (String '"abc\ndef")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"no_match" (lambda '(row) (block '(
+          (let res (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%a")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (String '"abc\ndef")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"match" '"no_match")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

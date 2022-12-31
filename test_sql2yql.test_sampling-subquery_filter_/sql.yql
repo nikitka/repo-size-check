@@ -1,0 +1,57 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"subkey") (String '"1")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Member row '"key"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (OrderedFlatMap select (lambda '(row) (block '(
+          (let res (OptionalIf (< (Random (DependsOn row)) (/ (Coalesce (SafeCast (Ensure (Ensure (Int32 '"44") (>= (Int32 '"44") (Double '0)) (String '"Expected sampling rate to be nonnegative")) (<= (Ensure (Int32 '"44") (>= (Int32 '"44") (Double '0)) (String '"Expected sampling rate to be nonnegative")) (Double '100)) (String '"Sampling rate is over 100%")) (DataType 'Double)) (Double '0)) (Double '100))) row))
+          (return res)
+        )))))
+        (return select)
+      )))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (Member row '"key") (String '"50")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

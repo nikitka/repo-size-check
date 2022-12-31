@@ -1,0 +1,82 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (SqlIn '((String '"wat") (String '"bar")) (Member row '"value") '('('warnNoAnsi))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '(subquery0 '"R0") '(subquery0 '"R1") '(subquery0 '"R2") '('Left '('Left '"R0" '"R1" '('"R0" '"subkey") '('"R1" '"key") '()) '"R2" '('"R1" '"subkey") '('"R2" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"R0.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"R0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R0.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"R0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R0.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"R0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R1.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"R1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R1.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"R1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R1.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"R1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R2.key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"R2"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"R2.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"R2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key" '"R0")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"R0.key" '"R0.subkey" '"R0.value" '"R1.key" '"R1.subkey" '"R1.value" '"R2.key" '"R2.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

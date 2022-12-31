@@ -1,0 +1,72 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (SafeCast (Member row '"key") (DataType 'Int32)))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"sub" (lambda '(row) (block '(
+              (let res (Unwrap (SafeCast (Member row '"subkey") (DataType 'Int32))))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+              (let res (Member row '"value"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"empty" (lambda '(row) (block '(
+              (let res (SafeCast (Member row '"value") (DataType 'Int32)))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MinBy0 (Apply (bind aggregate_module '"min_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"key")) (lambda '(row) (Member row '"sub")))) '('MaxBy0 (Apply (bind aggregate_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"sub")) (lambda '(row) (Member row '"value")))) '('MinBy1 (Apply (bind aggregate_module '"min_by_traits_factory2") (TypeOf core) (lambda '(row) (Size (Member row '"sub"))) (lambda '(row) (Member row '"key")) (Int32 '"2"))) '('MinBy2 (Apply (bind aggregate_module '"min_by_traits_factory2") (TypeOf core) (lambda '(row) (Size (Member row '"sub"))) (lambda '(row) (Member row '"empty")) (Int32 '"2"))) '('MaxBy1 (Apply (bind aggregate_module '"max_by_traits_factory2") (TypeOf core) (lambda '(row) (Member row '"empty")) (lambda '(row) (Member row '"key")) (Int32 '"2")))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"min" (lambda '(row) (block '(
+          (let res (Member row 'MinBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max" (lambda '(row) (block '(
+          (let res (Member row 'MaxBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min_list" (lambda '(row) (block '(
+          (let res (Member row 'MinBy1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"empty_result" (lambda '(row) (block '(
+          (let res (Member row 'MinBy2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"empty_by" (lambda '(row) (block '(
+          (let res (Member row 'MaxBy1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"min" '"max" '"min_list" '"empty_result" '"empty_by")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

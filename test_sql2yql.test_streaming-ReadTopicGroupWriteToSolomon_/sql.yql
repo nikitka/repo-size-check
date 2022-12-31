@@ -1,0 +1,73 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"maxtasksperstage" '"10"))
+(let world (Configure! world (DataSource '"pq" '"$all") '"Attr" '"consumer" '"test_client"))
+(let world (block '(
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input")))) (Void) '()))
+  (let world (Left! x))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table1)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"Data" (lambda '(row) (block '(
+              (let res (Member row '"Data"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"crc" (lambda '(row) (block '(
+              (let res (Apply (lambda '("$s") (block '(
+                (return (Unwrap ("%" (Size "$s") (Int32 '"8"))))
+              ))) (Member row '"Data")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"crc") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"Data")))))) '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"Data")))))) '('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"Data"))))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Just (CurrentUtcTimestamp (DependsOn (RemoveSystemMembers row))))) (Interval '5000000) (Interval '5000000) (Interval '5000000) 'true 'v1)))) '('"crc")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+          (let res (Unwrap (Member row '_yql_time)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"crc8" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"crc") (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min_length" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max_length" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"solomon" '"solomon"))
+    (let world (Write! world sink (Key '('table (String '"project/cluster/service"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

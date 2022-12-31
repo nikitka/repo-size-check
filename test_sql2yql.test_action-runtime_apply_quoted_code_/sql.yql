@@ -1,0 +1,82 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$strValue" "$f") (block '(
+            (let $code (EvaluateCode (LambdaCode (lambda '("$strCode") (block '(
+              (let $members (StructTypeComponents (TypeHandle (TypeOf "$strValue"))))
+              (return (Fold "$members" (ReprCode (Bool '"false")) (lambda '("$item" "$state") (block '(
+                (let $member (FuncCode (String '"Member") "$strCode" (AtomCode (SqlAccess 'struct "$item" '"Name" '('"yson_strict" '"yson_fast")))))
+                (let $apply (FuncCode (String '"Apply") (QuoteCode "$f") "$member"))
+                (return (FuncCode (String '"Or") "$state" "$apply"))
+              )))))
+            ))))))
+            (return (Apply "$code" "$strValue"))
+          ))) (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (Int32 '"2")) '('"c" (Int32 '"3"))) (lambda '("$x") (block '(
+            (return ("==" "$x" (Int32 '"1")))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$strValue" "$f") (block '(
+            (let $code (EvaluateCode (LambdaCode (lambda '("$strCode") (block '(
+              (let $members (StructTypeComponents (TypeHandle (TypeOf "$strValue"))))
+              (return (Fold "$members" (ReprCode (Bool '"false")) (lambda '("$item" "$state") (block '(
+                (let $member (FuncCode (String '"Member") "$strCode" (AtomCode (SqlAccess 'struct "$item" '"Name" '('"yson_strict" '"yson_fast")))))
+                (let $apply (FuncCode (String '"Apply") (QuoteCode "$f") "$member"))
+                (return (FuncCode (String '"Or") "$state" "$apply"))
+              )))))
+            ))))))
+            (return (Apply "$code" "$strValue"))
+          ))) (AsStructUnordered '('"a" (Int32 '"4")) '('"b" (Int32 '"2")) '('"c" (Int32 '"3"))) (lambda '("$x") (block '(
+            (return ("==" "$x" (Int32 '"1")))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

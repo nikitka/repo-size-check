@@ -1,0 +1,98 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"DisablePullUpFlatMapOverJoin"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergetableslimit" '"10"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergeunsortedfactor" '"3.0"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"BaseNo")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"inp2") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table2 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"inp2") (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"pd") '((block '(
+        (let select (block '(
+          (let core table3)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"BaseNo" (lambda '(row) (block '(
+              (let res (Member row '"BaseNo"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"PhraseID" (lambda '(row) (block '(
+              (let res (Member row '"PhraseID"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Extra" (lambda '(row) (block '(
+              (let res (Int32 '"1"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) '"m2") '('Left '"pd" '"m2" '('"pd" '"BaseNo" '"pd" '"PhraseID") '('"m2" '"BaseNo" '"m2" '"PhraseID") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"pd.BaseNo" (lambda '(row) (block '(
+          (let res (SqlColumn row '"BaseNo" '"pd"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"m2.PhraseID" (lambda '(row) (block '(
+          (let res (SqlColumn row '"PhraseID" '"m2"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"m2.Extra" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Extra" '"m2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"BaseNo" '"pd")) (PersistableRepr (SqlColumn row '"PhraseID" '"m2")) (PersistableRepr (SqlColumn row '"Extra" '"m2"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"pd.BaseNo" '"m2.PhraseID" '"m2.Extra")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

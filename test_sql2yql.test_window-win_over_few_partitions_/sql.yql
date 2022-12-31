@@ -1,0 +1,82 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"age_decade" (lambda '(row) (block '(
+          (let res ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"region") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"name")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"age")))))))))
+        (let partitioning (CalcOverWindow partitioning '('"age_decade") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"name")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"age")))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (Member row '"region"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (Member row '"age"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"name"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum1" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum2" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"region")) (PersistableRepr (Member row '"age"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"region" '"age" '"name" '"sum1" '"sum2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,55 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"maxtasksperstage" '"10"))
+(let world (Configure! world (DataSource '"pq" '"$all") '"Attr" '"consumer" '"test_client"))
+(let world (block '(
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input")))) (Void) '()))
+  (let world (Left! x))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input2")))) (Void) '()))
+  (let world (Left! x))
+  (let table2 (Right! x))
+  (let values (UnionAll (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"Data" (lambda '(row) (block '(
+          (let res (Member row '"Data"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )) (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"Data" (lambda '(row) (block '(
+          (let res (Member row '"Data"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+  (let world (block '(
+    (let sink (DataSink '"pq" '"pq"))
+    (let world (Write! world sink (Key '('table (String '"test_topic_output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,47 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let inputRowsList table0)
+      (let inputRowsList (Map (RemoveSystemMembers inputRowsList) (lambda '(row) '((AsStructUnordered '('"uid" (SafeCast (Member row '"key") (DataType 'Uint64))) '('"eventTime" (CurrentUtcDatetime)) '('"events" (Member row '"value")))))))
+      (let transform (SqlExternalFunction (String '"YANDEX-CLOUD") (String '"foo:$latest") '('('"concurrency" (Int32 '"3")) '('"connection" (String '"my-yc-fold3nf")) '('"input_type" (StructType '('"uid" (DataType 'Uint64)) '('"eventTime" (OptionalType (DataType 'Datetime))) '('"events" (DataType 'Json)))) '('"optimize_for" (String '"CALLS")) '('"output_type" (StructType '('"uid" (DataType 'Uint64)) '('"eventTime" (DataType 'Datetime)) '('"eventType" (DataType 'String)) '('"osType" (DataType 'String)) '('"osVersion" (DataType 'String)) '('"appPath" (DataType 'String)) '('"appVersion" (DataType 'String)) '('"requireAdminPwd" (DataType 'Bool)))))))
+      (let core (Apply transform inputRowsList))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let inputRowsList subquery0)
+      (let inputRowsList (RemoveSystemMembers inputRowsList))
+      (let transform (SqlExternalFunction (String '"YANDEX-CLOUD") (String '"d4e44kf36si4uo5t314n") '('('"connection" (String '"my-yc-fold3nf")) '('"input_type" (StructType '('"uid" (DataType 'Uint64)) '('"eventTime" (DataType 'Datetime)) '('"eventType" (DataType 'String)) '('"osType" (DataType 'String)) '('"osVersion" (DataType 'String)) '('"appPath" (DataType 'String)) '('"appVersion" (DataType 'String)) '('"requireAdminPwd" (DataType 'Bool)))) '('"output_type" (StructType '('"uid" (DataType 'Uint64)) '('"eventTime" (DataType 'Datetime)) '('"eventType" (DataType 'String)) '('"osType" (DataType 'String)) '('"osVersion" (DataType 'String)) '('"appPath" (DataType 'String)) '('"appVersion" (DataType 'String)) '('"requireAdminPwd" (DataType 'Bool)))))))
+      (let core (Apply transform inputRowsList))
+      (let core (AutoDemux (PersistableRepr core)))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

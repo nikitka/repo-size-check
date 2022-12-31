@@ -1,0 +1,57 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (ForceRemoveMember row 'group0)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"group0" '"user") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Coalesce (Member row '"ts") (Int32 '"100500"))) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '('('session '('"group0" (SessionWindowTraits (TypeOf core) (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) (lambda '("$row") (block '(
+        (return (AsStructUnordered '('"value" (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))) '('"count" (Int32 '"1"))))
+      ))) (lambda '("$row" "$state") (block '(
+        (let $state (AsStructUnordered '('"count" ("+" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) '('"value" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))))
+        (let $state (AsStructUnordered '('"count" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast"))) '('"value" ("+" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))))))
+        (return '(("==" (Unwrap ("%" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"2"))) (Int32 '"1")) "$state"))
+      ))) (lambda '("$_row" "$state") (block '(
+        (return (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))
+      )))))))) '('"group0" '"user")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"user" (lambda '(row) (block '(
+          (let res (Member row '"user"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session_start" (lambda '(row) (block '(
+          (let res (Member row '"group0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session" (lambda '(row) (block '(
+          (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"session_len" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"user")) (PersistableRepr (Member row '"session_start"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"user" '"session_start" '"session" '"session_len")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

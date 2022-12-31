@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())) '('where (PgWhere (Void) (lambda '() (PgSubLink 'any (Void) (Void) (lambda '(value) (PgOp '"=" (PgConst '1 (PgType 'int4)) value)) (lambda '() (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))) '('where (PgWhere (Void) (lambda '() (PgOp '"=" (PgColumnRef '"x") (PgConst '1 (PgType 'int4)))))))))) '('set_ops '('push))))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())) '('where (PgWhere (Void) (lambda '() (PgSubLink 'any (Void) (Void) (lambda '(value) (PgOp '"=" (PgConst '1 (PgType 'int4)) value)) (lambda '() (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))) '('where (PgWhere (Void) (lambda '() (PgOp '"=" (PgColumnRef '"x") (PgConst '10 (PgType 'int4)))))))))) '('set_ops '('push))))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

@@ -1,0 +1,176 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"usenativeyttypes" '"1"))
+(let world (Configure! world (DataSource '"config") '"LLVM" '""))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d3" (lambda '(row) (block '(
+              (let res (Decimal '"3.14" '"3" '"2"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d12" (lambda '(row) (block '(
+              (let res (Decimal '"2.9999999999" '"12" '"10"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d35" (lambda '(row) (block '(
+              (let res (Decimal '"2.12345678900876543" '"35" '"10"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d3" (lambda '(row) (block '(
+              (let res (Decimal '"inf" '"3" '"2"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d12" (lambda '(row) (block '(
+              (let res (Decimal '"inf" '"12" '"10"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d35" (lambda '(row) (block '(
+              (let res (Decimal '"inf" '"35" '"10"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d3" (lambda '(row) (block '(
+              (let res (Decimal '"-inf" '"3" '"2"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d12" (lambda '(row) (block '(
+              (let res (Decimal '"-inf" '"12" '"10"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d35" (lambda '(row) (block '(
+              (let res (Decimal '"-inf" '"35" '"10"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d3" (lambda '(row) (block '(
+              (let res (Decimal '"nan" '"3" '"2"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d12" (lambda '(row) (block '(
+              (let res (Decimal '"nan" '"12" '"10"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"d35" (lambda '(row) (block '(
+              (let res (Decimal '"nan" '"35" '"10"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      ))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"a") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"a") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"d3") (Decimal '"5.3" '"3" '"2")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,6 @@
+/dev/stdin:<main>:15:5: Error: Column kk is not in source column set. Did you mean key?
+	    i1.kk, -- invalid column, should be either kk or i1.key
+	    ^
+/dev/stdin:<main>:16:5: Error: Column val is not in source column set. Did you mean value?
+	    i2.val -- invalid column, should be either val or i2.value
+	    ^

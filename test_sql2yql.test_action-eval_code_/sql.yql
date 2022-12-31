@@ -1,0 +1,93 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (EvaluateCode (FuncCode (String '"Int32") (AtomCode (String '"1")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (EvaluateCode (LambdaCode (lambda '("$x") (block '(
+            (return (FuncCode (String '"+") "$x" (FuncCode (String '"Int32") (AtomCode (String '"1")))))
+          ))))) (Int32 '"1")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$strValue") (block '(
+            (let $code (EvaluateCode (LambdaCode (lambda '("$str") (block '(
+              (let $members (StructTypeComponents (TypeHandle (TypeOf "$strValue"))))
+              (let $list (ListMap "$members" (lambda '("$x") (block '(
+                (return (ListCode (AtomCode (Concat (String '"prefix") (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast")))) (FuncCode (String '"Member") "$str" (AtomCode (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast"))))))
+              )))))
+              (return (FuncCode (String '"AsStruct") "$list"))
+            ))))))
+            (return (Apply "$code" "$strValue"))
+          ))) (AsStructUnordered '('"foo" (Int32 '"1")) '('"bar" (String '"2")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

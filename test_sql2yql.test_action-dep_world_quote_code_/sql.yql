@@ -1,0 +1,168 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (EvaluateFor! world (EvaluateExpr (AsList (String '"Input"))) (lambda '(world "$z") (Apply (lambda '(world "$z") (block '(
+  (let subquerynode0 (block '(
+    (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$z"))))) (Void) '()))
+    (let table4 (Right! x))
+    (return '(world (block '(
+      (let select (block '(
+        (let core table4)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode0 '0))
+  (let subquery0 (Nth subquerynode0 '1))
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (UnorderedSubquery (Apply (Apply (lambda '("$query" "$list") (block '(
+          (return (EvaluateCode (LambdaCode (lambda '("$world") (block '(
+            (let $queries (ListMap "$list" (lambda '("$arg") (block '(
+              (return (FuncCode (String '"Apply") (QuoteCode "$query") "$world" (ReprCode "$arg")))
+            )))))
+            (return (FuncCode (String '"Extend") "$queries"))
+          ))))))
+        ))) (lambda '(world "$n") (block '(
+          (let world (block '(
+            (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$z"))))) (Void) '()))
+            (let table3 (Right! x))
+            (let output (block '(
+              (let select (block '(
+                (let core table3)
+                (let core (PersistableRepr (block '(
+                  (let projectCoreType (TypeOf core))
+                  (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                    (let res ("+" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+                    (return res)
+                  )))))))
+                  (return core)
+                ))))
+                (return core)
+              )))
+              (return select)
+            )))
+            (return output)
+          )))
+          (return world)
+        ))) (ListFromRange (Int32 '"0") (Int32 '"10"))) world)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let res row)
+            (return res)
+          ))) '()))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (RemoveSystemMembers select))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world "$z"))))
+(let world (Apply (lambda '(world "$z") (block '(
+  (let subquerynode0 (block '(
+    (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$z"))))) (Void) '()))
+    (let table4 (Right! x))
+    (return '(world (block '(
+      (let select (block '(
+        (let core table4)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (return select)
+    ))))
+  )))
+  (let world (Nth subquerynode0 '0))
+  (let subquery0 (Nth subquerynode0 '1))
+  (let world (block '(
+    (let output (block '(
+      (let select (block '(
+        (let core (UnorderedSubquery (Apply (Apply (lambda '("$query" "$list") (block '(
+          (return (EvaluateCode (LambdaCode (lambda '("$world") (block '(
+            (let $queries (ListMap "$list" (lambda '("$arg") (block '(
+              (return (FuncCode (String '"Apply") (QuoteCode "$query") "$world" (ReprCode "$arg")))
+            )))))
+            (return (FuncCode (String '"Extend") "$queries"))
+          ))))))
+        ))) (lambda '(world "$n") (block '(
+          (let world (block '(
+            (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$z"))))) (Void) '()))
+            (let table3 (Right! x))
+            (let output (block '(
+              (let select (block '(
+                (let core table3)
+                (let core (PersistableRepr (block '(
+                  (let projectCoreType (TypeOf core))
+                  (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                    (let res ("+" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+                    (return res)
+                  )))))))
+                  (return core)
+                ))))
+                (return core)
+              )))
+              (return select)
+            )))
+            (return output)
+          )))
+          (return world)
+        ))) (ListFromRange (Int32 '"0") (Int32 '"10"))) world)))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let res row)
+            (return res)
+          ))) '()))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (RemoveSystemMembers select))
+      (return select)
+    )))
+    (let output (Unordered output))
+    (let world (block '(
+      (let result_sink (DataSink 'result))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+      (return (Commit! world result_sink))
+    )))
+    (return world)
+  )))
+  (return world)
+))) world (String '"Input")))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

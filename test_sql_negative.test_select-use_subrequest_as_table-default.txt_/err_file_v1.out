@@ -1,0 +1,3 @@
+/dev/stdin:<main>:14:5: Error: Source used in expression should contain one concrete column
+	    SELECT 1 AS test, "a" AS test2
+	    ^

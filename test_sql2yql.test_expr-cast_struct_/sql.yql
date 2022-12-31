@@ -1,0 +1,43 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"empty" (lambda '(row) (block '(
+          (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"partial" (lambda '(row) (block '(
+          (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType '('"du" (OptionalType (DataType 'Uint32))) '('"fl" (OptionalType (DataType 'Uint32))) '('"s" (OptionalType (DataType 'Uint16))) '('"u" (OptionalType (DataType 'Int32))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"others" (lambda '(row) (block '(
+          (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType '('"x" (OptionalType (DataType 'Uint8))) '('"y" (OptionalType (DataType 'Uint16))) '('"z" (OptionalType (DataType 'Int8))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"fail" (lambda '(row) (block '(
+          (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType '('"du" (DataType 'Uint32)) '('"fl" (DataType 'Uint32)) '('"s" (DataType 'Uint16)) '('"u" (DataType 'Int32)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"empty" '"partial" '"others" '"fail")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

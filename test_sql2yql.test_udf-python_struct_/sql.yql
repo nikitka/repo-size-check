@@ -1,0 +1,71 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+          (let res (Apply (block '(
+            (let $udfScript (String '@@
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+def NewPerson(name, age):
+    return Person(name, age)
+@@))
+            (let ui32 (DataType 'Uint32))
+            (let str (DataType 'String))
+            (let personType (StructType '('name str) '('age ui32)))
+            (let udfType (CallableType '() '(personType) '(str) '(ui32)))
+            (let udf (ScriptUdf 'Python 'NewPerson udfType $udfScript))
+            (return udf)
+          )) (Member row '"value") (Int32 '"100")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+          (let res (Member row '"val"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"val")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,215 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"interval_data" (lambda '(row) (block '(
+          (let res (Coalesce (SafeCast (Member row '"key") (DataType 'Interval)) (Unwrap (SafeCast (Int32 '"0") (DataType 'Interval)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"interval_data" (lambda '(row) (block '(
+          (let res (Member row '"interval_data"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"interval_data2" (lambda '(row) (block '(
+          (let res ("+" (Member row '"interval_data") (Unwrap (SafeCast (Int32 '"1") (DataType 'Interval)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"optional_interval_data" (lambda '(row) (block '(
+          (let res (Just (Member row '"interval_data")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Percentile0 (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"interval_data")) (Double '"0.8")))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"result" (lambda '(row) (block '(
+          (let res (Member row 'Percentile0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let subquerynode3 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('('Percentile0 'Percentile1) (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"interval_data2")) '((Double '"0.8") (Double '"0.6"))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"result_1" (lambda '(row) (block '(
+          (let res (Member row 'Percentile0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"result_2" (lambda '(row) (block '(
+          (let res (Member row 'Percentile1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let subquerynode4 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Percentile0 (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"optional_interval_data")) (Double '"0.4")))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"result" (lambda '(row) (block '(
+          (let res (Member row 'Percentile0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode4 '0))
+(let subquery4 (Nth subquerynode4 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (EnsureType (Member row '"result") (OptionalType (DataType 'Interval))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (EnsureType (Member row '"result_1") (OptionalType (DataType 'Interval))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (EnsureType (Member row '"result_2") (OptionalType (DataType 'Interval))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery4)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"result" (lambda '(row) (block '(
+          (let res (Member row '"result"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"result")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

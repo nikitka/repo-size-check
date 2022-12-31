@@ -1,0 +1,184 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"Warning" '"4510" '"disable"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let inputRowsList table0)
+      (let core inputRowsList)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream 'byAllList (SqlReduceUdf '"SimpleUdf.GenericAsStruct" (TupleType)) "partitionStream")))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (SqlReduceUdf '"SimpleUdf.GenericAsStruct" (TupleType)) (lambda '(row) (SafeCast (SqlAccess 'struct (RemoveSystemMembers row) '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32))))))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table2 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionByKey core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream 'byAll (SqlReduceUdf '"SimpleUdf.GenericAsStruct" (TupleType)) (Map partitionStream (lambda '(keyPair) '((Nth keyPair '0) (Map (Nth keyPair '1) (lambda '(row) (SqlAccess 'struct (RemoveSystemMembers row) '"key" '('"yson_strict" '"yson_fast"))))))))))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core subquery0)
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'list row 'arg_0))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (Just (FlattenStructs row)))
+        (return res)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"arg_0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"values" (lambda '(row) (block '(
+          (let res (ListSort (Collect (Member row '"arg_1")) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"values")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (RemoveSystemMembers row))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Take select (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (RemoveSystemMembers row))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Take select (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

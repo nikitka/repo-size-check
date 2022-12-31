@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgColumnRef '"x"))) (PgResultItem '"y" (Void) (lambda '() (PgColumnRef '"y"))) (PgResultItem '"column0" (Void) (lambda '() (PgAggWindowCall '"sum" '"w" '() (PgColumnRef '"x")))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '1 (PgType 'int4)) (PgConst '3 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '4 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '5 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())) '('window '((PgWindow '"w" '"" '() '() '()))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"x" (Void) (lambda '() (PgColumnRef '"x"))) (PgResultItem '"y" (Void) (lambda '() (PgColumnRef '"y"))) (PgResultItem '"column0" (Void) (lambda '() (PgAggWindowCall '"sum" '"w" '() (PgColumnRef '"x")))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '1 (PgType 'int4)) (PgConst '3 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '4 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '5 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())) '('window '((PgWindow '"w" '"" '() '((PgSort (Void) (lambda '() (PgColumnRef '"y")) 'asc)) '()))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

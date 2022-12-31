@@ -1,0 +1,34 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Concat (Concat (Concat (Concat (Concat (Concat (String '"The") (String '" std::tuple")) (String '" type")) (Concat (Concat (String '" introduced") (String '" in")) (String '" C++11"))) (Concat (Concat (Concat (String '" allows") (String '" an")) (String '" aggregate")) (Concat (Concat (String '" of") (String '" typed")) (String '" values")))) (Concat (Concat (Concat (Concat (String '" to") (String '" be")) (String '" indexed")) (Concat (Concat (String '" by") (String '" a")) (String '" compile-time"))) (Concat (Concat (Concat (String '" constant") (String '" integer.")) (String '" C++14")) (Concat (Concat (String '" extends") (String '" this")) (Concat (String '" to") (String '" allow")))))) (Concat (Concat (Concat (Concat (Concat (String '" fetching") (String '" from")) (String '" a")) (Concat (Concat (String '" tuple") (String '" by")) (String '" type"))) (Concat (Concat (Concat (String '" instead") (String '" of")) (String '" by")) (Concat (Concat (String '" index.") (String '" If")) (String '" the")))) (Concat (Concat (Concat (Concat (String '" tuple") (String '" has")) (String '" more")) (Concat (Concat (String '" than") (String '" one")) (String '" element"))) (Concat (Concat (Concat (String '" of") (String '" the")) (String '" type,")) (Concat (Concat (String '" a") (String '" compile-time")) (Concat (String '" error") (String '" results..."))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

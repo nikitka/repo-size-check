@@ -1,0 +1,3 @@
+/dev/stdin:<main>:5:20: Error: Duplicate lambda argument parametr: '$x'.
+	$linear = ($x, $z, $x)->{ -- $x is duplicated
+	                   ^

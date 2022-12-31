@@ -1,0 +1,41 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text))))) (lambda '("$x") (block '(
+            (return "$x")
+          )))) (AsStruct '('"a" (String '"1")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text))))) (lambda '("$x") (block '(
+            (return "$x")
+          )))) (AddMember (AsStruct) '"a" (String '"2"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

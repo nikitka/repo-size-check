@@ -1,0 +1,38 @@
+(
+(declare $x4 (VariantType (StructType '('"a" (DataType 'String)) '('"b" (DataType 'Int64)))))
+(declare $x3 (VariantType (StructType '('"a" (DataType 'String)) '('"b" (DataType 'Int64)))))
+(declare $x2 (VariantType (TupleType (DataType 'String) (DataType 'Int64))))
+(declare $x1 (VariantType (TupleType (DataType 'String) (DataType 'Int64))))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Concat (Concat (SqlAccess 'struct "$x1" '"0" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x2" '"1" '('"yson_strict" '"yson_fast")) (DataType 'String))) (Concat (SqlAccess 'struct "$x3" '"a" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x4" '"b" '('"yson_strict" '"yson_fast")) (DataType 'String)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,65 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"region") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (If (Coalesce (And (">=" ("%" (Member row '"age") (Uint32 '"10")) (Uint32 '"1")) ("<=" ("%" (Member row '"age") (Uint32 '"10")) ("%" (Member row '"region") (Uint32 '"10")))) (Bool 'false)) (Member row '"age") (Uint32 '"0"))))))) '()) '('"region")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (Member row '"region"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max_age_at_range_intersect" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"region")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"region" '"max_age_at_range_intersect")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

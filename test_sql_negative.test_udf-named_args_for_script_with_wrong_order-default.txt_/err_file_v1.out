@@ -1,0 +1,3 @@
+/dev/stdin:<main>:18:37: Error: Unnamed arguments can not follow after named one
+	select $udf(name, region as region, age) as val from $data;
+	                                    ^

@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"id" (Int32 '"1")) '('"time" (Int32 '"1")) '('"value" (String '"a"))) (AsStructUnordered '('"id" (Int32 '"1")) '('"time" (Int32 '"2")) '('"value" (Null))) (AsStructUnordered '('"id" (Int32 '"1")) '('"time" (Int32 '"3")) '('"value" (Null))) (AsStructUnordered '('"id" (Int32 '"1")) '('"time" (Int32 '"4")) '('"value" (String '"b"))) (AsStructUnordered '('"id" (Int32 '"1")) '('"time" (Int32 '"5")) '('"value" (Null))) (AsStructUnordered '('"id" (Int32 '"2")) '('"time" (Int32 '"1")) '('"value" (String '"c"))) (AsStructUnordered '('"id" (Int32 '"2")) '('"time" (Int32 '"2")) '('"value" (String '"d"))) (AsStructUnordered '('"id" (Int32 '"2")) '('"time" (Int32 '"3")) '('"value" (Null))))))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"time")) (PersistableRepr (Member row '"id"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+        (let partitioning (CalcOverWindow partitioning '('"id") (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"value")))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"a" (lambda '(row) (block '(
+          (let row (RemoveMember row 'Count0))
+          (let row (RemoveMember row 'Max0))
+          (let res row)
+          (return res)
+        ))) '()) (SqlProjectItem projectCoreType '"w1" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"w2" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"id")) (PersistableRepr (Member row '"time"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

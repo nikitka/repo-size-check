@@ -1,0 +1,57 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"and_res" (lambda '(row) (block '(
+          (let res (BitAnd (Size (Member row '"key")) (Size (Member row '"value"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"or_res" (lambda '(row) (block '(
+          (let res (BitOr (Size (Member row '"key")) (Size (Member row '"value"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_res" (lambda '(row) (block '(
+          (let res (BitXor (Size (Member row '"key")) (Size (Member row '"value"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"shl_res" (lambda '(row) (block '(
+          (let res (ShiftLeft (Size (Member row '"key")) (Int32 '"1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"shr_res" (lambda '(row) (block '(
+          (let res (ShiftRight (Size (Member row '"key")) (Int32 '"1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rotl_res" (lambda '(row) (block '(
+          (let res (RotLeft (Size (Member row '"key")) (Int32 '"15")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rotr_res" (lambda '(row) (block '(
+          (let res (RotRight (Size (Member row '"key")) (Int32 '"15")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"not_res" (lambda '(row) (block '(
+          (let res (BitNot (Size (Member row '"key"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"and_res" '"or_res" '"xor_res" '"shl_res" '"shr_res" '"rotl_res" '"rotr_res" '"not_res")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

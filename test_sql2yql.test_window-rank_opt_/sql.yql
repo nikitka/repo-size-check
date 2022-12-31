@@ -1,0 +1,91 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"Warning" '"4520" '"disable"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"1")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+              (let res (Member row '"subkey"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+              (let res (Member row '"value"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '-5))) '('_yql_Rank0 (Rank (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) '('('ansi)))) '('_yql_DenseRank0 (DenseRank (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) '('('ansi)))) '('_yql_Rank1 (Rank (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) '('('ansi)))) '('_yql_DenseRank1 (DenseRank (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) '('('ansi))))))))
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))) '((WinOnRows '('('begin (Int32 '3)) '('end (Int32 '2))) '('_yql_Rank2 (Rank (TypeOf partitioning) (lambda '(row) '((Member row '"key") (Member row '"subkey"))) '('('ansi)))) '('_yql_DenseRank2 (DenseRank (TypeOf partitioning) (lambda '(row) '((Member row '"key") (Member row '"subkey"))) '('('ansi)))) '('_yql_Rank3 (Rank (TypeOf partitioning) (lambda '(row) (Concat (Member row '"subkey") (Member row '"subkey"))) '('('ansi)))) '('_yql_DenseRank3 (DenseRank (TypeOf partitioning) (lambda '(row) (Concat (Member row '"subkey") (Member row '"subkey"))) '('('ansi))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r1" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r2" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r3" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r4" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r5" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r6" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r7" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"r8" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank3))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"r1" '"r2" '"r3" '"r4" '"r5" '"r6" '"r7" '"r8")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

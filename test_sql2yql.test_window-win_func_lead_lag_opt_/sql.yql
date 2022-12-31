@@ -1,0 +1,127 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lag0 (Lag (TypeOf core) (lambda '(row) (Just (Member row '"subkey"))))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (Just (Member row '"subkey"))))) '('_yql_Lag1 (Lag (TypeOf core) (lambda '(row) (Member row '"subkey")) (Int32 '"0"))) '('_yql_Lead1 (Lead (TypeOf core) (lambda '(row) (Member row '"subkey")) (Int32 '"0")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"opt_lag" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"opt_lead" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lag0" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lead0" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"subkey" '"opt_lag" '"opt_lead" '"lag0" '"lead0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"InputOpt")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lag0 (Lag (TypeOf core) (lambda '(row) (Member row '"optkey")))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (Just (Member row '"optkey"))))) '('_yql_Lag1 (Lag (TypeOf core) (lambda '(row) (Just (Member row '"optkey"))) (Int32 '"0"))) '('_yql_Lead1 (Lead (TypeOf core) (lambda '(row) (Member row '"optkey")) (Int32 '"0")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"opt_lag" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"opt_lead" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lag0" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"lead0" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"opt_lag" '"opt_lead" '"lag0" '"lead0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Int32 '"1"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (Null))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

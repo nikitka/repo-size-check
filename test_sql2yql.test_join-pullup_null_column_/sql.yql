@@ -1,0 +1,70 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((block '(
+        (let select (block '(
+          (let core table1)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+              (let res (Member row '"key"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+              (let res (Null))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+              (let res (Int32 '"1"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) '"b") '('Left '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"akey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"a.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b.subkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"b"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"b"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"akey")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"akey" '"bkey" '"a.subkey" '"b.subkey" '"b.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

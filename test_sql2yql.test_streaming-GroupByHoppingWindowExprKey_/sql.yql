@@ -1,0 +1,56 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"maxtasksperstage" '"2"))
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"watermarksmode" '"default"))
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"computeactortype" '"async"))
+(let world (Configure! world (DataSource '"pq" '"$all") '"Attr" '"consumer" '"test_client"))
+(let world (block '(
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input")))) (Void) '('('"format" '"json_each_row") '('"userschema" (StructType '('"t" (AsOptionalType (DataType 'Uint64))) '('"k" (AsOptionalType (DataType 'Uint64))) '('"v" (AsOptionalType (DataType 'Uint64)))) '('"t" '"k" '"v")))))
+  (let world (Left! x))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table1)
+          (let core (FlatMap core (lambda '(row) (AsList (ForceRemoveMember (AddMember (ForceRemoveMember row 'group0) 'group0 (Min (Member row '"k") (Int32 '"2"))) 'group1)))))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"group0" '"group1") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"v")))))) '('('hopping '('"group1" (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (Just (SystemMetadata (String 'write_time) (DependsOn row)))) (Interval '"5000") (Interval '"10000") (Interval '"10000") 'true 'v2))))) '('"group0" '"group1")))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+              (let res (Member row 'Sum0))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.SerializeText" '((PositionalArgs (SqlCall '"Yson2.From" '((PositionalArgs (RemoveSystemMembers row))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"pq" '"pq"))
+    (let world (Write! world sink (Key '('table (String '"test_topic_output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

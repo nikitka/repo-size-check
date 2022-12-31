@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"l" (Void) (lambda '() (PgAggWindowCall '"sum" '"w" '() (PgOp '"+" (PgOp '"+" (PgColumnRef '"x") (PgConst '1 (PgType 'int4))) (PgAgg '"sum" '() (PgColumnRef '"z")))))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1 'column2) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4))) '((PgConst '1 (PgType 'int4)) (PgConst '5 (PgType 'int4)) (PgConst '3 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y" '"z")))) '('join_ops '('())) '('group_by '((PgGroup (Void) (lambda '() (PgOp '"+" (PgColumnRef '"x") (PgConst '1 (PgType 'int4))))) (PgGroup (Void) (lambda '() (PgColumnRef '"y"))))) '('window '((PgWindow '"w" '"" '() '() '()))) '('sort '((PgSort (Void) (lambda '() (PgColumnRef '"l")) 'asc))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

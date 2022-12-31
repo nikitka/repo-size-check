@@ -1,0 +1,88 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (EvaluateFor! world (EvaluateExpr (AsList '((String '"Input") (String '"Output1")) '((String '"Input") (String '"Output2")) '((String '"Input") (String '"Output3")))) (lambda '(world "$exp_name") (block '(
+  (let world (Apply (lambda '(world "$input" "$output") (block '(
+    (let world (block '(
+      (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$input"))))) (Void) '()))
+      (let table5 (Right! x))
+      (let values (block '(
+        (let select (block '(
+          (let core table5)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let values (Unordered values))
+      (let world (block '(
+        (let sink (DataSink '"yt" '"plato"))
+        (let world (Write! world sink (TempTable (EvaluateAtom "$output")) values '('('mode 'renew))))
+        (return world)
+      )))
+      (return world)
+    )))
+    (let world (block '(
+      (let world (CommitAll! world))
+      (return world)
+    )))
+    (let world (block '(
+      (let x (Read! world (DataSource '"yt" '"plato") (TempTable (EvaluateAtom "$output")) (Void) '()))
+      (let table4 (Right! x))
+      (let values (block '(
+        (let select (block '(
+          (let core table4)
+          (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Apply (lambda '("$struct" "$to_remove") (block '(
+            (let $remover (EvaluateCode (LambdaCode (lambda '("$st") (block '(
+              (let $to_keep (ListFlatMap (StructTypeComponents (TypeHandle (TypeOf "$struct"))) (lambda '("$x") (block '(
+                (return (If (Coalesce (Not (SqlIn "$to_remove" (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi)))) (Bool 'false)) (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast")) (Null)))
+              )))))
+              (return (FuncCode (String '"AsStruct") (ListMap "$to_keep" (lambda '("$x") (block '(
+                (return (ListCode (AtomCode "$x") (FuncCode (String '"Member") "$st" (AtomCode "$x"))))
+              ))))))
+            ))))))
+            (return (Apply "$remover" "$struct"))
+          ))) (RemoveSystemMembers row) (AsList (String '"")))) (Uint64 '0)))) '()) '()))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+              (let res (Member row 'AggregateList0))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let values (Unordered values))
+      (let world (block '(
+        (let sink (DataSink '"yt" '"plato"))
+        (let world (Write! world sink (Key '('table (String (EvaluateAtom "$output")))) values '('('mode 'renew))))
+        (return world)
+      )))
+      (return world)
+    )))
+    (let world (block '(
+      (let world (CommitAll! world))
+      (return world)
+    )))
+    (return world)
+  ))) world (SqlAccess 'struct "$exp_name" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$exp_name" '"1" '('"yson_strict" '"yson_fast"))))
+  (return world)
+)))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

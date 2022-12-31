@@ -1,0 +1,3 @@
+/dev/stdin:<main>:5:15: Error: Expected single argument for AS_TABLE source
+	SELECT * FROM AS_TABLE($data, "BadArg");
+	              ^

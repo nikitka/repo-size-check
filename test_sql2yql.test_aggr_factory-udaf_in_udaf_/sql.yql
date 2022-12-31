@@ -1,0 +1,109 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"count_values" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ListAggregate") (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"2") (Int32 '"3") (Int32 '"3")) (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$item" "$_parent") (block '(
+            (return (AsDict '("$item" (Int32 '"1"))))
+          ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$dict" "$item" "$parent") (block '(
+            (return (Apply (lambda '("$dict1" "$dict2") (block '(
+              (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+              )))))
+            ))) (Apply (lambda '("$item" "$_parent") (block '(
+              (return (AsDict '("$item" (Int32 '"1"))))
+            ))) "$item" "$parent") "$dict"))
+          ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$dict1" "$dict2") (block '(
+            (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+              (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+            )))))
+          ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$dict1" "$dict2") (block '(
+            (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+              (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+            )))))
+          ))) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_list_values" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ListAggregate") (AsList (AsList (Int32 '"1") (Int32 '"2")) (AsList (Int32 '"3") (Int32 '"2")) (AsList (Int32 '"3") (Int32 '"3")) (AsList (Int32 '"1") (Int32 '"3")) (AsList (Int32 '"3") (Int32 '"1")) (AsList (Int32 '"2") (Int32 '"2"))) (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$list" "$_parent") (block '(
+            (return (Apply (bind core_module '"ListAggregate") "$list" (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$item" "$_parent") (block '(
+              (return (AsDict '("$item" (Int32 '"1"))))
+            ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$dict" "$item" "$parent") (block '(
+              (return (Apply (lambda '("$dict1" "$dict2") (block '(
+                (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                  (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+                )))))
+              ))) (Apply (lambda '("$item" "$_parent") (block '(
+                (return (AsDict '("$item" (Int32 '"1"))))
+              ))) "$item" "$parent") "$dict"))
+            ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$dict1" "$dict2") (block '(
+              (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+              )))))
+            ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$dict1" "$dict2") (block '(
+              (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+              )))))
+            ))) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null)))))
+          ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$dict" "$list" "$parent") (block '(
+            (return (Apply (lambda '("$dict1" "$dict2") (block '(
+              (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+              )))))
+            ))) (Apply (lambda '("$list" "$_parent") (block '(
+              (return (Apply (bind core_module '"ListAggregate") "$list" (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$item" "$_parent") (block '(
+                (return (AsDict '("$item" (Int32 '"1"))))
+              ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$dict" "$item" "$parent") (block '(
+                (return (Apply (lambda '("$dict1" "$dict2") (block '(
+                  (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                    (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+                  )))))
+                ))) (Apply (lambda '("$item" "$_parent") (block '(
+                  (return (AsDict '("$item" (Int32 '"1"))))
+                ))) "$item" "$parent") "$dict"))
+              ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$dict1" "$dict2") (block '(
+                (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                  (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+                )))))
+              ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$dict1" "$dict2") (block '(
+                (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+                  (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+                )))))
+              ))) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null)))))
+            ))) "$list" "$parent") "$dict"))
+          ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$dict1" "$dict2") (block '(
+            (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+              (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+            )))))
+          ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$dict1" "$dict2") (block '(
+            (return (Apply (bind core_module '"SetUnion3") "$dict1" "$dict2" (lambda '("$_key" "$a" "$b") (block '(
+              (return ("+" (Coalesce "$a" (Int32 '"0")) (Coalesce "$b" (Int32 '"0"))))
+            )))))
+          ))) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count_values" '"count_list_values")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

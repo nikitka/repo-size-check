@@ -1,0 +1,241 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Left '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs" '"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"r") '('LeftSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"r") '('LeftOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Right '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Rhs" '"Lhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"r") '('RightSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"r") '('RightOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Inner '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs" '"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Full '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs" '"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Exclusion '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Lhs"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Rhs"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Lhs" '"Rhs")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

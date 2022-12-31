@@ -1,0 +1,37 @@
+(
+(let scriptudf0 (String '@@
+import functools
+def Len(key, input):
+    return {"total":functools.reduce(lambda x,y: x + 1, input, 0)}
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (SafeCast (Member row '"value") (DataType 'Int32)) (Int32 '"1")) (Bool 'false)))))
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (ScriptUdf 'Python3 '"Len" (CallableType '() '((StructType '('"total" (DataType 'Uint32)))) '((DataType 'String)) '((StreamType (DataType 'String)) '"")) scriptudf0) (lambda '(row) (Member row '"value")))))))
+      (let core (Filter core (lambda '(row) (Coalesce (">" (Member row '"total") (Int32 '"3")) (Bool 'false)))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

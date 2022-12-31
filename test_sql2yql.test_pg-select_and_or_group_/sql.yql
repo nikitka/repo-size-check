@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"and3_true" (Void) (lambda '() (PgAnd (PgAnd (PgOp '"<" (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) (PgOp '"<" (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4)))) (PgOp '"<" (PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4)))))) (PgResultItem '"and3_false" (Void) (lambda '() (PgAnd (PgAnd (PgOp '"<" (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) (PgOp '">" (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4)))) (PgOp '"<" (PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4)))))) (PgResultItem '"or3_true" (Void) (lambda '() (PgOr (PgOr (PgOp '">" (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) (PgOp '">" (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4)))) (PgOp '"<" (PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4)))))) (PgResultItem '"or3_false" (Void) (lambda '() (PgOr (PgOr (PgOp '">" (PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) (PgOp '">" (PgConst '2 (PgType 'int4)) (PgConst '3 (PgType 'int4)))) (PgOp '">" (PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4)))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

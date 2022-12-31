@@ -1,0 +1,61 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"named_args0" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"0")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args1" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"1")) (AsStructUnordered '('"D" (Int32 '"101")) '('"C" (Int32 '"13"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args2" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"1")) (AsStructUnordered '('"C" (Int32 '"21")) '('"D" (Int32 '"113"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args3" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"1")) (AsStruct '('"C" (Int32 '"42"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args4" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"1")) (AsStruct '('"D" (Int32 '"128"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args5" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"100") (Int32 '"500")) (AsStructUnordered '('"D" (Int32 '"404")) '('"C" (Int32 '"44"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args6" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"100") (Int32 '"500")) (AsStructUnordered '('"C" (Int32 '"55")) '('"D" (Int32 '"505"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args7" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"100") (Int32 '"500")) (AsStruct '('"C" (Int32 '"25"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args8" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"100") (Int32 '"500")) (AsStruct '('"D" (Int32 '"606"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"named_args9" (lambda '(row) (block '(
+          (let res (SqlCall '"SimpleUdf.NamedArgs" '((PositionalArgs (Int32 '"100") (Int32 '"500") (Int32 '"64")) (AsStruct '('"D" (Int32 '"512"))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"named_args0" '"named_args1" '"named_args2" '"named_args3" '"named_args4" '"named_args5" '"named_args6" '"named_args7" '"named_args8" '"named_args9")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

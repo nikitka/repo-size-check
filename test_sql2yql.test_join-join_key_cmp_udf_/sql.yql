@@ -1,0 +1,44 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"key") (DataType 'Utf8)))))))
+        (return row)
+      ))))) '"ia") '((RemoveSystemMembers table1) '"ib") '('Inner '"ia" '"ib" '('"ia" '"_equijoin_column_0") '('"ib" '"subkey") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"ia._equijoin_column_0"))
+        (return row)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"ib" (lambda '(row) (block '(
+          (let res (SelectMembers row '('"ib.")))
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"key" '"ib")) (PersistableRepr (SqlColumn row '"subkey" '"ib"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"ib."))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

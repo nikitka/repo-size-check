@@ -1,0 +1,286 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListFilter (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListFilter (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListFilter (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListMap (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$x") (block '(
+            (return ("*" "$x" (Int32 '"2")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListMap (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$x") (block '(
+            (return ("*" "$x" (Int32 '"2")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListMap (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (lambda '("$x") (block '(
+            (return ("*" "$x" (Int32 '"2")))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListFlatMap (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$x") (block '(
+            (return (AsList "$x" ("*" "$x" (Int32 '"2"))))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListFlatMap (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$x") (block '(
+            (return (AsList "$x" ("*" "$x" (Int32 '"2"))))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListFlatMap (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (lambda '("$x") (block '(
+            (return (AsList "$x" ("*" "$x" (Int32 '"2"))))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListSkipWhile (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListSkipWhile (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListSkipWhile (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListTakeWhile (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListTakeWhile (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListTakeWhile (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return ("<" "$x" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListExtend (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListExtend (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListExtend (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (ListExtend (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))) (Nothing (TypeOf (Just (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListUnionAll (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))) (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListUnionAll (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2"))))) (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListUnionAll (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2"))))) (Nothing (TypeOf (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (ListUnionAll (Nothing (TypeOf (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2"))))))) (Nothing (TypeOf (Just (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

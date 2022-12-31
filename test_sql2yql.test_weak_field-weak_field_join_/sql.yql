@@ -1,0 +1,50 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((RemoveSystemMembers table1) '"i2") '('Inner '"i1" '"i2" '('"i1" '"subkey") '('"i2" '"subkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"sk" (lambda '(row) (block '(
+          (let res (SqlColumn row '"subkey" '"i1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i1v1" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value1 'i1) (String '"funny")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i1v2" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value2 'i1) (String '"bunny")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2v1" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value1 'i2) (String '"short")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2v2" (lambda '(row) (block '(
+          (let res (WeakField row 'String '('value2 'i2) (String '"circuit")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"sk")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"sk" '"i1v1" '"i1v2" '"i2v1" '"i2v2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

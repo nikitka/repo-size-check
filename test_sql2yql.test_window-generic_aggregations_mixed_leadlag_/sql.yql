@@ -1,0 +1,70 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"1")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Int32 '-3)) '('end (Int32 '-1))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Unwrap (SafeCast (Member row '"subkey") (DataType 'Uint32))))))) '('_yql_Lead0 (Lead (TypeOf partitioning) (lambda '(row) (Concat (Member row '"value") (Member row '"value"))) (Int32 '"3")))))))
+        (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Int32 '0)) '('end (Int32 '2))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Uint32)))))) '('_yql_Lag0 (Lag (TypeOf partitioning) (lambda '(row) (SafeCast (Member row '"value") (DataType 'Uint32)))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum1" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dvalue_lead1" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum2" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value_lag2" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"sum1" '"dvalue_lead1" '"sum2" '"value_lag2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

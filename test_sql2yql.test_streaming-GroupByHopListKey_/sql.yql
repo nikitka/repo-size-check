@@ -1,0 +1,88 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"maxtasksperstage" '"2"))
+(let world (Configure! world (DataSource '"pq" '"$all") '"Attr" '"consumer" '"test_client"))
+(let world (block '(
+  (let x (Read! world (DataSource '"pq" '"pq") (MrTableConcat (Key '('table (String '"test_topic_input")))) (Void) '()))
+  (let world (Left! x))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (block '(
+                (let select (block '(
+                  (let core table1)
+                  (let core (PersistableRepr (block '(
+                    (let projectCoreType (TypeOf core))
+                    (let core (SqlProject core '((SqlProjectItem projectCoreType '"ys" (lambda '(row) (block '(
+                      (let res (SqlCall '"Yson2.Parse" '((PositionalArgs (Member row '"Data") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+                      (return res)
+                    )))))))
+                    (return core)
+                  ))))
+                  (return core)
+                )))
+                (return select)
+              )))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (SqlProject core '((SqlProjectItem projectCoreType '"t" (lambda '(row) (block '(
+                  (let res (SqlCall '"Yson2.LookupUint64" '((PositionalArgs (Member row '"ys") (String '"time") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
+                  (let res (SqlCall '"Yson2.LookupInt64" '((PositionalArgs (Member row '"ys") (String '"key") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+                  (return res)
+                )))) (SqlProjectItem projectCoreType '"v" (lambda '(row) (block '(
+                  (let res (SqlCall '"Yson2.LookupInt64" '((PositionalArgs (Member row '"ys") (String '"val") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'group0) 'group0 (AsList (Int32 '"1") (Member row '"k")))))))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"k" '"group0") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"v")))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SqlCall '"DateTime2.FromMilliseconds" '((PositionalArgs (SafeCast (Unwrap (Member row '"t")) (DataType 'Uint32)))))) (Interval '5000) (Interval '10000) (Interval '10000) 'true 'v1)))) '('"k" '"group0")))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+              (let res (Member row 'Sum0))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.SerializeText" '((PositionalArgs (SqlCall '"Yson2.From" '((PositionalArgs (RemoveSystemMembers row))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"pq" '"pq"))
+    (let world (Write! world sink (Key '('table (String '"test_topic_output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

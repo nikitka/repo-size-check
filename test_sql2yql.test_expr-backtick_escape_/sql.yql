@@ -1,0 +1,46 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a`b" (lambda '(row) (block '(
+          (let res (Int32 '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"`" (lambda '(row) (block '(
+          (let res (Int32 '"2"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"`a`" (lambda '(row) (block '(
+          (let res (Int32 '"3"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"`b`" (lambda '(row) (block '(
+          (let res (Int32 '"4"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"`c`" (lambda '(row) (block '(
+          (let res (Int32 '"5"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a`b" '"`" '"`a`" '"`b`" '"`c`")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

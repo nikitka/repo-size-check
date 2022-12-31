@@ -1,0 +1,48 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"t" (lambda '(row) (block '(
+          (let res (FlattenMembers '('"t." row)))
+          (return res)
+        ))) '('('addPrefix '"t."))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Apply (lambda '("$x" "$z" "$func") (block '(
+            (let $v ("+" ("*" (Int32 '"10") "$z") "$x"))
+            (let $shift (lambda '("$item" "$sk") (block '(
+              (return (ShiftLeft "$item" (Apply "$func" "$sk")))
+            ))))
+            (return (Apply "$shift" "$v" "$z"))
+          ))) (SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"subkey") (DataType 'Uint64)) (lambda '("$item") (block '(
+            (return (Coalesce (SafeCast ("%" "$item" (Int32 '"4")) (DataType 'Uint8)) (Int32 '"0")))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemovePrefixMembers select '('t._yql_)))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"t.") '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,122 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (return (UnionAll (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1" '"k2")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"k1" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k1"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"k2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"kk2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Some0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"k2" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'k2) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"k1" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k1"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"k2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"kk2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Some0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k2") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k2")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"k1" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'k1) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"k1" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k1"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"k2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"kk2" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"k2"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Some0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"k1")) (PersistableRepr (SqlColumn row '"kk2"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"kk2" '"val")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Roots")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Leaves")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Branches")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((RemoveSystemMembers table1) '"i2") '((RemoveSystemMembers table2) '"i3") '('Inner '('Inner '"i1" '"i2" '('"i1" '"leaf") '('"i2" '"key") '()) '"i3" '('"i1" '"branch") '('"i3" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Key" (lambda '(row) (block '(
+          (let res (SqlColumn row '"key" '"i1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"i1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Leaf" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"i2"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Branch" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"i3"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"Leaf")) (PersistableRepr (SqlColumn row '"Branch"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Key" '"Value" '"Leaf" '"Branch")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

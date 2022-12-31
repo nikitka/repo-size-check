@@ -1,0 +1,20 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (PersistableRepr '((AsStruct '('"key" (SqlCall '"SimpleUdf.ReturnNull" '((PositionalArgs (String '""))))) '('"subkey" (SqlCall '"SimpleUdf.ReturnVoid" '((PositionalArgs (String '""))))) '('"value" (Coalesce (SqlCall '"SimpleUdf.ReturnEmpty" '((PositionalArgs (String '"")))) (String '"!")))))))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

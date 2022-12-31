@@ -1,0 +1,50 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) '((Bool 'true) (Bool 'false)) (lambda '(row) (SqlExtractKey row (lambda '(row) '((PersistableRepr (Member row '"subkey")) (PersistableRepr (Member row '"value")))))) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (lambda '(key stream) (AsStruct '('key key) '('superstring (Collect (Condense stream (String '"") (lambda '(item state) (Bool 'False)) (lambda '(item state) (Concat state (Concat (Member item 'char) (Member item 'num))))))))) (lambda '(row) (AsStructUnordered '('"char" (Member row '"subkey")) '('"num" (Member row '"value")))))))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

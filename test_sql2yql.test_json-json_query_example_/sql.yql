@@ -1,0 +1,236 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (JsonExists (Member row '"J") (Utf8 '"lax $.friends") (JsonVariables) (Just (Bool '"false"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Friends" (lambda '(row) (block '(
+          (let res (JsonQuery (Member row '"J") (Utf8 '"lax $.friends") (JsonVariables) 'NoWrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali" '"Friends")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Friends" (lambda '(row) (block '(
+          (let res (JsonQuery (Member row '"J") (Utf8 '"lax $.friends") (JsonVariables) 'NoWrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali" '"Friends")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"T")))) (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"K" (lambda '(row) (block '(
+          (let res (Member row '"K"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Who" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.who") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Nali" (lambda '(row) (block '(
+          (let res (JsonValue (Member row '"J") (Utf8 '"lax $.where") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"FriendsNames" (lambda '(row) (block '(
+          (let res (JsonQuery (Member row '"J") (Utf8 '"lax $.friends.name") (JsonVariables) 'Wrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"K" '"Who" '"Nali" '"FriendsNames")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.b") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonValue (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.c") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'NoWrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.b") (JsonVariables) 'NoWrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.c") (JsonVariables) 'NoWrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'Wrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.b") (JsonVariables) 'Wrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.c") (JsonVariables) 'Wrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'ConditionalWrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.b") (JsonVariables) 'ConditionalWrap 'Null 'Null))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonQuery (SafeCast (String '@@{ "a": "[1,2]", "b": [1,2], "c": "hi"}@@) (DataType 'Json)) (Utf8 '"strict $.c") (JsonVariables) 'ConditionalWrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,184 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"foo")) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (String '"bar"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

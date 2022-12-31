@@ -1,0 +1,37 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" (Uint32 '"1")) '('"Value1" (String '"v1")) '('"Value2" (Int32 '"100"))) (AsStructUnordered '('"Key" (Uint32 '"2")) '('"Value1" (String '"v2")) '('"Value2" (Int32 '"200"))) (AsStructUnordered '('"Key" (Uint32 '"3")) '('"Value1" (String '"v3")) '('"Value2" (Int32 '"300"))))) (lambda '(row) (SelectMembers row '('"Key" '"Value3")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Key" (lambda '(row) (block '(
+          (let res (Member row '"Key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"Value3" (lambda '(row) (block '(
+          (let res (Member row '"Value3"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"Key" '"Value3")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

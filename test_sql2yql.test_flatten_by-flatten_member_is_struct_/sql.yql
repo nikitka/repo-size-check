@@ -1,0 +1,65 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'auto row '('key 'keyitem)))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"kkstr" (lambda '(row) (block '(
+              (let res (SqlAccess 'struct (Member row '"keyitem") '"kk" '('"yson_strict" '"yson_fast")))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'auto row '('kkstr 'kkstritem)))
+        (return res)
+      )))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("==" ("%" (Member row '"kkstritem") (Int32 '"10")) (Int32 '"0")))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("<" (Member row '"kkstritem") (Int32 '"100")))))) '('CountIf2 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"kkstritem") (Int32 '"900"))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"count_dec" (lambda '(row) (block '(
+          (let res (Member row 'CountIf0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_small" (lambda '(row) (block '(
+          (let res (Member row 'CountIf1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_huge" (lambda '(row) (block '(
+          (let res (Member row 'CountIf2))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"count_dec" '"count_small" '"count_huge")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

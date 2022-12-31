@@ -1,0 +1,90 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"Warning" '"4510" '"disable"))
+(let world (Configure! world (DataSource '"config") '"Warning" '"1108" '"disable"))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (RangeComputeFor (StructType '('"x" (DataType 'String)) '('"y" (DataType 'String))) (lambda '("$row") (block '(
+            (return (SqlIn (SafeCast (ListFromRange (Int32 '"0") (Int32 '"10001")) (ListType (DataType 'String))) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))))
+          ))) '('"x" '"y")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (RangeComputeFor (StructType '('"x" (DataType 'String)) '('"y" (DataType 'String))) (lambda '("$row") (block '(
+            (return (And (SqlIn (SafeCast (ListFromRange (Int32 '"0") (Int32 '"101")) (ListType (DataType 'String))) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) (SqlIn (SafeCast (ListFromRange (Int32 '"0") (Int32 '"101")) (ListType (DataType 'String))) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi)))))
+          ))) '('"x" '"y")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (RangeComputeFor (StructType '('"x" (DataType 'Int32))) (lambda '("$row") (block '(
+            (return (SqlIn (ListFromRange (Int32 '"0") (Int32 '"20000")) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))))
+          ))) '('"x")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

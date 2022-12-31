@@ -1,0 +1,67 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"DisablePullUpFlatMapOverJoin"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergetableslimit" '"10"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"joinmergeunsortedfactor" '"3.0"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"m2") '((block '(
+        (let select (block '(
+          (let core table1)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"PhraseID" (lambda '(row) (block '(
+              (let res (Member row '"PhraseID"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"BaseNo" (lambda '(row) (block '(
+              (let res (Member row '"BaseNo"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"Text" (lambda '(row) (block '(
+              (let res (Bool '"true"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )) '"pd") '('Inner '"m2" '"pd" '('"m2" '"BaseNo" '"m2" '"PhraseID") '('"pd" '"BaseNo" '"pd" '"PhraseID") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"pd.Text" (lambda '(row) (block '(
+          (let res (SqlColumn row '"Text" '"pd"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"pd.PhraseID" (lambda '(row) (block '(
+          (let res (SqlColumn row '"PhraseID" '"pd"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"m2.BaseNo" (lambda '(row) (block '(
+          (let res (SqlColumn row '"BaseNo" '"m2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"PhraseID" '"pd")) (PersistableRepr (SqlColumn row '"BaseNo" '"m2"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"pd.Text" '"pd.PhraseID" '"m2.BaseNo")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

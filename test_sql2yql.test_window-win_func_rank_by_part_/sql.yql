@@ -1,0 +1,74 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key_quad" (lambda '(row) (block '(
+          (let res ("%" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"4")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Coalesce (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"0")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Int32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (CalcOverWindow core '('"key_quad") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Rank0 (Rank (TypeOf core) (lambda '(row) (Member row '"key")) '())) '('_yql_DenseRank0 (DenseRank (TypeOf core) (lambda '(row) (Member row '"key")) '()))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"rank_key" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dense_rank_key" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key_quad" (lambda '(row) (block '(
+          (let res (Member row '"key_quad"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"rank_key")) (PersistableRepr (Member row '"dense_rank_key")) (PersistableRepr (Member row '"key_quad"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"rank_key" '"dense_rank_key" '"key_quad" '"key")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

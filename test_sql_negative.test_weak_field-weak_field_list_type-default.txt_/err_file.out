@@ -1,0 +1,3 @@
+/dev/stdin:<main>:3:26: Error: Bad type string: 'List<int32>'. At second argument of WeakField expected type string, available one of: Bool, Date, Datetime, Decimal, Double, DyNumber, Float, Int16, Int32, Int64, Int8, Interval, Json, JsonDocument, String, Timestamp, TzDate, TzDatetime, TzTimestamp, Uint16, Uint32, Uint64, Uint8, Utf8, Uuid, Yson;
+	select WeakField(value1, "List<Int32>", "epic type!") as ll_i32 from Input1
+	                         ^

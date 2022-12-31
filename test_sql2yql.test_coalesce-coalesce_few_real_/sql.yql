@@ -1,0 +1,60 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Double '"2.71") (DataType 'Float)))) (Int32 '"0")) (Int32 '"1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Double '"3.14") (DataType 'Double)))) (Int32 '"41")) (Int32 '"42")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Float)))) (Int32 '"0")) (Double '"1.")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Double)))) (Double '"41.")) (Int32 '"42")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Float)))) (SafeCast (Double '"40.1") (DataType 'Float))) (SafeCast (Double '"40.2") (DataType 'Float))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Double)))) (SafeCast (Double '"40.1") (DataType 'Float))) (SafeCast (Double '"40.2") (DataType 'Float))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Float)))) (Int32 '"0")) (Double '"1.")) (Int32 '"3")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (Coalesce (Coalesce (Coalesce (Just (Just (SafeCast (Null) (DataType 'Double)))) (Int32 '"41")) (Int32 '"42")) (Int32 '"4")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (String '"end"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

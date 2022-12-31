@@ -1,0 +1,39 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStructUnordered '('"key" (Int32 '"1")) '('"subkey" (String '"1"))) (AsStructUnordered '('"key" (Int32 '"2")) '('"subkey" (String '"2"))) (AsStructUnordered '('"key" (Int32 '"1")) '('"subkey" (String '"1"))) (AsStructUnordered '('"key" (Int32 '"2")) '('"subkey" (String '"2"))))) (lambda '(row) (SelectMembers row '('"_yql_preagg_AggregateList0" '"_yql_preagg_Count0" '"key" '"subkey")))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row '_yql_preagg_AggregateList0) '_yql_preagg_AggregateList0 (SafeCast (Member row '"subkey") (DataType 'Int32))) '_yql_preagg_Count0) '_yql_preagg_Count0 (SafeCast (Member row '"subkey") (DataType 'Uint64)))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_AggregateList0")) (lambda '(row) row) (Uint64 '0)) '"_yql_preagg_AggregateList0") '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Count0")) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Count0")) '()) '('"key")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"foo" (lambda '(row) (block '(
+          (let res (SqlAccess 'dict (Member row 'AggregateList0) ("-" (Member row 'Count0) (Int32 '"1")) '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"foo")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

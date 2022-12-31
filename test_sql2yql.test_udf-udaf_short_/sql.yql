@@ -1,0 +1,81 @@
+(
+(let scriptudf0 (String '@@
+def create(item):
+    return item
+
+def add(state, item):
+    return state + item 
+
+def merge(state_a, state_b):
+    return state_a + state_b 
+@@))
+(let scriptudf1 (String '@@
+def create(item):
+    return item
+
+def add(state, item):
+    return state + item 
+
+def merge(state_a, state_b):
+    return state_a + state_b 
+@@))
+(let scriptudf2 (String '@@
+def create(item):
+    return item
+
+def add(state, item):
+    return state + item 
+
+def merge(state_a, state_b):
+    return state_a + state_b 
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"item" (lambda '(row) (block '(
+              (let res (SafeCast (Size (Member row '"value")) (DataType 'Int64)))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('UDAF0 (Apply (bind aggregate_module '"udaf_traits_factory") (TypeOf core) (lambda '(row) (Member row '"item")) (lambda '(value parent) (NamedApply (ScriptUdf 'Python3 '"create" (CallableType '() '((DataType 'Int64)) '((DataType 'Int64))) scriptudf0) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (ScriptUdf 'Python3 '"add" (CallableType '() '((DataType 'Int64)) '((DataType 'Int64)) '((DataType 'Int64) '"")) scriptudf1) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (ScriptUdf 'Python3 '"merge" (CallableType '() '((DataType 'Int64)) '((DataType 'Int64)) '((DataType 'Int64) '"")) scriptudf2) (NullType) (lambda '() (Void)) (lambda '() (Apply (ScriptUdf 'Python3 '"merge" (CallableType '() '((DataType 'Int64)) '((DataType 'Int64)) '((DataType 'Int64) '"")) scriptudf2) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null)))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'UDAF0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

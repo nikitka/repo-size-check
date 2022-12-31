@@ -1,0 +1,89 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'auto row '('parsed_answers_and_clicks 'answer_and_clicks)))
+        (return res)
+      )))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlAccess 'struct (Member row '"answer_and_clicks") '"1" '('"yson_strict" '"yson_fast")) (Int32 '"1")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"permalink" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"answer_and_clicks") '"0" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bc_type_tuple" (lambda '(row) (block '(
+          (let res (Member row '"bc_type_tuple"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core subquery0)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"bc_type" (lambda '(row) (block '(
+              (let res (AsList (SqlAccess 'struct (Member row '"bc_type_tuple") '"0" '('"yson_strict" '"yson_fast")) (String '"total")))
+              (return res)
+            )))) (SqlProjectStarItem projectCoreType '"a" (lambda '(row) (block '(
+              (let row (RemoveMember row 'bc_type_tuple))
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (OrderedFlatMap core (lambda '(row) (block '(
+        (let res (FlattenByColumns 'list row 'bc_type))
+        (return res)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"bc_type" (lambda '(row) (block '(
+          (let res (Member row '"bc_type"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"permalink" (lambda '(row) (block '(
+          (let res (Member row '"permalink"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"bc_type" '"permalink")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

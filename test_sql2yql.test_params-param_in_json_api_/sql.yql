@@ -1,0 +1,52 @@
+(
+(declare $json_param (DataType 'Json))
+(declare $int64_param (DataType 'Int64))
+(declare $input_json (DataType 'Json))
+(declare $string_param (DataType 'Utf8))
+(declare $bool_param (DataType 'Bool))
+(declare $double_param (DataType 'Double))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (JsonValue "$input_json" (Utf8 '"strict $var") (JsonVariables '('"var" "$int64_param")) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int64)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (JsonValue "$input_json" (Utf8 '"strict $var") (JsonVariables '('"var" "$double_param")) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Double)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (JsonValue "$input_json" (Utf8 '"strict $var") (JsonVariables '('"var" "$bool_param")) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Bool)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (JsonValue "$input_json" (Utf8 '"strict $var") (JsonVariables '('"var" "$string_param")) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'String)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (JsonQuery "$input_json" (Utf8 '"strict $var") (JsonVariables '('"var" "$json_param")) 'NoWrap 'Null 'Null))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

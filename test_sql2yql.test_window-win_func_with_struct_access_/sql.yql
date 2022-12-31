@@ -1,0 +1,68 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key_hundred" (lambda '(row) (block '(
+          (let res ("/" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"100")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"struct" (lambda '(row) (block '(
+          (let res (AsStructUnordered '('"key" (SafeCast (Member row '"key") (DataType 'Int32))) '('"subkey" (SafeCast (Member row '"subkey") (DataType 'Int32)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (CalcOverWindow core '('"key_hundred") (SortTraits (TypeOf core) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlAccess 'struct (Member row '"struct") '"key" '('"yson_strict" '"yson_fast"))) (PersistableRepr (Member row '"value"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (SqlAccess 'struct (Member row '"struct") '"key" '('"yson_strict" '"yson_fast"))) (Int32 '"1")))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a_part" (lambda '(row) (block '(
+          (let res (Member row '"key_hundred"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"keyDiff" (lambda '(row) (block '(
+          (let res ("-" (SqlAccess 'struct (Member row '"struct") '"key" '('"yson_strict" '"yson_fast")) (Member row '_yql_Lead0)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"a_part")) (PersistableRepr (Member row '"value"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a_part" '"keyDiff" '"value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

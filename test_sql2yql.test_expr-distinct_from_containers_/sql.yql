@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (IsNotDistinctFrom '((Int32 '"1") (Int32 '"2")) '((Int32 '"1") (Int32 '"2") ("/" (Int32 '"1") (Int32 '"0")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (IsNotDistinctFrom (AsStructUnordered '('"a" ("/" (Int32 '"1") (Int32 '"0"))) '('"b" (Nothing (OptionalType (DataType 'String)))) '('"c" (Int32 '"1"))) (AsStructUnordered '('"c" (Uint32 '"1")) '('"d" ("/" (Uint32 '"1") (Uint32 '"0"))) '('"e" (Nothing (OptionalType (DataType 'Utf8)))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (IsNotDistinctFrom (AsList (Int32 '"1") (Int32 '"2") (Null)) (AsList (Int32 '"1") (Int32 '"2") (Just ("/" (Int32 '"1") (Int32 '"0"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (IsDistinctFrom (AsDict '((Int32 '"1") (Null))) (AsDict '((Uint32 '"1") ("/" (Int32 '"2") (Int32 '"0"))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (IsDistinctFrom (Variant ("/" (Int32 '"1") (Int32 '"0")) '"1" (VariantType (TupleType (DataType 'Int32) (OptionalType (DataType 'Int32))))) (Variant (Null) '"1" (VariantType (TupleType (DataType 'Int64) (NullType))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (IsNotDistinctFrom (Variant ("/" (Int32 '"1") (Int32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Int32)))))) (Variant (Null) '"b" (VariantType (StructType '('"a" (DataType 'Int64)) '('"b" (NullType)))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

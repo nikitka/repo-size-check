@@ -1,0 +1,3 @@
+/dev/stdin:<main>:21:44: Error: Column `age` must either be a key column in GROUP BY or it should be used in aggregation function
+	window w1 as (partition by region order by age desc) -- use unaggregaded age in order by in win specification
+	                                           ^

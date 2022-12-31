@@ -1,0 +1,246 @@
+(
+(let scriptudf0 (String '@@
+def formula(a, b, c, d):
+    return a * b + c // d
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"length" (lambda '(row) (block '(
+          (let res (Length (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"extend" (lambda '(row) (block '(
+          (let res (ListExtend (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList (Int32 '"4"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"zip" (lambda '(row) (block '(
+          (let res (ListZip (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList (Int32 '"4"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"zipall" (lambda '(row) (block '(
+          (let res (ListZipAll (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList (Int32 '"4"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"enumerate" (lambda '(row) (block '(
+          (let res (ListEnumerate (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"reverse" (lambda '(row) (block '(
+          (let res (ListReverse (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"skip" (lambda '(row) (block '(
+          (let res (ListSkip (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"take" (lambda '(row) (block '(
+          (let res (ListTake (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sort" (lambda '(row) (block '(
+          (let res (ListSort (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sort_structs" (lambda '(row) (block '(
+          (let res (ListSort (AsList (AsStructUnordered '('"one" (Int32 '"1")) '('"two" (Int32 '"2"))) (AsStructUnordered '('"one" (Int32 '"-1")) '('"two" (Int32 '"-2")))) (Bool 'true) (lambda '("$x") (block '(
+            (return (SqlAccess 'struct "$x" '"two" '('"yson_strict" '"yson_fast")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"map" (lambda '(row) (block '(
+          (let res (ListMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
+            (return (Apply (ScriptUdf 'Python3 '"formula" (CallableType '() '((DataType 'Int64)) '((DataType 'Int64)) '((DataType 'Int64) '"") '((DataType 'Int64) '"") '((DataType 'Int64) '"")) scriptudf0) "$item" (Int32 '"6") (Int32 '"4") (Int32 '"2")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"flatmap" (lambda '(row) (block '(
+          (let res (ListFlatMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
+            (return ("/" "$item" (Int32 '"0")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"filter" (lambda '(row) (block '(
+          (let res (ListFilter (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(item) (Coalesce (Apply (lambda '("$item") (block '(
+            (return ("<" "$item" (Int32 '"3")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"any" (lambda '(row) (block '(
+          (let res (ListAny (AsList (Bool '"true") (Bool '"false") (Bool '"true"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"all" (lambda '(row) (block '(
+          (let res (ListAll (AsList (Bool '"true") (Bool '"false") (Bool '"true"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max" (lambda '(row) (block '(
+          (let res (ListMax (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min" (lambda '(row) (block '(
+          (let res (ListMin (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+          (let res (ListSum (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg" (lambda '(row) (block '(
+          (let res (ListAvg (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"uniq" (lambda '(row) (block '(
+          (let res (DictKeys (ToDict (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(arg) (block '(
+            (return arg)
+          ))) (lambda '(item) (Void)) '('Hashed 'One))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"concat" (lambda '(row) (block '(
+          (let res (ListConcat (ListMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
+            (return (SafeCast "$item" (DataType 'String)))
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"extract" (lambda '(row) (block '(
+          (let res (ListExtract (AsList (AsStructUnordered '('"one" (Int32 '"1")) '('"two" (Int32 '"2"))) (AsStructUnordered '('"one" (Int32 '"-1")) '('"two" (Int32 '"-2")))) '"two"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+          (let res (ListMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
+            (return (SafeCast "$item" (DataType 'Double)))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
+          (let res (List (ListType (TupleType (DataType 'Int64) (DataType 'Double)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
+          (let res (List (ListType (TypeOf (String '"foo")))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
+          (let res (ListFold (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"6") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column26" (lambda '(row) (block '(
+          (let res (ListFold (AsList) (Int32 '"3") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column27" (lambda '(row) (block '(
+          (let res (ListFold (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"6") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column28" (lambda '(row) (block '(
+          (let res (ListFold (Just (AsList)) (Int32 '"3") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column29" (lambda '(row) (block '(
+          (let res (ListFold (Null) (Int32 '"3") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column30" (lambda '(row) (block '(
+          (let res (ListFold1 (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$x") (block '(
+            (return ("*" (Int32 '"4") "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column31" (lambda '(row) (block '(
+          (let res (ListFold1 (AsList) (lambda '("$x") (block '(
+            (return ("*" (Int32 '"4") "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column32" (lambda '(row) (block '(
+          (let res (ListFold1 (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$x") (block '(
+            (return ("*" (Int32 '"4") "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column33" (lambda '(row) (block '(
+          (let res (ListFold1 (Just (AsList)) (lambda '("$x") (block '(
+            (return ("*" (Int32 '"4") "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column34" (lambda '(row) (block '(
+          (let res (ListFold1 (Null) (lambda '("$x") (block '(
+            (return ("*" (Int32 '"4") "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column35" (lambda '(row) (block '(
+          (let res (ListFoldMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"1") (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column36" (lambda '(row) (block '(
+          (let res (ListFoldMap (AsList) (Int32 '"1") (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column37" (lambda '(row) (block '(
+          (let res (ListFoldMap (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"1") (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column38" (lambda '(row) (block '(
+          (let res (ListFoldMap (Just (AsList)) (Int32 '"1") (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column39" (lambda '(row) (block '(
+          (let res (ListFoldMap (Null) (Int32 '"1") (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column40" (lambda '(row) (block '(
+          (let res (ListFold1Map (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$i") (block '(
+            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+          ))) (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column41" (lambda '(row) (block '(
+          (let res (ListFold1Map (AsList) (lambda '("$i") (block '(
+            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+          ))) (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column42" (lambda '(row) (block '(
+          (let res (ListFold1Map (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$i") (block '(
+            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+          ))) (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column43" (lambda '(row) (block '(
+          (let res (ListFold1Map (Just (AsList)) (lambda '("$i") (block '(
+            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+          ))) (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column44" (lambda '(row) (block '(
+          (let res (ListFold1Map (Null) (lambda '("$i") (block '(
+            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+          ))) (lambda '("$i" "$s") (block '(
+            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+          )))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"length" '"extend" '"zip" '"zipall" '"enumerate" '"reverse" '"skip" '"take" '"sort" '"sort_structs" '"map" '"flatmap" '"filter" '"any" '"all" '"max" '"min" '"sum" '"avg" '"uniq" '"concat" '"extract" '"column22" '"column23" '"column24" '"column25" '"column26" '"column27" '"column28" '"column29" '"column30" '"column31" '"column32" '"column33" '"column34" '"column35" '"column36" '"column37" '"column38" '"column39" '"column40" '"column41" '"column42" '"column43" '"column44")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

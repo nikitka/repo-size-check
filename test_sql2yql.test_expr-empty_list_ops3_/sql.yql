@@ -1,0 +1,140 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (ListExtract (AsList) '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (ListTakeWhile (AsList) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (ListSkipWhile (AsList) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (ListTakeWhileInclusive (AsList) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (ListSkipWhileInclusive (AsList) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ListAggregate") (AsList) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ToSet") (AsList)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"SetIsDisjoint") (AsSet (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"SetIncludes") (AsSet (Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsList)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (Fold (AsList) (Int32 '"0") (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res (Fold1 (AsList) (lambda '("$x") (block '(
+            (return "$x")
+          ))) (lambda '("$x" "$y") (block '(
+            (return ("+" "$x" "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res (FoldMap (AsList) (Int32 '"0") (lambda '("$x" "$y") (block '(
+            (return '(("+" "$x" "$y") "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res (Fold1Map (AsList) (lambda '("$x") (block '(
+            (return '("$x" "$x"))
+          ))) (lambda '("$x" "$y") (block '(
+            (return '(("+" "$x" "$y") "$y"))
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+          (let res (LazyList (AsList)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+          (let res (ListExtract (Just (AsList)) '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+          (let res (ListTakeWhile (Just (AsList)) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+          (let res (ListSkipWhile (Just (AsList)) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+          (let res (ListTakeWhileInclusive (Just (AsList)) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+          (let res (ListSkipWhileInclusive (Just (AsList)) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
+            (return (">" "$x" (Int32 '"0")))
+          ))) item) (Bool 'false)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ListAggregate") (Just (AsList)) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
+          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"ToSet") (Just (AsList))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"SetIsDisjoint") (AsSet (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Just (AsList))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column26" (lambda '(row) (block '(
+          (let res (Apply (bind core_module '"SetIncludes") (AsSet (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Just (AsList))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21" '"column22" '"column23" '"column24" '"column25" '"column26")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

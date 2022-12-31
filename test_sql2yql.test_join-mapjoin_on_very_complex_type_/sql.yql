@@ -1,0 +1,47 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_0" '((Member row '"subkey") '((Member row '"subkey1") '((SafeCast (Member row '"key") (DataType 'Int64)) (SafeCast (Member row '"key1") (DataType 'Uint64)))))))
+        (return row)
+      ))))) '"A") '((OrderedMap (ToList (AsList (AsStructUnordered '('"key1" (String '"1")) '('"subkey1" (String '"a")) '('"key" (String '"1")) '('"subkey" (String '"a")) '('"value" (String '"value2_1"))) (AsStructUnordered '('"key1" (String '"4")) '('"subkey1" (String '"d")) '('"key" (String '"4")) '('"subkey" (String '"d")) '('"value" (String '"value2_4"))) (AsStructUnordered '('"key1" (String '"-5")) '('"subkey1" (String '"e")) '('"key" (String '"-5")) '('"subkey" (String '"e")) '('"value" (String '"value2_5"))))) (lambda '(row) (block '(
+        (let row (AddMember row '"_equijoin_column_1" '((Member row '"subkey") '((Member row '"subkey1") '((SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"key1") (DataType 'Int64)))))))
+        (return row)
+      )))) '"B") '('LeftSemi '"A" '"B" '('"A" '"_equijoin_column_0") '('"B" '"_equijoin_column_1") '()) '()) (lambda '(row) (block '(
+        (let row (ForceRemoveMember row '"A._equijoin_column_0"))
+        (let row (ForceRemoveMember row '"B._equijoin_column_1"))
+        (return row)
+      )))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"A." '"B.")))
+          (return res)
+        ))) '('('divePrefix '('"A." '"B.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"key")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

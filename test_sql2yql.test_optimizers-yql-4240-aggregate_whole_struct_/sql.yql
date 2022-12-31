@@ -1,0 +1,89 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input0")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"attr" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"urlBase" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dupsCount" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Int32)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core subquery0)
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase" '"attr") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"urlBase" '"attr")))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"urlBase" (lambda '(row) (block '(
+              (let res (Member row '"urlBase"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"attr" (lambda '(row) (block '(
+              (let res (Member row '"attr"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"dupsCount" (lambda '(row) (block '(
+              (let res (Member row 'Count0))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"dupsCount"))))) '('MaxBy0 (Apply (bind aggregate_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"dupsCount")) (lambda '(row) (AsStructUnordered '('"dupsCount" (Member row '"dupsCount")) '('"attr" (Member row '"attr"))))))) '()) '('"urlBase")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"urlBase" (lambda '(row) (block '(
+          (let res (Member row '"urlBase"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"allDocs" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"best" (lambda '(row) (block '(
+          (let res (Member row 'MaxBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"urlBase")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"urlBase" '"allDocs" '"best")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

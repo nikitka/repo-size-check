@@ -1,0 +1,140 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (CalcOverWindow core '('"region") (SortTraits (TypeOf core) (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"name")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Min0 (Apply (bind window_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Count1 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('CountIf0 (Apply (bind window_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"age") (Int32 '"20")))))) '('Some0 (Apply (bind window_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('BitAnd0 (Apply (bind window_module '"bit_and_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('BitOr0 (Apply (bind window_module '"bit_or_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('BitXor0 (Apply (bind window_module '"bit_xor_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('BoolAnd0 (Apply (bind window_module '"and_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"age") (Int32 '"20")))))) '('BoolOr0 (Apply (bind window_module '"or_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"age") (Int32 '"20")))))) '('Avg0 (Apply (bind window_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"age")) (Uint64 '0))) '('MinBy0 (Apply (bind window_module '"min_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"name")) (lambda '(row) (Member row '"age")))) '('MaxBy0 (Apply (bind window_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"name")) (lambda '(row) (Member row '"age")))) '('Variance0 (Apply (bind window_module '"variance_0_1_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('StdDev0 (Apply (bind window_module '"variance_1_1_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('VariancePopulation0 (Apply (bind window_module '"variance_0_0_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('StdDevPopulation0 (Apply (bind window_module '"variance_1_0_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"age"))))) '('Histogram0 (Apply (bind window_module '"histogram_adaptive_ward_traits_factory") (TypeOf core) (lambda '(row) (Member row '"age")) (lambda '(row) (Double '1.0)) (Uint32 '100))) '('Median0 (Apply (bind window_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"age")) (Double '0.5))) '('Percentile0 (Apply (bind window_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"age")) (Double '"0.9"))) '('AggregateBy0 (Apply (lambda '(type extractor) (block '(
+        (let x (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"count_traits_factory") (ListType type) extractor)) type extractor))
+        (return (ToWindowTraits x))
+      ))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"age")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
+          (let res (Member row '"region"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"name" (lambda '(row) (block '(
+          (let res (Member row '"name"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min" (lambda '(row) (block '(
+          (let res (Member row 'Min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_all" (lambda '(row) (block '(
+          (let res (Member row 'Count1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_if" (lambda '(row) (block '(
+          (let res (Member row 'CountIf0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"some" (lambda '(row) (block '(
+          (let res (Member row 'Some0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bit_and" (lambda '(row) (block '(
+          (let res (Member row 'BitAnd0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bit_or" (lambda '(row) (block '(
+          (let res (Member row 'BitOr0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bit_xor" (lambda '(row) (block '(
+          (let res (Member row 'BitXor0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bool_and" (lambda '(row) (block '(
+          (let res (Member row 'BoolAnd0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"bool_or" (lambda '(row) (block '(
+          (let res (Member row 'BoolOr0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg" (lambda '(row) (block '(
+          (let res (Member row 'Avg0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"list" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"min_by" (lambda '(row) (block '(
+          (let res (Member row 'MinBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max_by" (lambda '(row) (block '(
+          (let res (Member row 'MaxBy0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"variance" (lambda '(row) (block '(
+          (let res (Nanvl (Member row 'Variance0) (Minus (Double '"999.0"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"stddev" (lambda '(row) (block '(
+          (let res (Nanvl (Member row 'StdDev0) (Minus (Double '"999.0"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"popvar" (lambda '(row) (block '(
+          (let res (Nanvl (Member row 'VariancePopulation0) (Minus (Double '"999.0"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"popstddev" (lambda '(row) (block '(
+          (let res (Nanvl (Member row 'StdDevPopulation0) (Minus (Double '"999.0"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"hist" (lambda '(row) (block '(
+          (let res (Member row 'Histogram0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"median" (lambda '(row) (block '(
+          (let res (Member row 'Median0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"perc90" (lambda '(row) (block '(
+          (let res (Member row 'Percentile0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"aggby" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'false)) (lambda '(row) '((PersistableRepr (Member row '"region")) (PersistableRepr (Member row '"name"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"region" '"name" '"sum" '"min" '"max" '"count" '"count_all" '"count_if" '"some" '"bit_and" '"bit_or" '"bit_xor" '"bool_and" '"bool_or" '"avg" '"list" '"min_by" '"max_by" '"variance" '"stddev" '"popvar" '"popstddev" '"hist" '"median" '"perc90" '"aggby")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

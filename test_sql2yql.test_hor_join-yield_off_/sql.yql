@@ -1,0 +1,70 @@
+(
+(let scriptudf0 (String '@@
+import yql
+
+def f(input, a):
+    for x in input:
+        yield x
+@@))
+(let scriptudf1 (String '@@
+import yql
+
+def f(input, a):
+    for x in input:
+        yield x
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UdfSupportsYield" '"false"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (UnionAll (block '(
+        (let select (block '(
+          (let inputRowsList table0)
+          (let core (SqlProcess (ScriptUdf 'Python3 '"f" (CallableType '() '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey" (DataType 'String)) '('"value" (DataType 'String))))) '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey" (DataType 'String)) '('"value" (DataType 'String))))) '((DataType 'Int32) '"")) scriptudf0) (RemoveSystemMembers inputRowsList) (Int32 '"1") '0))
+          (let core (AutoDemux (PersistableRepr core)))
+          (return core)
+        )))
+        (return select)
+      )) (block '(
+        (let select (block '(
+          (let inputRowsList table1)
+          (let core (SqlProcess (ScriptUdf 'Python3 '"f" (CallableType '() '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey" (DataType 'String)) '('"value" (DataType 'String))))) '((StreamType (StructType '('"key" (DataType 'String)) '('"subkey" (DataType 'String)) '('"value" (DataType 'String))))) '((DataType 'Int32) '"")) scriptudf1) (RemoveSystemMembers inputRowsList) (Int32 '"2") '0))
+          (let core (AutoDemux (PersistableRepr core)))
+          (return core)
+        )))
+        (return select)
+      ))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey")) (PersistableRepr (Member row '"value"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,3 @@
+/dev/stdin:<main>:11:74: Error: PROCESS with USING EXTERNAL FUNCTION doesn't allow ASSUME block
+	WITH INPUT_TYPE=Struct<a:Int32>, OUTPUT_TYPE=Struct<b:Int32>, CONNECTION='my-yc-fold3nf'
+	                                                                         ^

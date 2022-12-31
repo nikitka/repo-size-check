@@ -1,0 +1,166 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('string_agg0 (PgAggregationTraits 'string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'string_agg0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"x")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('string_agg0 (PgWindowTraits 'string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'string_agg0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'string_agg (ListItemType type) extractor)) (ListType type) extractor)) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr '((Member row '"x") (PgConst '"," (PgType 'text)))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"x")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateBy0 (Apply (lambda '(type extractor) (block '(
+        (let x (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'string_agg (ListItemType type) extractor)) (ListType type) extractor)) type extractor))
+        (return (ToWindowTraits x))
+      ))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr '((Member row '"x") (PgConst '"," (PgType 'text)))))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'max (ListItemType type) extractor)) (ListType type) extractor)) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"x")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateBy0 (Apply (lambda '(type extractor) (block '(
+        (let x (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'max (ListItemType type) extractor)) (ListType type) extractor)) type extractor))
+        (return (ToWindowTraits x))
+      ))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x")))))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,49 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"match" (lambda '(row) (block '(
+          (let res (Apply (Udf '"Re2.Match" '((String '"[ax]+\\d") (Null))) (String '"xaaxaaxaa")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"grep" (lambda '(row) (block '(
+          (let res (Apply (Udf '"Re2posix.Grep" '((String '"a.*") (Null))) (String '"xaaxaaxaa")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"capture" (lambda '(row) (block '(
+          (let res (Apply (Udf '"Re2.Capture" '((String '".*(?P<foo>xa?)(a{2,}).*") (Null)) (Void) '".*(?P<foo>xa?)(a{2,}).*") (String '"xaaxaaxaa")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"capture_member" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Apply (Udf '"Re2.Capture" '((String '".*(?P<foo>xa?)(a{2,}).*") (Null)) (Void) '".*(?P<foo>xa?)(a{2,}).*") (String '"xaaxaaxaa")) '"_1" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"replace" (lambda '(row) (block '(
+          (let res (Apply (Udf '"Re2.Replace" '((String '"x(a+)x") (Null))) (String '"xaaxaaxaa") (String '"b\\1z")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count" (lambda '(row) (block '(
+          (let res (Apply (Udf '"Re2.Count" '((String '"a") (Null))) (String '"xaaxaaxaa")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"match" '"grep" '"capture" '"capture_member" '"replace" '"count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

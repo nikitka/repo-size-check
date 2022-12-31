@@ -1,0 +1,3 @@
+/dev/stdin:<main>:11:3: Error: Column `age` must either be a key column in GROUP BY or it should be used in aggregation function
+	  age, -- use direct value in aggregation impossible
+	  ^

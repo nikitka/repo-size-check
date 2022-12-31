@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")) '((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '5 (PgType 'int4))))))))) '('set_ops '('push)))) '"b" '('"u" '"v")))) '('join_ops '('('('full (PgWhere (Void) (lambda '() (PgAnd (PgOp '"=" (PgColumnRef '"a" '"x") (PgColumnRef '"b" '"u")) (PgOp '"=" (PgOp '"+" (PgConst '1 (PgType 'int4)) (PgConst '1 (PgType 'int4))) (PgConst '2 (PgType 'int4)))))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"" (Void) (lambda '() (PgStar))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '3 (PgType 'int4)) (PgConst '4 (PgType 'int4))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")) '((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1 (PgType 'int4)) (PgConst '2 (PgType 'int4))) '((PgConst '2 (PgType 'int4)) (PgConst '5 (PgType 'int4))))))))) '('set_ops '('push)))) '"b" '('"u" '"v")))) '('join_ops '('('('full (PgWhere (Void) (lambda '() (PgAnd (PgOp '"=" (PgColumnRef '"a" '"x") (PgColumnRef '"b" '"u")) (PgOp '"=" (PgOp '"+" (PgConst '1 (PgType 'int4)) (PgConst '1 (PgType 'int4))) (PgConst '3 (PgType 'int4)))))))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

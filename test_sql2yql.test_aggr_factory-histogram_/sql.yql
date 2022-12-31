@@ -1,0 +1,117 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Aggregate (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"histogram_adaptive_ward_traits_factory") (ListType type) (lambda '(row) (Nth (Apply extractor row) '0)) (lambda '(row) (Nth (Apply extractor row) '1)) (Uint32 '100))) (ListItemType (TypeOf (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))))) (lambda '("$z") (block '(
+            (return '((SqlAccess 'struct "$z" '"a" '('"yson_strict" '"yson_fast")) (Double '"1.0")))
+          ))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Aggregate (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"histogram_adaptive_ward_traits_factory") (ListType type) (lambda '(row) (Nth (Apply extractor row) '0)) (lambda '(row) (Nth (Apply extractor row) '1)) (Cast (Int32 '"5") 'Uint32))) (ListItemType (TypeOf (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))))) (lambda '("$z") (block '(
+            (return '((SqlAccess 'struct "$z" '"a" '('"yson_strict" '"yson_fast")) (Double '"1.0")))
+          ))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2"))))) (lambda '(row) (SelectMembers row '('"a")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"aa" (lambda '(row) (block '(
+          (let res '((Member row '"a") (Double '"1.0")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"a") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"a") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"histogram_adaptive_ward_traits_factory") (ListType type) (lambda '(row) (Nth (Apply extractor row) '0)) (lambda '(row) (Nth (Apply extractor row) '1)) (Cast (Int32 '"5") 'Uint32))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"aa")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'AggregateBy0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

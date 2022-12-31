@@ -1,0 +1,35 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((ToList (AsList (AsStructUnordered '('"a" (AsSet (String '"1"))) '('"b" (Int32 '"2"))) (AsStructUnordered '('"a" (AsSet (String '"2"))) '('"b" (Int32 '"3"))) (AsStructUnordered '('"a" (AsSet (String '"3"))) '('"b" (Int32 '"4"))) (AsStructUnordered '('"a" (AsSet (String '"1"))) '('"b" (Int32 '"8"))))) '"one") '((ToList (AsList (AsStructUnordered '('"c" (AsSet (Just (String '"1")))) '('"d" (Int32 '"2"))) (AsStructUnordered '('"c" (AsDict)) '('"d" (Int32 '"3"))) (AsStructUnordered '('"c" (Null)) '('"d" (Int32 '"4"))) (AsStructUnordered '('"c" (AsSet (Just (String '"1")))) '('"d" (Int32 '"9"))))) '"two") '((ToList (AsList (AsStructUnordered '('"e" (AsSet (Utf8 '"1"))) '('"f" (Int32 '"-2"))) (AsStructUnordered '('"e" (AsSet (Utf8 '"1") (Utf8 '"2"))) '('"f" (Int32 '"-3"))) (AsStructUnordered '('"e" (Null)) '('"f" (Int32 '"-4"))) (AsStructUnordered '('"e" (AsSet (Utf8 '"1"))) '('"f" (Int32 '"-9"))))) '"foo") '((ToList (AsList (AsStructUnordered '('"g" (AsSet (Just (Utf8 '"1")))) '('"h" (Double '"1."))) (AsStructUnordered '('"g" (AsDict)) '('"h" (Double '"2.2"))) (AsStructUnordered '('"g" (AsSet (Just (Utf8 '"1")) (Just (Utf8 '"2")))) '('"h" (Double '"3.3"))) (AsStructUnordered '('"g" (AsSet (Just (Utf8 '"1")))) '('"h" (Double '"4.4"))))) '"bar") '('Full '('Left '('Inner '"one" '"two" '('"one" '"a") '('"two" '"c") '('('left 'any) '('right 'any))) '"foo" '('"two" '"c") '('"foo" '"e") '('('right 'any))) '"bar" '('"one" '"a") '('"bar" '"g") '('('right 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

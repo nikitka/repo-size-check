@@ -1,0 +1,67 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (String '"075,020,075,020"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
+          (let res (String '"x"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((block '(
+        (let flatten subquery0)
+        (let flatten (OrderedFlatMap flatten (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'aa) 'aa (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"a") (String '",")))))))))
+        (let flatten (OrderedFlatMap flatten (lambda '(row) (block '(
+          (let res (FlattenByColumns 'auto row 'aa))
+          (return res)
+        )))))
+        (return flatten)
+      )) '"x") '((RemoveSystemMembers table1) '"y") '('Inner '"x" '"y" '('"x" '"aa") '('"y" '"key") '('('left 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"x." '"y.")))
+          (return res)
+        ))) '('('divePrefix '('"x." '"y.")))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"aa")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

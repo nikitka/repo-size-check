@@ -1,0 +1,129 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"Warning" '"4510" '"disable"))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (AsList (AsStruct)))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"timestamp" (lambda '(row) (block '(
+              (let res (Int32 '"1"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"ts" (lambda '(row) (block '(
+              (let res (Timestamp '"978307200000000"))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"timestamp" (lambda '(row) (block '(
+          (let res (SqlPlainColumnOrType row '"timestamp"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (EnsureType (Member row '"ts") (DataType 'Timestamp)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (FormatType (DataType 'Timestamp)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SqlPlainColumnOrType row '"timestamp"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (InstanceOf (DataType 'Timestamp)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Nothing (OptionalType (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (FormatType (OptionalType (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (FormatType (ListType (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (FormatType (StreamType (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (FormatType (DictType (DataType 'Timestamp) (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (FormatType (TupleType (DataType 'Timestamp) (DataType 'Int32))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (FormatType (TaggedType (DataType 'Timestamp) '"foo")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res (FormatType (CallableType '('"0") '((DataType 'Timestamp)))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res (Minus (SqlPlainColumnOrType row '"timestamp")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res (FormatType (OptionalType (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+          (let res (FormatType (TypeHandle (DataType 'Timestamp))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (return (DataType 'Int32))
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (return (TupleType (DataType 'Int32)))
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (let $a (DataType 'String))
+            (return "$a")
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (let $a (TupleType (DataType 'String)))
+            (return "$a")
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (return (DataType 'Double))
+          ))))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+          (let res (FormatType (Apply (lambda '() (block '(
+            (return (TupleType (DataType 'Double)))
+          ))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"timestamp" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

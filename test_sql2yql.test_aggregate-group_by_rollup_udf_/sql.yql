@@ -1,0 +1,150 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite table0)
+      (return (UnionAll (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey" '"value") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key" '"subkey" '"value")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"value") (DataType 'Utf8))))))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key" '"subkey")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"value" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'value) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"value") (DataType 'Utf8))))))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"value" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'value) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"value") (DataType 'Utf8))))))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let origcore core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"key" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'key) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"value" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'value) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"subkey"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (SqlCall '"Unicode.ToUpper" '((PositionalArgs (SafeCast (Member row '"value") (DataType 'Utf8))))))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey")) (PersistableRepr (Member row '"value")) (PersistableRepr (Member row '"cnt"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"value" '"cnt")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

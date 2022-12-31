@@ -1,0 +1,75 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core table0)
+          (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"1")) (Bool 'false)))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '3))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Unwrap (SafeCast (Member row '"subkey") (DataType 'Uint32))))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Void))))) '('AggregateListDistinct0 (Apply (bind window_module '"set_traits_factory") (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))))))
+        (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '1))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Uint32)))))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf partitioning) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum1" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count1" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"agglist_distinct1" (lambda '(row) (block '(
+          (let res (ListSort (Member row 'AggregateListDistinct0) (Bool 'true) (lambda '(arg) (block '(
+            (return arg)
+          )))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum2" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"agglist2" (lambda '(row) (block '(
+          (let res (Member row 'AggregateList0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"sum1" '"count1" '"agglist_distinct1" '"sum2" '"agglist2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

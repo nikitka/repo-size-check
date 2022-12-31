@@ -1,0 +1,37 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Uint8 '"255")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Uint8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Uint8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V")))) '"a") '((OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Int8 '"-1")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Int8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Int8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V")))) '"b") '('Inner '"a" '"b" '('"a" '"K" '"a" '"V") '('"b" '"K" '"b" '"V") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.K" (lambda '(row) (block '(
+          (let res (SqlColumn row '"K" '"a"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b.V" (lambda '(row) (block '(
+          (let res (SqlColumn row '"V" '"b"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"K" '"a")) (PersistableRepr (SqlColumn row '"V" '"b"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a.K" '"b.V")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

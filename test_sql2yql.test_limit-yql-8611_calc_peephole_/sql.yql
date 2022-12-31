@@ -1,0 +1,61 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStructUnordered '('"Attributes" (Yson '"{\"row_count\"=9}")) '('"Path" (String '"Input1")) '('"Type" (String '"table"))) (AsStructUnordered '('"Attributes" (Yson '"{\"row_count\"=19}")) '('"Path" (String '"Input2")) '('"Type" (String '"table"))))) (lambda '(row) (SelectMembers row '('"Attributes" '"Type")))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"Type") (String '"table")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (SqlCall '"Yson2.LookupInt64" '((PositionalArgs (Member row '"Attributes") (String '"row_count") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (EvaluateFor! world (EvaluateExpr (AsList (Int32 '"0") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '(world "$bucket_number") (Apply (lambda '(world "$bucket_number") (block '(
+  (let world (block '(
+    (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+    (let table1 (Right! x))
+    (let values (block '(
+      (let select (block '(
+        (let core table1)
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+            (let res row)
+            (return res)
+          ))) '()))))
+          (return core)
+        ))))
+        (return core)
+      )))
+      (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+      (let select (Take (Skip select (Coalesce ("*" (Unwrap (SafeCast "$bucket_number" (DataType 'Uint8))) (Unwrap (SafeCast ("/" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0) (Length (AsList (Int32 '"0") (Int32 '"1") (Int32 '"2") (Int32 '"3")))) (DataType 'Uint64)))) (Uint64 '0))) (Coalesce (Unwrap (SafeCast ("/" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0) (Length (AsList (Int32 '"0") (Int32 '"1") (Int32 '"2") (Int32 '"3")))) (DataType 'Uint64))) (Uint64 '18446744073709551615))))
+      (let select (RemoveSystemMembers select))
+      (return select)
+    )))
+    (let world (block '(
+      (let sink (DataSink '"yt" '"plato"))
+      (let world (Write! world sink (Key '('table (String (EvaluateAtom (Concat (String '"Output") "$bucket_number"))))) values '('('mode 'append))))
+      (return world)
+    )))
+    (return world)
+  )))
+  (return world)
+))) world (SafeCast "$bucket_number" (DataType 'String))))))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

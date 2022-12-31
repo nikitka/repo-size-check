@@ -1,0 +1,55 @@
+(
+(let scriptudf0 (String '@@
+import functools
+def Len(key, input):
+    return {"sumByValAndKeyLen":functools.reduce(lambda x,y: x + int(y.value) + len(y.key), input, 0)}
+@@))
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (RemoveSystemMembers core))
+      (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (ScriptUdf 'Python3 '"Len" (CallableType '() '((StructType '('"sumByValAndKeyLen" (DataType 'Uint32)))) '((DataType 'String)) '((StreamType (StructType '('"key" (DataType 'String)) '('"value" (DataType 'String)))) '"")) scriptudf0) (lambda '(row) (AsStructUnordered '('"value" (SqlAccess 'struct (RemoveSystemMembers row) '"value" '('"yson_strict" '"yson_fast"))) '('"key" (SqlAccess 'struct (RemoveSystemMembers row) '"subkey" '('"yson_strict" '"yson_fast"))))))))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"sumByValAndKeyLen")))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

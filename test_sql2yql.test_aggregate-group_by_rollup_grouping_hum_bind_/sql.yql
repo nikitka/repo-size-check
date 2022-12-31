@@ -1,0 +1,160 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let composite table0)
+      (return (UnionAll (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"val_first" '"key_first") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"val_first" '"key_first")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"elements" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"val_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"group" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Apply (lambda '("$grouping") (block '(
+              (return (If (Coalesce (Or ("==" "$grouping" (Int32 '"1")) ("==" "$grouping" (Int32 '"2")) ("==" "$grouping" (Int32 '"3"))) (Bool 'false)) (If (Coalesce ("==" "$grouping" (Int32 '"1")) (Bool 'false)) (String '"Total By First digit key") (If (Coalesce ("==" "$grouping" (Int32 '"2")) (Bool 'false)) (String '"Total By First char value") (String '"Grand Total"))) (String '"Group")))
+            ))) ("Uint64" '"0")))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key_first") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key_first")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"val_first" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'val_first) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"elements" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"val_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"group" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Apply (lambda '("$grouping") (block '(
+              (return (If (Coalesce (Or ("==" "$grouping" (Int32 '"1")) ("==" "$grouping" (Int32 '"2")) ("==" "$grouping" (Int32 '"3"))) (Bool 'false)) (If (Coalesce ("==" "$grouping" (Int32 '"1")) (Bool 'false)) (String '"Total By First digit key") (If (Coalesce ("==" "$grouping" (Int32 '"2")) (Bool 'false)) (String '"Total By First char value") (String '"Grand Total"))) (String '"Group")))
+            ))) ("Uint64" '"1")))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"val_first") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"val_first")))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"key_first" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'key_first) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"elements" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"val_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"group" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Apply (lambda '("$grouping") (block '(
+              (return (If (Coalesce (Or ("==" "$grouping" (Int32 '"1")) ("==" "$grouping" (Int32 '"2")) ("==" "$grouping" (Int32 '"3"))) (Bool 'false)) (If (Coalesce ("==" "$grouping" (Int32 '"1")) (Bool 'false)) (String '"Total By First digit key") (If (Coalesce ("==" "$grouping" (Int32 '"2")) (Bool 'false)) (String '"Total By First char value") (String '"Grand Total"))) (String '"Group")))
+            ))) ("Uint64" '"2")))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      )) (block '(
+        (let core composite)
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let preaggregated core)
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
+        (let core (PersistableRepr (block '(
+          (let projectCoreType (TypeOf core))
+          (let addCompositTerms (lambda '(row) (block '(
+            (let row (AddMember row '"key_first" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'key_first) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (let row (AddMember row '"val_first" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'val_first) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
+            (return row)
+          ))))
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"elements" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row 'Count0))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"key_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"key_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"val_first" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Member row '"val_first"))
+            (return res)
+          )))) (SqlProjectItem projectCoreType '"group" (lambda '(row) (block '(
+            (let row (Apply addCompositTerms row))
+            (let res (Apply (lambda '("$grouping") (block '(
+              (return (If (Coalesce (Or ("==" "$grouping" (Int32 '"1")) ("==" "$grouping" (Int32 '"2")) ("==" "$grouping" (Int32 '"3"))) (Bool 'false)) (If (Coalesce ("==" "$grouping" (Int32 '"1")) (Bool 'false)) (String '"Total By First digit key") (If (Coalesce ("==" "$grouping" (Int32 '"2")) (Bool 'false)) (String '"Total By First char value") (String '"Grand Total"))) (String '"Group")))
+            ))) ("Uint64" '"3")))
+            (return res)
+          )))))))
+          (return core)
+        ))))
+        (return core)
+      ))))
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"elements")) (PersistableRepr (Member row '"key_first")) (PersistableRepr (Member row '"val_first"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"elements" '"key_first" '"val_first" '"group")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

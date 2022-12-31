@@ -1,0 +1,13 @@
+(
+(library "lib1.sql")
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(import lib1_module0 '"lib1")
+(let world (Apply (bind lib1_module0 '"$action") world (String '"Input")))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

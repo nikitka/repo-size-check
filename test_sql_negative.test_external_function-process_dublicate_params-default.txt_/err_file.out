@@ -1,0 +1,6 @@
+/dev/stdin:<main>:7:5: Error: WITH "CONCURRENCY" clause should be specified only once
+	    CONCURRENCY=5, OPTIMIZE_FOR=LATENCY
+	    ^
+/dev/stdin:<main>:7:20: Error: WITH "OPTIMIZE_FOR" clause should be specified only once
+	    CONCURRENCY=5, OPTIMIZE_FOR=LATENCY
+	                   ^

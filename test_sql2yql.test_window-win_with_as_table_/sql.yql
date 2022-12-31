@@ -1,0 +1,46 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStruct '('"k" (Int32 '"1"))) (AsStruct '('"k" (Int32 '"2"))))) (lambda '(row) (SelectMembers row '('"k")))))
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"k")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"k")))))))))
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"k")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"k")))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
+          (let res (Member row '"k"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s1" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s2" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"k")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k" '"s1" '"s2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

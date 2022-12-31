@@ -1,0 +1,6 @@
+/dev/stdin:<main>:6:3: Error: WeakField required to have correlation name in case of JOIN for column at first parameter
+	  WeakField(value1, "String", "funny") as v1, -- no idea to check value1 from i1._other or i2._other
+	  ^
+/dev/stdin:<main>:7:3: Error: WeakField required to have correlation name in case of JOIN for column at first parameter
+	  WeakField(value2, "String", "bunny") as v2
+	  ^
