@@ -1,0 +1,70 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let Udf2 (Udf '"Re2.Options"))
+(let Udf1 (Udf '"Re2.PatternFromLike"))
+(let world (Configure! world (DataSource '"config") '"Warning" '"4510" '"disable"))
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (StringContains (Member row '"value") (Member row '"value_utf")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (StringContains (Member row '"value") (String '"o")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res ("==" (Member row '"value") (String '"o")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (StringContains (Utf8 '"foobar") (Member row '"value")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (StartsWith (Member row '"value") (Member row '"value_utf")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (EndsWith (Member row '"value") (Utf8 '"ar")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (StartsWith (Utf8 '"\u0442\u0435\u0441\u0442\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430") (Member row '"value_utf")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (EndsWith (Utf8 '"\u0442\u0435\u0441\u0442\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430") (Member row '"value_utf")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (And (">=" (Size (Member row '"value")) (Uint32 '"4")) (StartsWith (Member row '"value") (String '"ba")) (EndsWith (Member row '"value") (String '"ar"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (And (">=" (Size (Member row '"value_utf")) (Uint32 '"14")) (StartsWith (Member row '"value_utf") (String '"\u043F\u0440\u043E")) (EndsWith (Member row '"value_utf") (String '"\u0435\u0440\u043A\u0430"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
