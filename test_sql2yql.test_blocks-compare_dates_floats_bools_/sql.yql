@@ -1,0 +1,168 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Int32 '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"fl1" (lambda '(row) (block '(
+          (let res (Float '"2.0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"fl2" (lambda '(row) (block '(
+          (let res (Float '"3.0"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"db1" (lambda '(row) (block '(
+          (let res (Double '"2.5"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"db2" (lambda '(row) (block '(
+          (let res (Double '"1.5"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b1" (lambda '(row) (block '(
+          (let res (Bool '"true"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"b2" (lambda '(row) (block '(
+          (let res (Bool '"false"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"d1" (lambda '(row) (block '(
+          (let res (Date '"19365"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"d2" (lambda '(row) (block '(
+          (let res (Date '"19362"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dt1" (lambda '(row) (block '(
+          (let res (Datetime '"1673136000"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"dt2" (lambda '(row) (block '(
+          (let res (Datetime '"1672876800"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ts1" (lambda '(row) (block '(
+          (let res (Timestamp '"1673136000000000"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ts2" (lambda '(row) (block '(
+          (let res (Timestamp '"1672876800000000"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i1" (lambda '(row) (block '(
+          (let res (Interval '"60000000"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2" (lambda '(row) (block '(
+          (let res (Interval '"3600000000"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"tmp") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"tmp") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"t" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (">" (Member row '"fl1") (Member row '"fl2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (">" (Member row '"fl1") (Member row '"key")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (">" (Member row '"fl2") (Double '"2.0")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (">" (Member row '"fl2") (Member row '"db2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (">" (Member row '"db1") (Member row '"db2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res ("<=" (Member row '"db2") (Member row '"key")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (">" (Member row '"db1") (Member row '"fl2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (">" (Member row '"db2") (Float '"1.0")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res ("<" (Member row '"b1") (Member row '"b2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res ("==" (Member row '"b1") (Bool '"true")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (">=" (Bool '"false") (Member row '"b2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+          (let res ("<" (Member row '"d1") (Member row '"d2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+          (let res ("==" (Member row '"d1") (Member row '"dt1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+          (let res ("==" (Member row '"ts2") (Member row '"d2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+          (let res (">=" (Member row '"d1") (Date '"19358")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+          (let res ("==" (Member row '"ts1") (Member row '"d1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+          (let res (">=" (Member row '"ts2") (Member row '"dt2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+          (let res ("<=" (Timestamp '"1672876800000000") (Member row '"d2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+          (let res ("<" (Member row '"i1") (Member row '"i2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+          (let res (">" (Member row '"i2") (Interval '"3540000000")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
