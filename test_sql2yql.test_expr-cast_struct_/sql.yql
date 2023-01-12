@@ -20,6 +20,9 @@
         )))) (SqlProjectItem projectCoreType '"fail" (lambda '(row) (block '(
           (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType '('"du" (DataType 'Uint32)) '('"fl" (DataType 'Uint32)) '('"s" (DataType 'Uint16)) '('"u" (DataType 'Int32)))))
           (return res)
+        )))) (SqlProjectItem projectCoreType '"extra" (lambda '(row) (block '(
+          (let res (SafeCast (AsStructUnordered '('"du" (Double '"3.14")) '('"fl" (Minus (Float '"1."))) '('"i" (Int32 '"0")) '('"s" (Utf8 '"str")) '('"u" (Uint32 '"123"))) (StructType '('"du" (OptionalType (DataType 'Uint32))) '('"li" (ListType (DataType 'Utf8))) '('"di" (DictType (DataType 'Utf8) (DataType 'Uint8))) '('"el" (EmptyListType)) '('"ed" (EmptyDictType)))))
+          (return res)
         )))))))
         (return core)
       ))))
@@ -30,7 +33,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"empty" '"partial" '"others" '"fail")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"empty" '"partial" '"others" '"fail" '"extra")))))
     (return (Commit! world result_sink))
   )))
   (return world)
