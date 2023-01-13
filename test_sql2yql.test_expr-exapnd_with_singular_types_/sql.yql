@@ -9,12 +9,12 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text))))) (lambda '("$x") (block '(
+          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (OptionalType (DataType 'Int32))) '('"c" (TypeOf (Null))) '('"d" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (OptionalType (DataType 'Int32))) '('"c" (TypeOf (Null))) '('"d" (PgType 'text))))) (lambda '("$x") (block '(
             (return "$x")
           )))) (AsStruct '('"a" (String '"1")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (ListType (DataType 'Int32))) '('"c" (DictType (DataType 'String) (DataType 'Int64))) '('"d" (EmptyListType)) '('"e" (EmptyDictType)) '('"f" (VoidType)) '('"g" (NullType)) '('"h" (PgType 'text))))) (lambda '("$x") (block '(
+          (let res (Apply (Callable (CallableType '() '((StructType '('"a" (DataType 'String)) '('"b" (OptionalType (DataType 'Int32))) '('"c" (TypeOf (Null))) '('"d" (PgType 'text)))) '((StructType '('"a" (DataType 'String)) '('"b" (OptionalType (DataType 'Int32))) '('"c" (TypeOf (Null))) '('"d" (PgType 'text))))) (lambda '("$x") (block '(
             (return "$x")
           )))) (AddMember (AsStruct) '"a" (String '"2"))))
           (return res)
