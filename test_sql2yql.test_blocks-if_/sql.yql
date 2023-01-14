@@ -1,0 +1,64 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
+          (let res (Member row '"subkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"same_as_key" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Int32 '"1") (Int32 '"0")) (Bool 'false)) (Member row '"key") (Member row '"subkey")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"same_as_subkey" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Int32 '"0") (Int32 '"100")) (Bool 'false)) (Member row '"key") (Member row '"subkey")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sc1" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Int32 '"10") (Int32 '"0")) (Bool 'false)) (String '"scalar1 selected") (Member row '"key")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sc2" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Int32 '"0") (Int32 '"11")) (Bool 'false)) (Member row '"subkey") (String '"scalar2 selected")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"max_of_key_subkey" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Member row '"key") (Member row '"subkey")) (Bool 'false)) (Member row '"key") (Member row '"subkey")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sc3" (lambda '(row) (block '(
+          (let res (If (Coalesce (">" (Member row '"key") (Member row '"subkey")) (Bool 'false)) (Member row '"key") (String '"subkey is greater")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sc4" (lambda '(row) (block '(
+          (let res (If (Coalesce (">=" (Member row '"subkey") (Member row '"key")) (Bool 'false)) (String '"subkey is greater or eq") (Member row '"key")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sc5" (lambda '(row) (block '(
+          (let res (If (Coalesce (">=" (Member row '"subkey") (Member row '"key")) (Bool 'false)) (String '"subkey is greater or eq") (String '"key is greater")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"same_as_key" '"same_as_subkey" '"sc1" '"sc2" '"max_of_key_subkey" '"sc3" '"sc4" '"sc5")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
