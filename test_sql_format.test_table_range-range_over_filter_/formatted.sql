@@ -6,7 +6,7 @@ $script = @@
 def f(s):
   return True
 @@;
-$callable = Python::f(Callable<(String) -> Bool?>, $script);
+$callable = Python3::f(Callable<(String) -> Bool?>, $script);
 SELECT
     count(*) AS count
 FROM plato.filter(``, $callable);

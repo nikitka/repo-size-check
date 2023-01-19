@@ -10,7 +10,7 @@ $record = (
 );
 $recordType = TypeOf(Unwrap($record));
 $streamType = StreamType(VariantType(TupleType($recordType, $recordType, $recordType)));
-$udf = Python::MyFunc(CallableType(0, $streamType, $streamType), $udfScript);
+$udf = Python3::MyFunc(CallableType(0, $streamType, $streamType), $udfScript);
 $src = (
     SELECT
         *

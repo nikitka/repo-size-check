@@ -7,7 +7,7 @@ def f(f):
     return False
   return f and ft or ff
 @@;
-$callable = Python::f(Callable<(Bool) -> Callable<(String) -> Bool>>, $script);
+$callable = Python3::f(Callable<(Bool) -> Callable<(String) -> Bool>>, $script);
 $callableT = $callable(String::StartsWith('testfets', 'test'));
 SELECT
     count(*) AS count
