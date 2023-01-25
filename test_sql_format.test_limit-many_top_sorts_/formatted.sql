@@ -1,4 +1,4 @@
-/* postgres can not */
+/* postgres can not *//* ignore runonopt ast diff *//* ignore runonopt plan diff */
 USE plato;
 $i = (
     SELECT
