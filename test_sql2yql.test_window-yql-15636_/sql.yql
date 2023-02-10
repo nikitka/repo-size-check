@@ -1,0 +1,94 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"driver_license_pd_id" (lambda '(row) (block '(
+          (let res (Just (String '"foo")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"order_id" (lambda '(row) (block '(
+          (let res (String '"bar"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"user_phone_pd_id" (lambda '(row) (block '(
+          (let res (String '"1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"utc_order_dttm" (lambda '(row) (block '(
+          (let res (String '"2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"tmp") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"tmp") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '('"user_phone_pd_id") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"utc_order_dttm")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Lead0 (Lead (TypeOf partitioning) (lambda '(row) (AsStructUnordered '('"order_id" (Member row '"order_id")) '('"order_dttm" (Member row '"utc_order_dttm")))) (Int32 '"1")))))))
+        (let partitioning (CalcOverWindow partitioning '('"driver_license_pd_id") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"utc_order_dttm")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Lead1 (Lead (TypeOf partitioning) (lambda '(row) (AsStruct '('"order_id" (Member row '"order_id")))) (Int32 '"1")))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"driver_license_pd_id" (lambda '(row) (block '(
+          (let res (Member row '"driver_license_pd_id"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"user_phone_pd_id" (lambda '(row) (block '(
+          (let res (Member row '"user_phone_pd_id"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"utc_order_dttm" (lambda '(row) (block '(
+          (let res (Member row '"utc_order_dttm"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"order_id" (lambda '(row) (block '(
+          (let res (Member row '"order_id"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"next_user_order" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"next_driver_order" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"driver_license_pd_id" '"user_phone_pd_id" '"utc_order_dttm" '"order_id" '"next_user_order" '"next_driver_order")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
