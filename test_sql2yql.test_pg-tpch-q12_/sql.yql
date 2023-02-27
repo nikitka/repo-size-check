@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let read0 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"orders"))) (Void) '()))
+(let world (Left! read0))
+(let read1 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"lineitem"))) (Void) '()))
+(let world (Left! read1))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"l_shipmode" (Void) (lambda '() (PgColumnRef '"l_shipmode"))) (PgResultItem '"high_line_count" (Void) (lambda '() (PgAgg '"sum" '() (If (Coalesce (FromPg (PgOr (PgOp '"=" (PgColumnRef '"o_orderpriority") (PgConst '"1-URGENT" (PgType 'text))) (PgOp '"=" (PgColumnRef '"o_orderpriority") (PgConst '"2-HIGH" (PgType 'text))))) (Bool 'false)) (PgConst '1 (PgType 'int4)) (PgConst '0 (PgType 'int4)))))) (PgResultItem '"low_line_count" (Void) (lambda '() (PgAgg '"sum" '() (If (Coalesce (FromPg (PgAnd (PgOp '"<>" (PgColumnRef '"o_orderpriority") (PgConst '"1-URGENT" (PgType 'text))) (PgOp '"<>" (PgColumnRef '"o_orderpriority") (PgConst '"2-HIGH" (PgType 'text))))) (Bool 'false)) (PgConst '1 (PgType 'int4)) (PgConst '0 (PgType 'int4)))))))) '('from '('((Right! read0) '"orders" '()) '((Right! read1) '"lineitem" '()))) '('join_ops '('() '())) '('where (PgWhere (Void) (lambda '() (PgAnd (PgAnd (PgAnd (PgAnd (PgAnd (PgOp '"=" (PgColumnRef '"o_orderkey") (PgColumnRef '"l_orderkey")) (PgIn (PgColumnRef '"l_shipmode") (AsList (PgConst '"MAIL" (PgType 'text)) (PgConst '"SHIP" (PgType 'text))))) (PgOp '"<" (PgColumnRef '"l_commitdate") (PgColumnRef '"l_receiptdate"))) (PgOp '"<" (PgColumnRef '"l_shipdate") (PgColumnRef '"l_commitdate"))) (PgOp '">=" (PgColumnRef '"l_receiptdate") (PgCast (PgConst '"1994-01-01" (PgType 'text)) (PgType '"date")))) (PgOp '"<" (PgColumnRef '"l_receiptdate") (PgOp '"+" (PgCast (PgConst '"1994-01-01" (PgType 'text)) (PgType '"date")) (PgCast (PgConst '"1" (PgType 'text)) (PgType '"interval") (PgCall 'intervaltypmodin '() (PgArray (PgConst '"4" (PgType 'cstring))))))))))) '('group_by '((PgGroup (Void) (lambda '() (PgColumnRef '"l_shipmode"))))) '('sort '((PgSort (Void) (lambda '() (PgColumnRef '"l_shipmode")) 'asc))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)

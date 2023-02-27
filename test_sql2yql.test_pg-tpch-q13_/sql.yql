@@ -1,0 +1,13 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let read0 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"customer"))) (Void) '()))
+(let world (Left! read0))
+(let read1 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"orders"))) (Void) '()))
+(let world (Left! read1))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"c_count" (Void) (lambda '() (PgColumnRef '"c_count"))) (PgResultItem '"custdist" (Void) (lambda '() (PgAgg '"count" '()))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"c_custkey" (Void) (lambda '() (PgColumnRef '"c_custkey"))) (PgResultItem '"column0" (Void) (lambda '() (PgAgg '"count" '() (PgColumnRef '"o_orderkey")))))) '('from '('((Right! read0) '"customer" '()) '((Right! read1) '"orders" '()))) '('join_ops '('('('left (PgWhere (Void) (lambda '() (PgAnd (PgOp '"=" (PgColumnRef '"c_custkey") (PgColumnRef '"o_custkey")) (PgNot (PgLike (PgColumnRef '"o_comment") (PgConst '"%special%requests%" (PgType 'text))))))))))) '('group_by '((PgGroup (Void) (lambda '() (PgColumnRef '"c_custkey"))))))))) '('set_ops '('push)))) '"c_orders" '('"c_custkey" '"c_count")))) '('join_ops '('())) '('group_by '((PgGroup (Void) (lambda '() (PgColumnRef '"c_count"))))) '('sort '((PgSort (Void) (lambda '() (PgColumnRef '"custdist")) 'desc) (PgSort (Void) (lambda '() (PgColumnRef '"c_count")) 'desc))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)
