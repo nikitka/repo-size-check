@@ -17,15 +17,22 @@ FROM (
 WHERE x > "aaa"
 ORDER BY
     x;
+
 SELECT
     1;
+
 SELECT
     1;
+
 SELECT
     1;
+
 SELECT
     1;
+
 SELECT
     1;
+
 SELECT
     1;
+

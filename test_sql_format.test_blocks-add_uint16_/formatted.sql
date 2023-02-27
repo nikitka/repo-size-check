@@ -5,3 +5,4 @@ SELECT
     1us + key,
     subkey + 2us
 FROM Input;
+

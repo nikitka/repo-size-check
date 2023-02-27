@@ -4,7 +4,9 @@ $var =
     SELECT
         *
     FROM Input;
+
 SELECT
     *
 FROM $var
     TABLESAMPLE BERNOULLI (50);
+

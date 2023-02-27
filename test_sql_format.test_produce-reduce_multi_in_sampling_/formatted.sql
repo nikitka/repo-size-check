@@ -22,6 +22,7 @@ $r = (
         key
     USING $udf(TableRow())
 );
+
 SELECT
     key,
     src,
@@ -31,3 +32,4 @@ ORDER BY
     key,
     src,
     cnt;
+

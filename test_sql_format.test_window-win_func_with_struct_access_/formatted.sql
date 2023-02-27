@@ -8,6 +8,7 @@ $input = (
     FROM Input
         AS inSrc
 );
+
 --INSERT INTO Output
 SELECT
     key_hundred AS a_part,
@@ -26,3 +27,4 @@ WINDOW
 ORDER BY
     a_part,
     value;
+

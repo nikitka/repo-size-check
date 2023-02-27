@@ -6,6 +6,7 @@ $input =
         [1, 2] AS lst
     FROM Input
         AS a;
+
 SELECT
     key,
     subkey,
@@ -22,3 +23,4 @@ GROUP BY
 ORDER BY
     key,
     subkey;
+

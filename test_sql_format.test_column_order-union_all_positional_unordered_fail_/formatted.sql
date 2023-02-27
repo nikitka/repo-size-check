@@ -8,3 +8,4 @@ UNION ALL
 SELECT
     *
 FROM as_table([<|c: 1, b: 2, a: 3|>]);
+

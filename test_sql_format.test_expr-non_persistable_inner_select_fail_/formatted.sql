@@ -7,3 +7,4 @@ FROM (
         YQL::NewMTRand(1) AS x
     FROM Input
 );
+

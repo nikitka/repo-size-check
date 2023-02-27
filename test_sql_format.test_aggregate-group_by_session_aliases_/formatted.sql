@@ -13,3 +13,4 @@ GROUP BY
 ORDER BY
     user,
     session_start;
+

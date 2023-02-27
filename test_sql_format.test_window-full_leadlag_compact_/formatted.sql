@@ -27,6 +27,7 @@ $in =
                 value DESC
             ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
         );
+
 SELECT
     value,
     dvalue_lead1,
@@ -34,3 +35,4 @@ SELECT
 FROM $in
 ORDER BY
     value;
+

@@ -25,3 +25,4 @@ SELECT
     b.value
 ORDER BY
     akey;
+

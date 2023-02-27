@@ -11,8 +11,10 @@ FROM (
     SELECT
         Json(@@{"d": "fff"}@@) AS j
 );
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE ToBytes(j) != "";
+

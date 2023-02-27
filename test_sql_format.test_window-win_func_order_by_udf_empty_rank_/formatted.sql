@@ -17,3 +17,4 @@ WINDOW
 ORDER BY
     key,
     ix;
+

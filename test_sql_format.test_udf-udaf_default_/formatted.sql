@@ -23,5 +23,7 @@ $default = ($result_type) -> {
 $udaf_factory = AGGREGATION_FACTORY("UDAF", $create, $add, $merge, $get_result, $serialize, $deserialize, $default);
 SELECT
     ListAggregate(AsList(1, 2), $udaf_factory);
+
 SELECT
     ListAggregate(ListCreate(Int32), $udaf_factory);
+

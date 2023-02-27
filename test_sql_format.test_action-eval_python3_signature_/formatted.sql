@@ -13,3 +13,4 @@ def f(x, y):
 $f = Python3::f($script);
 SELECT
     $f(1, 2);
+

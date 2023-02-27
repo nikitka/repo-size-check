@@ -8,10 +8,13 @@ $sub_raws = (
         trivialWindow AS (
         )
 );
+
 --INSERT INTO Output
 SELECT
     *
 FROM $sub_raws;
+
 SELECT
     *
 FROM $sub_raws;
+

@@ -8,6 +8,7 @@ $visitors = (
     FROM Input
     WHERE subkey != ""
 );
+
 $over_threshold = (
     SELECT
         key,
@@ -16,11 +17,13 @@ $over_threshold = (
     FROM $visitors
     WHERE key > "070"
 );
+
 $clean = (
     SELECT
         COUNT(*)
     FROM $over_threshold
 );
+
 $tail = (
     SELECT
         key,
@@ -31,6 +34,7 @@ $tail = (
         key DESC
     LIMIT IF($clean ?? 0 < 2, 2 - $clean ?? 0, 0)
 );
+
 INSERT INTO Output
     WITH TRUNCATE
 SELECT
@@ -44,3 +48,4 @@ SELECT
     subkey,
     value
 FROM $tail;
+

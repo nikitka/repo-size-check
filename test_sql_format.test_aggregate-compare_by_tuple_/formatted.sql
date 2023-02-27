@@ -12,3 +12,4 @@ FROM (
 )
 GROUP BY
     key;
+

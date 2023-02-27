@@ -19,14 +19,17 @@ DEFINE ACTION $func($input, $output) AS
         *
     FROM $input
         AS input;
+
     COMMIT;
     INSERT INTO $output
         WITH truncate
     SELECT
         AGG_LIST($force_remove_members(TableRow(), ['']))
     FROM @$jname;
+
     COMMIT;
 END DEFINE;
+
 $exps = [('Input', 'Output1'), ('Input', 'Output2'), ('Input', 'Output3')];
 EVALUATE FOR $exp_name IN $exps
     DO BEGIN
@@ -34,3 +37,4 @@ EVALUATE FOR $exp_name IN $exps
         $output = $exp_name.1;
         DO $func($input, $output);
     END DO;
+

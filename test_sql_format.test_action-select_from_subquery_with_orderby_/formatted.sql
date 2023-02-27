@@ -6,6 +6,7 @@ DEFINE SUBQUERY $src() AS
     ORDER BY
         subkey;
 END DEFINE;
+
 DEFINE SUBQUERY $src_non_yt() AS
     SELECT
         *
@@ -13,13 +14,16 @@ DEFINE SUBQUERY $src_non_yt() AS
     ORDER BY
         subkey;
 END DEFINE;
+
 SELECT
     *
 FROM $src()
 ORDER BY
     key;
+
 SELECT
     *
 FROM $src_non_yt()
 ORDER BY
     key;
+

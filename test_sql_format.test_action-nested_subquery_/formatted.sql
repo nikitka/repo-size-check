@@ -5,6 +5,9 @@ DEFINE SUBQUERY $q($name) AS
         SELECT
             $name;
     END DEFINE;
+
     PROCESS $nested();
 END DEFINE;
+
 PROCESS $q(CAST(Unicode::ToUpper("foo"u) AS String));
+

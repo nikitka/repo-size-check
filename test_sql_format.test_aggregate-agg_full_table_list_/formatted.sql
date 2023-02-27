@@ -5,6 +5,7 @@ FROM (
     SELECT
         1 AS x
 );
+
 SELECT
     agglist(x)
 FROM (
@@ -12,3 +13,4 @@ FROM (
         1 AS x
     LIMIT 0
 );
+

@@ -12,3 +12,4 @@ ON a.key = b.x
 ORDER BY
     key,
     y;
+

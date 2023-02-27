@@ -9,3 +9,4 @@ UNION ALL
         *
     FROM plato.Input
 );
+

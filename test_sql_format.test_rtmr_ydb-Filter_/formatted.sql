@@ -5,3 +5,4 @@ SELECT STREAM
     "value:" || value AS value
 FROM plato.Input
 WHERE key < "100";
+

@@ -6,6 +6,7 @@ $input = (
         value
     FROM plato.Input
 );
+
 SELECT
     subkey,
     sum(subkey) OVER w2 AS x,
@@ -32,3 +33,4 @@ ORDER BY
     subkey,
     x,
     dbl_sum;
+

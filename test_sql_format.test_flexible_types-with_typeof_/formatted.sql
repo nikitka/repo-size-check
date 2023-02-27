@@ -8,6 +8,7 @@ $src =
     SELECT
         Date("2021-12-31") AS int32,
         1 AS value;
+
 $with_bytes =
     SELECT
         t.*,
@@ -15,6 +16,7 @@ $with_bytes =
         ToBytes(value) AS int_bytes
     FROM $src
         AS t;
+
 SELECT
     int32,
     value,
@@ -23,3 +25,4 @@ SELECT
 FROM $with_bytes
 ORDER BY
     int32;
+

@@ -8,6 +8,7 @@ $with_row1 = (
     FROM Input1
         AS t
 );
+
 $with_row2 = (
     SELECT
         t.*,
@@ -16,6 +17,7 @@ $with_row2 = (
     FROM Input2
         AS t
 );
+
 SELECT
     a.key AS key,
     b.subkey AS subkey,
@@ -25,3 +27,4 @@ FROM $with_row1
 LEFT JOIN $with_row2
     AS b
 USING (row_num);
+

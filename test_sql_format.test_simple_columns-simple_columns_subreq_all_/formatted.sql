@@ -8,6 +8,7 @@ $req = (
     FROM Input
         AS t
 );
+
 --INSERT INTO Output
 SELECT
     ff.*,
@@ -17,3 +18,4 @@ FROM $req
     AS ff
 ORDER BY
     sk;
+

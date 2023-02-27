@@ -7,7 +7,9 @@ SELECT
 FROM Input
 ORDER BY
     x DESC;
+
 COMMIT;
 SELECT
     *
 FROM Output;
+

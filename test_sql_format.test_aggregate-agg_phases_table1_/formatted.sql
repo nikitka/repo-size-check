@@ -8,3 +8,4 @@ SELECT
 FROM Input
 GROUP BY
     key;
+

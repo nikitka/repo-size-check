@@ -7,6 +7,7 @@ $src =
         user ?? "u0" AS user_nonopt
     FROM Input
         AS t;
+
 SELECT
     user,
     user_nonopt,
@@ -28,3 +29,4 @@ WINDOW
 ORDER BY
     user,
     payload;
+

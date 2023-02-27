@@ -5,3 +5,4 @@ SELECT
     JSON_QUERY ($json, "$.b"),
     JSON_QUERY ($json, "$.c"),
     JSON_QUERY (CAST(NULL AS JsonDocument), "$.a");
+

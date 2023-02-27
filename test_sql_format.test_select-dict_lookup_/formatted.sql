@@ -8,9 +8,11 @@ $dictList = (
         value
     FROM Input
 );
+
 SELECT
     d["z"] AS static,
     input.`dict`[input.value] AS dynamic,
     input.`dict` AS `dict`
 FROM $dictList
     AS input;
+

@@ -8,6 +8,7 @@ $top = (
         value DESC
     LIMIT 100
 );
+
 INSERT INTO Output
 SELECT
     key,
@@ -15,6 +16,8 @@ SELECT
 FROM $top
 ORDER BY
     value DESC;
+
 SELECT
     *
 FROM $top;
+

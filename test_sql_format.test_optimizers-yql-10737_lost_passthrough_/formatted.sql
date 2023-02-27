@@ -4,6 +4,7 @@ INSERT INTO @a
 SELECT
     "1" AS Text,
     ["a", "b"] AS Attachments;
+
 COMMIT;
 SELECT
     x.*,
@@ -14,3 +15,4 @@ SELECT
         x.Attachments
 FROM @a
     AS x;
+

@@ -6,6 +6,8 @@ $x = ($key) -> {
 SELECT
     $x(key)
 FROM Input;
+
 SELECT
     $x(key)
 FROM Input;
+

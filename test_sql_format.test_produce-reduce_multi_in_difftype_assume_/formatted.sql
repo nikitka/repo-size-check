@@ -40,3 +40,4 @@ ON
 USING $reducer(TableRow())
 ASSUME ORDER BY
     key;
+

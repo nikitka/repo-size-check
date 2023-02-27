@@ -9,3 +9,4 @@ GROUP BY
     Input1.key
 ORDER BY
     key;
+

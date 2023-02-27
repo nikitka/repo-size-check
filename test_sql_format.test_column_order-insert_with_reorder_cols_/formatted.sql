@@ -9,6 +9,7 @@ $i =
     FROM Input
     GROUP BY
         key;
+
 INSERT INTO Output
 SELECT
     a.key AS key,
@@ -16,3 +17,4 @@ SELECT
     2 AS anum,
 FROM $i
     AS a;
+

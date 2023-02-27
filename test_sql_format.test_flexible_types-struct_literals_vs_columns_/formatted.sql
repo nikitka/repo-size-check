@@ -6,5 +6,7 @@ FROM (
     SELECT
         1 AS text
 );
+
 SELECT
     <|text: ''|>;
+

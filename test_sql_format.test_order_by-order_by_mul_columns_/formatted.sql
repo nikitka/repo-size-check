@@ -6,3 +6,4 @@ FROM plato.Input
 ORDER BY
     value,
     subkey;
+

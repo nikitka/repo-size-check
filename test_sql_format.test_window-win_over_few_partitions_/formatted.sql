@@ -7,6 +7,7 @@ $data = (
         value AS name
     FROM plato.Input
 );
+
 SELECT
     region,
     age,
@@ -30,3 +31,4 @@ WINDOW
 ORDER BY
     region,
     age;
+

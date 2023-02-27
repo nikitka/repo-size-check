@@ -9,6 +9,7 @@ $data = (
     FROM Input
     WHERE CAST(key AS uint32) / 100 < 5
 );
+
 --INSERT INTO Output
 SELECT
     d.*,
@@ -20,3 +21,4 @@ ON Input.key = d.key AND Input.value == d.value
 ORDER BY
     key,
     value;
+

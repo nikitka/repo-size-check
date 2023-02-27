@@ -5,3 +5,4 @@ $zones = CAST(ListMap(ListFromRange(0us, 1000us), ($i) -> {
 SELECT
     *
 FROM AS_TABLE($zones);
+

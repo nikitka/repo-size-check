@@ -11,7 +11,10 @@ $foo =
         subkey ASC,
         key DESC
     LIMIT 0;
+
 $x =
     PROCESS $foo;
+
 SELECT
     YQL::ConstraintsOf($x) AS constraints;
+

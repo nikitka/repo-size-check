@@ -6,3 +6,4 @@ SELECT
     CurrentUtcDate(),
     CurrentUtcDatetime(),
     CurrentUtcTimestamp();
+

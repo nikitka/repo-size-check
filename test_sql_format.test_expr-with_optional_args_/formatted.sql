@@ -8,3 +8,4 @@ SELECT
     Yql::NamedApply($f, (1, 2), <||>),
     Yql::NamedApply($f, (1, 2, 3), <||>),
     Yql::NamedApply($f, (1, 2, 3, 4), <||>);
+

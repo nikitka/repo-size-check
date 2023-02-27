@@ -8,11 +8,14 @@ $input = (
         key
     LIMIT 3
 );
+
 --insert into Output
 SELECT
     *
 FROM $input;
+
 SELECT
     *
 FROM Input
 WHERE key = $input;
+

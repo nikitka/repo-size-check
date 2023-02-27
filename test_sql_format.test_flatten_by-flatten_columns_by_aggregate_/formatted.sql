@@ -14,7 +14,9 @@ $input = (
     )
         FLATTEN COLUMNS
 );
+
 --INSERT INTO Output WITH TRUNCATE
 SELECT
     *
 FROM $input;
+

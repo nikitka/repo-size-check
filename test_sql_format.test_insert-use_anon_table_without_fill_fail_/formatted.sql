@@ -3,3 +3,4 @@ USE plato;
 SELECT
     *
 FROM @a;
+

@@ -4,6 +4,7 @@ $i1 =
         CAST(key AS Int32) ?? 0 AS key,
         '' AS value
     FROM plato.Input1;
+
 $i2 =
     SELECT
         0 AS key,
@@ -14,6 +15,7 @@ $i2 =
         1 AS key,
         value
     FROM plato.Input3;
+
 $i3 = (
     SELECT
         2 AS key,
@@ -25,8 +27,10 @@ $i3 = (
         value
     FROM plato.Input5
 );
+
 $udf = ($x) -> {
     RETURN Yql::VariantItem($x)
 };
 PROCESS $i1, $i2, $i3
 USING $udf(TableRow());
+

@@ -7,6 +7,7 @@ $data = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 SELECT
     mod,
     iv
@@ -16,3 +17,4 @@ FROM $data
 ORDER BY
     mod,
     iv;
+

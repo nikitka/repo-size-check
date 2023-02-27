@@ -5,6 +5,7 @@ $data = (
         value AS Value
     FROM plato.Input0
 );
+
 $filtered = (
     SELECT
         *
@@ -12,6 +13,7 @@ $filtered = (
     WHERE Name != "BadName"
     LIMIT 10
 );
+
 SELECT
     Name,
     Avg(Length(Value)) AS Len
@@ -20,3 +22,4 @@ GROUP BY
     Name
 ORDER BY
     Name;
+

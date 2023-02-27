@@ -13,3 +13,4 @@ $myAddSuffix = ($row, $value) -> {
 SELECT
     $myAddSuffix(TableRow(), "*")
 FROM Input;
+

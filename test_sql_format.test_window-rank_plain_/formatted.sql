@@ -35,3 +35,4 @@ WINDOW
 ORDER BY
     key,
     subkey;
+

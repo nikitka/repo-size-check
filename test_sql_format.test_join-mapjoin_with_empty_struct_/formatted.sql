@@ -7,6 +7,7 @@ $sizes = (
         0 AS id
     FROM Input
 );
+
 SELECT
     d.key
 FROM Input
@@ -15,3 +16,4 @@ CROSS JOIN $sizes
     AS s
 ORDER BY
     d.key;
+

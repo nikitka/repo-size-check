@@ -28,6 +28,8 @@ $i = (
     )
     USING $udf(TableRows())
 );
+
 SELECT
     *
 FROM $i;
+

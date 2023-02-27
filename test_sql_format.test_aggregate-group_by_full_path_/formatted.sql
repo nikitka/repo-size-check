@@ -7,3 +7,4 @@ GROUP BY
     a.value
 ORDER BY
     a.value;
+

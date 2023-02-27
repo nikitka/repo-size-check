@@ -3,6 +3,7 @@ $input =
     SELECT
         *
     FROM as_table([<|key: 1|>, <|key: 1|>]);
+
 $src =
     SELECT
         key,
@@ -13,6 +14,7 @@ $src =
             ORDER BY
                 key
         );
+
 SELECT
     *
 FROM $src
@@ -20,3 +22,4 @@ UNION ALL
 SELECT
     *
 FROM $src;
+

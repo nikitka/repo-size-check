@@ -20,6 +20,7 @@ FROM (
 )
 ORDER BY
     key;
+
 SELECT
     key
 FROM (
@@ -41,3 +42,4 @@ FROM (
 )
 ORDER BY
     key;
+

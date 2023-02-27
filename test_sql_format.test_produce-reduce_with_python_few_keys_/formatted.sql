@@ -12,6 +12,7 @@ $data = (
         key AS val
     FROM plato.Input1
 );
+
 $res = (
     REDUCE $data
     ON
@@ -19,8 +20,10 @@ $res = (
         kk
     USING $udf(ss)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     Yql::ToOptional(Yql::DictKeys(zuza));
+

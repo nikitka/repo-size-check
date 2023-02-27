@@ -6,3 +6,4 @@ SELECT
     count(key)
 FROM Input
 WHERE subkey != 5;
+

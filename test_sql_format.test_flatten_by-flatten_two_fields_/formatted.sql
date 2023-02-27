@@ -9,6 +9,7 @@ $data_deep = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 SELECT
     *
 FROM $data_deep
@@ -20,3 +21,4 @@ ORDER BY
     ik,
     lv,
     mod;
+

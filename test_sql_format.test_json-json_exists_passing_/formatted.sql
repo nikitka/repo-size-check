@@ -19,6 +19,7 @@ SELECT
     -- Nulls
     JSON_EXISTS ($json, "strict $var" PASSING Nothing(Int64?) AS var),
     JSON_EXISTS ($json, "strict $var" PASSING NULL AS var);
+
 -- Check various ways to pass variable name
 SELECT
     JSON_EXISTS ($json, "strict $var1" PASSING 123 AS var1),
@@ -26,3 +27,4 @@ SELECT
     JSON_EXISTS ($json, "strict $VaR1" PASSING 123 AS VaR1),
     JSON_EXISTS ($json, "strict $var1" PASSING 123 AS "var1"),
     JSON_EXISTS ($json, "strict $VaR1" PASSING 123 AS "VaR1");
+

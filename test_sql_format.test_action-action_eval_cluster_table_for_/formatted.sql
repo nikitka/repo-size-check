@@ -9,5 +9,7 @@ DEFINE ACTION $a($x) AS
     ORDER BY
         key;
 END DEFINE;
+
 EVALUATE FOR $i IN AsList("PLATO"u)
     DO $a($i);
+

@@ -19,3 +19,4 @@ LEFT ONLY JOIN (
 USING (k)
 GROUP BY
     a.val AS aval;
+

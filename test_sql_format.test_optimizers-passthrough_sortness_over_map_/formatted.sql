@@ -7,6 +7,7 @@ FROM Input0
 ORDER BY
     key,
     subkey;
+
 COMMIT;
 INSERT INTO @c
 SELECT
@@ -16,6 +17,7 @@ WHERE key < "100"
 ORDER BY
     key,
     subkey;
+
 INSERT INTO @d
 SELECT
     key AS key,
@@ -25,10 +27,13 @@ FROM @a
 WHERE key < "100"
 ORDER BY
     key;
+
 COMMIT;
 SELECT
     *
 FROM @c;
+
 SELECT
     *
 FROM @d;
+

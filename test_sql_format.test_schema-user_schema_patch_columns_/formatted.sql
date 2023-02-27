@@ -7,3 +7,4 @@ SELECT
     subkey
 FROM Input
     WITH COLUMNS Struct<key: Utf8, subkey: String?>;
+

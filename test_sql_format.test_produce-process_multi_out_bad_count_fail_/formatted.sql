@@ -8,18 +8,23 @@ $record = (
         TableRow()
     FROM plato.Input
 );
+
 $recordType = TypeOf(Unwrap($record));
 $udf = Python::MyFunc(CallableType(0, StreamType(VariantType(TupleType($recordType, $recordType))), StreamType($recordType)), $udfScript);
 $i, $j, $k = (
     PROCESS plato.Input
     USING $udf(TableRows())
 );
+
 SELECT
     *
 FROM $i;
+
 SELECT
     *
 FROM $j;
+
 SELECT
     *
 FROM $k;
+

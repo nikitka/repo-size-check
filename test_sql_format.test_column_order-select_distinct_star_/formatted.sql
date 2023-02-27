@@ -7,3 +7,4 @@ FROM Input
 ORDER BY
     subkey,
     key;
+

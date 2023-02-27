@@ -13,3 +13,4 @@ FROM (
         CAST(value AS int) AS empty
     FROM plato.Input
 );
+

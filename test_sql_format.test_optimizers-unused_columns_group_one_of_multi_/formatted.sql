@@ -20,3 +20,4 @@ FROM (
     GROUP BY
         a
 );
+

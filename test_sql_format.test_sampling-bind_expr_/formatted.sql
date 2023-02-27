@@ -4,12 +4,15 @@ $count =
     SELECT
         COUNT(*)
     FROM Input;
+
 -- $count = 10
 $var =
     SELECT
         *
     FROM Input;
+
 SELECT
     *
 FROM $var
     TABLESAMPLE BERNOULLI (5 * $count);
+

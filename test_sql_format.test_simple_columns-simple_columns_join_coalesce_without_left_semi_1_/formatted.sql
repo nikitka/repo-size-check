@@ -14,6 +14,7 @@ LEFT SEMI JOIN Input
 USING (key)
 ORDER BY
     subkey;
+
 SELECT
     *
     WITHOUT
@@ -26,3 +27,4 @@ LEFT SEMI JOIN Input
 USING (key)
 ORDER BY
     subkey;
+

@@ -8,3 +8,4 @@ FROM (
         value
     FROM plato.Input
 );
+

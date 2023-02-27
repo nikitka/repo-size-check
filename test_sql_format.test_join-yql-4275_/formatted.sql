@@ -13,3 +13,4 @@ JOIN (
     AS x2
 ON x1.key == x2.key
 WHERE x2.key == 4;
+

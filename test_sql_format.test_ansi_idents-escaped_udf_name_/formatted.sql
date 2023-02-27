@@ -7,3 +7,4 @@ FROM Input
 WHERE "String"::Contains("key", '7')
 ORDER BY
     key;
+

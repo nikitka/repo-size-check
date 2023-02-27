@@ -14,3 +14,4 @@ FROM (
 GROUP BY
     HOP (CAST(subkey AS Timestamp), "PT10S", "PT30S", "PT5M"),
     key;
+

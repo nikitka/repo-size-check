@@ -6,11 +6,14 @@ SELECT
 UNION ALL
 SELECT
     "subkey" AS field;
+
 COMMIT;
 $whitelist =
     SELECT
         aggregate_list(field)
     FROM Output;
+
 SELECT
     ForceSpreadMembers([("key", key)], Unwrap($whitelist))
 FROM Input;
+

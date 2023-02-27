@@ -26,11 +26,14 @@ FROM (
         Decimal("nan", 12, 10) AS d12,
         Decimal("nan", 35, 10) AS d35
 );
+
 COMMIT;
 SELECT
     *
 FROM @a
 WHERE d3 != Decimal("5.3", 3, 2);
+
 SELECT
     *
 FROM Input;
+

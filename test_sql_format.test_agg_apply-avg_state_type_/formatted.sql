@@ -15,3 +15,4 @@ FROM (
 GROUP BY
     ()
     WITH combine;
+

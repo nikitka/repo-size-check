@@ -3,3 +3,4 @@ $list = [AsVariant(1, "int"), AsVariant(1.f, "float"), AsVariant(1.0, "double"),
 SELECT
     ListSortAsc($list) AS asc,
     ListSortDesc($list) AS desc;
+

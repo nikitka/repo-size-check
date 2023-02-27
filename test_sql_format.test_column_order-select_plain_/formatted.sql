@@ -6,6 +6,7 @@ SELECT
 FROM Input
 ORDER BY
     subkey;
+
 SELECT
     *
     WITHOUT
@@ -13,12 +14,14 @@ SELECT
 FROM Input
 ORDER BY
     subkey;
+
 SELECT
     a.*
 FROM Input
     AS a
 ORDER BY
     a.subkey;
+
 SELECT
     a.*
     WITHOUT
@@ -27,6 +30,7 @@ FROM Input
     AS a
 ORDER BY
     a.subkey;
+
 SELECT
     1 AS z,
     2 AS x,
@@ -35,6 +39,7 @@ FROM Input
     AS a
 ORDER BY
     a.subkey;
+
 SELECT
     1 AS z,
     2 AS x,
@@ -45,7 +50,9 @@ FROM Input
     AS a
 ORDER BY
     a.subkey;
+
 SELECT
     1 AS c,
     2 AS b,
     3 AS a;
+

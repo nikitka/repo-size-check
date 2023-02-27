@@ -22,3 +22,4 @@ SELECT
     coalesce(coalesce(coalesce(third_num, 233), 443), 100501),
     'end'
 FROM plato.Input;
+

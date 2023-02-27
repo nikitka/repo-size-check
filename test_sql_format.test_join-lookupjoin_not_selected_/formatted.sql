@@ -10,3 +10,4 @@ FROM Input1
 LEFT JOIN Input2
     AS b
 ON a.k1 = b.k2;
+

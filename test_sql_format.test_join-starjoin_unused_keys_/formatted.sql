@@ -16,3 +16,4 @@ JOIN Input4
 ON (a.k1 = d.k4)
 ORDER BY
     v3;
+

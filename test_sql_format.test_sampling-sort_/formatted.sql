@@ -5,3 +5,4 @@ FROM plato.Input
     TABLESAMPLE BERNOULLI (30) REPEATABLE (1)
 ORDER BY
     key;
+

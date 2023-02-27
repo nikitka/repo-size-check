@@ -7,6 +7,7 @@ SELECT
     subkey,
     value
 FROM Input;
+
 COMMIT;
 SELECT
     *
@@ -25,3 +26,4 @@ FROM (
 ORDER BY
     key,
     value;
+

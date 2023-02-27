@@ -4,8 +4,10 @@ INSERT INTO plato.Output
 SELECT
     *
 FROM plato.Input;
+
 COMMIT;
 SELECT
     *
 FROM plato.Output
     VIEW raw;
+

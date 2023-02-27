@@ -7,3 +7,4 @@ SELECT
     key,
     value
 FROM concat(Input, Input, Input, Input);
+

@@ -17,6 +17,8 @@ $data = (
         value AS name
     FROM Input
 );
+
 SELECT
     $udf(region AS region, name AS name) AS val
 FROM $data;
+

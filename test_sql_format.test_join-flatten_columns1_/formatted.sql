@@ -15,3 +15,4 @@ JOIN Input2
 USING (key)
 ORDER BY
     Input2.key;
+

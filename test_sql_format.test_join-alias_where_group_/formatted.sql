@@ -15,3 +15,4 @@ GROUP BY
     ia.value AS subkey
 ORDER BY
     key;
+

@@ -13,8 +13,10 @@ $res = (
         key
     USING $udf(value)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     value;
+

@@ -9,6 +9,7 @@ $x = (
         value
     FROM CONCAT(Input, Input)
 );
+
 $y = (
     SELECT
         t.path AS path,
@@ -28,6 +29,8 @@ $y = (
     USING (key)
     WHERE t.key IN ("023", "150")
 );
+
 SELECT DISTINCT
     path
 FROM $y;
+

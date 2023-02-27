@@ -6,3 +6,4 @@ FROM (
         1 AS `int32`
 )
     AS a;
+

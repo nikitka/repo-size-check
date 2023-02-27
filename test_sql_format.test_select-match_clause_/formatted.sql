@@ -5,3 +5,4 @@ SELECT
     value
 FROM plato.Input
 WHERE value MATCH "q";
+

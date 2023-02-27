@@ -17,6 +17,7 @@ SELECT
     Timestamp('2023-01-05T00:00:00.000000Z') AS ts2,
     Interval('PT1M') AS i1,
     Interval('PT1H') AS i2,;
+
 COMMIT;
 SELECT
     t.*,
@@ -42,3 +43,4 @@ SELECT
     i2 > Interval('PT59M'),
 FROM @tmp
     AS t;
+

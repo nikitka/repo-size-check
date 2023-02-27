@@ -10,3 +10,4 @@ FROM (
     TABLESAMPLE BERNOULLI (33)
 ORDER BY
     key;
+

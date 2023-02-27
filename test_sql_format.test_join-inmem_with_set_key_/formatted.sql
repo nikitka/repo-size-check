@@ -17,3 +17,4 @@ ON foo.e == two.c
 FULL JOIN AS_TABLE($bar)
     AS bar
 ON bar.g == one.a;
+

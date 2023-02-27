@@ -6,3 +6,4 @@ FROM plato.Input
 ORDER BY
     (CAST(i.key AS uint32) / 10) % 10 DESC,
     subkey;
+

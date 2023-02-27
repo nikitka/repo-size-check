@@ -12,3 +12,4 @@ ON a.key = b.key
 WHERE Unwrap(CAST(a.key AS Int32)) > 100
 ORDER BY
     a.key;
+

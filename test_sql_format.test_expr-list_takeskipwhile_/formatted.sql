@@ -19,3 +19,4 @@ SELECT
     Yql::SkipWhile(Just(1), ($x) -> {
         RETURN $x < 3
     });
+

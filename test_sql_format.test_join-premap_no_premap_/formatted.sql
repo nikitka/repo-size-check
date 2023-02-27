@@ -19,6 +19,7 @@ SELECT
     b.value
 ORDER BY
     a.key;
+
 -- not fixed size
 FROM (
     SELECT
@@ -37,6 +38,7 @@ SELECT
     b.value
 ORDER BY
     a.key;
+
 -- to many Justs
 FROM (
     SELECT
@@ -55,6 +57,7 @@ SELECT
     b.value
 ORDER BY
     a.key;
+
 -- container
 FROM (
     SELECT
@@ -73,3 +76,4 @@ SELECT
     b.value
 ORDER BY
     a.key;
+

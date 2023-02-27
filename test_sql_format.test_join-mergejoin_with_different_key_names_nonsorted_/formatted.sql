@@ -10,6 +10,7 @@ $unsorted = (
         value AS val
     FROM Unsorted
 );
+
 FROM SortedBySubkeyValue
     AS a
 JOIN $unsorted
@@ -20,3 +21,4 @@ SELECT
 ORDER BY
     a.key,
     b.key;
+

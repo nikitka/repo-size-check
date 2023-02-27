@@ -7,6 +7,7 @@ $data = (
         value AS name
     FROM Input
 );
+
 --insert into Output
 SELECT
     region,
@@ -16,3 +17,4 @@ GROUP BY
     region
 ORDER BY
     region;
+

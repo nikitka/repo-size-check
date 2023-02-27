@@ -13,6 +13,7 @@ FROM (
     SELECT
         NULL AS x
 );
+
 SELECT
     min(x),
     count(x),
@@ -31,3 +32,4 @@ FROM (
 )
 GROUP BY
     y;
+

@@ -8,6 +8,7 @@ $subq = (
         CAST((CAST(subkey AS Int32) + 1) AS String) AS subkey_plus_one
     FROM Input
 );
+
 FROM $subq
     AS a
 JOIN Dict1
@@ -21,3 +22,4 @@ SELECT
 ORDER BY
     a.key,
     a.subkey_plus_one;
+

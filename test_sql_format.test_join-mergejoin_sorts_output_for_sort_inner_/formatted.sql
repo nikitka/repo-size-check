@@ -15,12 +15,14 @@ $inner = (
         b.v2 AS bv2,
         a.k1 AS ak1
 );
+
 SELECT
     *
 FROM $inner
 ORDER BY
     bv2,
     bk2_extra;
+
 SELECT
     *
 FROM $inner
@@ -28,19 +30,23 @@ ORDER BY
     bk2,
     bk2_extra,
     bv2;
+
 SELECT
     *
 FROM $inner
 ORDER BY
     bk2_extra,
     bv2;
+
 SELECT
     *
 FROM $inner
 ORDER BY
     bk2_extra;
+
 SELECT
     *
 FROM $inner
 ORDER BY
     ak1;
+

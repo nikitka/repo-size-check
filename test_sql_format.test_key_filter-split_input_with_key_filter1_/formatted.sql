@@ -6,3 +6,4 @@ SELECT
     "value:" || value AS value
 FROM concat(Input, Input, Input, Input)
 WHERE key = "07" || "5";
+

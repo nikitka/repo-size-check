@@ -10,3 +10,4 @@ GROUP BY
 ORDER BY
     odd,
     score;
+

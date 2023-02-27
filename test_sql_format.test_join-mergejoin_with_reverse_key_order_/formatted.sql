@@ -11,3 +11,4 @@ INNER JOIN Input1
 USING (BaseNo, PhraseID)
 ORDER BY
     pd.Text;
+

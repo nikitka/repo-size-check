@@ -2,3 +2,4 @@
 $json = CAST("{}" AS Json);
 SELECT
     JSON_QUERY ($json, "strict $.key" ERROR ON ERROR);
+

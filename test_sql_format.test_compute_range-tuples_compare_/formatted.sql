@@ -16,6 +16,7 @@ SELECT
     $range_for($pred4),
     $range_for($pred5),
     $range_for($pred6),;
+
 $pred1 = ($row) -> (($row.x, $row.y) >= (11, 22));
 $pred2 = ($row) -> (($row.x, $row.y) > (11, 22));
 $pred3 = ($row) -> (($row.x, $row.y) < (11, 22));
@@ -29,3 +30,4 @@ SELECT
     $range_for($pred4),
     $range_for($pred5),
     $range_for($pred6),;
+

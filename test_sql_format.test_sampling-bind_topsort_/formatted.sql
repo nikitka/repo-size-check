@@ -4,6 +4,7 @@ $var =
         key,
         value
     FROM plato.Input;
+
 SELECT
     *
 FROM $var
@@ -12,3 +13,4 @@ ORDER BY
     key ASC,
     value
 LIMIT 10;
+

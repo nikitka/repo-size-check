@@ -9,3 +9,4 @@ UNION ALL
 SELECT
     Data
 FROM pq.test_topic_input2;
+

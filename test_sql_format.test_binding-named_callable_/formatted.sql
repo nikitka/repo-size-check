@@ -4,3 +4,4 @@ $foo = ($item) -> {
 };
 SELECT
     $foo(1);
+

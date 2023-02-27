@@ -2,3 +2,4 @@
 $json = CAST("{}" AS Json);
 SELECT
     JSON_EXISTS ($json, "strict $.key" ERROR ON ERROR);
+

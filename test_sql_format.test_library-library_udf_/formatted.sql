@@ -3,3 +3,4 @@ PRAGMA Library("udf.sql");
 IMPORT udf SYMBOLS $f;
 SELECT
     $f;
+

@@ -6,3 +6,4 @@ GROUP BY
     `dict`["a"]
 ORDER BY
     s;
+

@@ -4,6 +4,7 @@ $src =
     SELECT
         Text("test_text, привет") AS text,
         Bytes("binary\x00\xff") AS bytes;
+
 SELECT
     text,
     bytes,
@@ -11,3 +12,4 @@ SELECT
     FormatType(TypeOf(text)) AS text_real_type,
     FormatType(Bytes) AS bytes_real_type,
 FROM $src;
+

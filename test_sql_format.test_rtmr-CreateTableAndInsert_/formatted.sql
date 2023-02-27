@@ -4,8 +4,10 @@ CREATE TABLE Output (
     value String,
     PRIMARY KEY (key)
 );
+
 INSERT INTO Output
 SELECT STREAM
     key,
     value
 FROM Input;
+

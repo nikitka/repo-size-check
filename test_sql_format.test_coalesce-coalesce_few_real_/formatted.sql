@@ -14,3 +14,4 @@ SELECT
     (($optDuoDoubleN ?? 41) ?? 42) ?? 4,
     'end'
 FROM plato.Input;
+

@@ -8,6 +8,7 @@ $data1 = (
         value
     FROM Input1
 );
+
 $data2 = (
     SELECT
         CAST(key AS uint32) % 100u AS key,
@@ -15,6 +16,7 @@ $data2 = (
         value
     FROM Input2
 );
+
 --INSERT INTO Output
 SELECT
     i1.*
@@ -28,3 +30,4 @@ LEFT OUTER JOIN $data1
 ON i1.key = i3.key
 ORDER BY
     i1.key;
+

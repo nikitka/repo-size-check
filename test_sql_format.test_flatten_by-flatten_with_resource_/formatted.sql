@@ -14,9 +14,11 @@ $input = (
         AsList($save(value), $save(subkey)) AS resourceList
     FROM plato.Input
 );
+
 SELECT
     key,
     $load(resourceList) AS value
 FROM $input
     FLATTEN BY
         resourceList;
+

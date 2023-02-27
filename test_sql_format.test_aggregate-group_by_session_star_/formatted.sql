@@ -9,6 +9,7 @@ GROUP BY
 ORDER BY
     user,
     session_start;
+
 SELECT
     *
 FROM plato.Input
@@ -18,3 +19,4 @@ GROUP BY
 ORDER BY
     user,
     group0;
+

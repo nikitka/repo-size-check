@@ -7,3 +7,4 @@ SELECT
 FROM $multiaggr_win()
 ORDER BY
     rn;
+

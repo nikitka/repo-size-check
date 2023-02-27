@@ -5,6 +5,7 @@ $input =
     UNION ALL
     SELECT
         AsTuple(4, Just(5), Just(6)) AS nums;
+
 SELECT
     MULTI_AGGREGATE_BY(nums, AGGREGATION_FACTORY("count")) AS count,
     MULTI_AGGREGATE_BY(nums, AGGREGATION_FACTORY("min")) AS min,
@@ -15,3 +16,4 @@ SELECT
     MULTI_AGGREGATE_BY(nums, AGGREGATION_FACTORY("percentile", 0.5)) AS p50,
     MULTI_AGGREGATE_BY(nums, AGGREGATION_FACTORY("aggregate_list")) AS agg_list,
 FROM $input;
+

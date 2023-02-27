@@ -19,3 +19,4 @@ SELECT
 ORDER BY
     ak1,
     ck3;
+

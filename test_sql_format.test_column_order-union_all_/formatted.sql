@@ -11,6 +11,7 @@ SELECT
 UNION ALL
 SELECT
     1 AS z;
+
 SELECT
     1 AS z,
     2 AS y,
@@ -22,3 +23,4 @@ SELECT
 UNION ALL
 SELECT
     1 AS a;
+

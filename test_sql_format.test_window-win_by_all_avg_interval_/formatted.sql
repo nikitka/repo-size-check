@@ -7,6 +7,7 @@ $data = (
         value AS name
     FROM Input
 );
+
 -- insert into Output
 $data2 = (
     SELECT
@@ -22,6 +23,8 @@ $data2 = (
                 name DESC
         )
 );
+
 DISCARD SELECT
     EnsureType(avg_age, Interval?) AS avg_age
 FROM $data2;
+

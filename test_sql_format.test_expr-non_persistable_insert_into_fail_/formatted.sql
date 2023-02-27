@@ -6,3 +6,4 @@ INSERT INTO Output (
 )
 VALUES
     ("foo", YQL::NewMTRand(1));
+

@@ -16,3 +16,4 @@ FULL JOIN (
 )
     AS b
 ON a.v1 = b.v2;
+

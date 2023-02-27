@@ -14,8 +14,10 @@ $res = (
         key
     USING $udf(subkey)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     Yql::ToOptional(Yql::DictKeys(joined));
+

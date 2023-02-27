@@ -11,6 +11,8 @@ SELECT
     Ensure($p3, $p2 = $p3),
     Ensure($p4, $p4 != $p1),
     Ensure($p5, $p5 = $p2);
+
 SELECT
     Unpickle(TypeOf(ToDict($lst)), $p1),
     Unpickle(TypeOf(ToDict($lst)), $p2);
+

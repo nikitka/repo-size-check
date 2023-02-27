@@ -10,21 +10,27 @@ SELECT
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, $v1),
     DictLookup($d, $v3);
+
 SELECT
     DictContains($d, $v1),
     DictContains($d, $v3);
+
 $d = ToSortedMultiDict($l);
 SELECT
     $d,
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, $v1),
     DictLookup($d, $v3);
+
 SELECT
     DictContains($d, $v1),
     DictContains($d, $v3);
+

@@ -9,7 +9,9 @@ $in = (
         key DESC
     LIMIT 15000
 );
+
 SELECT
     *
 FROM $in
 WHERE value LIKE "a%";
+

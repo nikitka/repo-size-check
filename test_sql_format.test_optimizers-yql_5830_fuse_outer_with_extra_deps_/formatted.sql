@@ -6,6 +6,7 @@ $data = (
     FROM Input
     WHERE value > "a"
 );
+
 SELECT
     a.key,
     $data AS max_key,
@@ -22,3 +23,4 @@ LEFT JOIN (
 ON a.key = b.key
 ORDER BY
     a.key;
+

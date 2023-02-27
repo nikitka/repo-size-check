@@ -8,6 +8,7 @@ $input = (
         value
     FROM Input
 );
+
 --insert into Output
 SELECT
     key_hundred AS a_part,
@@ -34,3 +35,4 @@ ORDER BY
     a_part,
     keyO,
     value;
+

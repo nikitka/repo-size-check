@@ -18,3 +18,4 @@ SELECT
     min(if(key = 100u, TRUE)),
     min(if(key >= 10u, TRUE)),
 FROM Input;
+

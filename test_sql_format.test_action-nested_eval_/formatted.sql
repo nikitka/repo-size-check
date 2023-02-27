@@ -12,3 +12,4 @@ $struct = AsStruct(CALLABLE (Callable<(String) -> Struct<kek: Int32>>, ($string)
 }) AS KekFromString, TypeHandle(Int32) AS IntHandle);
 SELECT
     FormatType(EvaluateType($struct.IntHandle));
+

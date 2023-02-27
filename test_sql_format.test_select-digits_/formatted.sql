@@ -11,6 +11,7 @@ SELECT
     0x80000000u,
     0xffffffffu,
     0x80000000ul;
+
 SELECT
     0xfFUt,
     0X0FfuT,
@@ -23,6 +24,7 @@ SELECT
     0x80000000U,
     0xffffffffu,
     0x80000000uL;
+
 SELECT
     0.f,
     0.0f,
@@ -35,6 +37,7 @@ SELECT
     Math::Round(3.14f, - 3),
     1.e2f,
     1.0e2f;
+
 SELECT
     0.F,
     0.0f,
@@ -47,6 +50,7 @@ SELECT
     Math::Round(3.14F, - 3),
     1.e2f,
     1.0E2F;
+
 SELECT
     1t,
     2ut,
@@ -58,3 +62,4 @@ SELECT
     8ul,
     9.0,
     10.0f;
+

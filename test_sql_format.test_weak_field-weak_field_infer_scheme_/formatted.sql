@@ -6,3 +6,4 @@ SELECT
     subkey,
     WeakField(value, "String") AS value
 FROM Input;
+

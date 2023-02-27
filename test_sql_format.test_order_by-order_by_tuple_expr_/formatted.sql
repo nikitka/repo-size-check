@@ -8,3 +8,4 @@ SELECT
 FROM Input
 ORDER BY
     $keys(value);
+

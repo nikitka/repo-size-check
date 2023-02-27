@@ -22,3 +22,4 @@ FROM (
     GROUP BY
         HOP (DateTime::FromMilliseconds(CAST(Unwrap(t) AS Uint32)), "PT0.005S", "PT0.01S", "PT0.01S")
 );
+

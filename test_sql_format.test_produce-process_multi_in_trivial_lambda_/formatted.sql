@@ -6,6 +6,8 @@ $lambda = ($x) -> {
 $result =
     PROCESS Input, Input
     USING $lambda(TableRow());
+
 SELECT
     *
 FROM AS_TABLE($result.0);
+

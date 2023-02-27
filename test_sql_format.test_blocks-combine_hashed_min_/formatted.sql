@@ -12,3 +12,4 @@ GROUP BY
     key
 ORDER BY
     key;
+

@@ -7,3 +7,4 @@ SELECT
 FROM as_table($t)
 ASSUME ORDER BY
     key;
+

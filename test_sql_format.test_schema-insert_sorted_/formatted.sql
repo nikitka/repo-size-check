@@ -8,7 +8,9 @@ ORDER BY
     a,
     b,
     c;
+
 COMMIT;
 SELECT
     *
 FROM plato.Output;
+

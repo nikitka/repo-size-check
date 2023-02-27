@@ -9,3 +9,4 @@ FROM Input2
 JOIN Input3
     AS b
 ON a.value == b.value;
+

@@ -3,3 +3,4 @@ SELECT
     SELECT
         'Cool')
 FROM plato.Input;
+

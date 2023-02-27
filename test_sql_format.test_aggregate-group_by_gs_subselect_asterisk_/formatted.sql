@@ -6,6 +6,7 @@ $sub = (
     FROM Input
     LIMIT 5
 );
+
 --INSERT INTO Output
 SELECT
     Sum(CAST(subkey AS Uint32)) AS sumLen,
@@ -20,3 +21,4 @@ GROUP BY
 ORDER BY
     key,
     value;
+

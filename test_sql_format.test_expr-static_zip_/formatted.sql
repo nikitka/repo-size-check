@@ -12,3 +12,4 @@ SELECT
     StaticZip(AsTuple(), AsTuple()) AS empty_tuples,
     StaticZip($s1) AS single_struct,
     StaticZip($t1) AS single_tuple,;
+

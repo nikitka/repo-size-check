@@ -3,3 +3,4 @@ SELECT
     *
 FROM plato.`Input["150"]`
 LIMIT 2;
+

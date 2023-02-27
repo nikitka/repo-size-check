@@ -8,6 +8,7 @@ FROM `Input2`
 LEFT SEMI JOIN `Input3`
     AS b
 ON a.value == b.value;
+
 SELECT
     *
 FROM `Input2`
@@ -15,6 +16,7 @@ FROM `Input2`
 LEFT ONLY JOIN `Input3`
     AS b
 ON a.value == b.value;
+
 SELECT
     *
 FROM `Input2`
@@ -22,6 +24,7 @@ FROM `Input2`
 RIGHT SEMI JOIN `Input3`
     AS b
 ON a.value == b.value;
+
 SELECT
     *
 FROM `Input2`
@@ -29,3 +32,4 @@ FROM `Input2`
 RIGHT ONLY JOIN `Input3`
     AS b
 ON a.value == b.value;
+

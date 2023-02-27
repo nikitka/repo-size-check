@@ -8,3 +8,4 @@ SELECT
     ListConcat($list, NULL),
     ListConcat($list, Nothing(String?)),
     ListConcat(["single"], "tail");
+

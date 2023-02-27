@@ -6,36 +6,42 @@ $r4_20 = (
     FROM Input
     WHERE optkey BETWEEN 4 AND 20
 );
+
 $r6_20 = (
     SELECT
         key
     FROM Input
     WHERE optkey BETWEEN 6 AND 20
 );
+
 $r8_20 = (
     SELECT
         key
     FROM Input
     WHERE optkey BETWEEN 8 AND 20
 );
+
 $r10_20 = (
     SELECT
         optkey
     FROM Input
     WHERE optkey BETWEEN 10 AND 20
 );
+
 $r1_16 = (
     SELECT
         optkey
     FROM Input
     WHERE optkey BETWEEN 1 AND 16
 );
+
 $r1_12 = (
     SELECT
         key
     FROM Input
     WHERE optkey BETWEEN 1 AND 12
 );
+
 SELECT
     key
 FROM Input
@@ -49,3 +55,4 @@ key IN $r10_20 AND-- key = [10, 17]
 (key - 1) IN $r1_12 AND-- key = [10, 13]  -- 2 joinable
 (key - 3) NOT IN $r8_20-- key = [10]
 ;
+

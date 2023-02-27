@@ -4,6 +4,7 @@ $data =
     SELECT
         "075,020,075,020" AS a,
         "x" AS c;
+
 SELECT
     *
 FROM ANY $data
@@ -16,3 +17,4 @@ JOIN Input
 ON x.aa = y.key
 ORDER BY
     aa;
+

@@ -11,3 +11,4 @@ FROM (
         x
 ORDER BY
     x;
+

@@ -10,6 +10,7 @@ $src =
         AS u
     ASSUME ORDER BY
         key;
+
 SELECT
     *
 FROM $src
@@ -17,3 +18,4 @@ WHERE key < "075" OR key > "075"
 ORDER BY
     key,
     subkey;
+

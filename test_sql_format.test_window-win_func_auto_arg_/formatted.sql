@@ -18,3 +18,4 @@ WINDOW
         ORDER BY
             subkey
     );
+

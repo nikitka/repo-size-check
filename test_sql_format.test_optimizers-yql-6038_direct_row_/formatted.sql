@@ -5,17 +5,20 @@ $queries_0 = (
         key
     FROM Input
 );
+
 $queries = (
     SELECT
         TableRecordIndex() AS j,
         key
     FROM $queries_0
 );
+
 $count = (
     SELECT
         count(*)
     FROM $queries
 );
+
 $users_0 = (
     SELECT
         ListFromRange(0, 3) AS lst,
@@ -24,6 +27,7 @@ $users_0 = (
     FROM Input
         AS t
 );
+
 $users = (
     SELECT
         CAST(Random(idx + x) AS Uint64) % $count AS j,
@@ -32,6 +36,7 @@ $users = (
         FLATTEN BY
             lst AS x
 );
+
 SELECT
     *
 FROM $queries
@@ -39,3 +44,4 @@ FROM $queries
 JOIN $users
     AS users
 USING (j);
+

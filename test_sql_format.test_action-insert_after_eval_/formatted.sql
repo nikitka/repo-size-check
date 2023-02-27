@@ -5,13 +5,16 @@ $s1 = (
         count(*)
     FROM Output
 );
+
 $s2 = (
     SELECT
         max(key)
     FROM Output
 );
+
 INSERT INTO Output
     WITH truncate
 SELECT
     EvaluateExpr($s1) AS a,
     EvaluateExpr($s2) AS b;
+

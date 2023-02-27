@@ -10,6 +10,8 @@ $x1 = (
     PROCESS STREAM Input
     USING $f2(TableRows())
 );
+
 SELECT STREAM
     *
 FROM $x1;
+

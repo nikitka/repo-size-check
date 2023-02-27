@@ -4,3 +4,4 @@ SELECT
     *
 FROM plato.Input
     SAMPLE $x;
+

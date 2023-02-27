@@ -10,6 +10,7 @@ SELECT
 FROM Input
 ORDER BY
     value;
+
 COMMIT;
 SELECT
     *
@@ -55,19 +56,24 @@ FROM (
 )
 ORDER BY
     value;
+
 -- Don't union all to calc nodes separatelly
 SELECT
     *
 FROM @decimal
 WHERE value = CAST("6.6" AS Decimal (15, 10));
+
 -- Safe key filter calc
 SELECT
     *
 FROM @decimal
 WHERE value = CAST($asIs("3.3") AS Decimal (15, 10));
+
 -- Unsafe key filter calc
 SELECT
     *
 FROM @decimal
 WHERE value = CAST($asIs("bad") AS Decimal (15, 10));
+
 -- Unsafe key filter calc
+

@@ -10,6 +10,7 @@ $data_dict = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 SELECT
     mod,
     iv,
@@ -29,3 +30,4 @@ ORDER BY
     ls,
     key,
     value;
+

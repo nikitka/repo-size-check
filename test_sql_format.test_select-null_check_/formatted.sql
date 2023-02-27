@@ -13,3 +13,4 @@ FROM (
 )
     AS sq
 WHERE x IS NULL;
+

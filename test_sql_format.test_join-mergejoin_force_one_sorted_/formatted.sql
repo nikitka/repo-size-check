@@ -11,3 +11,4 @@ JOIN Input
 USING (key)
 ORDER BY
     key;
+

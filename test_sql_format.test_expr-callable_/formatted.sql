@@ -6,3 +6,4 @@ $callables = AsTuple(CALLABLE (Callable<(Int32) -> String>, $lambda), CALLABLE (
 SELECT
     $callables.0(10),
     $callables.1(TRUE);
+

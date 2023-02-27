@@ -22,3 +22,4 @@ SELECT
     SpreadMembers(NULL, ["a", "b"]),
     ForceSpreadMembers([("a", 1)], ["a", "b"]),
     ForceSpreadMembers([("c", 1)], ["a", "b"]);
+

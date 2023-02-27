@@ -12,3 +12,4 @@ GROUP BY
 ORDER BY
     key_first,
     val_first;
+

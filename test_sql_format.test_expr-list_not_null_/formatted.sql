@@ -10,3 +10,4 @@ SELECT
     ListNotNull(Just([1, NULL, 2])),
     ListNotNull(Nothing(List<Int32>?)),
     ListNotNull(Nothing(List<Int32?>?));
+

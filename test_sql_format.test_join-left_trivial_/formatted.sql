@@ -8,3 +8,4 @@ LEFT JOIN plato.Input3
 USING (key)
 ORDER BY
     Input1.key;
+

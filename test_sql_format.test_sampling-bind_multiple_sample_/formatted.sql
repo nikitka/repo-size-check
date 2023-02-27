@@ -4,17 +4,21 @@ $var =
     SELECT
         *
     FROM Input;
+
 INSERT INTO @tmp
 SELECT
     *
 FROM $var
     TABLESAMPLE BERNOULLI (100);
+
 INSERT INTO @tmp
 SELECT
     *
 FROM $var
     TABLESAMPLE BERNOULLI (50);
+
 COMMIT;
 SELECT
     *
 FROM @tmp;
+

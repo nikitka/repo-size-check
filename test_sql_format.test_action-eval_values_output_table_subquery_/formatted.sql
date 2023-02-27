@@ -4,6 +4,7 @@ $a = (
     SELECT
         CAST(Unicode::ToUpper("o"u) AS String) || "utpu"
 );
+
 $a = $a || CAST(Unicode::ToLower("T"u) AS String);
 INSERT INTO $a (
     key,
@@ -12,3 +13,4 @@ INSERT INTO $a (
 )
 VALUES
     (1, "foo", FALSE);
+

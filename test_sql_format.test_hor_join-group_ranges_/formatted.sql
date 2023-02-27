@@ -5,6 +5,7 @@ $i = (
         *
     FROM plato.range(``, Input1, Input4)
 );
+
 SELECT
     *
 FROM (
@@ -25,3 +26,4 @@ ORDER BY
     key,
     subkey,
     value;
+

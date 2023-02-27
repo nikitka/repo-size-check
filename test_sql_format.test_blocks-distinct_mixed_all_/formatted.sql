@@ -8,3 +8,4 @@ SELECT
     sum(DISTINCT key),
     min(DISTINCT key)
 FROM Input;
+

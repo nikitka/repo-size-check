@@ -21,3 +21,4 @@ FROM (
 GROUP BY
     HOP (Just(CurrentUtcTimestamp(TableRow())), "PT5S", "PT5S", "PT5S"),
     crc;
+

@@ -8,3 +8,4 @@ SELECT
     WeakField(val, "string") AS missed_nodef,
     WeakField(val, "string", "no value") AS missed_def
 FROM Input;
+

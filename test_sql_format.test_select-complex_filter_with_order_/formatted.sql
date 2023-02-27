@@ -6,3 +6,4 @@ FROM plato.Input
 WHERE value > "A" AND length(value) = CAST(3 AS smallint)
 ORDER BY
     key;
+

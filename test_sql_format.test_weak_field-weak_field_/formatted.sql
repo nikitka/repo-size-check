@@ -23,3 +23,4 @@ SELECT
     key,
     WeakField(value2, "String") AS ozer
 FROM Input2;
+

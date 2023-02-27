@@ -10,3 +10,4 @@ SELECT
     DictContains($dict, "baz"),
     DictCreate(String, Tuple<String, Double?>),
     DictCreate(Tuple<Int32?, String>, OptionalType(DataType("String")));
+

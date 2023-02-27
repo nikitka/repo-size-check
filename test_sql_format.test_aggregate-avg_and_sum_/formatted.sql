@@ -4,3 +4,4 @@ SELECT
     CAST(sum(CAST(subkey AS int)) AS varchar) AS subkey,
     min(value) AS value
 FROM plato.Input;
+

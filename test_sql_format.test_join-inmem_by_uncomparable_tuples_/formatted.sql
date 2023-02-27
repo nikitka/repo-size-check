@@ -9,6 +9,7 @@ FROM AS_TABLE($l)
 LEFT JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Lhs
 FROM AS_TABLE($l)
@@ -16,6 +17,7 @@ FROM AS_TABLE($l)
 LEFT SEMI JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Lhs
 FROM AS_TABLE($l)
@@ -23,6 +25,7 @@ FROM AS_TABLE($l)
 LEFT ONLY JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Rhs,
     Lhs
@@ -31,6 +34,7 @@ FROM AS_TABLE($l)
 RIGHT JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Rhs
 FROM AS_TABLE($l)
@@ -38,6 +42,7 @@ FROM AS_TABLE($l)
 RIGHT SEMI JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Rhs
 FROM AS_TABLE($l)
@@ -45,6 +50,7 @@ FROM AS_TABLE($l)
 RIGHT ONLY JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Lhs,
     Rhs
@@ -53,6 +59,7 @@ FROM AS_TABLE($l)
 INNER JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Lhs,
     Rhs
@@ -61,6 +68,7 @@ FROM AS_TABLE($l)
 FULL JOIN AS_TABLE($r)
     AS r
 USING (Key);
+
 SELECT
     Lhs,
     Rhs
@@ -69,3 +77,4 @@ FROM AS_TABLE($l)
 EXCLUSION JOIN AS_TABLE($r)
     AS r
 USING (Key);
+

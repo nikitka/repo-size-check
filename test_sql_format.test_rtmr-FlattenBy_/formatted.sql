@@ -13,3 +13,4 @@ FROM (
 )
     FLATTEN BY
         a;
+

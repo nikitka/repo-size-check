@@ -5,20 +5,25 @@ SELECT
     Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
         RETURN $z.a
     }))));
+
 $f = AGGREGATION_FACTORY("hll", 4);
 SELECT
     Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
         RETURN $z.a
     }))));
+
 USE plato;
 INSERT INTO @a
 SELECT
     *
 FROM as_table($t);
+
 COMMIT;
 SELECT
     AGGREGATE_BY(a, $f)
 FROM @a;
+
 SELECT
     AGGREGATE_BY(DISTINCT a, $f)
 FROM @a;
+

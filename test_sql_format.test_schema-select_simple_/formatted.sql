@@ -6,3 +6,4 @@ SELECT
     e AS ee,
     f AS ff
 FROM plato.Input;
+

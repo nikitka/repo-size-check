@@ -4,6 +4,7 @@ DEFINE SUBQUERY $t() AS
         *
     FROM as_table([<|key: "0"|>, <|key: "1"|>]);
 END DEFINE;
+
 DEFINE SUBQUERY $split_formula_log($in) AS
     $parition = ($row) -> {
         $recordType = TypeOf($row);
@@ -13,12 +14,16 @@ DEFINE SUBQUERY $split_formula_log($in) AS
     PROCESS $in()
     USING $parition(TableRow());
 END DEFINE;
+
 $a, $b = (
     PROCESS $split_formula_log($t)
 );
+
 SELECT
     *
 FROM $a;
+
 SELECT
     *
 FROM $b;
+

@@ -7,6 +7,7 @@ $input = (
         substring(value, 0, 1) == substring(value, 2, 1) AS value_from_a
     FROM Input
 );
+
 --insert into Output
 SELECT
     key,
@@ -20,3 +21,4 @@ GROUP BY
 ORDER BY
     key,
     subkey;
+

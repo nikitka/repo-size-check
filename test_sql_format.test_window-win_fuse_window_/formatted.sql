@@ -8,10 +8,12 @@ $data = (
         value || value AS unused
     FROM Input4
 );
+
 INSERT INTO @data
 SELECT
     *
 FROM $data;
+
 COMMIT;
 SELECT
     key,
@@ -64,3 +66,4 @@ WINDOW
 ORDER BY
     key,
     subkey;
+

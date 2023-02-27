@@ -25,3 +25,4 @@ WINDOW
 ORDER BY
     user,
     ts;
+

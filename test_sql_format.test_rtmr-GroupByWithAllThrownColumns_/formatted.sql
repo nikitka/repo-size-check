@@ -8,3 +8,4 @@ SELECT STREAM
 FROM Input
 GROUP BY
     HOP (Just(CurrentUtcTimestamp(TableRow())), "PT10S", "PT30S", "PT5M");
+

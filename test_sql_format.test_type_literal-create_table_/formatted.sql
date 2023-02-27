@@ -62,3 +62,4 @@ CREATE TABLE plato.Output (
     c_callable7 Callable<(foo: int32, bar: optional<string>) -> float?>,
     c_callable8 Callable<(foo: int32 {automap}, bar: string {Automap}) -> float>
 );
+

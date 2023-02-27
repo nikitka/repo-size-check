@@ -15,6 +15,7 @@ ON a.K = b.K AND a.V = b.V
 ORDER BY
     a.K,
     b.V;
+
 SELECT
     a.K,
     b.V
@@ -26,6 +27,7 @@ ON a.K = b.K AND a.V = b.V
 ORDER BY
     a.K,
     b.V;
+
 SELECT
     a.K,
     b.V
@@ -37,6 +39,7 @@ ON a.K = b.K AND a.V = b.V
 ORDER BY
     a.K,
     b.V;
+
 SELECT
     a.K,
     b.V
@@ -48,3 +51,4 @@ ON a.K = b.K AND a.V = b.V
 ORDER BY
     a.K,
     b.V;
+

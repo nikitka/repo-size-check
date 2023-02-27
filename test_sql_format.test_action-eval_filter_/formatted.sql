@@ -9,3 +9,4 @@ $arg4 = "" || "raw";
 SELECT
     count(*)
 FROM FILTER($arg1, $arg2, $arg3, $arg4);
+

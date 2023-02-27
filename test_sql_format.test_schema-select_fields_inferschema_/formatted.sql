@@ -4,3 +4,4 @@ SELECT
     d
 FROM plato.Input
     WITH inferscheme;
+

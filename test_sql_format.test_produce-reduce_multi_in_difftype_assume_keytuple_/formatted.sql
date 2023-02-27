@@ -45,3 +45,4 @@ USING $reducer(TableRow())
 ASSUME ORDER BY
     key,
     subkey;
+

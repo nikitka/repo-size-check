@@ -5,7 +5,9 @@ $l1 =
     SELECT
         key
     FROM `Input`;
+
 SELECT
     *
 FROM Input
 WHERE TRUE AND value != "" AND key IN $l1;
+

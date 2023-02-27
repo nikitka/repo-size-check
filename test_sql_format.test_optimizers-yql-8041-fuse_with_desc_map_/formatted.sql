@@ -10,7 +10,9 @@ $i = (
         key DESC
     LIMIT 1000
 );
+
 SELECT DISTINCT
     key
 FROM $i
 WHERE value != "";
+

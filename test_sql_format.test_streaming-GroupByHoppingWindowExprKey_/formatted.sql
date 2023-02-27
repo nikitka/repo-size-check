@@ -15,3 +15,4 @@ FROM (
         MIN_OF(k, 2),
         HoppingWindow("PT0.005S", "PT0.01S")
 );
+

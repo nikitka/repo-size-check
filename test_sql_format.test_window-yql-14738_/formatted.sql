@@ -20,3 +20,4 @@ WINDOW
     )
 ORDER BY
     subkey;
+

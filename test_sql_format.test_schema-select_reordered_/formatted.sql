@@ -6,3 +6,4 @@ SELECT
     a,
     f
 FROM plato.Input;
+

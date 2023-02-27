@@ -12,3 +12,4 @@ REDUCE Input1
 ON
     key
 USING ALL $udf(CAST(value AS uint32) ?? 0);
+

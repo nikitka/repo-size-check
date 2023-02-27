@@ -3,6 +3,7 @@ $t =
     SELECT
         *
     FROM AS_TABLE([<|key: 1, value: NULL|>, <|key: 1, value: NULL|>]);
+
 $p =
     SELECT
         key,
@@ -11,12 +12,15 @@ $p =
     GROUP BY
         key
         WITH combine;
+
 $p =
     PROCESS $p;
+
 --select FormatType(TypeOf($p));
 SELECT
     *
 FROM $p;
+
 $p =
     SELECT
         key,
@@ -25,12 +29,15 @@ $p =
     GROUP BY
         key
         WITH combinestate;
+
 $p =
     PROCESS $p;
+
 --select FormatType(TypeOf($p));
 SELECT
     *
 FROM $p;
+
 $p =
     SELECT
         key,
@@ -39,12 +46,15 @@ $p =
     GROUP BY
         key
         WITH mergestate;
+
 $p =
     PROCESS $p;
+
 --select FormatType(TypeOf($p));
 SELECT
     *
 FROM $p;
+
 $p1 =
     SELECT
         key,
@@ -53,12 +63,15 @@ $p1 =
     GROUP BY
         key
         WITH mergefinalize;
+
 $p1 =
     PROCESS $p1;
+
 --select FormatType(TypeOf($p1));
 SELECT
     *
 FROM $p1;
+
 $p2 =
     SELECT
         key,
@@ -72,12 +85,15 @@ $p2 =
     GROUP BY
         key
         WITH mergemanyfinalize;
+
 $p2 =
     PROCESS $p2;
+
 --select FormatType(TypeOf($p2));
 SELECT
     *
 FROM $p2;
+
 $p3 =
     SELECT
         key,
@@ -86,9 +102,12 @@ $p3 =
     GROUP BY
         key
         WITH finalize;
+
 $p3 =
     PROCESS $p3;
+
 --select FormatType(TypeOf($p));
 SELECT
     *
 FROM $p3;
+

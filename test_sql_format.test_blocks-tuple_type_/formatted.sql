@@ -6,3 +6,4 @@ SELECT
     (3, 4.0),
     value
 FROM Input;
+

@@ -11,7 +11,9 @@ $input = (
     CROSS JOIN Input
         AS b
 );
+
 -- ResFill with table content
 SELECT
     sum(key)
 FROM $input;
+

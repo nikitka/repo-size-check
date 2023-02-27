@@ -3,13 +3,16 @@ USE plato;
 PRAGMA DisableSimpleColumns;
 DISCARD SELECT
     1;
+
 DISCARD SELECT
     *
 FROM Input;
+
 DISCARD SELECT
     *
 FROM Input
 WHERE key < "foo";
+
 DISCARD SELECT
     *
 FROM Input
@@ -17,6 +20,7 @@ FROM Input
 JOIN Input
     AS b
 USING (key);
+
 DISCARD SELECT
     sum(length(value)),
     key,
@@ -27,6 +31,7 @@ GROUP BY
 ORDER BY
     key,
     subkey;
+
 DISCARD SELECT
     *
 FROM (
@@ -42,3 +47,4 @@ JOIN (
 )
     AS b
 USING (key);
+

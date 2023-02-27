@@ -15,3 +15,4 @@ WINDOW
     )
 ORDER BY
     position_cnt;
+

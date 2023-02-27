@@ -14,3 +14,4 @@ INNER JOIN (
 )
     AS b
 ON a.k1 = b.k2;
+

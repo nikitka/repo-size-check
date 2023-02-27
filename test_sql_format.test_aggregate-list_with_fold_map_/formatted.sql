@@ -8,9 +8,11 @@ $data = (
         id
     FROM Input
 );
+
 SELECT
     AGGREGATE_LIST(profile) AS profiles,
     id
 FROM $data
 GROUP BY
     id;
+

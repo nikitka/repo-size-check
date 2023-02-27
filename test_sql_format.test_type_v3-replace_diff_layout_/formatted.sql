@@ -24,19 +24,23 @@ $i, $j, $k = (
     PROCESS Input
     USING $udf(TableRows())
 );
+
 INSERT INTO Output1
     WITH (truncate, keepmeta)
 SELECT
     *
 FROM $i;
+
 INSERT INTO Output2
     WITH (truncate, keepmeta)
 SELECT
     *
 FROM $j
 LIMIT 2;
+
 INSERT INTO Output3
     WITH (truncate, keepmeta)
 SELECT
     *
 FROM $k;
+

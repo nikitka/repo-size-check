@@ -8,6 +8,7 @@ INSERT INTO @A (
 VALUES
     ('x', 1),
     ('y', 2);
+
 INSERT INTO @B (
     key,
     value
@@ -15,6 +16,7 @@ INSERT INTO @B (
 VALUES
     ('y', 3),
     ('z', 4);
+
 COMMIT;
 SELECT
     A.*
@@ -31,3 +33,4 @@ FROM @A
 RIGHT ONLY JOIN @B
     AS B
 ON A.key = B.key;
+

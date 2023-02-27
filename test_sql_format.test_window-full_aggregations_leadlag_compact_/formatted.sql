@@ -28,3 +28,4 @@ WINDOW
     )
 ORDER BY
     value;
+

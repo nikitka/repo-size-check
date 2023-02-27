@@ -7,8 +7,10 @@ $dictList = (
         value
     FROM Input
 );
+
 SELECT
     input.`dict`[input.value],
     input.`dict`[input.subkey]
 FROM $dictList
     AS input;
+

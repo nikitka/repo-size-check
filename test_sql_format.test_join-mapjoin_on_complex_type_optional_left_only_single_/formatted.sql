@@ -10,3 +10,4 @@ LEFT ONLY JOIN AS_TABLE($t)
 ON AsTuple(CAST(A.key AS uint64), CAST(A.subkey AS String)) = AsTuple(CAST(B.key AS int64), CAST(B.subkey AS Utf8))
 ORDER BY
     `key`;
+

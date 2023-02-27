@@ -7,3 +7,4 @@ FROM concat(Input1, Input2)
 ORDER BY
     key,
     path;
+

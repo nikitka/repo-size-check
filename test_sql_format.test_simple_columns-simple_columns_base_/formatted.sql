@@ -5,3 +5,4 @@ SELECT
     t.*
 FROM plato.Input
     AS t;
+

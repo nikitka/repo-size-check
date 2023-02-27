@@ -11,6 +11,7 @@ SELECT
     value AS new_value,
     "x"
 FROM plato.Input;
+
 COMMIT;
 SELECT
     key,
@@ -18,3 +19,4 @@ SELECT
     new_value,
     one_more_value
 FROM plato.Output;
+

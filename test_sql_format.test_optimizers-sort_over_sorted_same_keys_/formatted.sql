@@ -7,6 +7,7 @@ FROM Input0
 ORDER BY
     key ASC,
     subkey ASC;
+
 COMMIT;
 SELECT
     *
@@ -14,3 +15,4 @@ FROM @a
 ORDER BY
     key ASC,
     subkey ASC;
+

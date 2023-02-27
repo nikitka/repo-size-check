@@ -10,6 +10,7 @@ $data =
         2 AS n,
         AsList(4, 5) AS l,
         AsStruct(20 AS n, AsList(1, 2) AS l) AS s;
+
 SELECT
     n,
     l
@@ -19,6 +20,7 @@ FROM $data
 ORDER BY
     n,
     l;
+
 SELECT
     n,
     l
@@ -29,6 +31,7 @@ FROM $data
 ORDER BY
     n,
     l;
+
 SELECT
     n,
     l
@@ -39,6 +42,7 @@ FROM $data
 ORDER BY
     n,
     l;
+
 SELECT
     n,
     l,
@@ -52,3 +56,4 @@ ORDER BY
     n,
     l,
     sl;
+

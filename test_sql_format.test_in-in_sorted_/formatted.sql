@@ -5,7 +5,9 @@ $in =
         key
     FROM InputSorted
     WHERE key < "100";
+
 SELECT
     *
 FROM InputSorted
 WHERE key IN $in;
+

@@ -6,3 +6,4 @@ FROM plato.Input
 WHERE ki IN ('075', '150')
 GROUP BY
     key AS ki;
+

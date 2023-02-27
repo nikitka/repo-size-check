@@ -17,3 +17,4 @@ WINDOW
         PARTITION BY
             r.id
     );
+

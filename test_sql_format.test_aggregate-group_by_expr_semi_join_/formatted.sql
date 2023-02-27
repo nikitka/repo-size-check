@@ -21,3 +21,4 @@ GROUP BY
     b.us AS bus
 ORDER BY
     bus;
+

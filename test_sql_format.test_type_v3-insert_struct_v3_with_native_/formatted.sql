@@ -6,19 +6,23 @@ INSERT INTO @a
 SELECT
     *
 FROM concat(Input1, Input2);
+
 COMMIT;
 INSERT INTO @a
     WITH truncate
 SELECT
     *
 FROM Input1;
+
 COMMIT;
 INSERT INTO @a
 SELECT
     *
 FROM Input2;
+
 COMMIT;
 INSERT INTO @a
 SELECT
     *
 FROM concat(Input1, Input2);
+

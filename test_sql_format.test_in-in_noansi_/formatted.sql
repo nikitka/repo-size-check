@@ -21,8 +21,10 @@ SELECT
     -- false
     128 IN (128ut, 1t),-- true
 ;
+
 SELECT
     Just(1) IN (1, 2, 3),
     -- true?
     1 IN (Just(2), Just(3)),-- false
 ;
+

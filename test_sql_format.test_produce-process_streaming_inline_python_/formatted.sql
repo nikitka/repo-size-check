@@ -11,5 +11,7 @@ $input = (
         String::JoinFromList(AsList(key, subkey, value), ",") AS Data
     FROM plato.Input1
 );
+
 PROCESS $input
 USING Streaming::ProcessInline(TableRows(), $script);
+

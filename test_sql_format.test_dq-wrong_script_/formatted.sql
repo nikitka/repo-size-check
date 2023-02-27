@@ -9,3 +9,4 @@ def f(x):
 @@);
 SELECT
     $f(0);
+

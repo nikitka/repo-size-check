@@ -10,6 +10,7 @@ $flatten = (
             parsed_answers_and_clicks AS answer_and_clicks
     WHERE answer_and_clicks.1 = 1
 );
+
 SELECT
     bc_type,
     permalink,
@@ -24,3 +25,4 @@ FROM (
 )
     FLATTEN LIST BY
         bc_type;
+

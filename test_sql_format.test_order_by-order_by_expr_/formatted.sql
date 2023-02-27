@@ -6,3 +6,4 @@ FROM plato.Input
 ORDER BY
     CAST(i.key AS uint32) * CAST(subkey AS uint32)
 LIMIT 3;
+

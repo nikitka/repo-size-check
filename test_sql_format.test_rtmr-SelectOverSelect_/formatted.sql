@@ -14,3 +14,4 @@ FROM (
         HOP (CAST(subkey AS Timestamp), "PT10S", "PT30S", "PT5M")
 )
 WHERE value > 1;
+

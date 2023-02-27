@@ -4,3 +4,4 @@ INSERT INTO plato.Output
 SELECT
     value
 FROM plato.Input;
+

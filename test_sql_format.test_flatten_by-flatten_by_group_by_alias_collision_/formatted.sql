@@ -10,3 +10,4 @@ GROUP BY
     CAST(subkey AS String) AS subkey
 ORDER BY
     subkey;
+

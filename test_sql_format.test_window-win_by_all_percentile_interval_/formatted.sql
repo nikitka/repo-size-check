@@ -8,6 +8,7 @@ $prepared =
         CAST(subkey AS uint32) AS region,
         value AS name
     FROM Input;
+
 -- we want to check both optional<interval> and plain interval
 $data = (
     SELECT
@@ -17,6 +18,7 @@ $data = (
         name
     FROM $prepared
 );
+
 $data2 = (
     SELECT
         region,
@@ -32,7 +34,9 @@ $data2 = (
                 name DESC
         )
 );
+
 SELECT
     EnsureType(age_p80, Interval) AS age_p80,
     EnsureType(age_opt_p80, Interval?) AS age_opt_p80
 FROM $data2;
+

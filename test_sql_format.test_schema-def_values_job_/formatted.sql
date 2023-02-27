@@ -4,3 +4,4 @@ SELECT
     value
 FROM plato.Input
 WHERE key != "fake";
+

@@ -24,3 +24,4 @@ SELECT
 ORDER BY
     a.k1,
     a.u1;
+

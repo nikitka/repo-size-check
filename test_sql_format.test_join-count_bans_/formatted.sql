@@ -8,6 +8,7 @@ $records = (
         Url::GetHost(value) AS host
     FROM spider_info
 );
+
 $results = (
     SELECT
         ip,
@@ -19,6 +20,7 @@ $results = (
         ip,
         host
 );
+
 $bans = (
     SELECT
         ip,
@@ -30,6 +32,7 @@ $bans = (
         ip,
         host
 );
+
 SELECT
     results.ip AS ip,
     results.host AS host,
@@ -42,3 +45,4 @@ INNER JOIN $bans
 ON bans.ip == results.ip AND bans.host == results.host
 ORDER BY
     fetcher_count DESC;
+

@@ -5,8 +5,10 @@ $s = (
         count(*)
     FROM Input
 );
+
 SELECT
     EvaluateExpr($s);
+
 /*
 $s = (select key from Input);
 select EvaluateExpr($s);
@@ -29,3 +31,4 @@ select EvaluateExpr($s);
 $s = (select a.key from Input as a join Input as b using(key));
 select EvaluateExpr($s);
 */
+

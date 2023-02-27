@@ -8,3 +8,4 @@ $func = ($x, $y) -> {
 SELECT
     $func(key, subkey) AS func
 FROM Input;
+

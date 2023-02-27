@@ -12,3 +12,4 @@ FROM (
 WINDOW
     w AS (
     );
+

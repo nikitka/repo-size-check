@@ -5,6 +5,7 @@ SELECT
     *
 FROM Input
 WHERE key > "020";
+
 COMMIT;
 SELECT
     *
@@ -15,3 +16,4 @@ FROM (
         TABLESAMPLE BERNOULLI (50.0) REPEATABLE (1)
 )
 LIMIT 10;
+

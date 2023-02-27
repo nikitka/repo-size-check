@@ -3,3 +3,4 @@ PRAGMA EmitAggApply;
 SELECT
     count(if(key = 1, CAST(key AS string)))
 FROM plato.Input;
+

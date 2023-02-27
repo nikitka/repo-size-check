@@ -8,12 +8,14 @@ $one = (
         value
     FROM Input1
 );
+
 $two = (
     SELECT
         key,
         value
     FROM Input2
 );
+
 $three = (
     SELECT
         key,
@@ -21,6 +23,7 @@ $three = (
         2 AS subkey
     FROM Input3
 );
+
 FROM $one
     AS a
 CROSS JOIN $two
@@ -35,3 +38,4 @@ ORDER BY
     a.subkey,
     b.key,
     b.value;
+

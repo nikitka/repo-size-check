@@ -9,3 +9,4 @@ SELECT
     NULL AS x,
     2 / 1 AS jy,
     'b' AS y;
+

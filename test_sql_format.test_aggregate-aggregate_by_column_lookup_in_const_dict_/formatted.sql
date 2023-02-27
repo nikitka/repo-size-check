@@ -8,3 +8,4 @@ GROUP BY
     $dict[key] ?? "bar" AS lookup_result
 ORDER BY
     lookup_result;
+

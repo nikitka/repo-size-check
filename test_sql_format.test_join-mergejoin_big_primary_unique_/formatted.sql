@@ -11,3 +11,4 @@ FROM Input1
 JOIN Input2
     AS b
 ON a.k1 = b.k2 AND a.v1 = b.v2;
+

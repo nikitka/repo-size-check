@@ -6,6 +6,7 @@ $keys = (
         key
     FROM Input3
 );
+
 FROM (
     SELECT
         key,
@@ -29,3 +30,4 @@ SELECT
     b.flag
 ORDER BY
     a.key;
+

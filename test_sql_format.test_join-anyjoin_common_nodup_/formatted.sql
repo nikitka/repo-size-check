@@ -11,6 +11,7 @@ ON a.k1 = b.k2
 ORDER BY
     a.v1,
     b.v2;
+
 SELECT
     *
 FROM ANY Input1
@@ -21,6 +22,7 @@ ON a.k1 = b.k2
 ORDER BY
     a.v1,
     b.v2;
+
 SELECT
     *
 FROM Input1
@@ -31,6 +33,7 @@ ON a.k1 = b.k2
 ORDER BY
     a.v1,
     b.v2;
+
 SELECT
     *
 FROM ANY Input1
@@ -41,3 +44,4 @@ ON a.k1 = b.k2
 ORDER BY
     a.v1,
     b.v2;
+

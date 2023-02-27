@@ -56,3 +56,4 @@ SELECT
     ListZipAll(Just([]), Just([])),
     ListZipAll(Just([]), [1]),
     ListZipAll([1], Just([]));
+

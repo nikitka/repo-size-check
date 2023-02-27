@@ -6,3 +6,4 @@ SELECT
     CAST($struct AS Struct<x: Uint8?, y: Uint16?, z: Int8?>) AS others,
     CAST($struct AS Struct<du: Uint32, fl: Uint32, s: Uint16, u: Int32>) AS fail,
     CAST($struct AS Struct<du: Uint32?, li: List<Utf8>, di: Dict<Utf8, Uint8>, el: EmptyList, ed: EmptyDict>) AS extra;
+

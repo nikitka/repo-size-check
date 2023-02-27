@@ -14,3 +14,4 @@ ORDER BY
     A.key,
     goal,
     ac_val_concat;
+

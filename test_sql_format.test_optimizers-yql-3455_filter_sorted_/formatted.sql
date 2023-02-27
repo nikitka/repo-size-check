@@ -4,10 +4,12 @@ SELECT
     subkey
 FROM Input
 WHERE subkey < "100";
+
 SELECT
     value
 FROM Input
 LIMIT 3;
+
 SELECT
     key
 FROM (
@@ -18,3 +20,4 @@ FROM (
         - CAST(subkey AS Int32)
     LIMIT 5
 );
+

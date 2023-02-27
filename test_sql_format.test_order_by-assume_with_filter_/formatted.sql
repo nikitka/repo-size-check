@@ -10,3 +10,4 @@ WHERE key >= "0"
 ASSUME ORDER BY
     key,
     subkey;
+

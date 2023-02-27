@@ -7,3 +7,4 @@ FROM (
     FROM plato.Input
 )
     TABLESAMPLE BERNOULLI (50);
+

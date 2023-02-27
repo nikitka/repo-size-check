@@ -10,9 +10,11 @@ $in = (
     FROM plato.Input
     WHERE key = "075"
 );
+
 SELECT
     *
 FROM $in
 ORDER BY
     key
 LIMIT 100 OFFSET 90;
+

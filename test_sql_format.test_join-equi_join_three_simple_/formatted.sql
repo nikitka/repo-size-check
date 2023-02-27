@@ -7,3 +7,4 @@ JOIN plato.B
 ON A.key == B.key
 JOIN plato.C
 ON A.subkey == C.subkey;
+

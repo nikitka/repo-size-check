@@ -11,8 +11,10 @@ FROM (
     SELECT
         Float("1.2") AS f
 );
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE f != Float("5.3");
+

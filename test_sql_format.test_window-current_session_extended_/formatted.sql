@@ -27,3 +27,4 @@ WINDOW
 ORDER BY
     user,
     payload;
+

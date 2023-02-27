@@ -6,11 +6,13 @@ $out = (
     FROM `Input`
     WHERE value != "111"
 );
+
 $row_count = (
     SELECT
         COUNT(*)
     FROM $out
 );
+
 $needed_row = COALESCE(CAST(CAST($row_count AS float) * 0.5 AS Uint64), 1);
 INSERT INTO Output
     WITH TRUNCATE
@@ -20,3 +22,4 @@ FROM $out
 ORDER BY
     key DESC
 LIMIT 1 OFFSET $needed_row;
+

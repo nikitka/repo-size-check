@@ -16,15 +16,19 @@ DEFINE SUBQUERY $last_tables($path, $limit) AS
         LIMIT $limit
     )
 END DEFINE;
+
 $logs = (
     SELECT
         *
     FROM $last_tables($logs_path, $logs_per_run)
 );
+
 $processed_logs = (
     SELECT
         *
     FROM $last_tables($results_path, $logs_per_run)
 );
+
 SELECT
     SetDifference(ToSet($logs), ToSet($processed_logs));
+

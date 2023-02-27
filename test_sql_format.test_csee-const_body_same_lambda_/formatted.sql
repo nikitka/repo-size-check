@@ -4,3 +4,4 @@ SELECT
     }), ListMap(AsList(5, 6), ($_x) -> {
         RETURN 3 + 4
     }));
+

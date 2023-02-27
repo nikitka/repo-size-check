@@ -6,3 +6,4 @@ INSERT INTO plato.Output (
 )
 VALUES
     (YQL::ToString(1), YQL::ToString(2), "3");
+

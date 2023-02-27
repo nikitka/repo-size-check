@@ -16,3 +16,4 @@ WINDOW
 ORDER BY
     subkey,
     c;
+

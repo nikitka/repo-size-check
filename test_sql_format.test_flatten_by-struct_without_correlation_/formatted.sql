@@ -9,6 +9,7 @@ $data_dict = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 --insert into plato.Output
 SELECT
     mod,
@@ -19,3 +20,4 @@ FROM $data_dict
         list_struct AS `struct`
 ORDER BY
     mod--order by mod, iv, ls;
+

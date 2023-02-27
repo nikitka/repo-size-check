@@ -6,3 +6,4 @@ SELECT
 FROM Input
 ORDER BY
     akey;
+

@@ -5,11 +5,14 @@ SELECT
     *
 FROM Input
 LIMIT 1;
+
 $tables = (
     SELECT
         aggregate_list(Path) AS dates
     FROM folder("")
 );
+
 SELECT
     count(*)
 FROM each($tables);
+

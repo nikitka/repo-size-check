@@ -3,6 +3,7 @@ $count =
     SELECT
         COUNT(*)
     FROM plato.Input;
+
 -- $count = 10
 SELECT
     *
@@ -12,3 +13,4 @@ FROM (
     FROM plato.Input
 )
     TABLESAMPLE BERNOULLI (5 * $count);
+

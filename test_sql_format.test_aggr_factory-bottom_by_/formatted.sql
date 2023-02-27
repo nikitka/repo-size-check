@@ -5,12 +5,15 @@ SELECT
     Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
         RETURN AsTuple($z.value, $z.key)
     }))));
+
 USE plato;
 INSERT INTO @a
 SELECT
     AsTuple(value, key) AS vk
 FROM as_table($t);
+
 COMMIT;
 SELECT
     AGGREGATE_BY(vk, $f)
 FROM @a;
+

@@ -15,6 +15,7 @@ $input = (
         "9" AS subkey,
         "001" AS value
 );
+
 SELECT
     key,
     subkey,
@@ -31,3 +32,4 @@ WINDOW
     )
 ORDER BY
     value;
+

@@ -4,3 +4,4 @@ SELECT
     $a,
     $b,
     $c;
+

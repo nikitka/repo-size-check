@@ -28,8 +28,10 @@ $data = (
     )
     WHERE boys OR girls OR min_age > 0.f OR max_age < 18.f
 );
+
 SELECT
     puid,
     $age_suffixes(<|begin: min_age, end: max_age|>, $ages) AS age_suffixes,
     <|begin: min_age, end: max_age|> AS interval
 FROM $data;
+

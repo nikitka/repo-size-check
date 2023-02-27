@@ -7,3 +7,4 @@ FROM Input2
 JOIN Input4
     AS B
 ON (A.key == B.key) AND (A.subkey == B.subkey) AND (A.value == B.value);
+

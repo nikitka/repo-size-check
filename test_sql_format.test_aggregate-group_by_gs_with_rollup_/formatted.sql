@@ -18,3 +18,4 @@ ORDER BY
     key,
     subkey,
     total_count;
+

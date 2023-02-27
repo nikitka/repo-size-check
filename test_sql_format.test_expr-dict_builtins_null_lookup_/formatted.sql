@@ -12,6 +12,7 @@ SELECT
     DictLookup($d2, NULL),
     -- Nothing(String?), no such key
     DictLookup($d3, NULL);
+
 -- Just("baz"), null is convertible to Nothing<T> for any T
 SELECT
     DictContains($t1, AsTuple(1, "keyy")),
@@ -27,4 +28,6 @@ SELECT
     DictLookup($t2, AsTuple(NULL, "key")),
     -- Nothing(Tuple<Int32?, String>?), no such key
     DictLookup($t3, AsTuple(NULL, "key"));
+
 -- Just(AsTuple(123, "value")), null is convertible to Nothing<T> for any T
+

@@ -22,3 +22,4 @@ SELECT
 ORDER BY
     a.k1,
     a.v1;
+

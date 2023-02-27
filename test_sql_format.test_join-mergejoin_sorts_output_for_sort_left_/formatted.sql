@@ -14,12 +14,14 @@ $left = (
         b.v2 AS bv2,
         a.k1 AS ak1
 );
+
 SELECT
     *
 FROM $left
 ORDER BY
     bv2,
     bk2_extra;
+
 SELECT
     *
 FROM $left
@@ -27,19 +29,23 @@ ORDER BY
     bk2,
     bk2_extra,
     bv2;
+
 SELECT
     *
 FROM $left
 ORDER BY
     bk2_extra,
     bv2;
+
 SELECT
     *
 FROM $left
 ORDER BY
     bk2_extra;
+
 SELECT
     *
 FROM $left
 ORDER BY
     ak1;
+

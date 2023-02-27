@@ -5,3 +5,4 @@ SELECT
 FROM Input
 ORDER BY
     TableRecordIndex();
+

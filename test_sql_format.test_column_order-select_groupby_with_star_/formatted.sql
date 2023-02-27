@@ -10,6 +10,7 @@ GROUP BY
 ORDER BY
     key,
     value;
+
 SELECT
     *
 FROM Input
@@ -17,6 +18,7 @@ GROUP BY
     value,
     key
 HAVING key = "150";
+
 SELECT
     *
 FROM Input
@@ -26,3 +28,4 @@ GROUP BY
 ORDER BY
     subkey,
     key;
+

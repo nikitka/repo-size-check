@@ -9,6 +9,7 @@ $i = (
     WHERE key = "112"
     LIMIT 1
 );
+
 $j = (
     SELECT
         subkey AS s
@@ -16,7 +17,9 @@ $j = (
     WHERE key = "113"
     LIMIT 1
 );
+
 SELECT
     *
 FROM Input
 WHERE CAST(TableRecordIndex() AS String) == $i OR CAST(TableRecordIndex() AS String) == $j;
+

@@ -8,3 +8,4 @@ SELECT
     count(1u),
     count(1u / 0u)
 FROM Input;
+

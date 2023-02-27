@@ -9,3 +9,4 @@ FROM (
         Just(AsStruct(Just(4) AS qwe))
 )
     FLATTEN COLUMNS;
+

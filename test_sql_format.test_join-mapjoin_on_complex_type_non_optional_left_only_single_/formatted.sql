@@ -10,3 +10,4 @@ LEFT ONLY JOIN AS_TABLE($t)
 ON AsTuple(A.key, AsTuple(A.subkey, A.subkey1)) = AsTuple(B.key, AsTuple(B.subkey, B.subkey1))
 ORDER BY
     `key`;
+

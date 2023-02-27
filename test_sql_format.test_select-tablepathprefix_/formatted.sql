@@ -7,8 +7,10 @@ SELECT
 FROM `Input`
 ORDER BY
     subkey;
+
 SELECT
     *
 FROM $input
 ORDER BY
     subkey;
+

@@ -7,3 +7,4 @@ FROM plato.Input2
 JOIN plato.Input3
     AS B
 ON CAST(A.key AS INT) + 1 == CAST(B.key AS INT);
+

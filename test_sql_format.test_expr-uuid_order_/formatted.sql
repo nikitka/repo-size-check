@@ -73,3 +73,4 @@ FROM (
     AS s
 ORDER BY
     x;
+

@@ -6,6 +6,7 @@ $input = (
         value
     FROM plato.Input
 );
+
 SELECT
     key,
     (key - lag(key, 1) OVER w) AS key_diff,
@@ -20,3 +21,4 @@ WINDOW
             subkey,
             value
     );
+

@@ -8,8 +8,10 @@ FROM Input
 ORDER BY
     key,
     length(value);
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE key != "";
+

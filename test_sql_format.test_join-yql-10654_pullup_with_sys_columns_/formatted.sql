@@ -11,6 +11,7 @@ $src =
     SELECT
         *
     FROM AS_TABLE(ListCreate(Struct<key: String, subkey: String, value: String>));
+
 SELECT
     a.key,
     a.subkey,
@@ -22,3 +23,4 @@ LEFT JOIN $src
 USING (key)
 ORDER BY
     a.key;
+

@@ -6,3 +6,4 @@ def Dup(s):
 $udf = Python::Dup(Callable<(String) -> List<Struct<value: String>>>, $udfScript);
 PROCESS plato.Input0
 USING $udf(value);
+

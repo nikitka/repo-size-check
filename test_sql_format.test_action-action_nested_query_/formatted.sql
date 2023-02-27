@@ -6,10 +6,12 @@ DEFINE ACTION $action() AS
             *
         FROM Input
     );
+
     SELECT
         *
     FROM $sub
     ORDER BY
         key;
 END DEFINE;
+
 DO $action();

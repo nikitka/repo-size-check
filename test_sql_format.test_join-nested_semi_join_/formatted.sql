@@ -11,6 +11,7 @@ $w1 = (
         AS v
     ON u.key == v.key
 );
+
 $t1 = (
     SELECT
         x.value
@@ -20,6 +21,8 @@ $t1 = (
         AS y
     ON x.subkey == y.subkey
 );
+
 SELECT
     *
 FROM $t1;
+

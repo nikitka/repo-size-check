@@ -5,3 +5,4 @@ INSERT INTO pq.test_topic_output
 SELECT STREAM
     Data
 FROM pq.test_topic_input;
+

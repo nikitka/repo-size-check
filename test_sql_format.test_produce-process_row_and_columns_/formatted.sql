@@ -11,6 +11,8 @@ $data = (
         subkey AS Tag
     FROM plato.Input0
 );
+
 $separator = "|";
 PROCESS $data
 USING $udf(TableRow(), Tag, $separator);
+

@@ -7,6 +7,7 @@ $input = (
         value
     FROM plato.Input
 );
+
 SELECT
     key_hundred,
     key,
@@ -25,3 +26,4 @@ WINDOW
 ORDER BY
     key_hundred,
     key;
+

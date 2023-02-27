@@ -35,6 +35,7 @@ JOIN (
 )
     AS b
 ON a.x == b.x AND a.y == b.y;
+
 SELECT
     *
     WITHOUT
@@ -68,3 +69,4 @@ JOIN (
 )
     AS b
 ON a.x == b.x AND a.y == b.y;
+

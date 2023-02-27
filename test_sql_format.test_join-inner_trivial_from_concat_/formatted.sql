@@ -9,3 +9,4 @@ FROM plato.concat(Input1, Input2)
 INNER JOIN plato.Input3
     AS B
 USING (key);
+

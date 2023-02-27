@@ -10,6 +10,7 @@ DEFINE SUBQUERY $input() AS
     FROM concat(Input, Input)
     WHERE key IN ("heartbeat", "show", "click") AND subkey IN ("native", "gif");
 END DEFINE;
+
 -- Native:
 DEFINE SUBQUERY $native_show_and_clicks($input) AS
     SELECT
@@ -19,10 +20,13 @@ DEFINE SUBQUERY $native_show_and_clicks($input) AS
     FROM $input()
     WHERE subkey == "native" AND key IN ("click", "show");
 END DEFINE;
+
 SELECT
     count(DISTINCT strongest_id) AS native_users
 FROM $native_show_and_clicks($input);
+
 SELECT
     count(DISTINCT strongest_id) AS native_users_with_click
 FROM $native_show_and_clicks($input)
 WHERE key == "click";
+

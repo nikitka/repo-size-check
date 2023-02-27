@@ -5,3 +5,4 @@ SELECT
     JSON_VALUE ($json, "$.b"),
     JSON_VALUE ($json, "$.a"),
     JSON_VALUE (CAST(NULL AS JsonDocument), "$.a");
+

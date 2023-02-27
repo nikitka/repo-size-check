@@ -6,3 +6,4 @@ GROUP BY
     CAST(key AS uint32) / 100 + CAST(subkey AS uint32) % 10
 ORDER BY
     keysum DESC;
+

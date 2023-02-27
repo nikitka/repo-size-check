@@ -6,8 +6,10 @@ SELECT
 FROM Input
 ORDER BY
     key;
+
 SELECT
     key || "b" AS key
 FROM Input
 ORDER BY
     key;
+

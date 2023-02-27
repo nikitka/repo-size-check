@@ -2,3 +2,4 @@
 SELECT
     *
 FROM plato.concat("InputA", "InputD");
+

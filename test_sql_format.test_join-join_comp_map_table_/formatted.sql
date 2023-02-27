@@ -7,11 +7,13 @@ $i = (
         AsList(key) AS x
     FROM Input
 );
+
 $j = (
     SELECT
         Just(AsList(key)) AS y
     FROM Input
 );
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -20,6 +22,7 @@ FROM $i
 INNER JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -28,6 +31,7 @@ FROM $i
 RIGHT JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -36,6 +40,7 @@ FROM $i
 LEFT JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz
 FROM $i
@@ -43,6 +48,7 @@ FROM $i
 LEFT SEMI JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz
 FROM $i
@@ -50,6 +56,7 @@ FROM $i
 LEFT ONLY JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     b.y AS fff
 FROM $i
@@ -57,6 +64,7 @@ FROM $i
 RIGHT SEMI JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     b.y AS fff
 FROM $i
@@ -64,3 +72,4 @@ FROM $i
 RIGHT ONLY JOIN $j
     AS b
 ON a.x = b.y;
+

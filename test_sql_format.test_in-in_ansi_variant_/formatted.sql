@@ -7,3 +7,4 @@ SELECT
     ENUM ("foo", Enum<"foo", "bar">) IN (AsEnum("bar"), AsEnum("baz")),
     ENUM ("foo", Enum<"foo", "bar">) IN [AsEnum("foo"), AsEnum("bar")],
     ENUM ("foo", Enum<"foo", "bar">) IN {AsEnum("bar"), AsEnum("baz")};
+

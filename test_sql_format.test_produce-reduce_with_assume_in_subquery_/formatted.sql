@@ -10,14 +10,17 @@ $in = (
     ASSUME ORDER BY
         key
 );
+
 $res = (
     REDUCE $in
     ON
         key
     USING $udf(value)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     key;
+

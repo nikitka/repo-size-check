@@ -14,3 +14,4 @@ FROM plato.Input
 ORDER BY
     key,
     subkey;
+

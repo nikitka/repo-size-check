@@ -13,3 +13,4 @@ JOIN Input2
 USING (subkey)
 ORDER BY
     sk;
+

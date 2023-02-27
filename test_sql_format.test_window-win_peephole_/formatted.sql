@@ -3,6 +3,7 @@ $t =
     SELECT
         'john' AS name,
         42 AS age;
+
 SELECT
     SUM(age) OVER w0 AS sumAge,
     LEAD(age, 1) OVER w0 AS nextAge,
@@ -17,3 +18,4 @@ WINDOW
         ORDER BY
             name
     );
+

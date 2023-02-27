@@ -15,5 +15,7 @@ $structApply = ($strValue, $f) -> {
 };
 SELECT
     $structApply(AsStruct(1 AS a, 2 AS b, 3 AS c), $func);
+
 SELECT
     $structApply(AsStruct(4 AS a, 2 AS b, 3 AS c), $func);
+

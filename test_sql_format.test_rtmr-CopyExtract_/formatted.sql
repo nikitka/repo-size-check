@@ -5,3 +5,4 @@ SELECT STREAM
     WITHOUT
         subkey
 FROM Input;
+

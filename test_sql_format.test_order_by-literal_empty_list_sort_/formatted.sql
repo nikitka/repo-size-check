@@ -7,3 +7,4 @@ SELECT
 FROM as_table($list)
 ORDER BY
     key;
+

@@ -11,3 +11,4 @@ SELECT
     value AS new_value,
     "x"
 FROM plato.Input;
+

@@ -7,3 +7,4 @@ SELECT
     f AS f,
     CAST(coalesce(e, TRUE) AS varchar) AS e
 FROM plato.Input;
+

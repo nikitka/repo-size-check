@@ -5,6 +5,7 @@ $cnt = (
         count(*)
     FROM Input
 );
+
 $offset = ($cnt + 10) ?? 0;
 $data_limited = (
     SELECT
@@ -14,6 +15,7 @@ $data_limited = (
         key || value
     LIMIT 1 OFFSET $offset
 );
+
 $result_top = (
     SELECT
         subkey,
@@ -21,6 +23,8 @@ $result_top = (
         key
     FROM $data_limited
 );
+
 SELECT
     *
 FROM $result_top;
+

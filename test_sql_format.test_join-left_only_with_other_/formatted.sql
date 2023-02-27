@@ -8,6 +8,7 @@ $data1 = (
         value
     FROM Input1
 );
+
 $data2 = (
     SELECT
         CAST(key AS uint32) % 100u AS key,
@@ -15,6 +16,7 @@ $data2 = (
         value
     FROM Input1
 );
+
 --INSERT INTO Output
 SELECT
     i1.*
@@ -26,3 +28,4 @@ ON i1.key = i2.key
 JOIN $data1
     AS i3
 ON i1.key = i3.key;
+

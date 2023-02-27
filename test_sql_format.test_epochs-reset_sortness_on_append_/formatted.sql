@@ -11,6 +11,7 @@ VALUES
     ('21', '30'),
     ('31', '40'),
     ('41', '50');
+
 COMMIT;
 INSERT INTO Output
 SELECT
@@ -18,8 +19,10 @@ SELECT
 FROM Output
 ORDER BY
     a;
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE a > '11';
+

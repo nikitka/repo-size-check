@@ -11,3 +11,4 @@ SELECT
     avg(if(key = 10u, key)),
     avg(if(key = 100u, key))
 FROM Input;
+

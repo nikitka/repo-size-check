@@ -17,3 +17,4 @@ FROM (
         2000 + (CAST(value AS uint64) ?? 0) AS value
     FROM Input
 );
+

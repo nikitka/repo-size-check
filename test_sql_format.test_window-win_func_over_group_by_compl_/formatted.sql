@@ -7,6 +7,7 @@ $data = (
         value AS name
     FROM Input
 );
+
 --insert into Output
 SELECT
     prefix,
@@ -35,3 +36,4 @@ WINDOW
 ORDER BY
     region,
     avg_age DESC;
+

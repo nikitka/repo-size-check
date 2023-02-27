@@ -7,6 +7,7 @@ $data = (
         (key AS kk, subkey AS sk) AS struct_field
     FROM Input
 );
+
 --INSERT INTO Output
 SELECT
     mod,
@@ -21,3 +22,4 @@ ORDER BY
     key,
     mod_key,
     value;
+

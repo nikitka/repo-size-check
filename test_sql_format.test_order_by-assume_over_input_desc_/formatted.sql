@@ -6,3 +6,4 @@ SELECT
 FROM concat(`Input[#3]`, `Input[#0]`, `Input[#2]`)
 ASSUME ORDER BY
     key DESC;
+

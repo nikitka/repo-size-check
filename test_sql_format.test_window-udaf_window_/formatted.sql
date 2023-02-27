@@ -43,3 +43,4 @@ WINDOW
         ORDER BY
             value
     );
+

@@ -16,3 +16,4 @@ GROUP BY
 ORDER BY
     key,
     sk;
+

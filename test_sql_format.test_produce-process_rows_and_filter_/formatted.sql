@@ -14,7 +14,9 @@ $data = (
         value AS Value
     FROM plato.Input1
 );
+
 $prefix = ">>";
 PROCESS $data
 USING $udf($prefix, TableRows(), "=")
 WHERE Name != "foo";
+

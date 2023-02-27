@@ -10,6 +10,7 @@ $t = (
     CROSS JOIN Input2
         AS r
 );
+
 SELECT
     l.*,
     r.value AS rvalue
@@ -18,3 +19,4 @@ FROM $t
 LEFT JOIN Input3
     AS r
 ON l.key = coalesce("" || r.key, "");
+

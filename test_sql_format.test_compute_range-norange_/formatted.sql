@@ -10,3 +10,4 @@ SELECT
     $range_for($pred1) IS NULL,
     $range_for($pred2) IS NULL,
     $range_for($pred3) IS NULL,;
+

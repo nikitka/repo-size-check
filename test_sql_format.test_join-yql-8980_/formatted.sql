@@ -6,6 +6,7 @@ $foo = (
         value IN ("wat", "bar") AS value
     FROM Input
 );
+
 SELECT
     R0.key,
     R0.subkey,
@@ -25,3 +26,4 @@ LEFT JOIN $foo
 ON R1.subkey = R2.key
 ORDER BY
     R0.key;
+

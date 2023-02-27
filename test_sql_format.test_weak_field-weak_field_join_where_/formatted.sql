@@ -15,3 +15,4 @@ ON WeakField(i1.value1, "String") == WeakField(i2.value2, "String")
 WHERE WeakField(i2.key, "String") == "150" OR WeakField(i1.key, "String") == "075"
 ORDER BY
     sk;
+

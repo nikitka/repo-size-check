@@ -22,3 +22,4 @@ JOIN (
 USING (key)
 ORDER BY
     a.key;
+

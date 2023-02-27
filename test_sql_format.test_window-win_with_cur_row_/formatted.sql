@@ -6,6 +6,7 @@ $data = (
         value AS name
     FROM plato.Input
 );
+
 SELECT
     region,
     name,
@@ -21,3 +22,4 @@ WINDOW
 ORDER BY
     region,
     name;
+

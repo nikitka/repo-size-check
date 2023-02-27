@@ -17,3 +17,4 @@ FROM (
 )
 GROUP COMPACT BY
     key;
+

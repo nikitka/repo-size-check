@@ -11,3 +11,4 @@ SELECT
     count(DISTINCT subkey / 2u),
     avg(DISTINCT subkey / 2u)
 FROM Input;
+

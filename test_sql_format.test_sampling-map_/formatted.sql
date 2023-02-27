@@ -4,3 +4,4 @@ SELECT
 FROM plato.Input
     TABLESAMPLE BERNOULLI (30) REPEATABLE (1)
 WHERE subkey > "1";
+

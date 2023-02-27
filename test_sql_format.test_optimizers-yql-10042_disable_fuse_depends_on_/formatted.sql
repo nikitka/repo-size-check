@@ -4,3 +4,4 @@ SELECT
     RandomNumber(a),
     RandomNumber(b)
 FROM AS_TABLE($data);
+

@@ -6,3 +6,4 @@ SELECT
     key
 FROM Input
 WHERE key >= $k2 AND key <= $k1;
+

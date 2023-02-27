@@ -12,3 +12,4 @@ SELECT
     PgNumeric(13.45, 10, 1),
     _PgInterval('{90}', "day"),
     _PgNumeric('{13.45}', 10, 1);
+

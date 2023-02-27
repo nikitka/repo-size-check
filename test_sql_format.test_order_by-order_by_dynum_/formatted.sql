@@ -4,3 +4,4 @@ SELECT
 FROM plato.Input
 ORDER BY
     CAST(key AS DyNumber);
+

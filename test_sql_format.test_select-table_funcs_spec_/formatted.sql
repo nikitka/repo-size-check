@@ -9,3 +9,4 @@ SELECT
     TableName() AS table_name3
 FROM Input
 WHERE key = '800';
+

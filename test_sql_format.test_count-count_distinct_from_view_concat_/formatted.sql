@@ -2,3 +2,4 @@
 SELECT
     count(DISTINCT k) AS count
 FROM plato.concat(Input VIEW ksv, Input VIEW ksv);
+

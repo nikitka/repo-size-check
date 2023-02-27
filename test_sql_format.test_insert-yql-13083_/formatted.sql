@@ -9,6 +9,7 @@ FROM Input
 WHERE key < "100"
 ORDER BY
     key;
+
 INSERT INTO Output2
 SELECT
     key AS key,
@@ -18,15 +19,18 @@ FROM Input
 WHERE key < "200"
 ORDER BY
     key;
+
 INSERT INTO Output1
 SELECT
     *
 FROM Input
 ORDER BY
     key;
+
 INSERT INTO Output2
 SELECT
     *
 FROM Input
 ORDER BY
     key;
+

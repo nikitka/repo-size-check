@@ -6,3 +6,4 @@ SELECT
     random_column_name
 FROM pq.test_topic_input
     WITH (format = raw, SCHEMA = (random_column_name STRING NOT NULL));
+

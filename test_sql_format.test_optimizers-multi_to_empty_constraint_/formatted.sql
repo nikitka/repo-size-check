@@ -23,3 +23,4 @@ FROM (
 )
 GROUP BY
     key;
+

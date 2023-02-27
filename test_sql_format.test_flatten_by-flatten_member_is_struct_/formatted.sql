@@ -15,3 +15,4 @@ FROM (
 )
     FLATTEN BY
         kkstr AS kkstritem;
+

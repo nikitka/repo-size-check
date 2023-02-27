@@ -5,3 +5,4 @@ UNION ALL
 SELECT
     *
 FROM plato.Input;
+

@@ -6,3 +6,4 @@ SELECT
 FROM plato.Input
 GROUP BY
     HOP (DateTime::FromSeconds(CAST(ts AS Uint32)), "PT10S", "PT10S", "PT10S");
+

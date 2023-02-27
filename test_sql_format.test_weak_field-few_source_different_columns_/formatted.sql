@@ -7,3 +7,4 @@ SELECT
     WeakField(value, "String", "boom")
 FROM RANGE(``, ``, ``)--FROM Concat(Input1, Input2)
 ;
+

@@ -9,6 +9,7 @@ $a =
         u1,
         1 AS t1
     FROM Input1;
+
 $b =
     SELECT
         k2,
@@ -16,6 +17,7 @@ $b =
         u2,
         2 AS t2
     FROM Input2;
+
 $c =
     SELECT
         k3,
@@ -23,6 +25,7 @@ $c =
         u3,
         3 AS t3
     FROM Input3;
+
 FROM $a
     AS a
 LEFT SEMI JOIN $b
@@ -35,3 +38,4 @@ SELECT
     *
 ORDER BY
     u1;
+

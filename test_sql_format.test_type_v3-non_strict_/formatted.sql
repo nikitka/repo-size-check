@@ -10,3 +10,4 @@ FROM Input
     AS t
 ORDER BY
     record_idx;
+

@@ -10,3 +10,4 @@ ON a.key == b.key
 WHERE a.key IS NULL
 ORDER BY
     b.key;
+

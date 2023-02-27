@@ -8,9 +8,12 @@ SELECT
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, $d1),
     DictLookup($d, $d3);
+
 SELECT
     DictContains($d, $d1),
     DictContains($d, $d3);
+

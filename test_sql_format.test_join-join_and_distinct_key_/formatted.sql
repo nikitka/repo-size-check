@@ -8,3 +8,4 @@ FROM plato.Input
 JOIN plato.Input
     AS i2
 ON CAST(i1.key AS uint32) / 100 == CAST(i2.subkey AS uint32) / 100;
+

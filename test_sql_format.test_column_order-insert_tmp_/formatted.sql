@@ -8,6 +8,7 @@ FROM Input
 ORDER BY
     subkey,
     key;
+
 COMMIT;
 SELECT
     *
@@ -15,6 +16,7 @@ FROM @tmp
 ORDER BY
     subkey,
     key;
+
 INSERT INTO @tmp
     WITH truncate
 SELECT
@@ -25,12 +27,14 @@ FROM Input
 ORDER BY
     subkey,
     key;
+
 SELECT
     *
 FROM @tmp
 ORDER BY
     subkey,
     key;
+
 COMMIT;
 SELECT
     *
@@ -38,3 +42,4 @@ FROM @tmp
 ORDER BY
     subkey,
     key;
+

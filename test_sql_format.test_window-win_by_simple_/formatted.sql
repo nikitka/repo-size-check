@@ -14,3 +14,4 @@ WINDOW
         ORDER BY
             value
     );
+

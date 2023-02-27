@@ -12,6 +12,7 @@ $data_dict = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 --INSERT INTO Output
 SELECT
     --DISTINCT
@@ -25,3 +26,4 @@ ON CAST(Input.key AS uint32) / 100 == d.mod
 ORDER BY
     key,
     value;
+

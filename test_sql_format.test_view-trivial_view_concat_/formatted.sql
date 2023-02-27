@@ -5,3 +5,4 @@ SELECT
     s,
     v
 FROM concat(Input VIEW ksv, Input VIEW ksv);
+

@@ -3,3 +3,4 @@ INSERT INTO Output
 SELECT STREAM
     *
 FROM Input;
+

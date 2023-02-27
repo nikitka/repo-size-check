@@ -5,3 +5,4 @@ $lst = ListExtend(ListFromRange(0, 5000), ListFromRange(0, 5000), ListFromRange(
 $lst = ListMap($lst, ($x) -> (AsTuple(CAST($x AS String), $x)));
 SELECT
     YQL::RangeComputeFor(Struct<a: Int32?, b: String,>, ($row) -> ((($row.b, $row.a) IN $lst) ?? FALSE), AsTuple(AsAtom("a"), AsAtom("b"),));
+

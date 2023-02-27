@@ -7,6 +7,7 @@ $data = (
     WHERE length(key) > 2
     LIMIT 20
 );
+
 SELECT
     Category,
     COUNT(*)
@@ -15,3 +16,4 @@ GROUP BY
     Category
 ORDER BY
     Category ASC;
+

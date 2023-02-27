@@ -4,21 +4,25 @@ SELECT
     subkey,
     value
 FROM Input1;
+
 SELECT
     key,
     subkey,
     value
 FROM Input2;
+
 SELECT
     key,
     subkey,
     value
 FROM Input3;
+
 SELECT
     key,
     subkey,
     value
 FROM Input4;
+
 SELECT
     any_column,
     boolean_column,
@@ -31,8 +35,10 @@ SELECT
     optional_column,
     string_column
 FROM Input5;
+
 SELECT
     key,
     subkey,
     value
 FROM Input6;
+

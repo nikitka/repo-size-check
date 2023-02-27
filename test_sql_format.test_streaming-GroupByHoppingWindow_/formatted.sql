@@ -16,3 +16,4 @@ FROM (
         k,
         HoppingWindow("PT0.005S", "PT0.01S")
 );
+

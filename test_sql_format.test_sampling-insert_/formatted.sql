@@ -5,7 +5,9 @@ SELECT
     *
 FROM Input
     TABLESAMPLE BERNOULLI (30) REPEATABLE (1);
+
 COMMIT;
 SELECT
     *
 FROM @tmp;
+

@@ -6,6 +6,7 @@ $in = (
     FROM plato.Input
     WHERE key > "100"
 );
+
 SELECT
     *
 FROM $in
@@ -13,3 +14,4 @@ FROM $in
 INNER JOIN $in
     AS b
 ON a.key = b.key;
+

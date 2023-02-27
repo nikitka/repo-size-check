@@ -9,6 +9,7 @@ $a =
         u1,
         1 AS t1
     FROM Input1;
+
 $c =
     SELECT
         k3,
@@ -16,6 +17,7 @@ $c =
         u3,
         3 AS t3
     FROM Input3;
+
 FROM ANY Input2
     AS b
 JOIN ANY $a
@@ -28,3 +30,4 @@ SELECT
     *
 ORDER BY
     u1;
+

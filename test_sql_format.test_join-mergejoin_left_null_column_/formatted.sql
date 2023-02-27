@@ -14,3 +14,4 @@ ON a.k1 = b.x
 ORDER BY
     k1,
     y;
+

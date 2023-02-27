@@ -3,3 +3,4 @@ SELECT
     *
 FROM plato.Input
     TABLESAMPLE BERNOULLI (30) REPEATABLE (1);
+

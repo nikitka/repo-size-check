@@ -3,3 +3,4 @@ SELECT
     *
 FROM plato.Input
 LIMIT 100;
+

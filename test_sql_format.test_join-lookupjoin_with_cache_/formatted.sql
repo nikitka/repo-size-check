@@ -13,6 +13,7 @@ FROM Input
 WHERE subkey == "bbb"
 ORDER BY
     key;
+
 COMMIT;
 SELECT
     *
@@ -24,3 +25,4 @@ ON a.key = b.key
 ORDER BY
     a.key,
     a.subkey;
+

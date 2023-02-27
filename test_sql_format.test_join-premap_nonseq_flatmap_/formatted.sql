@@ -10,6 +10,7 @@ $hashes = (
         FLATTEN BY
             multiplier
 );
+
 SELECT
     *
 FROM Input1
@@ -20,3 +21,4 @@ ORDER BY
     a.key,
     a.subkey,
     h.hash;
+

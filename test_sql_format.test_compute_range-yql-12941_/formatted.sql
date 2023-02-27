@@ -8,3 +8,4 @@ $pred2 = ($row) -> (($row.y > 300 AND $row.x == 3u OR $row.x == 3u AND $row.y ==
 SELECT
     $range_for($pred1),
     $range_for($pred2),;
+

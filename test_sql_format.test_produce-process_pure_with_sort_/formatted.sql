@@ -16,6 +16,10 @@ $sorted = ($world, $input, $orderByColumns, $asc) -> {
 DEFINE SUBQUERY $source() AS
     PROCESS Input0;
 END DEFINE;
+
 PROCESS $sorted($source, AsList("key", "subkey"), TRUE);
+
 PROCESS $sorted($source, AsList("value"), TRUE);
+
 PROCESS $sorted($source, ListCreate(TypeOf("")), TRUE);
+

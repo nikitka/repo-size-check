@@ -16,3 +16,4 @@ FROM (
         AsList(1, k),
         HoppingWindow("PT0.005S", "PT0.01S")
 );
+

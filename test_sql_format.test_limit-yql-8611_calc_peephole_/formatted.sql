@@ -8,6 +8,7 @@ $row_count = (
     FROM AS_TABLE($tableList)
     WHERE Type = "table"
 );
+
 $bucket_size = unwrap(CAST($row_count / ListLength($buckets) AS Uint64));
 DEFINE ACTION $make_bucket($bucket_number) AS
     $offset = unwrap(CAST($bucket_number AS UInt8)) * $bucket_size;
@@ -22,5 +23,7 @@ DEFINE ACTION $make_bucket($bucket_number) AS
         LIMIT $bucket_size OFFSET $offset
     );
 END DEFINE;
+
 EVALUATE FOR $bucket_number IN $buckets
     DO $make_bucket(CAST($bucket_number AS String));
+

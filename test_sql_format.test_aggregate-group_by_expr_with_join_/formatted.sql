@@ -12,3 +12,4 @@ GROUP BY
     t1.key AS kk
 ORDER BY
     kk;
+

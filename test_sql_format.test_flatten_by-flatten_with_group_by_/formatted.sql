@@ -9,6 +9,7 @@ $data_deep = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 SELECT
     sum(cc) AS sc,
     sum(mod) AS sm
@@ -23,3 +24,4 @@ GROUP BY
 ORDER BY
     sc,
     sm;
+

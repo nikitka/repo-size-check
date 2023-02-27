@@ -17,3 +17,4 @@ SELECT
     $linear(CAST(key AS uint64), CAST(subkey AS uint64), $shiftSteps)
 FROM Input
     AS t;
+

@@ -9,6 +9,8 @@ $src =
         1,
         2,
         3;
+
 SELECT DISTINCT
     *
 FROM $src;
+

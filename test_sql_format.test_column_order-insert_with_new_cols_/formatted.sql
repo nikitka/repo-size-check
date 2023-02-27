@@ -11,3 +11,4 @@ SELECT
     ) AS cnt
 FROM Input
     AS a;
+

@@ -18,6 +18,7 @@ FROM (
     )
 )
 WHERE key < "100";
+
 SELECT
     key,
     value
@@ -34,3 +35,4 @@ FROM (
     FROM Input
 )
 WHERE key < "200";
+

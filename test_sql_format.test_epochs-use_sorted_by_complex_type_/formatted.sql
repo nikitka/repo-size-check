@@ -10,8 +10,10 @@ GROUP BY
 ORDER BY
     key,
     lst;
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE key > "150";
+

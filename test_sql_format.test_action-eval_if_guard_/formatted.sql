@@ -6,5 +6,7 @@ DEFINE ACTION $process() AS
         count(*)
     FROM each($list);
 END DEFINE;
+
 EVALUATE IF ListLength($list) > 0
     DO $process();
+

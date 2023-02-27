@@ -7,6 +7,7 @@ $input = (
         value
     FROM Input
 );
+
 --insert into Output
 SELECT
     lead(key, 3) OVER w AS keyL,
@@ -29,3 +30,4 @@ WINDOW
 ORDER BY
     keyO,
     value;
+

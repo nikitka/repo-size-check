@@ -7,3 +7,4 @@ FROM plato.Input1
 INNER JOIN plato.Input2
     AS B
 ON A.key = B.key;
+

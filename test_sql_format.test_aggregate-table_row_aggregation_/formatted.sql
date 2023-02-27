@@ -7,9 +7,11 @@ $data = (
     GROUP BY
         key
 );
+
 SELECT
     *
 FROM $data
     FLATTEN COLUMNS
 ORDER BY
     key;
+

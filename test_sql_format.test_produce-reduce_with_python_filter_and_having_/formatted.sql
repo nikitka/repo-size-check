@@ -13,3 +13,4 @@ ON
 USING $udf(value)
 WHERE CAST(value AS int) > 1
 HAVING total > 3;
+

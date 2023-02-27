@@ -9,12 +9,14 @@ $record = (
         TableRow()
     FROM Input
 );
+
 $recordType = TypeOf(Unwrap($record));
 $udf = Python::MyFunc(CallableType(0, StreamType(VariantType(TupleType($recordType, $recordType, $recordType, $recordType))), StreamType($recordType)), $udfScript);
 $i0, $i1, $i2, $i3 = (
     PROCESS Input
     USING $udf(TableRows())
 );
+
 SELECT
     *
 FROM (
@@ -36,6 +38,7 @@ FROM (
 )
 ORDER BY
     key;
+
 INSERT INTO Output
 SELECT
     *
@@ -56,3 +59,4 @@ FROM (
         *
     FROM $i3
 );
+

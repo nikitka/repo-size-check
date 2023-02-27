@@ -19,6 +19,7 @@ FROM (
 ORDER BY
     key,
     summ;
+
 SELECT
     *
 FROM (
@@ -34,6 +35,7 @@ FROM (
 ORDER BY
     key,
     summ;
+
 SELECT
     *
 FROM (
@@ -49,6 +51,7 @@ FROM (
 ORDER BY
     key,
     summ;
+
 SELECT
     *
 FROM (
@@ -64,3 +67,4 @@ FROM (
 ORDER BY
     key,
     summ;
+

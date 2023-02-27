@@ -2,3 +2,4 @@
 SELECT
     *
 FROM plato.range("", "InputA", "InputD");
+

@@ -4,3 +4,4 @@ IMPORT lib1 SYMBOLS $subq;
 SELECT
     *
 FROM $subq();
+

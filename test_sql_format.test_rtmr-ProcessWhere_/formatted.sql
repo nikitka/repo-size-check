@@ -7,7 +7,9 @@ $x1 = (
     USING $f1(value)
     WHERE CAST(subkey AS int) > 3
 );
+
 INSERT INTO Output
 SELECT STREAM
     *
 FROM $x1;
+

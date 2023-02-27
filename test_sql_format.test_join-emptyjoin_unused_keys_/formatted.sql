@@ -6,6 +6,7 @@ SELECT
     '' AS v1,
     '' AS u1
 LIMIT 0;
+
 COMMIT;
 SELECT
     v3
@@ -19,3 +20,4 @@ RIGHT JOIN Input3
 ON (a.k1 = c.k3)
 ORDER BY
     v3;
+

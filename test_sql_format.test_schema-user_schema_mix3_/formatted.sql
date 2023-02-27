@@ -4,6 +4,8 @@ SELECT
     *
 FROM Input
     WITH SCHEMA Struct<key: String, subkey: String, value: String>;
+
 SELECT
     *
 FROM Input;
+

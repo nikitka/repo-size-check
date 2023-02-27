@@ -7,10 +7,12 @@ $data = (
     WHERE key < "700"
     LIMIT 10
 );
+
 SELECT
     *
 FROM $data
 LIMIT 100;
+
 SELECT
     a.key AS key,
     b.subkey AS subkey,
@@ -22,3 +24,4 @@ INNER JOIN Input2
 ON a.key = b.key
 ORDER BY
     key;
+

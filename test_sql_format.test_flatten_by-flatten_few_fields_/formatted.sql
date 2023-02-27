@@ -10,6 +10,7 @@ $data_deep = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 -- order to have same results on yamr and yt
 SELECT
     *
@@ -24,3 +25,4 @@ ORDER BY
     ik,
     ls,
     lv;
+

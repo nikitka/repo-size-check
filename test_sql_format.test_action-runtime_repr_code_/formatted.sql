@@ -4,3 +4,4 @@ $fact = EvaluateCode(Yql::Fold(ListFromRange(1, 11), ReprCode(1), ($item, $state
 }));
 SELECT
     $fact;
+

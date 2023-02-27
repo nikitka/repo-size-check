@@ -5,5 +5,7 @@ $query = (
     FROM plato.Input
 --WHERE 1=0
 );
+
 SELECT
     $query ?? AsTuple(0, "") AS cnt;
+

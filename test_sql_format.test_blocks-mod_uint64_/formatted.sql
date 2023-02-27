@@ -5,3 +5,4 @@ SELECT
     999ul % key,
     subkey % 0ul
 FROM Input;
+

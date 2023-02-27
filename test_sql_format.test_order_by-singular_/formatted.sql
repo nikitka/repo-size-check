@@ -11,7 +11,9 @@ ORDER BY
     y,
     z,
     w;
+
 COMMIT;
 SELECT
     *
 FROM @foo;
+

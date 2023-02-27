@@ -4,3 +4,4 @@ SELECT
     subkey,
     value || "foo" AS new_value
 FROM plato.Input;
+

@@ -6,3 +6,4 @@ GROUP BY
     CAST(key AS uint32) % 10
 ORDER BY
     s;
+

@@ -3,3 +3,4 @@ PRAGMA UseBlocks;
 SELECT
     key + 1t
 FROM Input;
+

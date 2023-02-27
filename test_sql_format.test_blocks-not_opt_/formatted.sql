@@ -5,3 +5,4 @@ SELECT
     subkey,
     NOT key
 FROM Input;
+

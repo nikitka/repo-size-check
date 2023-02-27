@@ -6,3 +6,4 @@ SELECT
     }), ListMap($list, ($x) -> {
         RETURN $x + 2
     }));
+

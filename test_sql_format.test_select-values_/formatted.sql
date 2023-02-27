@@ -2,6 +2,7 @@
 VALUES
     (1, 2),
     (3, 4);
+
 SELECT
     *
 FROM (
@@ -9,6 +10,7 @@ FROM (
         (1, 2),
         (3, 4)
 );
+
 SELECT
     *
 FROM (
@@ -20,6 +22,7 @@ FROM (
         x,
         y
     );
+
 SELECT
     *
 FROM (
@@ -32,7 +35,9 @@ FROM (
         y,
         z
     );
+
 SELECT
     EXISTS (
     VALUES
         (1));
+

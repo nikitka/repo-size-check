@@ -12,3 +12,4 @@ JOIN `Input2`
 ON a.k == b.key
 ORDER BY
     a.v;
+

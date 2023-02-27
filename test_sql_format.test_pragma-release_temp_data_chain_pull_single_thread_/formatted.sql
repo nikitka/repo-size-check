@@ -18,6 +18,7 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     $c = (
         SELECT
             key,
@@ -31,6 +32,7 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     $d = (
         SELECT
             key,
@@ -44,6 +46,7 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     $e = (
         SELECT
             key,
@@ -57,6 +60,7 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     $f = (
         SELECT
             key,
@@ -70,6 +74,7 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     $g = (
         SELECT
             key,
@@ -83,9 +88,12 @@ DEFINE ACTION $action($param) AS
             value
         LIMIT 10
     );
+
     SELECT
         *
     FROM $g;
 END DEFINE;
+
 EVALUATE FOR $param IN ListFromRange(1, 2)
     DO $action($param);
+

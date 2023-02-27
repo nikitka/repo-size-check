@@ -7,12 +7,14 @@ $input =
     FROM Input
     GROUP BY
         key;
+
 SELECT
     key
 FROM $input
 WHERE subkey > "0"
 ORDER BY
     key;
+
 INSERT INTO @a
 SELECT
     t.*,
@@ -20,7 +22,9 @@ SELECT
 FROM $input
     AS t
 WHERE value > "a";
+
 INSERT INTO @b
 SELECT
     *
 FROM $input;
+

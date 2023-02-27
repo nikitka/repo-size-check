@@ -7,6 +7,7 @@ $input = (
         value
     FROM Input
 );
+
 --insert into Output
 SELECT
     kk,
@@ -20,3 +21,4 @@ ORDER BY
     kk,
     sk,
     total_count;
+

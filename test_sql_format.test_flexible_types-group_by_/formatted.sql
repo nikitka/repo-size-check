@@ -8,6 +8,7 @@ $groupsrc =
     SELECT
         1 AS int32,
         1 AS value;
+
 SELECT
     int32,
     max(value) AS maxval,
@@ -17,3 +18,4 @@ GROUP BY
     int32
 ASSUME ORDER BY
     int32;
+

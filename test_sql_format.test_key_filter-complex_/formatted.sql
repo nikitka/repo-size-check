@@ -5,3 +5,4 @@ WHERE key IN ("023", "075", "150") AND (subkey = "1" OR subkey = "3") AND value 
 ORDER BY
     key,
     subkey;
+

@@ -9,3 +9,4 @@ SELECT
     key,
     _other["value1"] AS value
 FROM Input;
+

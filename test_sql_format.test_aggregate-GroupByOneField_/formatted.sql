@@ -5,3 +5,4 @@ SELECT
 FROM plato.Input
 GROUP BY
     a;
+

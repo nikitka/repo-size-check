@@ -50,3 +50,4 @@ SELECT
     CAST($x21 AS string),
     $x22,
     CAST($x23 AS string);
+

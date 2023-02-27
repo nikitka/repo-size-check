@@ -15,21 +15,27 @@ SELECT
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, $i),
     DictLookup($d, $k);
+
 SELECT
     DictContains($d, $i),
     DictContains($d, $k);
+
 $d = Yql::ToDict($l, $first, $second, AsTuple(AsAtom("Compact"), AsAtom("Hashed"), AsAtom("One")));
 SELECT
     $d,
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, $i),
     DictLookup($d, $k);
+
 SELECT
     DictContains($d, $i),
     DictContains($d, $k);
+

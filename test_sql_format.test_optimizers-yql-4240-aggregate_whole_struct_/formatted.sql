@@ -7,6 +7,7 @@ $data = (
         CAST(subkey AS int32) AS dupsCount
     FROM Input0
 );
+
 SELECT
     urlBase,
     SUM(dupsCount) AS allDocs,
@@ -25,3 +26,4 @@ GROUP BY
     urlBase
 ORDER BY
     urlBase;
+

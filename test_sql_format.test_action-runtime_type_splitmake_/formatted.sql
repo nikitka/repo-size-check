@@ -48,3 +48,4 @@ SELECT
     $formatCallable(CallableTypeComponents(ParseTypeHandle("(Int32,[bar:Double?{Flags:AutoMap}])->String{Payload:foo}"))),
     FormatType(CallableTypeHandle(ParseTypeHandle("String"), AsList(CallableArgument(ParseTypeHandle("Int32")), CallableArgument(ParseTypeHandle("Double?"), "bar", AsList("AutoMap"))))),
     FormatType(CallableTypeHandle(ParseTypeHandle("String"), AsList(CallableArgument(ParseTypeHandle("Int32")), CallableArgument(ParseTypeHandle("Double?"), "bar", AsList("AutoMap"))), 1, "foo"));
+

@@ -7,6 +7,7 @@ $bar = (
     SELECT
         "2"
 );
+
 $barr = (
     SELECT
         "1" AS subkey
@@ -14,24 +15,31 @@ $barr = (
     SELECT
         "2" AS subkey
 );
+
 SELECT
     "1" IN $bar,
     "2" IN $bar;
+
 SELECT
     "3" IN $bar;
+
 SELECT
     "1" IN AsList($barr),
     "2" IN AsList($barr);
+
 SELECT
     "3" IN AsList($barr);
+
 SELECT
     *
 FROM Input
 WHERE subkey IN $bar;
+
 SELECT
     *
 FROM Input
 WHERE subkey IN AsList($barr);
+
 -- same content as $bar
 $baz = (
     SELECT
@@ -39,6 +47,7 @@ $baz = (
     FROM Input
     WHERE subkey == "1" OR subkey == "2"
 );
+
 $bazz = (
     SELECT
         subkey
@@ -48,21 +57,28 @@ $bazz = (
         subkey ASC
     LIMIT 1
 );
+
 SELECT
     "1" IN $baz,
     "2" IN $baz;
+
 SELECT
     "3" IN $baz;
+
 SELECT
     "1" IN AsList($bazz),
     "2" IN AsList($bazz);
+
 SELECT
     "3" IN AsList($bazz);
+
 SELECT
     *
 FROM Input
 WHERE subkey IN $baz;
+
 SELECT
     *
 FROM Input
 WHERE subkey IN AsList($bazz);
+

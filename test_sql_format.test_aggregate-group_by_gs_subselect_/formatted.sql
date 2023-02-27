@@ -12,6 +12,7 @@ $sub = (
             (key),
             (value))
 );
+
 --INSERT INTO Output
 SELECT
     t.sumLen,
@@ -23,3 +24,4 @@ FROM $sub
 ORDER BY
     t.key,
     t.value;
+

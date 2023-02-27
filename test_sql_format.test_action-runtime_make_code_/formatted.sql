@@ -9,3 +9,4 @@ SELECT
     }), LambdaCode(2, ($args) -> {
         RETURN FuncCode("+", Unwrap($args[0]), Unwrap($args[1]))
     }),));
+

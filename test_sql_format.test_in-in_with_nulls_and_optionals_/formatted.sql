@@ -33,3 +33,4 @@ SELECT
     1 / 1 IN NULL,
     1 / 0 IN NULL,
     NULL IN NULL;
+

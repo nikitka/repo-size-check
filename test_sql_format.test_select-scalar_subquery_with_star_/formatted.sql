@@ -4,6 +4,7 @@ $single = (
         key
     FROM plato.Input
 );
+
 $all = (
     SELECT
         *
@@ -12,5 +13,7 @@ $all = (
         key
     LIMIT 100
 );
+
 SELECT
     $all;
+

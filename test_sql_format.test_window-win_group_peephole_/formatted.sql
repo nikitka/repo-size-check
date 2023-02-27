@@ -3,6 +3,7 @@ $t =
     SELECT
         'john' AS name,
         42 AS age;
+
 SELECT
     SUM(age) OVER w0 AS sumAge,
     LEAD(age, 1) OVER w1 AS nextAge,
@@ -19,3 +20,4 @@ WINDOW
     ),
     w1 AS (
     );
+

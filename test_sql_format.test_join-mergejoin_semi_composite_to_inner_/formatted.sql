@@ -11,6 +11,7 @@ $semi =
     JOIN Input4
         AS d
     ON c.k3 = d.k4;
+
 FROM $semi
     AS semi
 RIGHT SEMI JOIN Input1
@@ -23,3 +24,4 @@ SELECT
     *
 ORDER BY
     u1;
+

@@ -12,6 +12,7 @@ GROUP COMPACT BY
 ORDER BY
     key,
     subkey;
+
 SELECT
     key,
     subkey
@@ -23,6 +24,7 @@ GROUP COMPACT BY
 ORDER BY
     subkey,
     key;
+
 SELECT
     key
 FROM Input1
@@ -31,6 +33,7 @@ GROUP COMPACT BY
     key
 ORDER BY
     key;
+
 SELECT
     subkey
 FROM Input1
@@ -39,6 +42,7 @@ GROUP COMPACT BY
     subkey
 ORDER BY
     subkey;
+
 SELECT
     key,
     subkey
@@ -50,3 +54,4 @@ GROUP COMPACT BY
 ORDER BY
     key,
     subkey;
+

@@ -7,3 +7,4 @@ GROUP BY
     key,
     HOP (CAST(subkey AS Timestamp), "PT10S", "PT10S", "PT5M")
 HAVING COUNT(value) > 2;
+

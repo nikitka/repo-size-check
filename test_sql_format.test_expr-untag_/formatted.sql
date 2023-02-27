@@ -4,3 +4,4 @@ $energy = ($m, $v) -> {
 };
 SELECT
     $energy(AsTagged(5.0, "G"), AsTagged(10.0, "V"));
+

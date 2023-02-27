@@ -26,3 +26,4 @@ SELECT
     b.value
 ORDER BY
     key;
+

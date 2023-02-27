@@ -8,6 +8,7 @@ $data_dict = (
     GROUP BY
         CAST(subkey AS uint32) % 10 AS mod
 );
+
 SELECT
     *
 FROM $data_dict
@@ -15,3 +16,4 @@ FROM $data_dict
         dk
 ORDER BY
     mod;
+

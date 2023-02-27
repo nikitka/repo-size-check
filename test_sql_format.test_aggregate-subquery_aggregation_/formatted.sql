@@ -5,6 +5,7 @@ $total_count = (
         Count(*)
     FROM Input
 );
+
 SELECT
     common,
     count(*) AS rec_count,
@@ -14,3 +15,4 @@ GROUP BY
     subkey AS common
 ORDER BY
     common;
+

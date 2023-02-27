@@ -15,3 +15,4 @@ FROM (
         2 AS b,
         3 AS c
 );
+

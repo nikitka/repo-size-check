@@ -4,23 +4,27 @@ INSERT INTO @foo
 SELECT
     count(*) AS count
 FROM Input;
+
 COMMIT;
 $n = (
     SELECT
         count
     FROM @foo
 );
+
 $predicate = $n > 1;
 IF $predicate
     DO BEGIN
         SELECT
             1;
     END DO;
+
 IF NOT $predicate
     DO BEGIN
         SELECT
             2;
     END DO;
+
 IF $predicate
     DO BEGIN
         SELECT
@@ -31,6 +35,7 @@ ELSE
         SELECT
             4;
     END DO;
+
 IF NOT $predicate
     DO BEGIN
         SELECT
@@ -41,3 +46,4 @@ ELSE
         SELECT
             6;
     END DO;
+

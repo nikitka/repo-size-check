@@ -5,6 +5,7 @@ SELECT
     TableName() AS name
 FROM Input
 WHERE value == 'q';
+
 SELECT
     key,
     count(*) AS subkeys
@@ -17,3 +18,4 @@ FROM (
 )
 GROUP BY
     key;
+

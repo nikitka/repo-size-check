@@ -3,6 +3,7 @@ DEFINE SUBQUERY $bar() AS
     SELECT
         [1, 2] AS ks;
 END DEFINE;
+
 SELECT
     key
 FROM $bar()
@@ -10,6 +11,7 @@ FROM $bar()
         ks AS key
 ORDER BY
     key;
+
 SELECT
     key
 FROM $bar()
@@ -18,3 +20,4 @@ FROM $bar()
     )
 ORDER BY
     key;
+

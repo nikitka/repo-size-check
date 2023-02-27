@@ -20,3 +20,4 @@ $deserialize = ($state) -> {
 SELECT
     UDAF(length(key), $create, $add, $merge, $get_result, $serialize, $deserialize, 0u)
 FROM plato.Input;
+

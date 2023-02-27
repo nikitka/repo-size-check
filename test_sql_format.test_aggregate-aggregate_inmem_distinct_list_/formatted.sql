@@ -11,6 +11,7 @@ FROM (
     SELECT
         AsList(1, 2) AS x
 );
+
 SELECT
     count(DISTINCT x) AS c
 FROM (
@@ -23,6 +24,7 @@ FROM (
     SELECT
         AsList(1, 2) AS x
 );
+
 SELECT
     x,
     count(DISTINCT y) AS c
@@ -55,3 +57,4 @@ GROUP BY
     x
 ORDER BY
     c;
+

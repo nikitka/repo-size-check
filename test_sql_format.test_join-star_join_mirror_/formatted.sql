@@ -9,6 +9,7 @@ $leftSemi =
     LEFT SEMI JOIN Input2
         AS b
     ON b.k2 = a.k1 AND a.v1 = b.v2;
+
 $rightOnly =
     SELECT
         *
@@ -17,6 +18,7 @@ $rightOnly =
     RIGHT ONLY JOIN $leftSemi
         AS ls
     ON ls.k1 = c.k3 AND ls.v1 = c.v3;
+
 $left =
     SELECT
         *
@@ -25,6 +27,7 @@ $left =
     LEFT JOIN Input4
         AS d
     ON ro.v1 = d.v4 AND d.k4 = ro.k1;
+
 $inner =
     SELECT
         *
@@ -33,9 +36,11 @@ $inner =
     JOIN $left
         AS l
     ON e.k5 = l.k1 AND l.v1 = e.v5;
+
 SELECT
     *
 FROM $inner
 ORDER BY
     u1,
     u5;
+

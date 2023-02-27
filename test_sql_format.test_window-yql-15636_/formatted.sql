@@ -6,6 +6,7 @@ SELECT
     'bar' AS order_id,
     '1' AS user_phone_pd_id,
     '2' AS utc_order_dttm;
+
 COMMIT;
 SELECT
     driver_license_pd_id,
@@ -25,3 +26,4 @@ SELECT
             utc_order_dttm
     ) AS next_driver_order,
 FROM @tmp;
+

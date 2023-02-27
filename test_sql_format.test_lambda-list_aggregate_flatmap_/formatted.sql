@@ -13,6 +13,8 @@ $table = (
         AsList("c", "d") AS names,
         AsList(0, 1, 1) AS indices
 );
+
 SELECT
     AGGREGATE_LIST($subst(names, indices))
 FROM $table;
+

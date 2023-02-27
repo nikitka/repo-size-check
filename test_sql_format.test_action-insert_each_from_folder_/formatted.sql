@@ -13,8 +13,10 @@ $list = (
         LIMIT 30
     )
 );
+
 INSERT INTO Output
     WITH truncate
 SELECT
     count(*)
 FROM each($list);
+

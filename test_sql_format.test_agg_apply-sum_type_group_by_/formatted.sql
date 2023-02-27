@@ -7,7 +7,10 @@ $p =
     FROM AS_TABLE([<|key: 1, value: 2|>])
     GROUP BY
         key;
+
 $p =
     PROCESS $p;
+
 SELECT
     FormatType(TypeOf($p));
+

@@ -19,3 +19,4 @@ SELECT
     -- Nothing<Bool?>
     NULL IN Nothing(ParseType("Tuple<>?")),-- Nothing<Bool?>
 ;
+

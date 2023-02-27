@@ -9,3 +9,4 @@ FROM (
     AS a (
         key
     );
+

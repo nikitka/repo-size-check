@@ -16,3 +16,4 @@ SELECT
     --false
     VARIANT (1 / 0, "b", $svt1) IS NOT DISTINCT FROM VARIANT (NULL, "b", $svt2),--true
 ;
+

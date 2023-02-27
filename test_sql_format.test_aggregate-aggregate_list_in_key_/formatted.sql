@@ -12,6 +12,7 @@ UNION ALL
 SELECT
     AsList(1, 2) AS x,
     3 AS y;
+
 COMMIT;
 SELECT
     x,
@@ -21,6 +22,7 @@ GROUP BY
     x
 ORDER BY
     c;
+
 INSERT INTO @bar
 SELECT
     AsList(1, 2) AS x,
@@ -51,6 +53,7 @@ SELECT
     AsList(1, 2) AS x,
     AsList(5) AS y,
     6 AS z;
+
 COMMIT;
 SELECT
     x,
@@ -62,6 +65,7 @@ GROUP BY
     y
 ORDER BY
     c;
+
 SELECT
     x,
     y,
@@ -72,6 +76,7 @@ GROUP BY
     y
 ORDER BY
     c;
+
 SELECT
     x,
     y,
@@ -83,6 +88,7 @@ GROUP BY
     y
 ORDER BY
     c;
+
 SELECT
     x
 FROM @bar
@@ -91,6 +97,7 @@ GROUP BY
     x
 ORDER BY
     t.x[1];
+
 SELECT
     x,
     y
@@ -102,12 +109,14 @@ GROUP BY
 ORDER BY
     t.x[1],
     t.y[0];
+
 SELECT DISTINCT
     x
 FROM @bar
     AS t
 ORDER BY
     t.x[1] DESC;
+
 SELECT DISTINCT
     x,
     y
@@ -116,3 +125,4 @@ FROM @bar
 ORDER BY
     t.x[1] DESC,
     t.y[0] DESC;
+

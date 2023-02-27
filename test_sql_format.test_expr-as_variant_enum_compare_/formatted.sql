@@ -3,3 +3,4 @@ SELECT
     ENUM ("foo", Enum<"foo", "bar">) == AsEnum("foo"),
     ENUM ("foo", Enum<"foo", "bar">) == AsEnum("bar"),
     ENUM ("foo", Enum<"foo", "bar">) == AsEnum("baz");
+

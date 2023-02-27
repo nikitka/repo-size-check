@@ -4,8 +4,10 @@ $list =
     SELECT
         ListSort(aggregate_list(key))
     FROM Input;
+
 SELECT
     *
 FROM Input
 ORDER BY
     ListIndexOf($list ?? [], key);
+

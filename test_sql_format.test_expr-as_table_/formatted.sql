@@ -4,13 +4,16 @@ SELECT
     Key,
     Value2
 FROM AS_TABLE($data);
+
 $input = (
     SELECT
         *
     FROM AS_TABLE($data)
     WHERE Key > 1
 );
+
 SELECT
     Key,
     Value1
 FROM $input;
+

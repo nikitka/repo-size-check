@@ -7,6 +7,7 @@ $data = (
     GROUP BY
         CAST(key AS uint32) % 10 AS mod
 );
+
 SELECT
     d.lv,
     d.mod
@@ -17,3 +18,4 @@ FROM $data
     )
 ORDER BY
     lv;
+

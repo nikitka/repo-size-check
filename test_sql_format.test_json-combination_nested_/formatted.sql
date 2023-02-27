@@ -10,7 +10,10 @@ $json = CAST(@@{
 }@@ AS Json);
 SELECT
     JSON_VALUE (JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c"), "strict $.d");
+
 SELECT
     JSON_EXISTS (JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c"), "strict $.d");
+
 SELECT
     JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c");
+

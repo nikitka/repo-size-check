@@ -17,3 +17,4 @@ GROUP BY
 ORDER BY
     k1,
     kk2;
+

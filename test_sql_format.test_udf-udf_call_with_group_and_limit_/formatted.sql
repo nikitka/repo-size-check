@@ -8,3 +8,4 @@ GROUP BY
 ORDER BY
     key
 /* sort for stable results only */ LIMIT 2;
+

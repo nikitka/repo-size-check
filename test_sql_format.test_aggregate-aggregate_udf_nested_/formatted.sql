@@ -6,3 +6,4 @@ GROUP BY
     value
 ORDER BY
     value;
+

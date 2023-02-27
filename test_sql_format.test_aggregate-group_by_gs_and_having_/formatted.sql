@@ -15,3 +15,4 @@ HAVING count(*) > 2
 ORDER BY
     key,
     value;
+

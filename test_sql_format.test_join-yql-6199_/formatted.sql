@@ -4,6 +4,7 @@ $i = (
     SELECT
         1 AS key
 );
+
 $j1 = (
     SELECT
         a2.key,
@@ -14,6 +15,7 @@ $j1 = (
         AS b
     ON a2.key = b.key
 );
+
 SELECT
     a.*
 FROM $j1
@@ -21,6 +23,7 @@ FROM $j1
 JOIN $i
     AS d
 ON a.k = d.key;
+
 $j2 = (
     SELECT
         a.key,
@@ -31,6 +34,7 @@ $j2 = (
         AS b
     ON a.key = b.key
 );
+
 SELECT
     a.*
 FROM $j2
@@ -38,3 +42,4 @@ FROM $j2
 JOIN $i
     AS d
 ON a.k = d.key;
+

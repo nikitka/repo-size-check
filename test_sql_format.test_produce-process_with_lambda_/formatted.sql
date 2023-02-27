@@ -5,3 +5,4 @@ $udf = YQL::@@(lambda '(x)
 ))@@;
 PROCESS plato.Input0
 USING $udf(TableRows());
+

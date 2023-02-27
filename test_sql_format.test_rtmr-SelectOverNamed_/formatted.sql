@@ -9,9 +9,11 @@ $x = (
         key,
         HOP (CAST(subkey AS Timestamp), "PT10S", "PT30S", "PT5M")
 );
+
 INSERT INTO Output
 SELECT STREAM
     key,
     value
 FROM $x
 WHERE value > 1;
+

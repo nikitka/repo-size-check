@@ -24,3 +24,4 @@ WINDOW
     )
 ORDER BY
     value;
+

@@ -6,6 +6,7 @@ $i = (
     FROM Input
     WHERE key < "900"
 );
+
 SELECT
     key,
     some(value) AS s
@@ -15,6 +16,7 @@ GROUP BY
 ORDER BY
     key,
     s;
+
 SELECT
     key,
     sum(CAST(subkey AS Int32)) AS s
@@ -24,6 +26,7 @@ GROUP BY
 ORDER BY
     key,
     s;
+
 SELECT
     key,
     some(subkey) AS s
@@ -33,3 +36,4 @@ GROUP BY
 ORDER BY
     key,
     s;
+

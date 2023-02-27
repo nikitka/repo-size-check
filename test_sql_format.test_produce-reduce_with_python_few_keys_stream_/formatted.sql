@@ -14,6 +14,7 @@ $data = (
         key AS val
     FROM Input1
 );
+
 --insert into Output
 $res = (
     REDUCE $data
@@ -22,8 +23,10 @@ $res = (
         kk
     USING $udf(ss)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     DictKeys(zuza);
+

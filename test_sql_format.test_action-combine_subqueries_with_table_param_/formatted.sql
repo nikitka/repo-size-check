@@ -13,7 +13,9 @@ DEFINE SUBQUERY $calc($table) AS
         *
     FROM $table;
 END DEFINE;
+
 $fullQuery = $combineQueries($calc, AsList("Input", "Input"));
 SELECT
     count(*)
 FROM $fullQuery();
+

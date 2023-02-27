@@ -8,3 +8,4 @@ GROUP BY
     CAST(key AS Uint32) AS ki
 ORDER BY
     ki;
+

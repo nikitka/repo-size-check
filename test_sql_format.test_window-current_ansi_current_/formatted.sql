@@ -16,3 +16,4 @@ WINDOW
 ORDER BY
     value,
     key;
+

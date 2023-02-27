@@ -10,6 +10,7 @@ SELECT
 FROM Input
 ORDER BY
     value;
+
 COMMIT;
 SELECT
     *
@@ -50,19 +51,24 @@ FROM (
 )
 ORDER BY
     value;
+
 -- Don't union all to calc nodes separatelly
 SELECT
     *
 FROM @tzdate
 WHERE value = CAST("1999-01-01,Europe/Moscow" AS TzDate);
+
 -- Safe key filter calc
 SELECT
     *
 FROM @tzdate
 WHERE value = CAST($asIs("2105-12-30,America/Los_Angeles") AS TzDate);
+
 -- Unsafe key filter calc
 SELECT
     *
 FROM @tzdate
 WHERE value = CAST($asIs("bad") AS TzDate);
+
 -- Unsafe key filter calc
+

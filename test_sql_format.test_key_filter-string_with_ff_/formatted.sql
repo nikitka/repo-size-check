@@ -6,6 +6,7 @@ SELECT
 FROM Input
 ORDER BY
     key;
+
 COMMIT;
 SELECT
     count(*)
@@ -15,3 +16,4 @@ FROM (
     FROM @src
     WHERE StartsWith(key, "\xff\xff") AND EndsWith(key, "5")
 );
+

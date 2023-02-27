@@ -12,3 +12,4 @@ $callableT = $callable(String::StartsWith('testfets', 'test'));
 SELECT
     count(*) AS count
 FROM plato.filter(``, $callableT);
+

@@ -8,6 +8,7 @@ $l = (
         AS t
     WHERE key == '023' AND subkey == "3"
 );
+
 $r = (
     SELECT
         t.*,
@@ -16,6 +17,7 @@ $r = (
         AS t
     WHERE key == '150' AND subkey == "3"
 );
+
 SELECT
     lhs.key AS key,
     rhs.value AS value,
@@ -26,3 +28,4 @@ FROM $l
 JOIN $r
     AS rhs
 ON lhs.subkey == rhs.subkey;
+

@@ -6,12 +6,14 @@ $data = (
     FROM Input1
     LIMIT 10
 );
+
 SELECT
     key,
     subkey,
     _other["value"]
 FROM $data
 LIMIT 100;
+
 SELECT
     a.key AS key,
     b.subkey AS subkey,
@@ -23,3 +25,4 @@ INNER JOIN Input2
 ON a.key = b.key
 ORDER BY
     key;
+

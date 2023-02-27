@@ -11,5 +11,7 @@ $users = (
         `value` AS name
     FROM plato.Input0
 );
+
 PROCESS $users
 USING $udf();
+

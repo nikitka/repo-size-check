@@ -9,3 +9,4 @@ FROM (
     FROM Input
 )
     FLATTEN COLUMNS;
+

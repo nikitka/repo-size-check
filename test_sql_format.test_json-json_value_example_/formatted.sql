@@ -5,22 +5,26 @@ SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who
 FROM T;
+
 SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who,
     JSON_VALUE (T.J, 'lax $.where' NULL ON EMPTY) AS Nali
 FROM T;
+
 SELECT
     T.K,
     JSON_VALUE (T.J, 'strict $.who') AS Who,
     JSON_VALUE (T.J, 'strict $.where' DEFAULT 'no where there' ON ERROR) AS Nali
 FROM T;
+
 SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who,
     JSON_VALUE (T.J, 'lax $.where' NULL ON EMPTY) AS Nali,
     JSON_VALUE (T.J, 'lax $.friends.name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR) AS Friend
 FROM T;
+
 SELECT
     T.K,
     JSON_VALUE (T.J, 'strict $.who') AS Who,
@@ -37,9 +41,11 @@ SELECT
     -- PostgreSQL shows us that hard error has happened, as expected.
     JSON_VALUE (T.J, 'strict $.friends[*].name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR) AS Friend
 FROM T;
+
 SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who,
     -- NOTE: In the original example INTEGER type was used. YQL does not have INTEGER type, Int64 was used instead
     JSON_VALUE (T.J, 'lax $.friends[0].rank' RETURNING Int64 NULL ON EMPTY) AS Rank
 FROM T;
+

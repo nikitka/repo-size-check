@@ -9,6 +9,7 @@ $map = (
         2 AS another
     FROM Input1
 );
+
 FROM $map
     AS a
 JOIN Input2
@@ -21,6 +22,7 @@ SELECT
 ORDER BY
     a.key,
     a.value;
+
 FROM $map
     AS a
 JOIN Input3
@@ -34,3 +36,4 @@ SELECT
 ORDER BY
     a.key,
     a.value;
+

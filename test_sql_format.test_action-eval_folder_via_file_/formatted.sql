@@ -12,6 +12,8 @@ $list = (
         LIMIT 30
     )
 );
+
 SELECT
     count(*)
 FROM each($list);
+

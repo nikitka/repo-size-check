@@ -8,9 +8,11 @@ FROM AS_TABLE($list)
     AS l
 CROSS JOIN AS_TABLE($lazy)
     AS r;
+
 SELECT
     *
 FROM AS_TABLE($lazy)
     AS l
 CROSS JOIN AS_TABLE($list)
     AS r;
+

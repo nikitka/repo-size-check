@@ -8,10 +8,13 @@ DEFINE SUBQUERY $dup($x) AS
         *
     FROM $x(2);
 END DEFINE;
+
 DEFINE SUBQUERY $sub($n) AS
     SELECT
         $n * 10;
 END DEFINE;
+
 SELECT
     *
 FROM $dup($sub);
+

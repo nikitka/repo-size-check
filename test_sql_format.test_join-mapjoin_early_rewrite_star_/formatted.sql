@@ -8,6 +8,7 @@ $subq = (
         CAST((CAST(subkey AS Int32) + 1) AS String) AS subkey_plus_one
     FROM Input
 );
+
 SELECT
     *
 FROM Input
@@ -18,3 +19,4 @@ ON a.subkey = b.subkey_plus_one
 ORDER BY
     subkey,
     key;
+

@@ -11,3 +11,4 @@ JOIN plato.C
 ON B.subkey == C.subkey
 ORDER BY
     A.key;
+

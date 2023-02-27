@@ -19,8 +19,10 @@ SELECT
     -- false?
     (1, 2) IN AsSet((1, NULL), (2, 1)),-- Nothing<Bool?>
 ;
+
 SELECT
     Just(1) IN AsSet(1, 2, 3),
     -- true?
     1 IN AsSet(Just(2), Just(3)),-- false?
 ;
+

@@ -5,12 +5,15 @@ INSERT INTO @tmp
 SELECT
     Just(Just(key)) AS key
 FROM Input;
+
 COMMIT;
 $key =
     SELECT
         key
     FROM @tmp;
+
 SELECT
     *
 FROM Input
 WHERE key = $key;
+

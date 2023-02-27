@@ -9,6 +9,7 @@ $aggregated = (
         Group,
         Name
 );
+
 SELECT
     t.Comment,
     a.TotalAmount
@@ -20,8 +21,10 @@ ON t.Group == a.Group AND t.Name == a.Name
 ORDER BY
     t.Comment,
     a.TotalAmount;
+
 SELECT
     TotalAmount
 FROM $aggregated
 ORDER BY
     TotalAmount;
+

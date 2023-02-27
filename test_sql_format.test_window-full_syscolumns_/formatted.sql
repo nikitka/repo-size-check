@@ -10,6 +10,7 @@ SELECT
 FROM Input
 ORDER BY
     value;
+
 SELECT
     value,
     max(value) OVER (
@@ -21,3 +22,4 @@ SELECT
 FROM Input
 ORDER BY
     value;
+

@@ -9,6 +9,7 @@ $stream = (
         CAST(subkey AS Timestamp) AS input_ts
     FROM Input
 );
+
 SELECT STREAM
     HOP_START() AS ts,
     COUNT(*) AS count_by_project_name,
@@ -35,6 +36,7 @@ GROUP BY
     HOP (ts, "PT10S", "PT30S", "PT5M"),
     project,
     first;
+
 SELECT STREAM
     HOP_START() AS ts,
     COUNT(*) AS count_by_project_name,
@@ -61,3 +63,4 @@ GROUP BY
     HOP (ts, "PT10S", "PT30S", "PT5M"),
     project,
     second;
+

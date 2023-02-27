@@ -7,6 +7,7 @@ $data = (
         Url::GetDomain(Url::Normalize(value), 1) AS tld
     FROM CONCAT(`Input1`, `Input2`)
 );
+
 $ru_hosts = (
     SELECT
         host
@@ -14,6 +15,7 @@ $ru_hosts = (
     WHERE normalized_url IS NOT NULL AND (tld = "ru" OR tld = "su" OR tld = "рф" OR tld = "xn--p1ai"-- punycode рф
     )
 );
+
 SELECT
     host AS host,
     COUNT(*) AS hits_count
@@ -23,3 +25,4 @@ GROUP BY
 ORDER BY
     hits_count DESC
 LIMIT 25;
+

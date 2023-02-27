@@ -4,6 +4,7 @@ $data =
         "a,b,c,d" AS a,
         "e,f,g,h" AS b,
         "x" AS c;
+
 SELECT
     bb,
     count(*) AS count
@@ -17,3 +18,4 @@ GROUP BY
 ORDER BY
     bb,
     count;
+

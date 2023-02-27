@@ -7,8 +7,10 @@ SELECT DISTINCT
 FROM Input
 ORDER BY
     value;
+
 SELECT DISTINCT
     value,
 FROM Input
 ORDER BY
     value;
+

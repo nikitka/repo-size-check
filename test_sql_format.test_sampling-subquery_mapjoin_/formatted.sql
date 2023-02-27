@@ -14,3 +14,4 @@ FROM (
     ON a.key = b.key
 )
     TABLESAMPLE BERNOULLI (30);
+

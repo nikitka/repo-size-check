@@ -8,3 +8,4 @@ GROUP BY
 HAVING value > "foo"
 ORDER BY
     key;
+

@@ -12,3 +12,4 @@ SELECT
 FROM Input
 ORDER BY
     weightMin;
+

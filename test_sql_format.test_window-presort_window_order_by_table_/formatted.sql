@@ -10,6 +10,7 @@ FROM (
 )
     FLATTEN BY
         x;
+
 COMMIT;
 SELECT
     x,
@@ -20,3 +21,4 @@ WINDOW
         ORDER BY
             x ASC
     );
+

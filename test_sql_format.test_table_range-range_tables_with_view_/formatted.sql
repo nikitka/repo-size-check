@@ -2,3 +2,4 @@
 SELECT
     count(*) AS count
 FROM plato.range(``, ``, ``, ``, ksv);
+

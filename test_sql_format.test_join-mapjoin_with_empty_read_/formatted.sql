@@ -7,6 +7,7 @@ $cnt = (
         count(*)
     FROM Input
 );
+
 $offset = ($cnt + 10) ?? 0;
 $in1 = (
     SELECT
@@ -17,6 +18,7 @@ $in1 = (
         key
     LIMIT 10 OFFSET $offset
 );
+
 SELECT
     *
 FROM Input
@@ -24,6 +26,7 @@ FROM Input
 LEFT JOIN $in1
     AS b
 ON a.key = b.key;
+
 $limit = ($cnt / 100) ?? 0;
 $in2 = (
     SELECT
@@ -32,6 +35,7 @@ $in2 = (
     WHERE key != ""
     LIMIT $limit
 );
+
 SELECT
     *
 FROM Input
@@ -39,3 +43,4 @@ FROM Input
 LEFT ONLY JOIN $in2
     AS b
 ON a.key = b.key;
+

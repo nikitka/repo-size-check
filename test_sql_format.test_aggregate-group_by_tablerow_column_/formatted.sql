@@ -5,3 +5,4 @@ SELECT
 FROM Input
 GROUP BY
     TableRow().key;
+

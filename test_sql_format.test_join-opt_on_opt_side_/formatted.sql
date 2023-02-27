@@ -15,3 +15,4 @@ LEFT JOIN (
 ON A.key == B.key
 ORDER BY
     A.key;
+

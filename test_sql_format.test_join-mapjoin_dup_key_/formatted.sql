@@ -9,3 +9,4 @@ FROM Input1
 JOIN Input2
     AS b
 ON a.key = b.key AND a.subkey = b.key;
+

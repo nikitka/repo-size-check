@@ -24,20 +24,25 @@ $i, $j, $k = (
     PROCESS Input
     USING $udf(TableRows())
 );
+
 INSERT INTO Output1
 SELECT
     *
 FROM $i;
+
 INSERT INTO Output2
 SELECT
     *
 FROM $j
 LIMIT 2;
+
 INSERT INTO Output3
 SELECT
     *
 FROM $k;
+
 INSERT INTO Output3
 SELECT
     *
 FROM $j;
+

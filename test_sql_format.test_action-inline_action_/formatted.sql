@@ -3,6 +3,7 @@ DO BEGIN
     SELECT
         1;
 END DO;
+
 EVALUATE IF TRUE
     DO BEGIN
         SELECT
@@ -13,8 +14,10 @@ ELSE
         SELECT
             2;
     END DO;
+
 EVALUATE FOR $i IN AsList(1, 2, 3)
     DO BEGIN
         SELECT
             $i;
     END DO;
+

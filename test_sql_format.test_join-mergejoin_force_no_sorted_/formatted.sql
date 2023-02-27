@@ -10,3 +10,4 @@ JOIN Input2
 USING (key)
 ORDER BY
     key;
+

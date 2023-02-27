@@ -19,3 +19,4 @@ SELECT
     CAST($sub AS String) AS sub,
     $longint == YQL::Abs($negative_longint) AS eq,
     $div <= $longint AS cmp;
+

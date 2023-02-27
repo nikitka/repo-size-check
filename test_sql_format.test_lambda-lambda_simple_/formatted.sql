@@ -15,3 +15,4 @@ SELECT
     $linear(CAST(key AS uint64), CAST(subkey AS uint64))
 FROM Input
     AS t;
+

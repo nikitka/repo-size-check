@@ -6,12 +6,14 @@ SELECT
 FROM Input
 ORDER BY
     key || "1";
+
 INSERT INTO @f2
 SELECT
     *
 FROM Input
 ORDER BY
     key || "2";
+
 COMMIT;
 INSERT INTO Output
 SELECT
@@ -25,3 +27,4 @@ FROM (
         *
     FROM @f2
 );
+

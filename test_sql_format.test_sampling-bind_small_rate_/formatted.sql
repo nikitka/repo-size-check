@@ -3,7 +3,9 @@ $a =
     SELECT
         *
     FROM plato.Input;
+
 SELECT
     *
 FROM $a
     TABLESAMPLE BERNOULLI (0.1);
+

@@ -10,3 +10,4 @@ GROUP BY
     WeakField(subkey, "Int64") AS subkey
 ORDER BY
     subkey;
+

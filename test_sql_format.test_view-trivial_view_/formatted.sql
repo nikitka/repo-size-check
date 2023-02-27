@@ -6,3 +6,4 @@ SELECT
     v
 FROM Input
     VIEW ksv;
+

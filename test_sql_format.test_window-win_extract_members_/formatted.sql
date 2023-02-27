@@ -15,6 +15,7 @@ $foo = (
                 subkey
         )
 );
+
 $bar = (
     SELECT
         key,
@@ -30,6 +31,7 @@ $bar = (
                 subkey
         )
 );
+
 SELECT
     key,
     subkey,
@@ -38,6 +40,7 @@ FROM $foo
 ORDER BY
     key,
     subkey;
+
 SELECT
     key,
     ska
@@ -45,3 +48,4 @@ FROM $bar
 ORDER BY
     key,
     ska;
+

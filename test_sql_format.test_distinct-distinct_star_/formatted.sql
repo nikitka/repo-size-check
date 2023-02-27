@@ -6,6 +6,7 @@ FROM Input2
 ORDER BY
     key,
     subkey;
+
 SELECT DISTINCT
     *
     WITHOUT
@@ -14,6 +15,7 @@ FROM Input2
 ORDER BY
     key,
     value;
+
 SELECT DISTINCT
     a.*,
     TableName() AS tn,
@@ -24,3 +26,4 @@ FROM Input2
 ORDER BY
     key,
     value;
+

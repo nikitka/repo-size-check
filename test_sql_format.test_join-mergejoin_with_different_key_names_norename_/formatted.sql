@@ -13,6 +13,7 @@ SELECT
 ORDER BY
     a.subkey,
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 JOIN SortedByKey
@@ -24,6 +25,7 @@ SELECT
 ORDER BY
     a.subkey,
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 LEFT JOIN SortedByKey
@@ -33,6 +35,7 @@ SELECT
     *
 ORDER BY
     a.subkey;
+
 FROM SortedBySubkeyValue
     AS a
 RIGHT JOIN SortedByKey
@@ -42,3 +45,4 @@ SELECT
     *
 ORDER BY
     b.key;
+

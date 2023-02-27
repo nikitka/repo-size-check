@@ -25,3 +25,4 @@ SELECT
     ListFromRange(Interval("PT1M"), Interval("PT2M"), Just(Interval("PT10S"))),
     ListFromRange(Interval("PT1S"), Interval("PT1M"), NULL),
     ListFromRange(Interval("PT1S"), Interval("PT4S"), Nothing(Interval?));
+

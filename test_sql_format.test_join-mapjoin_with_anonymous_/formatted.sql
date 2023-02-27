@@ -7,6 +7,7 @@ SELECT
     *
 FROM Input
 WHERE key > "100";
+
 COMMIT;
 SELECT
     *
@@ -15,3 +16,4 @@ FROM Input
 LEFT JOIN @tmp
     AS b
 ON a.key = b.key;
+

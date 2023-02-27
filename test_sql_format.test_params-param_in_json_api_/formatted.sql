@@ -11,3 +11,4 @@ SELECT
     JSON_VALUE ($input_json, "strict $var" PASSING $bool_param AS var RETURNING Bool),
     JSON_VALUE ($input_json, "strict $var" PASSING $string_param AS var RETURNING String),
     JSON_QUERY ($input_json, "strict $var" PASSING $json_param AS var);
+

@@ -8,8 +8,10 @@ $res =
     ON
         key
     USING ALL $udf_stream(TableRows());
+
 SELECT
     *
 FROM $res
 ORDER BY
     value;
+

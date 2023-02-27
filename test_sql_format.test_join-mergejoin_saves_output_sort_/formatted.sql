@@ -17,6 +17,7 @@ ORDER BY
     a.subkey,
     a.value,
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 RIGHT JOIN SortedByKey
@@ -28,6 +29,7 @@ SELECT
     a.value
 ORDER BY
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 LEFT JOIN SortedByKey
@@ -40,6 +42,7 @@ SELECT
 ORDER BY
     a.subkey,
     a.value;
+
 FROM SortedBySubkeyValue
     AS a
 FULL JOIN SortedByKey
@@ -53,6 +56,7 @@ ORDER BY
     b.key,
     a.subkey,
     a.value;
+
 FROM SortedBySubkeyValue
     AS a
 RIGHT ONLY JOIN SortedByKey
@@ -62,6 +66,7 @@ SELECT
     b.key
 ORDER BY
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 LEFT ONLY JOIN SortedByKey
@@ -73,6 +78,7 @@ SELECT
 ORDER BY
     a.subkey,
     a.value;
+
 FROM SortedBySubkeyValue
     AS a
 EXCLUSION JOIN SortedByKey
@@ -86,6 +92,7 @@ ORDER BY
     b.key,
     a.subkey,
     a.value;
+
 FROM SortedBySubkeyValue
     AS a
 RIGHT SEMI JOIN SortedByKey
@@ -95,6 +102,7 @@ SELECT
     b.key
 ORDER BY
     b.key;
+
 FROM SortedBySubkeyValue
     AS a
 LEFT SEMI JOIN SortedByKey
@@ -106,3 +114,4 @@ SELECT
 ORDER BY
     a.subkey,
     a.value;
+

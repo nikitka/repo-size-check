@@ -8,3 +8,4 @@ FROM (
         CombineMembers(ChooseMembers($s, $list), <|remain: RemoveMembers($s, $list)|>)
 )
     FLATTEN COLUMNS;
+

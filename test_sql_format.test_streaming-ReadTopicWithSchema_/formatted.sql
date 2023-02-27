@@ -5,3 +5,4 @@ SELECT
     *
 FROM pq.object("test_topic_input", json_each_row)
     WITH SCHEMA (String AS value, String AS color);
+

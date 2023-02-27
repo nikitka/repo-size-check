@@ -11,3 +11,4 @@ FROM (
         x
 ASSUME ORDER BY
     x DESC;
+

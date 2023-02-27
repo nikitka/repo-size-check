@@ -11,3 +11,4 @@ FROM Input2
 INNER JOIN ANY Input1
     AS b
 ON a.k2 = b.k1;
+

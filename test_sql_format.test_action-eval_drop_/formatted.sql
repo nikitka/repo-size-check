@@ -5,4 +5,5 @@ $path = (
         min(Path)
     FROM folder("")
 );
+
 DROP TABLE $path;

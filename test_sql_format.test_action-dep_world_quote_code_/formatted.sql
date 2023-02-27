@@ -14,16 +14,20 @@ DEFINE ACTION $aaa($z) AS
             count(*)
         FROM $z
     );
+
     DEFINE SUBQUERY $sub($n) AS
         SELECT
             $n + $k
         FROM $z;
     END DEFINE;
+
     $fullQuery = $combineQueries($sub, ListFromRange(0, 10));
     SELECT
         *
     FROM $fullQuery();
 END DEFINE;
+
 EVALUATE FOR $z IN AsList("Input")
     DO $aaa($z);
+
 DO $aaa("Input");

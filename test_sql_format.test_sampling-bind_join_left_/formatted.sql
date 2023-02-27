@@ -6,6 +6,7 @@ $a =
         *
     FROM Input
     WHERE key > "199" AND value != "bbb";
+
 SELECT
     *
 FROM (
@@ -19,3 +20,4 @@ FROM (
     USING (subkey)
 )
     TABLESAMPLE BERNOULLI (25);
+

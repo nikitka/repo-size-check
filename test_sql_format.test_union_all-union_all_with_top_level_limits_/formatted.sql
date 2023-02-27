@@ -10,8 +10,10 @@ $foo =
         *
     FROM Input
     LIMIT 2;
+
 SELECT
     *
 FROM $foo
 ORDER BY
     subkey;
+

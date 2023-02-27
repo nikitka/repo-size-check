@@ -7,9 +7,11 @@ SELECT
 FROM Input
 ORDER BY
     key DESC;
+
 INSERT INTO Output
 SELECT
     *
 FROM Input
 ORDER BY
     key DESC;
+

@@ -13,3 +13,4 @@ def f(input,x):
 $udf_stream = Python3::f(Callable<(Stream<Struct<key: String, subkey: String, value: String>>, Int32) -> Stream<Struct<key: String, subkey: String, value: String, pass: Int32>>>, $udfScript);
 PROCESS Input0
 USING $udf_stream(TableRows(), 2);
+

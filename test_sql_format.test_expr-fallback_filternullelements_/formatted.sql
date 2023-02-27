@@ -7,3 +7,4 @@ $structs = ListMap($lists, $map);
 SELECT
     YQL::FilterNullElements($structs),
     YQL::SkipNullElements($structs);
+

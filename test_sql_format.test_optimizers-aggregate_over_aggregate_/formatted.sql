@@ -9,3 +9,4 @@ GROUP BY
     key
 ORDER BY
     subkey;
+

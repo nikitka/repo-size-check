@@ -11,8 +11,10 @@ FROM (
         x
 ORDER BY
     x;
+
 COMMIT;
 SELECT
     *
 FROM Output
 WHERE x = 50;
+

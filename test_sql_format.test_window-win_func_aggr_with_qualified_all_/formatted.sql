@@ -7,6 +7,7 @@ $q = (
         value
     FROM Input
 );
+
 SELECT
     t.*,
     sum(subkey) OVER w AS subkey_sum,
@@ -23,3 +24,4 @@ WINDOW
 ORDER BY
     key,
     subkey;
+

@@ -13,3 +13,4 @@ SELECT
 FROM plato.Input
 GROUP BY
     CAST(key AS uint32) % 2 AS val;
+

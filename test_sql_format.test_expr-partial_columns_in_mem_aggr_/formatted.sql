@@ -10,3 +10,4 @@ FROM (
 )
 GROUP BY
     Domain;
+

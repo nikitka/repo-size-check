@@ -9,3 +9,4 @@ SELECT
 FROM Input
 ASSUME ORDER BY
     key DESC;
+

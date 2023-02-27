@@ -6,6 +6,8 @@ $in = (
     FROM Input
     WHERE a != 0
 );
+
 SELECT
     *
 FROM $in;
+

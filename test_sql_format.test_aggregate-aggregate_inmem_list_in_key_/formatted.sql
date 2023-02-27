@@ -16,6 +16,7 @@ GROUP BY
     x
 ORDER BY
     c;
+
 SELECT
     x,
     y,
@@ -50,3 +51,4 @@ GROUP BY
     y
 ORDER BY
     c;
+

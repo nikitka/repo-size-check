@@ -14,13 +14,16 @@ $i, $j = (
         key
     USING $udf(TableRow())
 );
+
 SELECT
     *
 FROM $i
 ORDER BY
     sumByVal;
+
 SELECT
     *
 FROM $j
 ORDER BY
     sumByVal;
+

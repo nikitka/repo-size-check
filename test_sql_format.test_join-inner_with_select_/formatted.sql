@@ -14,3 +14,4 @@ INNER JOIN (
 USING (key)
 ORDER BY
     key DESC;
+

@@ -9,3 +9,4 @@ GROUP BY
     key || "foo" AS key
 ORDER BY
     key;
+

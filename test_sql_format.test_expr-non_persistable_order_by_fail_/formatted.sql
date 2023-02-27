@@ -6,3 +6,4 @@ SELECT
 FROM Input
 ORDER BY
     YQL::NewMTRand(length(value));
+

@@ -4,3 +4,4 @@ SELECT
             RETURN $x + $y
         })
     });
+

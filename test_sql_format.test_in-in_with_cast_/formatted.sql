@@ -6,3 +6,4 @@ SELECT
     3.14 IN (1, 3, 4) AS pi_not_exact,
     3.14 IN (1, 3, 4, 3 + 0.14) AS pi_in_expr,
     'end' AS end;
+

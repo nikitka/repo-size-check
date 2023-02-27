@@ -4,10 +4,12 @@ $i = (
     SELECT
         AsList("foo") AS x
 );
+
 $j = (
     SELECT
         Just(AsList("foo")) AS y
 );
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -16,6 +18,7 @@ FROM $i
 INNER JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -24,6 +27,7 @@ FROM $i
 RIGHT JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -32,6 +36,7 @@ FROM $i
 LEFT JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz
 FROM $i
@@ -39,6 +44,7 @@ FROM $i
 LEFT SEMI JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz
 FROM $i
@@ -46,6 +52,7 @@ FROM $i
 LEFT ONLY JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     b.y AS fff
 FROM $i
@@ -53,6 +60,7 @@ FROM $i
 RIGHT SEMI JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     b.y AS fff
 FROM $i
@@ -60,6 +68,7 @@ FROM $i
 RIGHT ONLY JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -68,6 +77,7 @@ FROM $i
 FULL JOIN $j
     AS b
 ON a.x = b.y;
+
 SELECT
     a.x AS zzz,
     b.y AS fff
@@ -76,3 +86,4 @@ FROM $i
 EXCLUSION JOIN $j
     AS b
 ON a.x = b.y;
+

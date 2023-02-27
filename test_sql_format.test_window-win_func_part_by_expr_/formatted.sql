@@ -7,6 +7,7 @@ $data = (
         value AS name
     FROM Input
 );
+
 --insert into Output
 SELECT
     prefix,
@@ -24,3 +25,4 @@ WINDOW
 ORDER BY
     prefix,
     region;
+

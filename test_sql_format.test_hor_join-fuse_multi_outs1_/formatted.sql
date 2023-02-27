@@ -28,6 +28,7 @@ $i, $j = (
     PROCESS Input
     USING $udf(TableRows())
 );
+
 SELECT
     key,
     value
@@ -35,17 +36,21 @@ FROM $i
 WHERE key > "100"
 ORDER BY
     key;
+
 INSERT INTO @a
 SELECT
     *
 FROM $j;
+
 INSERT INTO @b
 SELECT
     key
 FROM $i
 WHERE key > "200";
+
 INSERT INTO @c
 SELECT
     key
 FROM $j
 WHERE key > "300";
+

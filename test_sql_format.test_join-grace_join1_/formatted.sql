@@ -10,3 +10,4 @@ JOIN plato.customers1
     AS cust
 ON cntr.country_id = cust.country_id
 WHERE cntr.country_id = "11";
+

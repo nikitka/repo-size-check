@@ -19,6 +19,8 @@ $join = (
         AS b
     ON a.key = b.key
 );
+
 SELECT
     count(*)
 FROM $join;
+

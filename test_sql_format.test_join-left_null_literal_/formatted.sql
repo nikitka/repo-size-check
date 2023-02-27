@@ -10,3 +10,4 @@ FROM AS_TABLE($foo)
 LEFT JOIN AS_TABLE($bar)
     AS b
 USING (x);
+

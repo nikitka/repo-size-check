@@ -7,3 +7,4 @@ FROM Input2
 LEFT JOIN Input3
     AS b
 ON a.value == b.value;
+

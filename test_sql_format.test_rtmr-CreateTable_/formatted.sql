@@ -11,3 +11,4 @@ CREATE TABLE Output (
     PARTITION BY (a, b),
     ORDER BY (e, f ASC, g DESC)
 );
+

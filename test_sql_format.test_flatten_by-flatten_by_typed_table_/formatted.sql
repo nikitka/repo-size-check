@@ -5,3 +5,4 @@ FROM plato.Input
     VIEW opt_struct
     FLATTEN BY
         b AS bb;
+

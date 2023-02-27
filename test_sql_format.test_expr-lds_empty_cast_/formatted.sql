@@ -11,3 +11,4 @@ SELECT
     AsList({}, DictCreate(Int32, String)),
     AsList(SetCreate(Int32), {}),
     AsList({}, SetCreate(Int32));
+

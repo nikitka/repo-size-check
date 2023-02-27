@@ -14,3 +14,4 @@ REDUCE Input
 ON
     key
 USING $udf_stream(TableRow());
+

@@ -5,7 +5,9 @@ INSERT INTO pq.test_topic_output
 SELECT
     Data
 FROM pq.test_topic_input;
+
 INSERT INTO pq.test_topic_output2
 SELECT
     Data
 FROM pq.test_topic_input2;
+

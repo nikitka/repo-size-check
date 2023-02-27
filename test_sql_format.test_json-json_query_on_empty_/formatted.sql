@@ -6,3 +6,4 @@ SELECT
     JSON_QUERY ($json, "lax $.key" NULL ON EMPTY),
     JSON_QUERY ($json, "lax $.key" EMPTY ARRAY ON EMPTY),
     JSON_QUERY ($json, "lax $.key" EMPTY OBJECT ON EMPTY);
+

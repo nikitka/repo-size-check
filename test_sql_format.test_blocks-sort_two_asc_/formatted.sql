@@ -9,3 +9,4 @@ FROM Input
 ORDER BY
     key,
     subkey1;
+

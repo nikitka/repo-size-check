@@ -19,3 +19,4 @@ GROUP BY
     B.subkey
 ORDER BY
     key;
+

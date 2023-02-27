@@ -11,3 +11,4 @@ FROM Input
     AS a
 GROUP BY
     a.key AS key;
+

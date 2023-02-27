@@ -5,3 +5,4 @@ $json = CAST(@@{
 }@@ AS Json);
 SELECT
     JSON_VALUE ($json, "strict $.key" RETURNING Uint16 ERROR ON ERROR);
+

@@ -19,3 +19,4 @@ GROUP BY
 ORDER BY
     vsid,
     session_start;
+

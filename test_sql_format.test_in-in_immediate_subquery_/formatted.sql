@@ -11,6 +11,7 @@ WHERE subkey NOT IN (
 ORDER BY
     key,
     subkey;
+
 SELECT
     *
 FROM Input4
@@ -22,3 +23,4 @@ WHERE subkey IN COMPACT (
 ORDER BY
     key,
     subkey;
+

@@ -9,3 +9,4 @@ FROM (
 )
     TABLESAMPLE BERNOULLI (44)
 WHERE key > "50";
+

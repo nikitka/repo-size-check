@@ -6,3 +6,4 @@ INSERT INTO plato.Output (
 )
 VALUES
     (SimpleUdf::ReturnNull(""), SimpleUdf::ReturnVoid(""), coalesce(SimpleUdf::ReturnEmpty(""), "!"));
+

@@ -8,3 +8,4 @@ SELECT
     'foo' LIKE 'foo%foo',
     'foofoo' LIKE 'foo%%foo',
     'abcxzfoo' LIKE '%x_foo',;
+

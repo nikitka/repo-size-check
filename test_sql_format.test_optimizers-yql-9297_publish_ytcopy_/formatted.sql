@@ -7,6 +7,7 @@ FROM Input
 WHERE key < "100"
 ORDER BY
     key DESC;
+
 COMMIT;
 INSERT INTO Output
 SELECT
@@ -14,7 +15,9 @@ SELECT
 FROM @a
 ORDER BY
     key DESC;
+
 COMMIT;
 SELECT
     *
 FROM Output;
+

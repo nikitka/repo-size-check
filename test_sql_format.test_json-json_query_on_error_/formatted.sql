@@ -6,3 +6,4 @@ SELECT
     JSON_QUERY ($json, "strict $.key" NULL ON ERROR),
     JSON_QUERY ($json, "strict $.key" EMPTY ARRAY ON ERROR),
     JSON_QUERY ($json, "strict $.key" EMPTY OBJECT ON ERROR);
+

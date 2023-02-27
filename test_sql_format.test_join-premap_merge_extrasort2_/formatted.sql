@@ -26,3 +26,4 @@ USING (BaseNo, PhraseID)
 ORDER BY
     pd.Text,
     m2.BannerID;
+

@@ -10,3 +10,4 @@ LEFT SEMI JOIN AS_TABLE($t)
 ON AsTuple(CAST(A.key AS uint64), CAST(A.subkey AS String)) = AsTuple(CAST(B.key AS int64), CAST(B.subkey AS Utf8)) AND AsTuple(CAST(A.key1 AS uint64), CAST(A.subkey1 AS String)) = AsTuple(CAST(B.key1 AS int64), CAST(B.subkey1 AS Utf8))
 ORDER BY
     `key`;
+

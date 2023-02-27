@@ -10,13 +10,16 @@ $input = (
         *
     FROM Input
 );
+
 SELECT
     *
 FROM $input
 ORDER BY
     key ASC;
+
 SELECT
     *
 FROM $input
 ORDER BY
     key DESC;
+

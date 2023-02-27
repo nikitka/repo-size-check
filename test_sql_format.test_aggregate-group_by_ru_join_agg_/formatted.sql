@@ -14,3 +14,4 @@ GROUP BY
 ORDER BY
     kk,
     sk;
+

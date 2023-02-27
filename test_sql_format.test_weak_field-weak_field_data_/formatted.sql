@@ -7,3 +7,4 @@ SELECT
 FROM Input3
 ORDER BY
     subkey;
+

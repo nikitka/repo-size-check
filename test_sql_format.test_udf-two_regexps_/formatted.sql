@@ -6,3 +6,4 @@ SELECT
 FROM plato.Input
 WHERE $is_abc(value)
 LIMIT 10;
+

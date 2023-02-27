@@ -5,6 +5,7 @@ DEFINE SUBQUERY $sub($name) AS
         *
     FROM $name
 END DEFINE;
+
 SELECT
     a.key
 FROM $sub("Input")
@@ -13,3 +14,4 @@ INNER JOIN Input
     AS b
 ON a.key = b.key
 WHERE JoinTableRow().`a.subkey` == "wat";
+

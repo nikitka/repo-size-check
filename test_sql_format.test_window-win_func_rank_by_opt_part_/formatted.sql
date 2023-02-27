@@ -9,6 +9,7 @@ $input = (
         value
     FROM Input
 );
+
 SELECT
     rank(key) OVER w1 AS rank_key,
     dense_rank(key) OVER w1 AS dense_rank_key,
@@ -26,3 +27,4 @@ ORDER BY
     rank_key,
     dense_rank_key,
     key_quad;
+

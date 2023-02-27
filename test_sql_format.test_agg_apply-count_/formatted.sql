@@ -12,3 +12,4 @@ FROM (
     AS a (
         key
     );
+

@@ -5,13 +5,16 @@ INSERT INTO @t1
 SELECT
     *
 FROM AS_TABLE($t1);
+
 COMMIT;
 $tuples = (
     SELECT
         AsTuple(key, subkey)
     FROM @t1
 );
+
 SELECT
     *
 FROM Input
 WHERE AsTuple(CAST(key AS uint64), CAST(subkey AS uint64)) IN $tuples;
+

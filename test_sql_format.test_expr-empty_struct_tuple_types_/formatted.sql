@@ -5,3 +5,4 @@ SELECT
     FormatType(Struct<>),
     FormatType(Struct<-- whitespace
      >);
+

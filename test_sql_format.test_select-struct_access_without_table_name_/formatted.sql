@@ -7,6 +7,7 @@ $data = (
         value
     FROM Input
 );
+
 --INSERT INTO Output
 SELECT
     mod,
@@ -18,3 +19,4 @@ FROM $data
 ORDER BY
     mod_key,
     value;
+

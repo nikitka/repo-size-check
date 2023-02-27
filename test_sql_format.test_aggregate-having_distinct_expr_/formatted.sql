@@ -6,3 +6,4 @@ FROM Input3
 GROUP BY
     key
 HAVING count(DISTINCT subkey || subkey) > 1;
+

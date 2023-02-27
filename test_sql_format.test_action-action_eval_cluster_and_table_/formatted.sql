@@ -4,3 +4,4 @@ $name = "In" || "put";
 SELECT
     count(*)
 FROM yt: $cluster.$name;
+

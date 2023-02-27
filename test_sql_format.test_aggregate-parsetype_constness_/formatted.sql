@@ -4,3 +4,4 @@ SELECT
 FROM AS_TABLE([<|key: 1|>, <|key: 2|>])
 GROUP BY
     key;
+

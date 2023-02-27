@@ -11,3 +11,4 @@ GROUP BY
 ORDER BY
     kk,
     subkey;
+

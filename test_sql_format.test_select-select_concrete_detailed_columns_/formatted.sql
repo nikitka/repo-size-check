@@ -3,3 +3,4 @@ SELECT
     i.subkey
 FROM plato.Input
     AS i;
+

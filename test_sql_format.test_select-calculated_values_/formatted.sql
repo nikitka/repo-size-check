@@ -7,3 +7,4 @@ SELECT
 FROM plato.Input
 ORDER BY
     key;
+

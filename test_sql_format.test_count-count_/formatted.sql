@@ -8,6 +8,7 @@ GROUP BY
     a
 ORDER BY
     a;
+
 SELECT
     b,
     aggregate_list(a),
@@ -17,6 +18,7 @@ GROUP BY
     b
 ORDER BY
     b;
+
 SELECT
     c,
     aggregate_list(a),
@@ -26,6 +28,7 @@ GROUP BY
     c
 ORDER BY
     c;
+
 SELECT
     d,
     aggregate_list(a),
@@ -35,6 +38,7 @@ GROUP BY
     d
 ORDER BY
     d;
+
 SELECT
     e,
     aggregate_list(a),
@@ -44,3 +48,4 @@ GROUP BY
     e
 ORDER BY
     e;
+

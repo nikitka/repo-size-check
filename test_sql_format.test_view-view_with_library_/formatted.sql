@@ -3,3 +3,4 @@ SELECT
     *
 FROM Input
     VIEW `library`;
+

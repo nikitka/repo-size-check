@@ -11,3 +11,4 @@ FROM (
     AS a (
         key
     );
+

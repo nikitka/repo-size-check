@@ -7,6 +7,7 @@ $input = (
         value
     FROM Input
 );
+
 --insert into Output
 SELECT
     key,
@@ -20,3 +21,4 @@ ORDER BY
     key,
     subkey,
     total_count;
+

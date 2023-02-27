@@ -13,8 +13,10 @@ $res = (
         key
     USING $udf(AsStruct(TableRow().value AS value, TableRow().subkey AS key))
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     sumByValAndKeyLen;
+

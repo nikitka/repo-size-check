@@ -10,3 +10,4 @@ GROUP COMPACT BY
     key
 ORDER BY
     key;
+

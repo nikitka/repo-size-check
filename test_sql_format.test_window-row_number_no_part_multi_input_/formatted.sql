@@ -4,6 +4,7 @@ INSERT INTO @foo
 SELECT
     *
 FROM Input;
+
 COMMIT;
 $input = (
     SELECT
@@ -19,6 +20,7 @@ $input = (
         *
     FROM Input
 );
+
 SELECT
     key,
     ROW_NUMBER() OVER w AS row_num
@@ -26,3 +28,4 @@ FROM $input
 WINDOW
     w AS (
     );
+

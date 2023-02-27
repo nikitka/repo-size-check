@@ -6,12 +6,16 @@ SELECT
 FROM Input
 ORDER BY
     key;
+
 SELECT
     key || "b" AS key
 FROM Input
 ORDER BY
     key;
+
 SELECT
     1 + 1;
+
 SELECT
     2 + 2;
+

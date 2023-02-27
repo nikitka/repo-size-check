@@ -10,6 +10,7 @@ SELECT
     ListFlatten(Just([[], []])),
     ListFlatten(Just([NULL, NULL])),
     ListFlatten(Just([Just([]), Just([])]));
+
 SELECT
     ListFlatten([[1, 2], [3, 4]]),
     ListFlatten([[1, 2], NULL, [3, 4]]),
@@ -17,3 +18,4 @@ SELECT
     ListFlatten(Just([[1, 2], NULL, [3, 4]])),
     ListFlatten([Just([1, 2]), Just([3, 4])]),
     ListFlatten(Just([Just([1, 2]), Just([3, 4])]));
+

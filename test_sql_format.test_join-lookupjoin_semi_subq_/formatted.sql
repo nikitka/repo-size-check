@@ -17,3 +17,4 @@ LEFT SEMI JOIN (
 ON a.k1 = b.k2
 ORDER BY
     a.k1;
+

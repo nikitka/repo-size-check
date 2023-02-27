@@ -5,11 +5,13 @@ SELECT
     TableRow() AS tr
 FROM plato.Input
     AS t;
+
 SELECT
     100500 AS magic,
     t.*
 FROM plato.Input
     AS t;
+
 SELECT
     TableRow() AS tr
 FROM (
@@ -25,6 +27,7 @@ JOIN (
 )
     AS b
 ON a.k = b.k;
+
 SELECT
     *
 FROM (
@@ -40,3 +43,4 @@ JOIN (
 )
     AS b
 ON a.k = b.k;
+

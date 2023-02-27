@@ -6,3 +6,4 @@ $x = "Input";
 SELECT
     count(*)
 FROM $x;
+

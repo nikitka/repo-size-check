@@ -11,18 +11,21 @@ SELECT
 FROM AS_TABLE($campaigns_data)
 ORDER BY
     id;
+
 INSERT INTO @strategies
 SELECT
     *
 FROM AS_TABLE($strategies_data)
 ORDER BY
     id;
+
 INSERT INTO @lottery
 SELECT
     *
 FROM AS_TABLE($lottery_data)
 ORDER BY
     id;
+
 COMMIT;
 SELECT
     lottery.id AS lottery_id
@@ -34,3 +37,4 @@ ON lottery.campaign_id = campaigns.id
 JOIN @strategies
     AS strategies
 ON lottery.strategy_id = strategies.id;
+

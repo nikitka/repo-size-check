@@ -10,6 +10,7 @@ GROUP BY
     key + 1u AS k1
 ORDER BY
     k1;
+
 SELECT
     k1,
     k2,
@@ -21,6 +22,7 @@ GROUP BY
 ORDER BY
     k1,
     k2;
+
 SELECT
     k1,
     k2,
@@ -35,6 +37,7 @@ ORDER BY
     k1,
     k2,
     k3;
+
 SELECT
     k1,
     k2,
@@ -52,6 +55,7 @@ ORDER BY
     k2,
     k3,
     k4;
+
 SELECT
     k1,
     k2,
@@ -72,3 +76,4 @@ ORDER BY
     k3,
     k4,
     k5;
+

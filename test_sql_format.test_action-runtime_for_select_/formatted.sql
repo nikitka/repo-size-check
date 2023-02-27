@@ -9,6 +9,7 @@ ELSE
         SELECT
             10;
     END DO;
+
 FOR $i IN Just(ListCreate(Int32))
     DO BEGIN
         SELECT
@@ -19,6 +20,7 @@ ELSE
         SELECT
             11;
     END DO;
+
 FOR $i IN NULL
     DO BEGIN
         SELECT
@@ -29,6 +31,7 @@ ELSE
         SELECT
             12;
     END DO;
+
 FOR $i IN AsList(4)
     DO BEGIN
         SELECT
@@ -39,6 +42,7 @@ ELSE
         SELECT
             13;
     END DO;
+
 FOR $i IN ListCreate(String)
     DO BEGIN
         SELECT
@@ -49,13 +53,16 @@ ELSE
         SELECT
             14;
     END DO;
+
 FOR $i IN AsList(5)
     DO BEGIN
         SELECT
             $i;
     END DO;
+
 FOR $i IN ListCreate(Bool)
     DO BEGIN
         SELECT
             $i;
     END DO;
+

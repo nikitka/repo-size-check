@@ -38,3 +38,4 @@ $deserialize = Python3::deserialize(Callable<(String) -> Resource<Python3>>, $sc
 SELECT
     UDAF(CAST(key AS Double), $create, $add, $merge, $get_result, $serialize, $deserialize)
 FROM plato.Input;
+

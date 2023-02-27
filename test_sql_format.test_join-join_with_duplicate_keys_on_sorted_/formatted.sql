@@ -12,3 +12,4 @@ SELECT
 ORDER BY
     a.value,
     b.value;
+

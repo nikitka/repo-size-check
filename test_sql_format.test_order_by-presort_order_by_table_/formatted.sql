@@ -10,9 +10,11 @@ FROM (
 )
     FLATTEN BY
         x;
+
 COMMIT;
 SELECT
     *
 FROM @foo
 ORDER BY
     x ASC;
+

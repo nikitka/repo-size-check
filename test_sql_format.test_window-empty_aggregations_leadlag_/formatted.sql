@@ -22,3 +22,4 @@ WINDOW
     )
 ORDER BY
     value;
+

@@ -17,3 +17,4 @@ SELECT
 FROM Input
 ORDER BY
     key;
+

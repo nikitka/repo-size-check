@@ -9,3 +9,4 @@ FROM (
     SELECT
         2 AS key
 );
+

@@ -3,3 +3,4 @@ USE plato;
 SELECT
     *
 FROM Folder(``, "foo;bar");
+

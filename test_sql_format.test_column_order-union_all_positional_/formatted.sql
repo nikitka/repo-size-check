@@ -10,3 +10,4 @@ SELECT
     (1u, 1) AS a,
     (2u, 2) AS b,
     (3u, 3) AS c;
+

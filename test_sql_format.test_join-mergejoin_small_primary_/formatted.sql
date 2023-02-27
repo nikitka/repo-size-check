@@ -14,3 +14,4 @@ ON a.k1 = b.k2
 ORDER BY
     a.v1,
     b.v2;
+

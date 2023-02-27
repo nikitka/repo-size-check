@@ -9,6 +9,7 @@ SELECT
 FROM Input2
 ORDER BY
     BaseNo DESC;
+
 COMMIT;
 SELECT
     pd.BaseNo,
@@ -29,3 +30,4 @@ ORDER BY
     pd.BaseNo,
     m2.PhraseID,
     m2.Extra;
+

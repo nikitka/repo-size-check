@@ -12,3 +12,4 @@ WINDOW
     )
 ORDER BY
     c;
+

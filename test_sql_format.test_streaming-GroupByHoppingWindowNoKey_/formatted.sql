@@ -14,3 +14,4 @@ FROM (
     GROUP BY
         HoppingWindow("PT0.005S", "PT0.01S")
 );
+

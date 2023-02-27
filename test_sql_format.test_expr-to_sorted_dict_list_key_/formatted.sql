@@ -6,21 +6,27 @@ SELECT
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, AsList(1, 2)),
     DictLookup($d, AsList(1, 3));
+
 SELECT
     DictContains($d, AsList(1, 2)),
     DictContains($d, AsList(1, 3));
+
 $d = ToSortedMultiDict($l);
 SELECT
     $d,
     DictKeys($d),
     DictPayloads($d),
     DictItems($d);
+
 SELECT
     DictLookup($d, AsList(1, 2)),
     DictLookup($d, AsList(1, 3));
+
 SELECT
     DictContains($d, AsList(1, 2)),
     DictContains($d, AsList(1, 3));
+

@@ -17,6 +17,7 @@ WINDOW
     w AS (
         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     );
+
 SELECT
     min(x) OVER w,
     count(x) OVER w,
@@ -35,3 +36,4 @@ WINDOW
     w AS (
         ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     );
+

@@ -7,3 +7,4 @@ FROM (
         CAST(value AS int) AS val
     FROM plato.Input
 );
+

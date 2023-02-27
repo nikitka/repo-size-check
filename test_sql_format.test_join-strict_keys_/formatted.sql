@@ -10,6 +10,7 @@ DEFINE SUBQUERY $strict() AS
         AS b
     USING (k1)
 END DEFINE;
+
 SELECT
     count(*)
 FROM Input1
@@ -17,6 +18,8 @@ FROM Input1
 JOIN Input2
     AS b
 USING (k1);
+
 SELECT
     *
 FROM $strict();
+

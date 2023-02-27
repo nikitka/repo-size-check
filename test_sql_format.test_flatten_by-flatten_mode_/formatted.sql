@@ -8,6 +8,7 @@ FROM (
 )
     FLATTEN OPTIONAL BY
         x;
+
 $lst = AsList(1, 2, 3);
 SELECT
     *
@@ -19,6 +20,7 @@ FROM (
         x
 ORDER BY
     x;
+
 SELECT
     x
 FROM (
@@ -29,6 +31,7 @@ FROM (
         x
 ORDER BY
     x;
+
 SELECT
     *
 FROM (
@@ -39,6 +42,7 @@ FROM (
         x
 ORDER BY
     x;
+
 $dct = AsDict(AsTuple(1, "foo"), AsTuple(2, "bar"), AsTuple(3, "baz"));
 SELECT
     *
@@ -50,6 +54,7 @@ FROM (
         x
 ORDER BY
     x;
+
 SELECT
     x
 FROM (
@@ -60,6 +65,7 @@ FROM (
         x
 ORDER BY
     x;
+
 SELECT
     ListSort(DictItems(x))
 FROM (
@@ -68,3 +74,4 @@ FROM (
 )
     FLATTEN OPTIONAL BY
         x;
+

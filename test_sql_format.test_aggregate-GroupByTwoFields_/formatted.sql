@@ -9,3 +9,4 @@ GROUP BY
 ORDER BY
     sum_c,
     max_d;
+

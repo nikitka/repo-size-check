@@ -8,6 +8,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 INSERT INTO @vsk
 SELECT
     *
@@ -16,6 +17,7 @@ ORDER BY
     value,
     subkey,
     key;
+
 INSERT INTO @vs
 SELECT
     *
@@ -23,6 +25,7 @@ FROM Input
 ORDER BY
     value,
     subkey;
+
 COMMIT;
 SELECT
     key,
@@ -38,6 +41,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 SELECT
     key,
     subkey,
@@ -52,6 +56,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 SELECT
     key,
     subkey,
@@ -65,6 +70,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 SELECT
     key,
     subkey,
@@ -78,6 +84,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 SELECT
     key,
     subkey,
@@ -92,6 +99,7 @@ ORDER BY
     key,
     subkey,
     value;
+
 SELECT
     some(key) AS key,
     subkey,
@@ -105,3 +113,4 @@ ORDER BY
     key,
     subkey,
     value;
+

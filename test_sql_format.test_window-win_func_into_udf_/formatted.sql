@@ -10,3 +10,4 @@ WINDOW
         ORDER BY
             subkey
     );
+

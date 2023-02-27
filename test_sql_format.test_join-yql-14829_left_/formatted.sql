@@ -5,16 +5,19 @@ SELECT
     Just('xxx') AS id
 ORDER BY
     id;
+
 INSERT INTO @y
 SELECT
     Just('yyy') AS id
 ORDER BY
     id;
+
 INSERT INTO @a
 SELECT
     Just('aaa') AS id
 ORDER BY
     id;
+
 COMMIT;
 $xy_left = (
     SELECT
@@ -25,6 +28,7 @@ $xy_left = (
         AS y
     ON x.id == y.id
 );
+
 SELECT
     *
 FROM ANY @a
@@ -32,3 +36,4 @@ FROM ANY @a
 LEFT JOIN ANY $xy_left
     AS b
 ON a.id == b.id;
+

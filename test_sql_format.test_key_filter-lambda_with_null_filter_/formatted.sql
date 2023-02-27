@@ -12,3 +12,4 @@ INNER JOIN (
     AS b
 ON a.subkey = b.subkey
 WHERE b.value != "";
+

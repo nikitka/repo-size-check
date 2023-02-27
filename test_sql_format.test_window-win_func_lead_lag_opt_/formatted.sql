@@ -12,6 +12,7 @@ WINDOW
     )
 ORDER BY
     subkey;
+
 SELECT
     key,
     lag(optkey) OVER w AS opt_lag,
@@ -24,6 +25,7 @@ WINDOW
     )
 ORDER BY
     key;
+
 SELECT
     lead(NULL) OVER w
 FROM (
@@ -33,3 +35,4 @@ FROM (
 WINDOW
     w AS (
     );
+

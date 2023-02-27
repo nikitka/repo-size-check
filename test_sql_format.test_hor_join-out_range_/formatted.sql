@@ -9,6 +9,7 @@ GROUP BY
 ORDER BY
     key,
     s;
+
 SELECT
     key,
     sum(CAST(subkey AS Int32)) AS s
@@ -19,6 +20,7 @@ GROUP BY
 ORDER BY
     key,
     s;
+
 SELECT
     key,
     some(subkey) AS s
@@ -29,3 +31,4 @@ GROUP BY
 ORDER BY
     key,
     s;
+

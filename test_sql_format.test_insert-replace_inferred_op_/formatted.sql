@@ -7,3 +7,4 @@ INSERT INTO Output
 SELECT
     *
 FROM Output;
+

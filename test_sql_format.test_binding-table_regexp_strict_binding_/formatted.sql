@@ -6,6 +6,7 @@ $d = "";
 SELECT
     count(*)
 FROM plato.regexp_strict($a, $b, $c, $d);
+
 USE plato;
 $a = "";
 $b = "Input";
@@ -14,3 +15,4 @@ $d = "";
 SELECT
     count(*)
 FROM regexp_strict($a, $b, $c, $d);
+

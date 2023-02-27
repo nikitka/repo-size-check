@@ -10,3 +10,4 @@ SELECT
 FROM Input
     AS a
     SAMPLE 0.1;
+

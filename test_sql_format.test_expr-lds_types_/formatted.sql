@@ -10,3 +10,4 @@ SELECT
     FormatType(ParseType("EmptyDict")),
     EmptyDict(),
     FormatType(EvaluateType(EmptyDictTypeHandle()));
+

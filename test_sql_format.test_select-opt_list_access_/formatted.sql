@@ -8,6 +8,7 @@ $data = (
     GROUP BY
         CAST(key AS uint32) AS key
 );
+
 SELECT
     key,
     lsk[0]
@@ -15,3 +16,4 @@ FROM $data
 WHERE lsk IS NOT NULL
 ORDER BY
     key;
+

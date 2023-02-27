@@ -5,6 +5,7 @@ $dict = (
         AsDict(AsTuple("key", CAST(key AS uint32) ?? 0), AsTuple("sk", CAST(subkey AS uint32) ?? 1), AsTuple("str", CAST(ByteAt(value, 0) AS uint32) ?? 256)) AS dd
     FROM Input
 );
+
 --INSERT INTO Output
 SELECT
     dd['key'] AS key,
@@ -14,3 +15,4 @@ FROM $dict
 ORDER BY
     key,
     zz;
+

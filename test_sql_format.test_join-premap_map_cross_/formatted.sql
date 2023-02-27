@@ -25,3 +25,4 @@ ORDER BY
     b.k2,
     a.v1,
     b.v2;
+

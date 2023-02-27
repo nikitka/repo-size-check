@@ -8,6 +8,8 @@ DEFINE SUBQUERY $select_star($table) AS
             subkey
     FROM $table;
 END DEFINE;
+
 SELECT
     *
 FROM $select_star("Input");
+

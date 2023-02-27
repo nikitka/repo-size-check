@@ -6,3 +6,4 @@ GROUP BY
     SessionWindow(ts, 10)
 ORDER BY
     session_start;
+

@@ -5,3 +5,4 @@ SELECT DISTINCT
     key
 FROM Input2
 HAVING key != '0';
+

@@ -15,8 +15,10 @@ $res = (
         key
     USING $udf(AsStruct(subkey AS char, value AS num))
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     key;
+

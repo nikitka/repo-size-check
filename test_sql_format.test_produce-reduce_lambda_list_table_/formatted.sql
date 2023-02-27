@@ -15,8 +15,10 @@ $res = (
         key
     USING $udf(CAST(value AS uint32) ?? 0)
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     key;
+

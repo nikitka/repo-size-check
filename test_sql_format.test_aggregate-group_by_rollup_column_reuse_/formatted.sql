@@ -7,6 +7,7 @@ $input = (
         value
     FROM Input
 );
+
 $request = (
     SELECT
         key,
@@ -17,6 +18,7 @@ $request = (
     GROUP BY
         ROLLUP (key, subkey)
 );
+
 --insert into Output
 SELECT
     key,
@@ -27,3 +29,4 @@ ORDER BY
     key,
     subkey,
     total_count;
+

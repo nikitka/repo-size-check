@@ -9,7 +9,9 @@ GROUP BY
     key
 ORDER BY
     sm DESC;
+
 SELECT
     count(1) AS cnt,
     sum(CAST(subkey AS int32)) AS sm
 FROM concat(Input1, Input2);
+

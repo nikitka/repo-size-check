@@ -14,3 +14,4 @@ JOIN Input2
 ON WeakField(i1.value1, "String") == WeakField(i2.value2, "String")
 ORDER BY
     sk;
+

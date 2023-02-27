@@ -6,3 +6,4 @@ SELECT
     String::JoinFromList(ListMap(ListFromRange(0, 1000000), ($_) -> {
         RETURN "0";
     }), "");
+

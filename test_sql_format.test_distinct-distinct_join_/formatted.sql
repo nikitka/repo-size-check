@@ -18,3 +18,4 @@ JOIN (
 USING (key)
 ORDER BY
     value;
+

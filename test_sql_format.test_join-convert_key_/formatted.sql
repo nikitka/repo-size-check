@@ -23,6 +23,8 @@ $join_result = (
         AS i2
     ON i1.k1 == i2.k1 AND i1.k2 == i2.k2
 );
+
 SELECT
     *
 FROM $join_result;
+

@@ -7,4 +7,6 @@ FROM Input
     TABLESAMPLE BERNOULLI (Math::Ceil(100 * $percent))
 ORDER BY
     key;
+
 -- 100% sample
+

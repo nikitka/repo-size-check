@@ -5,6 +5,7 @@ $input_table = (
         *
     FROM Input
 );
+
 SELECT
     'total' AS key,
     COUNT(*) AS count
@@ -18,3 +19,4 @@ FROM $input_table
 WHERE key != "1"
 GROUP BY
     key;
+

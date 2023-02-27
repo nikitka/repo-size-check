@@ -6,6 +6,7 @@ SELECT
 FROM Input
 GROUP BY
     key;
+
 SELECT
     key,
     sum(CAST(subkey AS Int32))
@@ -13,6 +14,7 @@ FROM Input
     SAMPLE 0.3
 GROUP BY
     key;
+
 SELECT
     key,
     some(subkey)
@@ -20,9 +22,11 @@ FROM Input
     SAMPLE 0.3
 GROUP BY
     key;
+
 SELECT
     key,
     sum(length(value))
 FROM Input
 GROUP BY
     key;
+

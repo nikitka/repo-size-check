@@ -7,3 +7,4 @@ SELECT
     Input.`dict`["c"] AS c,
     Input.`dict`["d"] AS d
 FROM plato.Input;
+

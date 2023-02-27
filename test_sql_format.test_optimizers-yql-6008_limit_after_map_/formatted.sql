@@ -6,6 +6,7 @@ SELECT
 FROM plato.Input
 WHERE value != "111"
 LIMIT 3;
+
 COMMIT;
 INSERT INTO Output
 SELECT
@@ -13,3 +14,4 @@ SELECT
 FROM plato.Input
 ORDER BY
     value;
+

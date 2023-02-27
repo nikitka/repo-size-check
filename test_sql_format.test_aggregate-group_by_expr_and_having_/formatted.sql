@@ -8,3 +8,4 @@ GROUP BY
     CAST(subkey AS uint32) % 10 AS mod_sk,
     CAST(key AS uint32) % 10 AS mod_k
 HAVING mod_k == 7;
+

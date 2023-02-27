@@ -9,3 +9,4 @@ SELECT
 FROM concat(Input, Input, Input, Input)
 ORDER BY
     key;
+

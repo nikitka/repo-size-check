@@ -11,6 +11,7 @@ $input = (
         NULL AS taskId,
         2 AS previousId
 );
+
 SELECT
     count(*)
 FROM $input
@@ -22,3 +23,4 @@ LEFT JOIN $input
     AS pedestrian
 ON diff.taskId = pedestrian.id
 WHERE diff.id = 1;
+

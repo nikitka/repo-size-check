@@ -9,3 +9,4 @@ WINDOW
         ORDER BY
             key
     );
+

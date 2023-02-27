@@ -21,3 +21,4 @@ FROM (
 )
 ORDER BY
     key;
+

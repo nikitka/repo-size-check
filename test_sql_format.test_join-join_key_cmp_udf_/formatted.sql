@@ -12,3 +12,4 @@ ON Unicode::ToUpper(CAST(ia.key AS Utf8)) == ib.subkey
 ORDER BY
     ib.key,
     ib.subkey;
+

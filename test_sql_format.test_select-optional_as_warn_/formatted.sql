@@ -7,9 +7,11 @@ SELECT
 FROM Input
 ORDER BY
     subkey;
+
 SELECT
     key AS subkey,
     value v,
 FROM Input
 ORDER BY
     subkey;
+

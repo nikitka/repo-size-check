@@ -5,3 +5,4 @@ FROM plato.Input
 ORDER BY
     is_abc DESC,
     value ASC;
+

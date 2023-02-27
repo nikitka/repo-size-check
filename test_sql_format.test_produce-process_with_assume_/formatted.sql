@@ -10,3 +10,4 @@ PROCESS plato.Input
 USING $udf(TableRows())
 ASSUME ORDER BY
     key;
+

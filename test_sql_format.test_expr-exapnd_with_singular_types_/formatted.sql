@@ -7,3 +7,4 @@ $callable = CALLABLE (Callable<($struct_t) -> $struct_t>, ($x) -> {
 SELECT
     $callable(<|a: "1"|>),
     $callable(AddMember(<||>, "a", "2"));
+

@@ -18,3 +18,4 @@ JOIN/*+ merge() */ Input3
 ON b.key = c.key
 ORDER BY
     k3;
+

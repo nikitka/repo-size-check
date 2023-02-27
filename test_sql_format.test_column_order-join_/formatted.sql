@@ -6,6 +6,7 @@ $foo =
         1 AS sk,
         "150" AS key,
         2 AS v;
+
 SELECT
     *
 FROM $foo
@@ -13,6 +14,7 @@ FROM $foo
 JOIN Input
     AS a
 USING (key);
+
 SELECT
     a.*
 FROM $foo
@@ -20,6 +22,7 @@ FROM $foo
 JOIN Input
     AS a
 USING (key);
+
 SELECT
     b.*
 FROM $foo
@@ -27,6 +30,7 @@ FROM $foo
 JOIN Input
     AS a
 USING (key);
+
 SELECT
     a.*,
     b.*
@@ -35,3 +39,4 @@ FROM $foo
 JOIN Input
     AS a
 USING (key);
+

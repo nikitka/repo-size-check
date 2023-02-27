@@ -9,3 +9,4 @@ FROM plato.Input
 INNER JOIN plato.Input
     AS b
 ON a.key = b.key;
+

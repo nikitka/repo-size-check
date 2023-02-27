@@ -6,9 +6,12 @@ EVALUATE FOR $_i IN ListFromRange(0, 10)
         SELECT
             *
         FROM Input;
+
         COMMIT;
     END DO;
+
 SELECT
     *
 FROM Output
     TABLESAMPLE SYSTEM (50);
+

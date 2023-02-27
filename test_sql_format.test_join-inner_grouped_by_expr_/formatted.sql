@@ -10,3 +10,4 @@ GROUP BY
     Input1.key AS keyz
 ORDER BY
     keyz;
+

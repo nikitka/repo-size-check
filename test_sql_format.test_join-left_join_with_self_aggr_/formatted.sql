@@ -4,6 +4,7 @@ $a =
         x AS bar,
         y AS foo
     FROM AS_TABLE($a);
+
 $b =
     SELECT
         a.bar AS bar,
@@ -22,6 +23,7 @@ $b =
     USING (foo, bar)
     GROUP BY
         a.bar;
+
 SELECT
     *
 FROM $a
@@ -29,3 +31,4 @@ FROM $a
 LEFT JOIN $b
     AS b
 USING (bar);
+

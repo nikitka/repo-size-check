@@ -5,3 +5,4 @@ SELECT
     t.*
 FROM concat(Input, Input)
     AS t;
+

@@ -4,3 +4,4 @@ PRAGMA pq.Consumer = "test_client";
 SELECT STREAM
     Data
 FROM pq.test_topic_input;
+

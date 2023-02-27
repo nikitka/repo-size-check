@@ -5,3 +5,4 @@ SELECT
     key,
     value
 FROM plato.Input;
+

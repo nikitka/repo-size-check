@@ -9,3 +9,4 @@ FROM (
     FLATTEN LIST BY (
         text
     );
+

@@ -4,6 +4,7 @@ $s = (
         1 AS x,
         2 AS y
 );
+
 SELECT
     x AS x2,
     y
@@ -13,3 +14,4 @@ GROUP BY
 ORDER BY
     x2,
     y;
+

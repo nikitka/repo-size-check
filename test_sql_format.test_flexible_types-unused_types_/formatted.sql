@@ -5,7 +5,9 @@ $src =
     SELECT
         1 AS integer,
         Float;
+
 SELECT
     $format(integer) AS formatted,
     integer + 1 AS int_plus_one
 FROM $src;
+

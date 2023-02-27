@@ -4,3 +4,4 @@ SELECT
     value,
     $key_text[key] AS key_text
 FROM plato.Input;
+

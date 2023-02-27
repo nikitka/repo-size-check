@@ -20,6 +20,7 @@ $src = (
     FROM plato.Input
     WHERE key > "200"
 );
+
 $r = (
     REDUCE Input, (
         SELECT
@@ -31,6 +32,7 @@ $r = (
         key
     USING $udf(TableRow())
 );
+
 SELECT
     key,
     src,
@@ -40,3 +42,4 @@ ORDER BY
     key,
     src,
     cnt;
+

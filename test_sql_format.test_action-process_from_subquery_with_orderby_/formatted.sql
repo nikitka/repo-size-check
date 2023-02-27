@@ -6,4 +6,6 @@ DEFINE SUBQUERY $src() AS
     ORDER BY
         key;
 END DEFINE;
+
 PROCESS $src();
+

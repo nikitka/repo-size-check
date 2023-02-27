@@ -14,8 +14,10 @@ $res = (
         key
     USING $udf(TableRow())
 );
+
 SELECT
     *
 FROM $res
 ORDER BY
     sumByVal;
+

@@ -11,3 +11,4 @@ USING (key)
 WHERE Random(TableRow()) < 0.1
 ORDER BY
     key;
+

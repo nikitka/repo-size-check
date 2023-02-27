@@ -6,3 +6,4 @@ SELECT
     TableName() AS name
 FROM each(["Input1", "Input2", "Input3"])
     WITH SCHEMA Struct<key: String, subkey: String, value: String>;
+

@@ -14,3 +14,4 @@ FROM (
 ORDER BY
     avg_key,
     min_val;
+

@@ -8,13 +8,16 @@ $_data = (
     FROM plato.Input
     WHERE key == '075'
 );
+
 $data_one_key = (
     SELECT
         subkey AS sk
     FROM plato.Input
     WHERE key == '075'
 );
+
 SELECT
     *
 FROM Input
 WHERE key = $data_one_key;
+

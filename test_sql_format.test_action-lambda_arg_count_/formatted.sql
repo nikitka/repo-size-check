@@ -10,3 +10,4 @@ SELECT
     LambdaOptionalArgumentsCount(($x, $y) -> ($x + $y)),
     LambdaOptionalArgumentsCount(($x?) -> ($x + 1)),
     LambdaOptionalArgumentsCount(($x, $y?) -> ($x + $y));
+

@@ -8,8 +8,10 @@ $a = (
         key
     LIMIT 1
 );
+
 INSERT INTO Output (
     key
 )
 VALUES
     ($a);
+

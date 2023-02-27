@@ -11,3 +11,4 @@ SELECT
     SystemMetadata("seq_no") AS v,
 FROM pq.`test_topic_input`
     WITH (format = json_each_row, SCHEMA (value String, color String));
+

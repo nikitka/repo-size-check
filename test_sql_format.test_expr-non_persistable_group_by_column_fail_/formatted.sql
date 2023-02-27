@@ -5,3 +5,4 @@ SELECT
 FROM Input
 GROUP BY
     YQL::NewMTRand(length(value)) AS key;
+

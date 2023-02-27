@@ -22,6 +22,8 @@ $persons = (
         $udf(value, 100) AS val
     FROM Input
 );
+
 SELECT
     val
 FROM $persons;
+

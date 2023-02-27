@@ -13,3 +13,4 @@ FROM Input2
 ORDER BY
     key,
     value;
+

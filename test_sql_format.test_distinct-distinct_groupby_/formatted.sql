@@ -10,3 +10,4 @@ GROUP BY
 ORDER BY
     k1,
     v1;
+

@@ -10,3 +10,4 @@ SELECT
 UNION ALL
 SELECT
     3 AS y;
+

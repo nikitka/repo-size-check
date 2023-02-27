@@ -8,6 +8,7 @@ $req = (
     FROM Input
         AS t
 );
+
 --INSERT INTO Output
 SELECT
     subkey AS sk,
@@ -15,3 +16,4 @@ SELECT
 FROM $req
 ORDER BY
     sk;
+

@@ -6,3 +6,4 @@ SELECT
 FROM $x
     VIEW raw
 LIMIT 1;
+

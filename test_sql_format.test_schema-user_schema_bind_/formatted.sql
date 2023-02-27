@@ -5,3 +5,4 @@ SELECT
     *
 FROM $table
     WITH SCHEMA Struct<a: Int64?>;
+

@@ -9,3 +9,4 @@ INNER JOIN plato.Input
     AS b
     SAMPLE 0.3
 ON a.key = b.key;
+

@@ -5,3 +5,4 @@ SELECT
     WeakField(email, "String"),
     WeakField(yandexuid, "Uint64")
 FROM Input;
+

@@ -9,6 +9,7 @@ FROM (
     AS a (
         x
     );
+
 SELECT
     Pg::string_agg(x, ','p) OVER (
         ORDER BY
@@ -23,6 +24,7 @@ FROM (
     AS a (
         x
     );
+
 $agg_string_agg = AggregationFactory("Pg::string_agg");
 SELECT
     AggregateBy((x, ','p), $agg_string_agg)
@@ -35,6 +37,7 @@ FROM (
     AS a (
         x
     );
+
 SELECT
     AggregateBy((x, ','p), $agg_string_agg) OVER (
         ORDER BY
@@ -49,6 +52,7 @@ FROM (
     AS a (
         x
     );
+
 $agg_max = AggregationFactory("Pg::max");
 SELECT
     AggregateBy(x, $agg_max)
@@ -61,6 +65,7 @@ FROM (
     AS a (
         x
     );
+
 SELECT
     AggregateBy(x, $agg_max) OVER (
         ORDER BY
@@ -75,3 +80,4 @@ FROM (
     AS a (
         x
     );
+

@@ -8,6 +8,7 @@ $q = (
         key
     LIMIT 100
 );
+
 $q1 = (
     SELECT
         *
@@ -16,6 +17,7 @@ $q1 = (
         key
     LIMIT 100
 );
+
 SELECT
     *
 FROM Input
@@ -29,17 +31,21 @@ WHERE key IN (
 )
 ORDER BY
     key;
+
 SELECT
     *
 FROM Input
 WHERE key IN $q1
 ORDER BY
     key;
+
 SELECT
     EXISTS (
     SELECT
         key
     FROM $q)
 FROM Input;
+
 SELECT
     $q;
+

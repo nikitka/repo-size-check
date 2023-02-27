@@ -12,3 +12,4 @@ USING (key)
 ORDER BY
     a.value,
     b.value;
+

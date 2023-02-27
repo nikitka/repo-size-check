@@ -7,3 +7,4 @@ SELECT
     lst
 FROM Input
     WITH COLUMNS Struct<lst_yson: List<int32>?, dt_yson: Date?>;
+

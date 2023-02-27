@@ -10,6 +10,7 @@ $list = (
         FLATTEN BY
             `list` AS item
 );
+
 --INSERT INTO Output
 SELECT
     item,
@@ -19,3 +20,4 @@ FROM $list
 WINDOW
     w AS (
     );
+
