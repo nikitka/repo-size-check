@@ -8,7 +8,11 @@ $second = ($x) -> {
 $i = AsDict(AsTuple(1, "A"), AsTuple(2, "B"));
 $j = AsDict(AsTuple(1, "A"), AsTuple(2, "C"));
 $k = AsDict(AsTuple(1, "A"), AsTuple(2, "D"));
-$l = AsList(AsTuple($i, Void()), AsTuple($i, Void()), AsTuple($j, Void()));
+$l = AsList(
+    AsTuple($i, Void()),
+    AsTuple($i, Void()),
+    AsTuple($j, Void())
+);
 $d = ToDict($l);
 SELECT
     $d,

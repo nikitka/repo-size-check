@@ -17,10 +17,12 @@ SELECT
 
 -- Here values retrieved from JSON cannot be casted to the target type Int16.
 -- ON ERROR default value must be used instead
-$invalid_types_json = CAST(@@{
+$invalid_types_json = CAST(
+    @@{
     "key": "string",
     "another_key": -123
-}@@ AS Json);
+}@@ AS Json
+);
 SELECT
     JSON_VALUE ($invalid_types_json, "strict $.key" RETURNING Int16 DEFAULT 456 ON ERROR),
     JSON_VALUE ($invalid_types_json, "strict $.another_key" RETURNING Uint16 DEFAULT 456 ON ERROR);

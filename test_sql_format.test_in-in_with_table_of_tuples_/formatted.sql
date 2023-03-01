@@ -1,6 +1,9 @@
 /* postgres can not */
 USE plato;
-$t1 = AsList(AsStruct(75 AS key, 1 AS subkey), AsStruct(800 AS key, 2 AS subkey));
+$t1 = AsList(
+    AsStruct(75 AS key, 1 AS subkey),
+    AsStruct(800 AS key, 2 AS subkey)
+);
 INSERT INTO @t1
 SELECT
     *

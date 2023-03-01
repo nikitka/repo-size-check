@@ -1,10 +1,10 @@
 /* postgres can not */
 USE plato;
 $data = (
-    SELECT
-        max_by(key, subkey)
-    FROM Input
-    WHERE value > "a"
+        SELECT
+            max_by(key, subkey)
+        FROM Input
+        WHERE value > "a"
 );
 
 SELECT

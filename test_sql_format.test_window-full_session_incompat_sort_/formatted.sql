@@ -18,13 +18,13 @@ SELECT
 FROM $src
 WINDOW
     w AS (
-        PARTITION BY
-            user,
-            user_nonopt,
-            SessionWindow(ts, 10)
-        ORDER BY
-            ts DESC
-        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+            PARTITION BY
+                user,
+                user_nonopt,
+                SessionWindow(ts, 10)
+            ORDER BY
+                ts DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     )
 ORDER BY
     user,

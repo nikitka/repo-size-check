@@ -9,20 +9,26 @@ FROM T;
 SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who,
-    JSON_VALUE (T.J, 'lax $.where' NULL ON EMPTY) AS Nali
+    JSON_VALUE (
+        T.J, 'lax $.where' NULL ON EMPTY
+    ) AS Nali
 FROM T;
 
 SELECT
     T.K,
     JSON_VALUE (T.J, 'strict $.who') AS Who,
-    JSON_VALUE (T.J, 'strict $.where' DEFAULT 'no where there' ON ERROR) AS Nali
+    JSON_VALUE (
+        T.J, 'strict $.where' DEFAULT 'no where there' ON ERROR
+    ) AS Nali
 FROM T;
 
 SELECT
     T.K,
     JSON_VALUE (T.J, 'lax $.who') AS Who,
     JSON_VALUE (T.J, 'lax $.where' NULL ON EMPTY) AS Nali,
-    JSON_VALUE (T.J, 'lax $.friends.name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR) AS Friend
+    JSON_VALUE (
+        T.J, 'lax $.friends.name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR
+    ) AS Friend
 FROM T;
 
 SELECT
@@ -39,7 +45,9 @@ SELECT
     -- postgres=# select * from jsonb_path_query('{ "who": "Louise", "where": "Iana" }', 'strict $.friends[*].name');
     -- ERROR:  JSON object does not contain key "friends"
     -- PostgreSQL shows us that hard error has happened, as expected.
-    JSON_VALUE (T.J, 'strict $.friends[*].name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR) AS Friend
+    JSON_VALUE (
+        T.J, 'strict $.friends[*].name' NULL ON EMPTY DEFAULT '*** error ***' ON ERROR
+    ) AS Friend
 FROM T;
 
 SELECT

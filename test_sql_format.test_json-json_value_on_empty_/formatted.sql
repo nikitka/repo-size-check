@@ -19,5 +19,8 @@ SELECT
 -- But default value in ON EMPTY section is -123 and casting it to Uint16 will fail.
 -- In this case ON ERROR section must be returned.
 SELECT
-    JSON_VALUE ($json, "lax $.key" RETURNING Uint16 DEFAULT - 123 ON EMPTY DEFAULT 456 ON ERROR);
+    JSON_VALUE (
+        $json,
+        "lax $.key" RETURNING Uint16 DEFAULT - 123 ON EMPTY DEFAULT 456 ON ERROR
+    );
 

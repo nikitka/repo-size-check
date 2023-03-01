@@ -1,11 +1,11 @@
 /* postgres can not */
 $data = (
-    SELECT
-        CAST(key AS uint32) AS age,
-        CAST(key AS uint32) / 10 AS age_decade,
-        CAST(subkey AS uint32) AS region,
-        value AS name
-    FROM plato.Input
+        SELECT
+            CAST(key AS uint32) AS age,
+            CAST(key AS uint32) / 10 AS age_decade,
+            CAST(subkey AS uint32) AS region,
+            value AS name
+        FROM plato.Input
 );
 
 SELECT

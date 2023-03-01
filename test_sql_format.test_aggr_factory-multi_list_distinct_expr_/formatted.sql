@@ -1,13 +1,24 @@
 /* syntax version 1 *//* postgres can not */
 $input =
     SELECT
-        AsList(1, 2, 3) AS nums
+        AsList(
+            1,
+            2,
+            3
+        ) AS nums
     UNION ALL
     SELECT
-        AsList(4, 5) AS nums
+        AsList(
+            4,
+            5
+        ) AS nums
     UNION ALL
     SELECT
-        AsList(1, 2, 3) AS nums;
+        AsList(
+            1,
+            2,
+            3
+        ) AS nums;
 
 SELECT
     MULTI_AGGREGATE_BY(DISTINCT ListExtend(nums, AsList(1, 5)), AGGREGATION_FACTORY("count")) AS count,

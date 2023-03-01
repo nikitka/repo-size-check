@@ -10,18 +10,18 @@ $data = (
 
 -- insert into Output
 $data2 = (
-    SELECT
-        region,
-        name,
-        avg(CAST(age AS Interval)) OVER w1 AS avg_age,
-    FROM $data
-    WINDOW
-        w1 AS (
-            PARTITION BY
-                region
-            ORDER BY
-                name DESC
-        )
+        SELECT
+            region,
+            name,
+            avg(CAST(age AS Interval)) OVER w1 AS avg_age,
+        FROM $data
+        WINDOW
+            w1 AS (
+                PARTITION BY
+                    region
+                ORDER BY
+                    name DESC
+            )
 );
 
 DISCARD SELECT

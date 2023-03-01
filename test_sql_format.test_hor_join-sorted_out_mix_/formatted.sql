@@ -22,13 +22,17 @@ $i3 = (
 );
 
 $udf = ($x) -> {
-    RETURN AsStruct(Yql::Visit($x, AsAtom("0"), ($i) -> {
-        RETURN Yql::Member($i, AsAtom("key"))
-    }, AsAtom("1"), ($i) -> {
-        RETURN Yql::Member($i, AsAtom("key"))
-    }, AsAtom("2"), ($i) -> {
-        RETURN Yql::Member($i, AsAtom("key"))
-    }) AS key)
+    RETURN AsStruct(
+        Yql::Visit(
+            $x, AsAtom("0"), ($i) -> {
+                RETURN Yql::Member($i, AsAtom("key"))
+            }, AsAtom("1"), ($i) -> {
+                RETURN Yql::Member($i, AsAtom("key"))
+            }, AsAtom("2"), ($i) -> {
+                RETURN Yql::Member($i, AsAtom("key"))
+            }
+        ) AS key
+    )
 };
 SELECT
     *

@@ -1,12 +1,15 @@
 USE plato;
-$tableList = AsList(AsStruct(Yson('{"row_count"=9}') AS Attributes, "Input1" AS Path, "table" AS Type), AsStruct(Yson('{"row_count"=19}') AS Attributes, "Input2" AS Path, "table" AS Type));
+$tableList = AsList(
+    AsStruct(Yson('{"row_count"=9}') AS Attributes, "Input1" AS Path, "table" AS Type),
+    AsStruct(Yson('{"row_count"=19}') AS Attributes, "Input2" AS Path, "table" AS Type)
+);
 -- $bucket_size = 1000000;
 $buckets = ASLIST(0, 1, 2, 3);
 $row_count = (
-    SELECT
-        Yson::LookupInt64(Attributes, "row_count")
-    FROM AS_TABLE($tableList)
-    WHERE Type = "table"
+        SELECT
+            Yson::LookupInt64(Attributes, "row_count")
+        FROM AS_TABLE($tableList)
+        WHERE Type = "table"
 );
 
 $bucket_size = unwrap(CAST($row_count / ListLength($buckets) AS Uint64));
@@ -15,12 +18,12 @@ DEFINE ACTION $make_bucket($bucket_number) AS
     $dst = "Output" || $bucket_number;
     INSERT INTO $dst
     (
-        SELECT
-            *
-        FROM Input
-        ORDER BY
-            key
-        LIMIT $bucket_size OFFSET $offset
+            SELECT
+                *
+            FROM Input
+            ORDER BY
+                key
+            LIMIT $bucket_size OFFSET $offset
     );
 END DEFINE;
 

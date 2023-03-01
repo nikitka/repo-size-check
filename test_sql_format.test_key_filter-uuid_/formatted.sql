@@ -1,9 +1,12 @@
 /* postgres can not *//* syntax version 1 */
 USE plato;
-$asIs = Python::asIs(Callable<(String) -> String>, @@
+$asIs = Python::asIs(
+    Callable<(String) -> String>,
+    @@
 def asIs(arg):
     return arg
-@@);
+@@
+);
 INSERT INTO @uuid
 SELECT
     CAST(value AS Uuid) AS value
@@ -15,59 +18,59 @@ COMMIT;
 SELECT
     *
 FROM (
-    SELECT
-        *
-    FROM @uuid
-    WHERE value < Uuid("00000000-0000-0000-0000-100000000000") AND value > Uuid("00000000-0000-0000-0000-400000000000")
-    -- empty
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value > Uuid("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
-    -- empty
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value < Uuid("00000000-0000-0000-0000-000000000000")
-    -- empty
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value > Uuid("00000000-0000-0000-0000-100000000000") OR value >= Uuid("00000000-0000-0000-0000-200000000000")
-    --(00000000-0000-0000-0000-100000000000,)
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value >= Uuid("00000000-0000-0000-0000-100000000000") OR value > Uuid("00000000-0000-0000-0000-200000000000")
-    --[00000000-0000-0000-0000-100000000000,)
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value = Uuid("00000000-0000-0000-0000-100000000000") OR value < Uuid("00000000-0000-0000-0000-200000000000")
-    --(,00000000-0000-0000-0000-200000000000)
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value < Uuid("00000000-0000-0000-0000-100000000000") OR value <= Uuid("00000000-0000-0000-0000-200000000000")
-    --(,00000000-0000-0000-0000-200000000000]
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value < Uuid("00000000-0000-0000-0000-100000000000") OR value <= Uuid("00000000-0000-0000-0000-200000000000")
-    --(,00000000-0000-0000-0000-200000000000]
-    UNION ALL
-    SELECT
-        *
-    FROM @uuid
-    WHERE value > Uuid("00000000-0000-0000-0000-100000000000") AND value <= Uuid("00000000-0000-0000-0000-400000000000")
---(00000000-0000-0000-0000-100000000000,00000000-0000-0000-0000-400000000000]
+        SELECT
+            *
+        FROM @uuid
+        WHERE value < Uuid("00000000-0000-0000-0000-100000000000") AND value > Uuid("00000000-0000-0000-0000-400000000000")
+        -- empty
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value > Uuid("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+        -- empty
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value < Uuid("00000000-0000-0000-0000-000000000000")
+        -- empty
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value > Uuid("00000000-0000-0000-0000-100000000000") OR value >= Uuid("00000000-0000-0000-0000-200000000000")
+        --(00000000-0000-0000-0000-100000000000,)
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value >= Uuid("00000000-0000-0000-0000-100000000000") OR value > Uuid("00000000-0000-0000-0000-200000000000")
+        --[00000000-0000-0000-0000-100000000000,)
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value = Uuid("00000000-0000-0000-0000-100000000000") OR value < Uuid("00000000-0000-0000-0000-200000000000")
+        --(,00000000-0000-0000-0000-200000000000)
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value < Uuid("00000000-0000-0000-0000-100000000000") OR value <= Uuid("00000000-0000-0000-0000-200000000000")
+        --(,00000000-0000-0000-0000-200000000000]
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value < Uuid("00000000-0000-0000-0000-100000000000") OR value <= Uuid("00000000-0000-0000-0000-200000000000")
+        --(,00000000-0000-0000-0000-200000000000]
+        UNION ALL
+        SELECT
+            *
+        FROM @uuid
+        WHERE value > Uuid("00000000-0000-0000-0000-100000000000") AND value <= Uuid("00000000-0000-0000-0000-400000000000")
+    --(00000000-0000-0000-0000-100000000000,00000000-0000-0000-0000-400000000000]
 )
 ORDER BY
     value;

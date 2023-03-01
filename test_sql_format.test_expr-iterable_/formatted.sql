@@ -18,7 +18,9 @@ SELECT
     ListHasItems($c);
 
 SELECT
-    ListMap(ListFromRange(1, 4), ($x) -> {
-        $y = Yql::ToList(() -> (Yql::Iterator([1, 2, $x])));
-        RETURN ListExtend($y, $y);
-    });
+    ListMap(
+        ListFromRange(1, 4), ($x) -> {
+            $y = Yql::ToList(() -> (Yql::Iterator([1, 2, $x])));
+            RETURN ListExtend($y, $y);
+        }
+    );

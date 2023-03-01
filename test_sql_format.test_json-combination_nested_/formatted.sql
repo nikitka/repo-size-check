@@ -1,5 +1,6 @@
 /* syntax version 1 *//* postgres can not */-- Check that Json2::Parse/Serialize calls fold
-$json = CAST(@@{
+$json = CAST(
+    @@{
     "a": {
         "b": {
             "c": {
@@ -7,13 +8,47 @@ $json = CAST(@@{
             }
         }
     }
-}@@ AS Json);
+}@@ AS Json
+);
 SELECT
-    JSON_VALUE (JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c"), "strict $.d");
+    JSON_VALUE (
+        JSON_QUERY (
+            JSON_QUERY (
+                JSON_QUERY (
+                    $json,
+                    "strict $.a"
+                ),
+                "strict $.b"
+            ),
+            "strict $.c"
+        ),
+        "strict $.d"
+    );
 
 SELECT
-    JSON_EXISTS (JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c"), "strict $.d");
+    JSON_EXISTS (
+        JSON_QUERY (
+            JSON_QUERY (
+                JSON_QUERY (
+                    $json,
+                    "strict $.a"
+                ),
+                "strict $.b"
+            ),
+            "strict $.c"
+        ),
+        "strict $.d"
+    );
 
 SELECT
-    JSON_QUERY (JSON_QUERY (JSON_QUERY ($json, "strict $.a"), "strict $.b"), "strict $.c");
+    JSON_QUERY (
+        JSON_QUERY (
+            JSON_QUERY (
+                $json,
+                "strict $.a"
+            ),
+            "strict $.b"
+        ),
+        "strict $.c"
+    );
 

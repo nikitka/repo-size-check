@@ -1,6 +1,8 @@
 /* postgres can not *//* multirun can not *//* syntax version 1 */
 USE plato;
-$t = AsList(AsStruct(1 AS key, 101 AS value));
+$t = AsList(
+    AsStruct(1 AS key, 101 AS value)
+);
 INSERT INTO Output
 SELECT
     *

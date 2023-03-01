@@ -1,6 +1,7 @@
 /* dqfile can not */
 USE plato;
-$f = Python3::f(@@
+$f = Python3::f(
+    @@
 def f(x):
     """
     Callable<(Int32)->Int32>
@@ -8,7 +9,8 @@ def f(x):
     import time
     time.sleep(60)
     return 0
-@@);
+@@
+);
 SELECT
     $f(0);
 

@@ -10,7 +10,16 @@ $record = (
 );
 
 $recordType = TypeOf(Unwrap($record));
-$udf = Python::MyFunc(CallableType(0, StreamType(VariantType(TupleType($recordType, $recordType))), StreamType($recordType)), $udfScript);
+$udf = Python::MyFunc(
+    CallableType(
+        0,
+        StreamType(
+            VariantType(TupleType($recordType, $recordType))
+        ),
+        StreamType($recordType)
+    ),
+    $udfScript
+);
 $i, $j = (
     PROCESS plato.Input
     USING $udf(TableRows())

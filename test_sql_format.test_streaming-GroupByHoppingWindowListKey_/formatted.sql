@@ -7,13 +7,20 @@ INSERT INTO pq.test_topic_output
 SELECT
     Yson::SerializeText(Yson::From(TableRow()))
 FROM (
-    SELECT
-        Sum(v) AS sum
-    FROM pq.test_topic_input
-        WITH (format = json_each_row, SCHEMA = (t Uint64, k Uint64, v Uint64))
-    GROUP BY
-        k,
-        AsList(1, k),
-        HoppingWindow("PT0.005S", "PT0.01S")
+        SELECT
+            Sum(v) AS sum
+        FROM pq.test_topic_input
+            WITH (
+                format = json_each_row,
+                SCHEMA = (
+                    t Uint64,
+                    k Uint64,
+                    v Uint64
+                )
+            )
+        GROUP BY
+            k,
+            AsList(1, k),
+            HoppingWindow("PT0.005S", "PT0.01S")
 );
 

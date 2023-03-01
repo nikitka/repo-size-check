@@ -4,9 +4,9 @@ $script = @@
 cat - | grep $1 | head -n 3 | grep [234]
 @@;
 $input = (
-    SELECT
-        String::JoinFromList(AsList(key, subkey, value), ",") AS Data
-    FROM plato.Input1
+        SELECT
+            String::JoinFromList(AsList(key, subkey, value), ",") AS Data
+        FROM plato.Input1
 );
 
 PROCESS $input

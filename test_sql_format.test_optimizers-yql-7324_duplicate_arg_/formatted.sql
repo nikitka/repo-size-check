@@ -7,11 +7,11 @@ $to_in_list = ($col) -> {
     RETURN ListMap(String::SplitToList($col, ","), $to_int)
 };
 $input = (
-    SELECT
-        $to_in_list(key) AS event_ids,
-        $to_in_list(subkey) AS test_ids
-    FROM Input
-    WHERE value = "aaa"
+        SELECT
+            $to_in_list(key) AS event_ids,
+            $to_in_list(subkey) AS test_ids
+        FROM Input
+        WHERE value = "aaa"
 );
 
 SELECT

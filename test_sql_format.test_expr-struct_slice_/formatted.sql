@@ -4,8 +4,11 @@ $list = ["a", "b"];
 SELECT
     *
 FROM (
-    SELECT
-        CombineMembers(ChooseMembers($s, $list), <|remain: RemoveMembers($s, $list)|>)
+        SELECT
+            CombineMembers(
+                ChooseMembers($s, $list),
+                <|remain: RemoveMembers($s, $list)|>
+            )
 )
     FLATTEN COLUMNS;
 

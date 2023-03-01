@@ -9,7 +9,11 @@ def f(key, input):
         'pass': 10
       }
 @@;
-$udf_stream = Python3::f(Callable<(String, Stream<Struct<key: String, value: String>>) -> Stream<Struct<key: String, value: String, pass: Int32>>>, $udfScript);
+$udf_stream = Python3::f(
+    Callable<
+        (String, Stream<Struct<key: String, value: String>>) -> Stream<Struct<key: String, value: String, pass: Int32>>
+    >, $udfScript
+);
 REDUCE Input
 ON
     key

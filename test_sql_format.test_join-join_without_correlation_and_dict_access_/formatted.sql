@@ -3,14 +3,14 @@ PRAGMA DisableSimpleColumns;
 /* postgres can not */
 USE plato;
 $data_dict = (
-    SELECT
-        mod,
-        YQL::ToIndexDict(ListSort(aggregate_list(key))) AS dk,
-        ListSort(aggregate_list(subkey)) AS ls,
-        ListSort(aggregate_list(value)) AS lv
-    FROM Input
-    GROUP BY
-        CAST(key AS uint32) % 10 AS mod
+        SELECT
+            mod,
+            YQL::ToIndexDict(ListSort(aggregate_list(key))) AS dk,
+            ListSort(aggregate_list(subkey)) AS ls,
+            ListSort(aggregate_list(value)) AS lv
+        FROM Input
+        GROUP BY
+            CAST(key AS uint32) % 10 AS mod
 );
 
 --INSERT INTO Output

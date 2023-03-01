@@ -1,9 +1,9 @@
 /* postgres can not */
 USE plato;
 $max_key = (
-    SELECT
-        max(key)
-    FROM Input
+        SELECT
+            max(key)
+        FROM Input
 );
 
 SELECT

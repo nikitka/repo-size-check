@@ -9,14 +9,14 @@ $input = (
 );
 
 $request = (
-    SELECT
-        key,
-        subkey,
-        count(*) AS total_count
-    FROM $input
-    WHERE subkey IN (23, 37, 75, 150)
-    GROUP BY
-        ROLLUP (key, subkey)
+        SELECT
+            key,
+            subkey,
+            count(*) AS total_count
+        FROM $input
+        WHERE subkey IN (23, 37, 75, 150)
+        GROUP BY
+            ROLLUP (key, subkey)
 );
 
 --insert into Output

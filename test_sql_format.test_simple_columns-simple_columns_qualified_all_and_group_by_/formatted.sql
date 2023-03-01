@@ -6,11 +6,11 @@ SELECT
     hundred_keys,
     sum(CAST(subkey AS uint32))
 FROM (
-    SELECT
-        data.key AS dkey,
-        data.*
-    FROM Input
-        AS data
+        SELECT
+            data.key AS dkey,
+            data.*
+        FROM Input
+            AS data
 )
     AS middle
 GROUP BY

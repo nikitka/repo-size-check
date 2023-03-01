@@ -11,8 +11,9 @@ SELECT
 FROM Input
 GROUP BY
     GROUPING SETS (
-        (CAST(key AS uint32) / 100 AS kf, key),
-        (Substring(value, 0, 1) AS vf, Substring(value, 2, 1) AS vl))
+            (CAST(key AS uint32) / 100 AS kf, key),
+            (Substring(value, 0, 1) AS vf, Substring(value, 2, 1) AS vl)
+    )
 ORDER BY
     kf,
     key,

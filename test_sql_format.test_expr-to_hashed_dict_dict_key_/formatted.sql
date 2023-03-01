@@ -8,7 +8,11 @@ $second = ($x) -> {
 $i = AsDict(AsTuple(1, "A"), AsTuple(2, "B"));
 $j = AsDict(AsTuple(1, "A"), AsTuple(2, "C"));
 $k = AsDict(AsTuple(1, "A"), AsTuple(2, "D"));
-$l = AsList(AsTuple($i, "foo"), AsTuple($i, "bar"), AsTuple($j, "baz"));
+$l = AsList(
+    AsTuple($i, "foo"),
+    AsTuple($i, "bar"),
+    AsTuple($j, "baz")
+);
 $d = ToDict($l);
 SELECT
     DictKeys($d),

@@ -3,14 +3,20 @@ $func = ($x) -> {
     RETURN $x == 1;
 };
 $structApply = ($strValue, $f) -> {
-    $code = EvaluateCode(LambdaCode(($strCode) -> {
-        $members = StructTypeComponents(TypeHandle(TypeOf($strValue)));
-        RETURN Yql::Fold($members, ReprCode(FALSE), ($item, $state) -> {
-            $member = FuncCode("Member", $strCode, AtomCode($item.Name));
-            $apply = FuncCode("Apply", QuoteCode($f), $member);
-            RETURN FuncCode("Or", $state, $apply);
-        });
-    }));
+    $code = EvaluateCode(
+        LambdaCode(
+            ($strCode) -> {
+                $members = StructTypeComponents(TypeHandle(TypeOf($strValue)));
+                RETURN Yql::Fold(
+                    $members, ReprCode(FALSE), ($item, $state) -> {
+                        $member = FuncCode("Member", $strCode, AtomCode($item.Name));
+                        $apply = FuncCode("Apply", QuoteCode($f), $member);
+                        RETURN FuncCode("Or", $state, $apply);
+                    }
+                );
+            }
+        )
+    );
     RETURN $code($strValue);
 };
 SELECT

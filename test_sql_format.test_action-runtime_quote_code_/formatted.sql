@@ -7,9 +7,15 @@ SELECT
     FormatCode(QuoteCode(($x, $y) -> {
         RETURN $x + $y
     })),
-    ListMap(ListFromRange(1, 4), ($x) -> {
-        RETURN FormatCode(QuoteCode(($y) -> {
-            RETURN $x + $y
-        }))
-    });
+    ListMap(
+        ListFromRange(1, 4), ($x) -> {
+            RETURN FormatCode(
+                QuoteCode(
+                    ($y) -> {
+                        RETURN $x + $y
+                    }
+                )
+            )
+        }
+    );
 

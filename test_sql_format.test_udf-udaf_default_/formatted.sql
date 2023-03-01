@@ -20,7 +20,16 @@ $deserialize = ($state) -> {
 $default = ($result_type) -> {
     RETURN Yql::List($result_type)
 };
-$udaf_factory = AGGREGATION_FACTORY("UDAF", $create, $add, $merge, $get_result, $serialize, $deserialize, $default);
+$udaf_factory = AGGREGATION_FACTORY(
+    "UDAF",
+    $create,
+    $add,
+    $merge,
+    $get_result,
+    $serialize,
+    $deserialize,
+    $default
+);
 SELECT
     ListAggregate(AsList(1, 2), $udaf_factory);
 

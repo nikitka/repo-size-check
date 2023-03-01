@@ -21,15 +21,31 @@ $default = 0;
 $f = AGGREGATION_FACTORY("udaf", $create, $add, $merge, $get_result, $serialize, $deserialize, $default);
 $t = AsList(AsStruct(1 AS a), AsStruct(2 AS a));
 SELECT
-    Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
-        RETURN $z.a
-    }))));
+    Yql::Aggregate(
+        $t, AsTuple(), AsTuple(
+            AsTuple(
+                AsAtom("res"), $f(
+                    ListItemType(TypeOf($t)), ($z) -> {
+                        RETURN $z.a
+                    }
+                )
+            )
+        )
+    );
 
 $t = AsList(AsStruct(1 / 0 AS a), AsStruct(2 / 0 AS a));
 SELECT
-    Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
-        RETURN $z.a
-    }))));
+    Yql::Aggregate(
+        $t, AsTuple(), AsTuple(
+            AsTuple(
+                AsAtom("res"), $f(
+                    ListItemType(TypeOf($t)), ($z) -> {
+                        RETURN $z.a
+                    }
+                )
+            )
+        )
+    );
 
 USE plato;
 INSERT INTO @a

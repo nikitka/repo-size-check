@@ -14,10 +14,10 @@ $list =
 SELECT
     *
 FROM (
-    SELECT
-        if(key = $max, "max", key) AS key,
-        value
-    FROM Input
+        SELECT
+            if(key = $max, "max", key) AS key,
+            value
+        FROM Input
 )
 WHERE key IN COMPACT $list;
 

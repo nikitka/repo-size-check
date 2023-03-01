@@ -10,8 +10,8 @@ FROM Input
     AS a
 WINDOW
     w AS (
-        ORDER BY
-            value DESC
+            ORDER BY
+                value DESC
     )
 ORDER BY
     position_cnt;

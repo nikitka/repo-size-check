@@ -2,12 +2,18 @@
 $list = AsList(3, 1, 2, 3);
 $other_list = AsList(4);
 $bool_list = AsList(TRUE, FALSE, TRUE);
-$struct_list = AsList(AsStruct(1 AS one, 2 AS two), AsStruct(- 1 AS one, - 2 AS two));
+$struct_list = AsList(
+    AsStruct(1 AS one, 2 AS two),
+    AsStruct(- 1 AS one, - 2 AS two)
+);
 $script = @@
 def formula(a, b, c, d):
     return a * b + c // d
 @@;
-$udf = Python3::formula(Callable<(Int64, Int64, Int64, Int64) -> Int64>, $script);
+$udf = Python3::formula(
+    Callable<(Int64, Int64, Int64, Int64) -> Int64>,
+    $script
+);
 $lambdaSum = ($x, $y) -> {
     RETURN $x + $y;
 };

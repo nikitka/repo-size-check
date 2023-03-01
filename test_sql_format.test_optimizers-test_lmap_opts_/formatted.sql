@@ -15,36 +15,39 @@ def processRows(prefix, rowList, separator):
     
     return result;
 @@;
-$udf = Python::processRows(Callable<(String, List<Struct<Name: String, Value: String>>, String) -> List<Struct<Result: String>>>, $udfScript);
+$udf = Python::processRows(
+    Callable<(String, List<Struct<Name: String, Value: String>>, String) -> List<Struct<Result: String>>>,
+    $udfScript
+);
 $data = (
-    SELECT
-        key AS Name,
-        value AS Value
-    FROM plato.Input0
+        SELECT
+            key AS Name,
+            value AS Value
+        FROM plato.Input0
 );
 
 $prefix = ">>";
 $p1 = (
-    PROCESS $data
-    USING $udf($prefix, TableRows(), "=")
-    WHERE Name != "foo"
+        PROCESS $data
+        USING $udf($prefix, TableRows(), "=")
+        WHERE Name != "foo"
 );
 
 $p2 = (
-    SELECT
-        Result AS Data
-    FROM $p1
+        SELECT
+            Result AS Data
+        FROM $p1
 );
 
 $p3 = (
-    PROCESS $p2
-    USING Streaming::Process(TableRows(), "grep", AsList("180"))
+        PROCESS $p2
+        USING Streaming::Process(TableRows(), "grep", AsList("180"))
 );
 
 $p4 = (
-    SELECT
-        Data AS FinalResult
-    FROM $p3
+        SELECT
+            Data AS FinalResult
+        FROM $p3
 );
 
 SELECT

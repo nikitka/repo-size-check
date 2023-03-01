@@ -7,9 +7,9 @@ for line in sys.stdin:
         sys.stdout.write(line)
 @@;
 $input = (
-    SELECT
-        String::JoinFromList(AsList(key, subkey, value), ",") AS Data
-    FROM plato.Input1
+        SELECT
+            String::JoinFromList(AsList(key, subkey, value), ",") AS Data
+        FROM plato.Input1
 );
 
 PROCESS $input

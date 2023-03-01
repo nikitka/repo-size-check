@@ -10,24 +10,24 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-        PARTITION BY
-            value
-        ORDER BY
-            key
+            PARTITION BY
+                value
+            ORDER BY
+                key
     ),
     w1 AS (
-        PARTITION BY
-            value
-        ORDER BY
-            key
-        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+            PARTITION BY
+                value
+            ORDER BY
+                key
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ),
     w2 AS (
-        PARTITION BY
-            value
-        ORDER BY
-            key
-        ROWS BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING
+            PARTITION BY
+                value
+            ORDER BY
+                key
+            ROWS BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING
     )
 ORDER BY
     value,

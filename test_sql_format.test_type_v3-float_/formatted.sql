@@ -5,11 +5,11 @@ INSERT INTO Output
 SELECT
     *
 FROM (
-    SELECT
-        Float("3.14") AS f
-    UNION ALL
-    SELECT
-        Float("1.2") AS f
+        SELECT
+            Float("3.14") AS f
+        UNION ALL
+        SELECT
+            Float("1.2") AS f
 );
 
 COMMIT;

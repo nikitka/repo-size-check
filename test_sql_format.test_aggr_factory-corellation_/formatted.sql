@@ -2,9 +2,17 @@
 $t = AsList(AsStruct(1 AS a), AsStruct(2 AS a));
 $f = AGGREGATION_FACTORY("correlation");
 SELECT
-    Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
-        RETURN AsTuple($z.a, - $z.a)
-    }))));
+    Yql::Aggregate(
+        $t, AsTuple(), AsTuple(
+            AsTuple(
+                AsAtom("res"), $f(
+                    ListItemType(TypeOf($t)), ($z) -> {
+                        RETURN AsTuple($z.a, - $z.a)
+                    }
+                )
+            )
+        )
+    );
 
 USE plato;
 INSERT INTO @a

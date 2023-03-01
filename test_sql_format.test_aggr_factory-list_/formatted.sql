@@ -2,15 +2,31 @@
 $t = AsList(AsStruct(1 AS a), AsStruct(2 AS a));
 $f = AGGREGATION_FACTORY("aggregate_list");
 SELECT
-    Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
-        RETURN $z.a
-    }))));
+    Yql::Aggregate(
+        $t, AsTuple(), AsTuple(
+            AsTuple(
+                AsAtom("res"), $f(
+                    ListItemType(TypeOf($t)), ($z) -> {
+                        RETURN $z.a
+                    }
+                )
+            )
+        )
+    );
 
 $f = AGGREGATION_FACTORY("aggregate_list", length(CAST(Unicode::ToUpper("xx"u) AS String)));
 SELECT
-    Yql::Aggregate($t, AsTuple(), AsTuple(AsTuple(AsAtom("res"), $f(ListItemType(TypeOf($t)), ($z) -> {
-        RETURN $z.a
-    }))));
+    Yql::Aggregate(
+        $t, AsTuple(), AsTuple(
+            AsTuple(
+                AsAtom("res"), $f(
+                    ListItemType(TypeOf($t)), ($z) -> {
+                        RETURN $z.a
+                    }
+                )
+            )
+        )
+    );
 
 USE plato;
 INSERT INTO @a

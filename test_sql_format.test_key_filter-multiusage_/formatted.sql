@@ -1,21 +1,21 @@
 /* postgres can not *//* syntax version 1 */
 USE plato;
 $l = (
-    SELECT
-        t.*,
-        TableName() AS tn
-    FROM CONCAT(Input1, Input2)
-        AS t
-    WHERE key == '023' AND subkey == "3"
+        SELECT
+            t.*,
+            TableName() AS tn
+        FROM CONCAT(Input1, Input2)
+            AS t
+        WHERE key == '023' AND subkey == "3"
 );
 
 $r = (
-    SELECT
-        t.*,
-        TableName() AS tn
-    FROM CONCAT(Input1, Input2)
-        AS t
-    WHERE key == '150' AND subkey == "3"
+        SELECT
+            t.*,
+            TableName() AS tn
+        FROM CONCAT(Input1, Input2)
+            AS t
+        WHERE key == '150' AND subkey == "3"
 );
 
 SELECT

@@ -7,18 +7,18 @@ FROM Input;
 
 COMMIT;
 $input = (
-    SELECT
-        *
-    FROM Input
-    WHERE key != "020"
-    UNION ALL
-    SELECT
-        *
-    FROM @foo
-    UNION ALL
-    SELECT
-        *
-    FROM Input
+        SELECT
+            *
+        FROM Input
+        WHERE key != "020"
+        UNION ALL
+        SELECT
+            *
+        FROM @foo
+        UNION ALL
+        SELECT
+            *
+        FROM Input
 );
 
 SELECT

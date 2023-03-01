@@ -20,13 +20,13 @@ ORDER BY
 
 COMMIT;
 $xy_leftonly = (
-    SELECT
-        x.id AS id
-    FROM @x
-        AS x
-    LEFT ONLY JOIN @y
-        AS y
-    ON x.id == y.id
+        SELECT
+            x.id AS id
+        FROM @x
+            AS x
+        LEFT ONLY JOIN @y
+            AS y
+        ON x.id == y.id
 );
 
 SELECT

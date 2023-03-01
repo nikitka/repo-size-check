@@ -15,7 +15,11 @@ def f(input):
         'value': b''.join(s),
       }
 @@;
-$udf_stream = Python3::f(Callable<(Stream<Struct<key: String, subkey: String, value: String>>) -> Stream<Struct<key: String, subkey1: String, value: String>>>, $udfScript);
+$udf_stream = Python3::f(
+    Callable<
+        (Stream<Struct<key: String, subkey: String, value: String>>) -> Stream<Struct<key: String, subkey1: String, value: String>>
+    >, $udfScript
+);
 $res =
     REDUCE Input0
     PRESORT

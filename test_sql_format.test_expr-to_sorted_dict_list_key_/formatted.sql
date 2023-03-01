@@ -1,5 +1,9 @@
 /* postgres can not */
-$l = AsList(AsTuple(AsList(1, 2, 3), "foo"), AsTuple(AsList(1, 2), "bar"), AsTuple(AsList(1, 2), "baz"));
+$l = AsList(
+    AsTuple(AsList(1, 2, 3), "foo"),
+    AsTuple(AsList(1, 2), "bar"),
+    AsTuple(AsList(1, 2), "baz")
+);
 $d = ToSortedDict($l);
 SELECT
     $d,

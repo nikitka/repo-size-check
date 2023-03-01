@@ -5,7 +5,11 @@ $first = ($x) -> {
 $second = ($x) -> {
     RETURN $x.1
 };
-$l = AsList(AsTuple(AsList(1, 2, 3), "foo"), AsTuple(AsList(1, 2), "bar"), AsTuple(AsList(1, 2), "baz"));
+$l = AsList(
+    AsTuple(AsList(1, 2, 3), "foo"),
+    AsTuple(AsList(1, 2), "bar"),
+    AsTuple(AsList(1, 2), "baz")
+);
 $d = ToDict($l);
 SELECT
     DictKeys($d),

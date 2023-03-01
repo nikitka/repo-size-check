@@ -1,14 +1,14 @@
 USE plato;
 PRAGMA yt.MapJoinLimit = "1M";
 $t = (
-    SELECT
-        l.key AS key,
-        r.subkey AS subkey,
-        l.value || r.value AS value
-    FROM Input1
-        AS l
-    CROSS JOIN Input2
-        AS r
+        SELECT
+            l.key AS key,
+            r.subkey AS subkey,
+            l.value || r.value AS value
+        FROM Input1
+            AS l
+        CROSS JOIN Input2
+            AS r
 );
 
 SELECT

@@ -9,14 +9,14 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-        PARTITION BY
-            user,
-            SessionWindow(ts, 10) AS ss0
+            PARTITION BY
+                user,
+                SessionWindow(ts, 10) AS ss0
     ),
     w1 AS (
-        PARTITION BY
-            SessionWindow(ts, 10),
-            user
+            PARTITION BY
+                SessionWindow(ts, 10),
+                user
     )
 ORDER BY
     user,

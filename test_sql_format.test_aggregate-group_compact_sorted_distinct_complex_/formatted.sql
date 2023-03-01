@@ -3,9 +3,13 @@ USE plato;
 SELECT
     key,
     count(DISTINCT value) AS cnt,
-    ListSort(ListMap(aggregate_list(DISTINCT value), ($x) -> {
-        RETURN DictItems($x)
-    })) AS lst
+    ListSort(
+        ListMap(
+            aggregate_list(DISTINCT value), ($x) -> {
+                RETURN DictItems($x)
+            }
+        )
+    ) AS lst
 FROM (
     SELECT
         key,

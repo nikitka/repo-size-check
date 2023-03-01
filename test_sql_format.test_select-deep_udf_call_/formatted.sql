@@ -1,9 +1,9 @@
 /* postgres can not */
 USE plato;
 $data = (
-    SELECT
-        Math::Pi() * CAST(subkey AS Double) AS rad
-    FROM Input
+        SELECT
+            Math::Pi() * CAST(subkey AS Double) AS rad
+        FROM Input
 );
 
 --INSERT INTO Output

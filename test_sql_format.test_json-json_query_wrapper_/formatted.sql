@@ -1,10 +1,12 @@
 /* syntax version 1 *//* postgres can not */
-$json = CAST(@@{
+$json = CAST(
+    @@{
     "object": {"key": 123},
     "multi_object": [{"key": 123}, {"key": 456}, {"key": 789}],
     "array": [1, 2, 3],
     "multi_array": [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-}@@ AS Json);
+}@@ AS Json
+);
 -- Check JSON_QUERY without wrapper
 SELECT
     JSON_QUERY ($json, "strict $.array"),

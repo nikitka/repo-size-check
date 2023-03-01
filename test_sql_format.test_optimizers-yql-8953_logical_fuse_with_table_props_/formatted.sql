@@ -10,11 +10,11 @@ SELECT
     key,
     count(*) AS subkeys
 FROM (
-    SELECT DISTINCT
-        key,
-        subkey
-    FROM Input
-    WHERE value == 'q'
+        SELECT DISTINCT
+            key,
+            subkey
+        FROM Input
+        WHERE value == 'q'
 )
 GROUP BY
     key;

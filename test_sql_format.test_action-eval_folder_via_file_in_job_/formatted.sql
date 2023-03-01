@@ -7,15 +7,15 @@ def f(s):
 @@;
 $callable = Python3::f(Callable<(String) -> Bool>, $script);
 $list = (
-    SELECT
-        aggregate_list(Path)
-    FROM (
         SELECT
-            Path
-        FROM folder("")
-        WHERE Type = "table" AND $callable(Path)
-        LIMIT 30
-    )
+            aggregate_list(Path)
+        FROM (
+                SELECT
+                    Path
+                FROM folder("")
+                WHERE Type = "table" AND $callable(Path)
+                LIMIT 30
+        )
 );
 
 SELECT

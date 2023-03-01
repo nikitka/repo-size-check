@@ -1,5 +1,9 @@
 /* postgres can not */
-$l = AsList(AsTuple(AsTuple(), Void()), AsTuple(AsTuple(), Void()), AsTuple(AsTuple(), Void()));
+$l = AsList(
+    AsTuple(AsTuple(), Void()),
+    AsTuple(AsTuple(), Void()),
+    AsTuple(AsTuple(), Void())
+);
 $d = ToSortedDict($l);
 SELECT
     $d,
@@ -13,7 +17,11 @@ SELECT
 SELECT
     DictContains($d, AsTuple());
 
-$l = AsList(AsTuple(AsTuple(1), Void()), AsTuple(AsTuple(2), Void()), AsTuple(AsTuple(2), Void()));
+$l = AsList(
+    AsTuple(AsTuple(1), Void()),
+    AsTuple(AsTuple(2), Void()),
+    AsTuple(AsTuple(2), Void())
+);
 $d = ToSortedDict($l);
 SELECT
     $d,
@@ -29,7 +37,11 @@ SELECT
     DictContains($d, AsTuple(2)),
     DictContains($d, AsTuple(3));
 
-$l = AsList(AsTuple(AsTuple(1, 2), Void()), AsTuple(AsTuple(1, 3), Void()), AsTuple(AsTuple(1, 3), Void()));
+$l = AsList(
+    AsTuple(AsTuple(1, 2), Void()),
+    AsTuple(AsTuple(1, 3), Void()),
+    AsTuple(AsTuple(1, 3), Void())
+);
 $d = ToSortedDict($l);
 SELECT
     $d,

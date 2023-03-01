@@ -1,6 +1,11 @@
 /* syntax version 1 *//* postgres can not *//* yt can not *//* ytfile can not *//* dq can not *//* dqfile can not */
 USE plato;
-$TEvent = Struct<uid: Uint64, eventTime: Datetime, eventType: String, osType: String, osVersion: String, appPath: String, appVersion: String, requireAdminPwd: Bool>;
+$TEvent = Struct<
+    uid: Uint64, eventTime: Datetime, eventType: String,
+    osType: String, osVersion: String,
+    appPath: String, appVersion: String,
+    requireAdminPwd: Bool
+>;
 -- parse format
 $process1 =
     PROCESS Input

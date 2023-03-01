@@ -36,10 +36,18 @@ $get_result = Python3::get_result(Callable<(Resource<Python3>) -> String>, $scri
 $serialize = Python3::serialize(Callable<(Resource<Python3>) -> String>, $script);
 $deserialize = Python3::deserialize(Callable<(String) -> Resource<Python3>>, $script);
 SELECT
-    UDAF(DISTINCT item, $create, $add, $merge, $get_result, $serialize, $deserialize)
+    UDAF(
+        DISTINCT item,
+        $create,
+        $add,
+        $merge,
+        $get_result,
+        $serialize,
+        $deserialize
+    )
 FROM (
-    SELECT
-        CAST(LENGTH(value) AS Int64) AS item
-    FROM plato.Input
+        SELECT
+            CAST(LENGTH(value) AS Int64) AS item
+        FROM plato.Input
 );
 

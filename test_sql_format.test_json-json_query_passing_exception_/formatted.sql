@@ -1,8 +1,12 @@
 /* syntax version 1 *//* postgres can not */
-$json = CAST(@@{
+$json = CAST(
+    @@{
     "key": 123
-}@@ AS Json);
+}@@ AS Json
+);
 -- Tuple type is not supported for variables
 SELECT
-    JSON_QUERY ($json, "strict $var" PASSING AsTuple(1, 2) AS var WITH UNCONDITIONAL ARRAY WRAPPER);
+    JSON_QUERY (
+        $json, "strict $var" PASSING AsTuple(1, 2) AS var WITH UNCONDITIONAL ARRAY WRAPPER
+    );
 

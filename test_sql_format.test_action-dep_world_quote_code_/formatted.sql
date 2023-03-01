@@ -1,12 +1,18 @@
 /* syntax version 1 *//* postgres can not */
 USE plato;
 $combineQueries = ($query, $list) -> {
-    RETURN EvaluateCode(LambdaCode(($world) -> {
-        $queries = ListMap($list, ($arg) -> {
-            RETURN FuncCode("Apply", QuoteCode($query), $world, ReprCode($arg))
-        });
-        RETURN FuncCode("Extend", $queries);
-    }));
+    RETURN EvaluateCode(
+        LambdaCode(
+            ($world) -> {
+                $queries = ListMap(
+                    $list, ($arg) -> {
+                        RETURN FuncCode("Apply", QuoteCode($query), $world, ReprCode($arg))
+                    }
+                );
+                RETURN FuncCode("Extend", $queries);
+            }
+        )
+    );
 };
 DEFINE ACTION $aaa($z) AS
     $k = (

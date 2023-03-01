@@ -2,5 +2,9 @@
 PRAGMA warning("disable", "4510");
 PRAGMA warning("disable", "1108");
 SELECT
-    YQL::RangeComputeFor(Struct<x: Uint32>, ($row) -> ($row.x IN ListFromRange(- 1, 10001)), AsTuple(AsAtom("x")));
+    YQL::RangeComputeFor(
+        Struct<x: Uint32>,
+        ($row) -> ($row.x IN ListFromRange(- 1, 10001)),
+        AsTuple(AsAtom("x"))
+    );
 

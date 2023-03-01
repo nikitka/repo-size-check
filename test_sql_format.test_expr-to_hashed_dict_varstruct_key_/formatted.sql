@@ -9,7 +9,11 @@ $vt = ParseType("Variant<a:Int32,b:Uint32>");
 $v1 = VARIANT (1, "a", $vt);
 $v2 = VARIANT (2u, "b", $vt);
 $v3 = VARIANT (2, "a", $vt);
-$l = AsList(AsTuple($v1, "foo"), AsTuple($v2, "bar"), AsTuple($v2, "baz"));
+$l = AsList(
+    AsTuple($v1, "foo"),
+    AsTuple($v2, "bar"),
+    AsTuple($v2, "baz")
+);
 $d = ToDict($l);
 SELECT
     DictKeys($d),

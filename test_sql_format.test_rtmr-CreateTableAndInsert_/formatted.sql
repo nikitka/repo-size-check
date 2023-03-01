@@ -1,8 +1,8 @@
 USE plato;
 CREATE TABLE Output (
-    key String,
-    value String,
-    PRIMARY KEY (key)
+        key String,
+        value String,
+        PRIMARY KEY (key)
 );
 
 INSERT INTO Output

@@ -1,13 +1,13 @@
 /* postgres can not */
 $aggregated = (
-    SELECT
-        Group,
-        Name,
-        SUM(Amount) AS TotalAmount
-    FROM plato.Input1
-    GROUP BY
-        Group,
-        Name
+        SELECT
+            Group,
+            Name,
+            SUM(Amount) AS TotalAmount
+        FROM plato.Input1
+        GROUP BY
+            Group,
+            Name
 );
 
 SELECT

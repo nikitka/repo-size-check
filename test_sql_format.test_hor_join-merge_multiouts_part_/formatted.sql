@@ -11,7 +11,16 @@ $record = (
 );
 
 $recordType = TypeOf(Unwrap($record));
-$udf = Python::MyFunc(CallableType(0, StreamType(VariantType(TupleType($recordType, $recordType, $recordType, $recordType))), StreamType($recordType)), $udfScript);
+$udf = Python::MyFunc(
+    CallableType(
+        0,
+        StreamType(
+            VariantType(TupleType($recordType, $recordType, $recordType, $recordType))
+        ),
+        StreamType($recordType)
+    ),
+    $udfScript
+);
 $i0, $i1, $i2, $i3 = (
     PROCESS plato.Input
     USING $udf(TableRows())
@@ -20,17 +29,17 @@ $i0, $i1, $i2, $i3 = (
 SELECT
     *
 FROM (
-    SELECT
-        *
-    FROM $i0
-    UNION ALL
-    SELECT
-        *
-    FROM $i1
-    UNION ALL
-    SELECT
-        *
-    FROM $i2
+        SELECT
+            *
+        FROM $i0
+        UNION ALL
+        SELECT
+            *
+        FROM $i1
+        UNION ALL
+        SELECT
+            *
+        FROM $i2
 )
 ORDER BY
     key;
@@ -39,16 +48,16 @@ INSERT INTO Output
 SELECT
     *
 FROM (
-    SELECT
-        *
-    FROM $i1
-    UNION ALL
-    SELECT
-        *
-    FROM $i2
-    UNION ALL
-    SELECT
-        *
-    FROM $i3
+        SELECT
+            *
+        FROM $i1
+        UNION ALL
+        SELECT
+            *
+        FROM $i2
+        UNION ALL
+        SELECT
+            *
+        FROM $i3
 );
 

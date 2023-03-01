@@ -1,6 +1,10 @@
 /* postgres can not */
 USE plato;
-$list = AsList(AsList(3, 1), AsList(1, 1), AsList(1),);
+$list = AsList(
+    AsList(3, 1),
+    AsList(1, 1),
+    AsList(1),
+);
 INSERT INTO @foo
 SELECT
     x

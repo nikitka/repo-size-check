@@ -1,10 +1,10 @@
 /* postgres can not */
 USE plato;
 $ctl = (
-    SELECT
-        1 AS join_col,
-        MAX(key) AS max
-    FROM Input
+        SELECT
+            1 AS join_col,
+            MAX(key) AS max
+        FROM Input
 );
 
 INSERT INTO Output
@@ -14,12 +14,12 @@ SELECT
 FROM $ctl;
 
 $in = (
-    SELECT
-        1 AS join_col,
-        key,
-        subkey,
-        value
-    FROM Input
+        SELECT
+            1 AS join_col,
+            key,
+            subkey,
+            value
+        FROM Input
 );
 
 SELECT

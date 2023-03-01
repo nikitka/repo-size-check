@@ -1,5 +1,8 @@
 /* postgres can not */
-$d = AsDict(AsTuple(AsList(1, 2, 3), "foo"), AsTuple(AsList(1, 2), "bar"));
+$d = AsDict(
+    AsTuple(AsList(1, 2, 3), "foo"),
+    AsTuple(AsList(1, 2), "bar")
+);
 SELECT
     $d,
     DictKeys($d),

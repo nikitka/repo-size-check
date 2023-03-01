@@ -9,10 +9,10 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-        PARTITION BY
-            value
-        ORDER BY
-            key
+            PARTITION BY
+                value
+            ORDER BY
+                key
     )
 ORDER BY
     value,

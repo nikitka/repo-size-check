@@ -45,15 +45,15 @@ $udf = YQL::@@(lambda '(key stream) (AsStruct
 SELECT
     *
 FROM (
-    REDUCE concat(@skv1v2, @skv1v2)
-    PRESORT
-        value1,
-        value2
-    ON
-        key,
-        subkey
-    USING $udf(value1)
---YtReduce
+        REDUCE concat(@skv1v2, @skv1v2)
+        PRESORT
+            value1,
+            value2
+        ON
+            key,
+            subkey
+        USING $udf(value1)
+    --YtReduce
 )
 ORDER BY
     key,
@@ -62,15 +62,15 @@ ORDER BY
 SELECT
     *
 FROM (
-    REDUCE @ksv1v2
-    PRESORT
-        value2,
-        value1
-    ON
-        key,
-        subkey
-    USING $udf(value1)
---YtMapReduce
+        REDUCE @ksv1v2
+        PRESORT
+            value2,
+            value1
+        ON
+            key,
+            subkey
+        USING $udf(value1)
+    --YtMapReduce
 )
 ORDER BY
     key,
@@ -79,15 +79,15 @@ ORDER BY
 SELECT
     *
 FROM (
-    REDUCE concat(@skv1v2, @skv2v1)
-    PRESORT
-        value1,
-        value2
-    ON
-        key,
-        subkey
-    USING $udf(value1)
---YtMapReduce
+        REDUCE concat(@skv1v2, @skv2v1)
+        PRESORT
+            value1,
+            value2
+        ON
+            key,
+            subkey
+        USING $udf(value1)
+    --YtMapReduce
 )
 ORDER BY
     key,
@@ -96,15 +96,15 @@ ORDER BY
 SELECT
     *
 FROM (
-    REDUCE concat(@skv1v2, @ksv1v2)
-    PRESORT
-        value1,
-        value2
-    ON
-        key,
-        subkey
-    USING $udf(value1)
---YtMapReduce
+        REDUCE concat(@skv1v2, @ksv1v2)
+        PRESORT
+            value1,
+            value2
+        ON
+            key,
+            subkey
+        USING $udf(value1)
+    --YtMapReduce
 )
 ORDER BY
     key,

@@ -8,12 +8,12 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-        PARTITION COMPACT BY
-            user,
-            SessionWindow(ts, 10)
-        ORDER BY
-            ts
-        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+            PARTITION COMPACT BY
+                user,
+                SessionWindow(ts, 10)
+            ORDER BY
+                ts
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     )
 ORDER BY
     user,

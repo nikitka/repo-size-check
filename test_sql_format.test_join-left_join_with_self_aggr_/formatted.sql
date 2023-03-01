@@ -1,4 +1,37 @@
-$a = [AsStruct('a' AS x, 1 AS y), AsStruct('a' AS x, 1 AS y), AsStruct('a' AS x, 2 AS y), AsStruct('a' AS x, 3 AS y), AsStruct('b' AS x, 1 AS y), AsStruct('b' AS x, 2 AS y), AsStruct('b' AS x, 3 AS y), AsStruct('c' AS x, 1 AS y),];
+$a = [
+    AsStruct(
+        'a' AS x,
+        1 AS y
+    ),
+    AsStruct(
+        'a' AS x,
+        1 AS y
+    ),
+    AsStruct(
+        'a' AS x,
+        2 AS y
+    ),
+    AsStruct(
+        'a' AS x,
+        3 AS y
+    ),
+    AsStruct(
+        'b' AS x,
+        1 AS y
+    ),
+    AsStruct(
+        'b' AS x,
+        2 AS y
+    ),
+    AsStruct(
+        'b' AS x,
+        3 AS y
+    ),
+    AsStruct(
+        'c' AS x,
+        1 AS y
+    ),
+];
 $a =
     SELECT
         x AS bar,
@@ -12,12 +45,12 @@ $b =
     FROM $a
         AS a
     INNER JOIN (
-        SELECT
-            bar,
-            min(foo) AS foo
-        FROM $a
-        GROUP BY
-            bar
+            SELECT
+                bar,
+                min(foo) AS foo
+            FROM $a
+            GROUP BY
+                bar
     )
         AS b
     USING (foo, bar)

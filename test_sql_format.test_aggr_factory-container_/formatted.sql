@@ -27,27 +27,59 @@ SELECT
 
 $factory = AGGREGATION_FACTORY("sum");
 SELECT
-    DictAggregate(DictCreate(ParseType("String"), ParseType("List<Int32>")), $factory);
+    DictAggregate(
+        DictCreate(ParseType("String"), ParseType("List<Int32>")), $factory
+    );
 
 SELECT
-    DictAggregate(AsDict(AsTuple("foo", AsList(1, 3)), AsTuple("bar", AsList(2))), $factory);
+    DictAggregate(
+        AsDict(
+            AsTuple("foo", AsList(1, 3)),
+            AsTuple("bar", AsList(2))
+        ), $factory
+    );
 
 SELECT
-    DictAggregate(Just(AsDict(AsTuple("foo", AsList(1, 3)), AsTuple("bar", AsList(2)))), $factory);
+    DictAggregate(
+        Just(
+            AsDict(
+                AsTuple("foo", AsList(1, 3)),
+                AsTuple("bar", AsList(2))
+            )
+        ), $factory
+    );
 
 SELECT
-    DictAggregate(Nothing(ParseType("Dict<String, List<Int32>>?")), $factory);
+    DictAggregate(
+        Nothing(ParseType("Dict<String, List<Int32>>?")), $factory
+    );
 
 $factory = AGGREGATION_FACTORY("count");
 SELECT
-    DictAggregate(DictCreate(ParseType("String"), ParseType("List<Int32>")), $factory);
+    DictAggregate(
+        DictCreate(ParseType("String"), ParseType("List<Int32>")), $factory
+    );
 
 SELECT
-    DictAggregate(AsDict(AsTuple("foo", AsList(1, 3)), AsTuple("bar", AsList(2))), $factory);
+    DictAggregate(
+        AsDict(
+            AsTuple("foo", AsList(1, 3)),
+            AsTuple("bar", AsList(2))
+        ), $factory
+    );
 
 SELECT
-    DictAggregate(Just(AsDict(AsTuple("foo", AsList(1, 3)), AsTuple("bar", AsList(2)))), $factory);
+    DictAggregate(
+        Just(
+            AsDict(
+                AsTuple("foo", AsList(1, 3)),
+                AsTuple("bar", AsList(2))
+            )
+        ), $factory
+    );
 
 SELECT
-    DictAggregate(Nothing(ParseType("Dict<String, List<Int32>>?")), $factory);
+    DictAggregate(
+        Nothing(ParseType("Dict<String, List<Int32>>?")), $factory
+    );
 

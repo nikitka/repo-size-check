@@ -1,11 +1,14 @@
 /* postgres can not *//* syntax version 1 */
-$makeOpt = Python::makeOpt(Callable<(String, Bool) -> String?>, @@
+$makeOpt = Python::makeOpt(
+    Callable<(String, Bool) -> String?>,
+    @@
 def makeOpt(arg, flag):
     if flag:
         return arg
     else:
         return None
-@@);
+@@
+);
 SELECT
     *
 FROM plato.Input
