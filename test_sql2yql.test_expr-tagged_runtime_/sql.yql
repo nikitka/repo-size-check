@@ -1,0 +1,76 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
+          (let res (Just '((AsTagged (Int32 '"1") '"A") (AsTagged (Just (Int32 '"2")) '"B") (AsTagged (Null) '"C") (AsTagged (Nothing (OptionalType (DataType 'Int32))) '"D") (AsTagged (Nothing (OptionalType (PgType 'int4))) '"E"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"tmp") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"tmp") (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"x") '"0" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"x") '"1" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"x") '"2" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"x") '"3" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (SqlAccess 'struct (Member row '"x") '"4" '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
