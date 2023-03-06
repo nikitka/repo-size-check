@@ -29,7 +29,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table1) '"d") '(subquery0 '"s") '('Cross '"d" '"s" '() '() '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table1) '"d") '((RemoveSystemMembers subquery0) '"s") '('Cross '"d" '"s" '() '() '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"d.key" (lambda '(row) (block '(

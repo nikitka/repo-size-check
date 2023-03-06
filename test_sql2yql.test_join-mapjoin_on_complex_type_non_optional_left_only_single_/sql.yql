@@ -10,10 +10,10 @@
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" '((Member row '"key") '((Member row '"subkey") (Member row '"subkey1")))))
         (return row)
-      ))))) '"A") '((OrderedMap (ToList (AsList (AsStructUnordered '('"key1" (String '"1")) '('"subkey1" (String '"a")) '('"key" (String '"1")) '('"subkey" (String '"a")) '('"value" (String '"value2_1"))) (AsStructUnordered '('"key1" (String '"4")) '('"subkey1" (String '"d")) '('"key" (String '"4")) '('"subkey" (String '"d")) '('"value" (String '"value2_4"))) (AsStructUnordered '('"key1" (String '"-5")) '('"subkey1" (String '"e")) '('"key" (String '"-5")) '('"subkey" (String '"e")) '('"value" (String '"value2_5"))))) (lambda '(row) (block '(
+      ))))) '"A") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"key1" (String '"1")) '('"subkey1" (String '"a")) '('"key" (String '"1")) '('"subkey" (String '"a")) '('"value" (String '"value2_1"))) (AsStructUnordered '('"key1" (String '"4")) '('"subkey1" (String '"d")) '('"key" (String '"4")) '('"subkey" (String '"d")) '('"value" (String '"value2_4"))) (AsStructUnordered '('"key1" (String '"-5")) '('"subkey1" (String '"e")) '('"key" (String '"-5")) '('"subkey" (String '"e")) '('"value" (String '"value2_5"))))) (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_1" '((Member row '"key") '((Member row '"subkey") (Member row '"subkey1")))))
         (return row)
-      )))) '"B") '('LeftOnly '"A" '"B" '('"A" '"_equijoin_column_0") '('"B" '"_equijoin_column_1") '()) '()) (lambda '(row) (block '(
+      ))))) '"B") '('LeftOnly '"A" '"B" '('"A" '"_equijoin_column_0") '('"B" '"_equijoin_column_1") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"A._equijoin_column_0"))
         (let row (ForceRemoveMember row '"B._equijoin_column_1"))
         (return row)

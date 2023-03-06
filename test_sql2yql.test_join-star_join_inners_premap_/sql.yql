@@ -69,7 +69,7 @@
   (let table2 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table2) '"b") '(subquery0 '"a") '(subquery1 '"c") '('Inner '('Inner '"b" '"a" '('"b" '"k2" '"b" '"v2") '('"a" '"k1" '"a" '"v1") '('('left 'any) '('right 'any))) '"c" '('"a" '"k1" '"a" '"v1") '('"c" '"k3" '"c" '"v3") '('('right 'any))) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"b") '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"c") '('Inner '('Inner '"b" '"a" '('"b" '"k2" '"b" '"v2") '('"a" '"k1" '"a" '"v1") '('('left 'any) '('right 'any))) '"c" '('"a" '"k1" '"a" '"v1") '('"c" '"k3" '"c" '"v3") '('('right 'any))) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

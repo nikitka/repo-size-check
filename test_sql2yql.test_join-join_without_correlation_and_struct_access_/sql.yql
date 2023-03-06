@@ -34,7 +34,7 @@
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
         (return row)
-      ))))) '"Input") '(subquery0 '"d") '('Inner '"Input" '"d" '('"Input" '"_equijoin_column_0") '('"d" '"mod") '()) '()) (lambda '(row) (block '(
+      ))))) '"Input") '((RemoveSystemMembers subquery0) '"d") '('Inner '"Input" '"d" '('"Input" '"_equijoin_column_0") '('"d" '"mod") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"Input._equijoin_column_0"))
         (return row)
       )))))

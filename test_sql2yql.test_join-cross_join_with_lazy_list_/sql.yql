@@ -5,9 +5,9 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two"))))) '"l") '((ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
+      (let core (EquiJoin '((RemoveSystemMembers (ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two")))))) '"l") '((RemoveSystemMembers (ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
         (return (AsStruct '('"y" "$i")))
-      ))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
+      )))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
@@ -32,9 +32,9 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
+      (let core (EquiJoin '((RemoveSystemMembers (ToList (ListMap (ListFromRange (Int16 '"1") (Int16 '"3")) (lambda '("$i") (block '(
         (return (AsStruct '('"y" "$i")))
-      ))))) '"l") '((ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two"))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
+      )))))) '"l") '((RemoveSystemMembers (ToList (AsList (AsStruct '('"x" (String '"one"))) (AsStruct '('"x" (String '"two")))))) '"r") '('Cross '"l" '"r" '() '() '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

@@ -71,10 +71,10 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (OrderedMap (EquiJoin '((OrderedMap subquery0 (lambda '(row) (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap subquery0 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" (SafeCast (Member row '"key") (DataType 'Int32))))
         (return row)
-      )))) '"foo") '(subquery1 '"bar") '(subquery2 '"baz") '('Inner '('Inner '"foo" '"bar" '('"foo" '"_equijoin_column_0") '('"bar" '"key") '()) '"baz" '('"bar" '"key") '('"baz" '"key") '()) '()) (lambda '(row) (block '(
+      ))))) '"foo") '((RemoveSystemMembers subquery1) '"bar") '((RemoveSystemMembers subquery2) '"baz") '('Inner '('Inner '"foo" '"bar" '('"foo" '"_equijoin_column_0") '('"bar" '"key") '()) '"baz" '('"bar" '"key") '('"baz" '"key") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"foo._equijoin_column_0"))
         (return row)
       )))))

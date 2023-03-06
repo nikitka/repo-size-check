@@ -33,7 +33,7 @@
   (let table2 (Right! x))
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table2) '"x") '(subquery0 '"y") '('LeftSemi '"x" '"y" '('"x" '"subkey") '('"y" '"subkey") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"x") '((RemoveSystemMembers subquery0) '"y") '('LeftSemi '"x" '"y" '('"x" '"subkey") '('"y" '"subkey") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"x.value" (lambda '(row) (block '(

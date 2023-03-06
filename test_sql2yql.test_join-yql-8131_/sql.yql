@@ -12,7 +12,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table0)
           (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"100")) (Bool 'false)))))
@@ -33,7 +33,7 @@
         (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
         (let select (Take select (Coalesce (Int32 '"100") (Uint64 '18446744073709551615))))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"500")) (Bool 'false)))))
@@ -51,7 +51,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Right '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"b") '('Right '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

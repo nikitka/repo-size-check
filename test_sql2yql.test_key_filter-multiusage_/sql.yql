@@ -57,7 +57,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"lhs") '(subquery1 '"rhs") '('Inner '"lhs" '"rhs" '('"lhs" '"subkey") '('"rhs" '"subkey") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"lhs") '((RemoveSystemMembers subquery1) '"rhs") '('Inner '"lhs" '"rhs" '('"lhs" '"subkey") '('"rhs" '"subkey") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

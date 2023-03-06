@@ -5,7 +5,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Uint8 '"255")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Uint8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Uint8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V")))) '"a") '((OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Int8 '"-1")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Int8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Int8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V")))) '"b") '('Inner '"a" '"b" '('"a" '"K" '"a" '"V") '('"b" '"K" '"b" '"V") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Uint8 '"255")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Uint8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Uint8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V"))))) '"a") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"K" (Int8 '"-1")) '('"V" (Int32 '"1"))) (AsStructUnordered '('"K" (Int8 '"127")) '('"V" (Int32 '"2"))) (AsStructUnordered '('"K" (Int8 '"0")) '('"V" (Int32 '"3"))))) (lambda '(row) (SelectMembers row '('"K" '"V"))))) '"b") '('Inner '"a" '"b" '('"a" '"K" '"a" '"V") '('"b" '"K" '"b" '"V") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.K" (lambda '(row) (block '(

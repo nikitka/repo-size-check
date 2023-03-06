@@ -28,7 +28,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery0 '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery0) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

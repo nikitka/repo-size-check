@@ -37,7 +37,7 @@
   (let table3 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (OrderedMap (EquiJoin '(subquery0 '"l") '((RemoveSystemMembers (OrderedMap table3 (lambda '(row) (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers subquery0) '"l") '((RemoveSystemMembers (OrderedMap table3 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" (Coalesce (Concat (String '"") (Member row '"key")) (String '""))))
         (return row)
       ))))) '"r") '('Left '"l" '"r" '('"l" '"key") '('"r" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(

@@ -32,7 +32,7 @@
     (let select (block '(
       (let core (block '(
         (let select (block '(
-          (let core (EquiJoin '((RemoveSystemMembers table1) '"a") '(subquery0 '"b") '('Inner '"a" '"b" '('"a" '"subkey") '('"b" '"subkey") '()) '()))
+          (let core (EquiJoin '((RemoveSystemMembers table1) '"a") '((RemoveSystemMembers subquery0) '"b") '('Inner '"a" '"b" '('"a" '"subkey") '('"b" '"subkey") '()) '()))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.value" (lambda '(row) (block '(

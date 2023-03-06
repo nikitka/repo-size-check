@@ -64,7 +64,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -81,7 +81,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -98,7 +98,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"k") '('"b" '"k") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"k") '('"b" '"k") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"tr" (lambda '(row) (block '(
@@ -122,7 +122,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -139,7 +139,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -156,7 +156,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"k") '('"b" '"k") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"k") '('"b" '"k") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

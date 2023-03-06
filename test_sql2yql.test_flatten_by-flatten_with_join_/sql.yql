@@ -33,14 +33,14 @@
   (let table2 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (OrderedMap (EquiJoin '((block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (block '(
         (let flatten subquery0)
         (let flatten (OrderedFlatMap flatten (lambda '(row) (block '(
           (let res (FlattenByColumns 'auto row 'lv))
           (return res)
         )))))
         (return flatten)
-      )) '"d") '((RemoveSystemMembers (OrderedMap table2 (lambda '(row) (block '(
+      ))) '"d") '((RemoveSystemMembers (OrderedMap table2 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" ("%" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"10"))))
         (return row)
       ))))) '"j") '('Inner '"d" '"j" '('"d" '"mod") '('"j" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(

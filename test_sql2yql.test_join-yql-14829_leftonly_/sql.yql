@@ -107,7 +107,7 @@
   (let table5 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table5) '"a") '(subquery0 '"b") '('LeftOnly '"a" '"b" '('"a" '"id") '('"b" '"id") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table5) '"a") '((RemoveSystemMembers subquery0) '"b") '('LeftOnly '"a" '"b" '('"a" '"id") '('"b" '"id") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

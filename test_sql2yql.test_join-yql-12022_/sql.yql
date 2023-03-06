@@ -7,7 +7,7 @@
   (let table2 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((UnorderedSubquery (Apply (lambda '(world "$name") (block '(
+      (let core (EquiJoin '((RemoveSystemMembers (UnorderedSubquery (Apply (lambda '(world "$name") (block '(
         (let world (block '(
           (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String (EvaluateAtom "$name"))))) (Void) '()))
           (let table3 (Right! x))
@@ -30,7 +30,7 @@
           (return output)
         )))
         (return world)
-      ))) world (String '"Input"))) '"a") '((RemoveSystemMembers table2) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) world (String '"Input")))) '"a") '((RemoveSystemMembers table2) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlAccess 'struct (RemoveSystemMembers row) '"a.subkey" '('"yson_strict" '"yson_fast")) (String '"wat")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

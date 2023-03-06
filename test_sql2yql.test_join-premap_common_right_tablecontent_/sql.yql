@@ -31,7 +31,7 @@
   (let table2 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (PersistableRepr (block '(
@@ -51,7 +51,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table2)
           (let core (PersistableRepr (block '(
@@ -68,7 +68,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Right '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"b") '('Right '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(

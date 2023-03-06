@@ -58,10 +58,10 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (OrderedMap (EquiJoin '(subquery1 '"top") '((OrderedMap subquery0 (lambda '(row) (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers subquery1) '"top") '((RemoveSystemMembers (OrderedMap subquery0 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" ("/" (Member row '"age") (Int32 '"10"))))
         (return row)
-      )))) '"info") '('Inner '"top" '"info" '('"top" '"age_dec") '('"info" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
+      ))))) '"info") '('Inner '"top" '"info" '('"top" '"age_dec") '('"info" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"info._equijoin_column_0"))
         (return row)
       )))))

@@ -11,11 +11,11 @@
         (let row (AddMember row '"_equijoin_column_0" '((SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"subkey") (DataType 'String)))))
         (let row (AddMember row '"_equijoin_column_1" '((SafeCast (Member row '"key1") (DataType 'Uint64)) (SafeCast (Member row '"subkey1") (DataType 'String)))))
         (return row)
-      ))))) '"A") '((OrderedMap (ToList (AsList (AsStructUnordered '('"key1" (String '"1")) '('"subkey1" (String '"a")) '('"key" (String '"1")) '('"subkey" (String '"a")) '('"value" (String '"value2_1"))) (AsStructUnordered '('"key1" (String '"4")) '('"subkey1" (String '"d")) '('"key" (String '"4")) '('"subkey" (String '"d")) '('"value" (String '"value2_4"))) (AsStructUnordered '('"key1" (String '"-5")) '('"subkey1" (String '"e")) '('"key" (String '"-5")) '('"subkey" (String '"e")) '('"value" (String '"value2_5"))))) (lambda '(row) (block '(
+      ))))) '"A") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"key1" (String '"1")) '('"subkey1" (String '"a")) '('"key" (String '"1")) '('"subkey" (String '"a")) '('"value" (String '"value2_1"))) (AsStructUnordered '('"key1" (String '"4")) '('"subkey1" (String '"d")) '('"key" (String '"4")) '('"subkey" (String '"d")) '('"value" (String '"value2_4"))) (AsStructUnordered '('"key1" (String '"-5")) '('"subkey1" (String '"e")) '('"key" (String '"-5")) '('"subkey" (String '"e")) '('"value" (String '"value2_5"))))) (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_2" '((SafeCast (Member row '"key") (DataType 'Int64)) (SafeCast (Member row '"subkey") (DataType 'Utf8)))))
         (let row (AddMember row '"_equijoin_column_3" '((SafeCast (Member row '"key1") (DataType 'Int64)) (SafeCast (Member row '"subkey1") (DataType 'Utf8)))))
         (return row)
-      )))) '"B") '('LeftSemi '"A" '"B" '('"A" '"_equijoin_column_0" '"A" '"_equijoin_column_1") '('"B" '"_equijoin_column_2" '"B" '"_equijoin_column_3") '()) '()) (lambda '(row) (block '(
+      ))))) '"B") '('LeftSemi '"A" '"B" '('"A" '"_equijoin_column_0" '"A" '"_equijoin_column_1") '('"B" '"_equijoin_column_2" '"B" '"_equijoin_column_3") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"A._equijoin_column_0"))
         (let row (ForceRemoveMember row '"A._equijoin_column_1"))
         (let row (ForceRemoveMember row '"B._equijoin_column_2"))

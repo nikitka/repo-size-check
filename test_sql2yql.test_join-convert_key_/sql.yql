@@ -10,7 +10,7 @@
   (let table1 (Right! x))
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (PersistableRepr (block '(
@@ -30,7 +30,7 @@
           (return core)
         )))
         (return select)
-      )) '"i2") '('Left '"i1" '"i2" '('"i1" '"k1" '"i1" '"k2") '('"i2" '"k1" '"i2" '"k2") '()) '()))
+      ))) '"i2") '('Left '"i1" '"i2" '('"i1" '"k1" '"i1" '"k2") '('"i2" '"k1" '"i2" '"k2") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"i1_k1" (lambda '(row) (block '(

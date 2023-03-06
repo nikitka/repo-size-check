@@ -213,7 +213,7 @@
   (let table6 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table5)
           (let core (PersistableRepr (block '(
@@ -227,7 +227,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table6)
           (let core (PersistableRepr (block '(
@@ -241,7 +241,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

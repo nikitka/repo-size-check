@@ -9,7 +9,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table0)
           (let core (PersistableRepr (block '(
@@ -23,7 +23,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (PersistableRepr (block '(
@@ -40,7 +40,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('RightSemi '"a" '"b" '('"a" '"uk") '('"b" '"uk") '()) '()))
+      ))) '"b") '('RightSemi '"a" '"b" '('"a" '"uk") '('"b" '"uk") '()) '()))
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'bus) 'bus (SqlColumn row '"us" '"b"))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"bus") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SqlColumn row '"uk" '"b")) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SqlColumn row '"uk" '"b")) (Uint64 '0)))) '()) '('"bus")))
       (let core (PersistableRepr (block '(

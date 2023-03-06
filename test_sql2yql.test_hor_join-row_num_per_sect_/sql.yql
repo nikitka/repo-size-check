@@ -59,7 +59,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Left '"a" '"b" '('"a" '"row_num") '('"b" '"row_num") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Left '"a" '"b" '('"a" '"row_num") '('"b" '"row_num") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

@@ -9,7 +9,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table0)
           (let core (PersistableRepr (block '(
@@ -32,7 +32,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (PersistableRepr (block '(
@@ -55,7 +55,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Left '"a" '"b" '('"a" '"akey1" '"a" '"akey1" '"a" '"akey2") '('"b" '"bkey1" '"b" '"bkey2" '"b" '"bkey1") '()) '()))
+      ))) '"b") '('Left '"a" '"b" '('"a" '"akey1" '"a" '"akey1" '"a" '"akey2") '('"b" '"bkey1" '"b" '"bkey2" '"b" '"bkey1") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"akey1" (lambda '(row) (block '(

@@ -50,7 +50,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"diff") '(subquery0 '"taskSuite") '(subquery0 '"pedestrian") '('Left '('Inner '"diff" '"taskSuite" '('"diff" '"previousId") '('"taskSuite" '"id") '()) '"pedestrian" '('"diff" '"taskId") '('"pedestrian" '"id") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"diff") '((RemoveSystemMembers subquery0) '"taskSuite") '((RemoveSystemMembers subquery0) '"pedestrian") '('Left '('Inner '"diff" '"taskSuite" '('"diff" '"previousId") '('"taskSuite" '"id") '()) '"pedestrian" '('"diff" '"taskId") '('"pedestrian" '"id") '()) '()))
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlColumn row '"id" '"diff") (Int32 '"1")) (Bool 'false)))))
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(

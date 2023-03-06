@@ -32,7 +32,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"R0") '(subquery0 '"R1") '(subquery0 '"R2") '('Left '('Left '"R0" '"R1" '('"R0" '"subkey") '('"R1" '"key") '()) '"R2" '('"R1" '"subkey") '('"R2" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"R0") '((RemoveSystemMembers subquery0) '"R1") '((RemoveSystemMembers subquery0) '"R2") '('Left '('Left '"R0" '"R1" '('"R0" '"subkey") '('"R1" '"key") '()) '"R2" '('"R1" '"subkey") '('"R2" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"R0.key" (lambda '(row) (block '(

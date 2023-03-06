@@ -57,7 +57,7 @@
   (let table3 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

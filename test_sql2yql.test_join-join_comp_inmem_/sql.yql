@@ -43,7 +43,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Inner '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Inner '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -70,7 +70,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Right '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Right '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -97,7 +97,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Left '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Left '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -124,7 +124,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('LeftSemi '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('LeftSemi '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -148,7 +148,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('LeftOnly '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('LeftOnly '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -172,7 +172,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('RightSemi '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('RightSemi '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"fff" (lambda '(row) (block '(
@@ -196,7 +196,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('RightOnly '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('RightOnly '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"fff" (lambda '(row) (block '(
@@ -220,7 +220,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Full '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Full '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(
@@ -247,7 +247,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Exclusion '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Exclusion '"a" '"b" '('"a" '"x") '('"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"zzz" (lambda '(row) (block '(

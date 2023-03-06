@@ -12,7 +12,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table0) '"m2") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"m2") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table1)
           (let core (PersistableRepr (block '(
@@ -32,7 +32,7 @@
           (return core)
         )))
         (return select)
-      )) '"pd") '('Inner '"m2" '"pd" '('"m2" '"BaseNo" '"m2" '"PhraseID") '('"pd" '"BaseNo" '"pd" '"PhraseID") '()) '()))
+      ))) '"pd") '('Inner '"m2" '"pd" '('"m2" '"BaseNo" '"m2" '"PhraseID") '('"pd" '"BaseNo" '"pd" '"PhraseID") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"pd.Text" (lambda '(row) (block '(

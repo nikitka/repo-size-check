@@ -122,7 +122,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery1 '"queries") '(subquery4 '"users") '('Inner '"queries" '"users" '('"queries" '"j") '('"users" '"j") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"queries") '((RemoveSystemMembers subquery4) '"users") '('Inner '"queries" '"users" '('"queries" '"j") '('"users" '"j") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

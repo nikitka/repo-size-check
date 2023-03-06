@@ -85,7 +85,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery1 '"a") '(subquery0 '"ctl") '('Left '"a" '"ctl" '('"a" '"join_col") '('"ctl" '"join_col") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"a") '((RemoveSystemMembers subquery0) '"ctl") '('Left '"a" '"ctl" '('"a" '"join_col") '('"ctl" '"join_col") '()) '()))
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (SqlColumn row '"key") (SqlColumn row '"max")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

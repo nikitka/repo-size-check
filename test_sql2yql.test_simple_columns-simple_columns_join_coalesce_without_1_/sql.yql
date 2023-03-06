@@ -5,7 +5,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (block '(
             (let select (block '(
@@ -41,7 +41,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (block '(
             (let select (block '(
@@ -77,7 +77,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"b" (lambda '(row) (block '(
@@ -102,7 +102,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (block '(
             (let select (block '(
@@ -138,7 +138,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"a") '((block '(
+      ))) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (block '(
             (let select (block '(
@@ -174,7 +174,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"x" '"a" '"y") '('"b" '"x" '"b" '"y") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

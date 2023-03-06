@@ -59,7 +59,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"i1") '(subquery1 '"i2") '(subquery0 '"i3") '('Left '('LeftSemi '"i1" '"i2" '('"i1" '"key") '('"i2" '"key") '()) '"i3" '('"i1" '"key") '('"i3" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"i1") '((RemoveSystemMembers subquery1) '"i2") '((RemoveSystemMembers subquery0) '"i3") '('Left '('LeftSemi '"i1" '"i2" '('"i1" '"key") '('"i2" '"key") '()) '"i3" '('"i1" '"key") '('"i3" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"i1" (lambda '(row) (block '(

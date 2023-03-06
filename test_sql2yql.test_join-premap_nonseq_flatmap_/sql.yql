@@ -44,7 +44,7 @@
   (let table0 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '(subquery0 '"h") '('Cross '"a" '"h" '() '() '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers subquery0) '"h") '('Cross '"a" '"h" '() '() '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

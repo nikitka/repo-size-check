@@ -49,7 +49,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"foo") '(subquery1 '"bar") '('Inner '"foo" '"bar" '('"foo" '"key") '('"bar" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"foo") '((RemoveSystemMembers subquery1) '"bar") '('Inner '"foo" '"bar" '('"foo" '"key") '('"bar" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"foo" (lambda '(row) (block '(

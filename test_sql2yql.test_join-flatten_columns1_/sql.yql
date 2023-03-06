@@ -9,7 +9,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let flatten (block '(
           (let select (block '(
             (let core table0)
@@ -33,7 +33,7 @@
           (return res)
         )))))
         (return flatten)
-      )) '"a") '((RemoveSystemMembers table1) '"Input2") '('Inner '"a" '"Input2" '('"a" '"key") '('"Input2" '"key") '()) '()))
+      ))) '"a") '((RemoveSystemMembers table1) '"Input2") '('Inner '"a" '"Input2" '('"a" '"key") '('"Input2" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

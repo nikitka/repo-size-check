@@ -35,10 +35,10 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers table1) '"Input") '((OrderedMap subquery0 (lambda '(row) (block '(
+      (let core (OrderedMap (EquiJoin '((RemoveSystemMembers table1) '"Input") '((RemoveSystemMembers (OrderedMap subquery0 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_0" (SafeCast ("/" (SafeCast (Member row '"kk") (DataType 'Uint32)) (Int32 '"100")) (DataType 'String))))
         (return row)
-      )))) '"d") '('Inner '"Input" '"d" '('"Input" '"subkey") '('"d" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
+      ))))) '"d") '('Inner '"Input" '"d" '('"Input" '"subkey") '('"d" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"d._equijoin_column_0"))
         (return row)
       )))))

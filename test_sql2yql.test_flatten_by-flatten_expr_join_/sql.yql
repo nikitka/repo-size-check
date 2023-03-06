@@ -29,7 +29,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let flatten subquery0)
         (let flatten (OrderedFlatMap flatten (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'aa) 'aa (SqlCall '"String.SplitToList" '((PositionalArgs (Member row '"a") (String '",")))))))))
         (let flatten (OrderedFlatMap flatten (lambda '(row) (block '(
@@ -37,7 +37,7 @@
           (return res)
         )))))
         (return flatten)
-      )) '"x") '((RemoveSystemMembers table1) '"y") '('Inner '"x" '"y" '('"x" '"aa") '('"y" '"key") '('('left 'any))) '()))
+      ))) '"x") '((RemoveSystemMembers table1) '"y") '('Inner '"x" '"y" '('"x" '"aa") '('"y" '"key") '('('left 'any))) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

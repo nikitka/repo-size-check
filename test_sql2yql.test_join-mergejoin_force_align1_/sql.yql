@@ -127,7 +127,7 @@
   (let table7 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (EquiJoin '((RemoveSystemMembers table4) '"a") '((RemoveSystemMembers table5) '"c") '('Inner '"a" '"c" '('"a" '"k1") '('"c" '"k3") '()) '()))
           (let core (PersistableRepr (block '(
@@ -142,7 +142,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"ac") '((block '(
+      ))) '"ac") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (EquiJoin '((RemoveSystemMembers table6) '"b") '((RemoveSystemMembers table7) '"d") '('Inner '"b" '"d" '('"b" '"k2") '('"d" '"k4") '()) '()))
           (let core (PersistableRepr (block '(
@@ -157,7 +157,7 @@
         )))
         (let select (RemoveSystemMembers select))
         (return select)
-      )) '"bd") '('Inner '"ac" '"bd" '('"ac" '"k1" '"ac" '"k3") '('"bd" '"k2" '"bd" '"k4") '()) '()))
+      ))) '"bd") '('Inner '"ac" '"bd" '('"ac" '"k1" '"ac" '"k3") '('"bd" '"k2" '"bd" '"k4") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

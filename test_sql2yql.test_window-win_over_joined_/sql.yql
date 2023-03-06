@@ -5,7 +5,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -19,7 +19,7 @@
           (return core)
         )))
         (return select)
-      )) '"r") '((block '(
+      ))) '"r") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
@@ -33,7 +33,7 @@
           (return core)
         )))
         (return select)
-      )) '"m") '('Inner '"r" '"m" '('"r" '"id") '('"m" '"id") '()) '()))
+      ))) '"m") '('Inner '"r" '"m" '('"r" '"id") '('"m" '"id") '()) '()))
       (let core (CalcOverWindow core '('"r.id") (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_RowNumber0 (RowNumber (TypeOf core)))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

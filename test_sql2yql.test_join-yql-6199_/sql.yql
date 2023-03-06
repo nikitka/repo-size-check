@@ -24,7 +24,7 @@
 (let subquerynode1 (block '(
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a2") '(subquery0 '"b") '('Inner '"a2" '"b" '('"a2" '"key") '('"b" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a2") '((RemoveSystemMembers subquery0) '"b") '('Inner '"a2" '"b" '('"a2" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a2.key" (lambda '(row) (block '(
@@ -46,7 +46,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery1 '"a") '(subquery0 '"d") '('Inner '"a" '"d" '('"a" '"k") '('"d" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"a") '((RemoveSystemMembers subquery0) '"d") '('Inner '"a" '"d" '('"a" '"k") '('"d" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"a" (lambda '(row) (block '(
@@ -70,7 +70,7 @@
 (let subquerynode2 (block '(
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery0 '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery0) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(
@@ -92,7 +92,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery2 '"a") '(subquery0 '"d") '('Inner '"a" '"d" '('"a" '"k") '('"d" '"key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery2) '"a") '((RemoveSystemMembers subquery0) '"d") '('Inner '"a" '"d" '('"a" '"k") '('"d" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"a" (lambda '(row) (block '(

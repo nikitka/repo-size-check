@@ -115,7 +115,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery1 '"L") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"L") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core subquery0)
           (let core (PersistableRepr (block '(
@@ -129,7 +129,7 @@
           (return core)
         )))
         (return select)
-      )) '"R") '('Left '"L" '"R" '('"L" '"manufacturer") '('"R" '"fixed_manufacturer") '()) '()))
+      ))) '"R") '('Left '"L" '"R" '('"L" '"manufacturer") '('"R" '"fixed_manufacturer") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"manufacturer" (lambda '(row) (block '(

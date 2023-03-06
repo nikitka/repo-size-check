@@ -35,7 +35,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table1) '"t") '(subquery0 '"a") '('Inner '"t" '"a" '('"t" '"Group" '"t" '"Name") '('"a" '"Group" '"a" '"Name") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table1) '"t") '((RemoveSystemMembers subquery0) '"a") '('Inner '"t" '"a" '('"t" '"Group" '"t" '"Name") '('"a" '"Group" '"a" '"Name") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"t.Comment" (lambda '(row) (block '(

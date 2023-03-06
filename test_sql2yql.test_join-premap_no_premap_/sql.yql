@@ -10,7 +10,7 @@
   (let table1 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table0)
           (let core (PersistableRepr (block '(
@@ -30,7 +30,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(
@@ -64,7 +64,7 @@
   (let table3 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table2)
           (let core (PersistableRepr (block '(
@@ -84,7 +84,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(
@@ -118,7 +118,7 @@
   (let table5 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table4)
           (let core (PersistableRepr (block '(
@@ -138,7 +138,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((RemoveSystemMembers table5) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"a") '((RemoveSystemMembers table5) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(
@@ -172,7 +172,7 @@
   (let table7 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table6)
           (let core (PersistableRepr (block '(
@@ -192,7 +192,7 @@
           (return core)
         )))
         (return select)
-      )) '"a") '((RemoveSystemMembers table7) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
+      ))) '"a") '((RemoveSystemMembers table7) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"a.key" (lambda '(row) (block '(

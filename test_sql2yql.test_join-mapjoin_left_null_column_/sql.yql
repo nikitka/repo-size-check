@@ -8,7 +8,7 @@
   (let table0 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((ToList (AsList (AsStructUnordered '('"x" (String '"150")) '('"y" (Int32 '"1")) '('"z" (Null))) (AsStructUnordered '('"x" (String '"150")) '('"y" (Int32 '"2")) '('"z" (Null))))) '"b") '('Left '"a" '"b" '('"a" '"key") '('"b" '"x") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers (ToList (AsList (AsStructUnordered '('"x" (String '"150")) '('"y" (Int32 '"1")) '('"z" (Null))) (AsStructUnordered '('"x" (String '"150")) '('"y" (Int32 '"2")) '('"z" (Null)))))) '"b") '('Left '"a" '"b" '('"a" '"key") '('"b" '"x") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

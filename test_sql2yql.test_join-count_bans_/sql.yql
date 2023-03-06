@@ -86,7 +86,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery1 '"results") '(subquery2 '"bans") '('Inner '"results" '"bans" '('"results" '"ip" '"results" '"host") '('"bans" '"ip" '"bans" '"host") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"results") '((RemoveSystemMembers subquery2) '"bans") '('Inner '"results" '"bans" '('"results" '"ip" '"results" '"host") '('"bans" '"ip" '"bans" '"host") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ip" (lambda '(row) (block '(

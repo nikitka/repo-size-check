@@ -5,7 +5,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Left '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"r") '('Left '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
@@ -32,7 +32,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"r") '('LeftSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs"))))) '"r") '('LeftSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
@@ -56,7 +56,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs")))) '"r") '('LeftOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs"))))) '"r") '('LeftOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
@@ -80,7 +80,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Right '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"r") '('Right '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
@@ -107,7 +107,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"r") '('RightSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs"))))) '"r") '('RightSemi '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
@@ -131,7 +131,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs")))) '"r") '('RightOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Rhs"))))) '"r") '('RightOnly '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Rhs" (lambda '(row) (block '(
@@ -155,7 +155,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Inner '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"r") '('Inner '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
@@ -182,7 +182,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Full '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"r") '('Full '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(
@@ -209,7 +209,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"l") '((OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs")))) '"r") '('Exclusion '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) '('"Lhs" (String '"1,2,3"))) (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2") (Int32 '"4"))) '('"Lhs" (String '"1,2,4"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"l") '((RemoveSystemMembers (OrderedMap (ToList (AsList (AsStructUnordered '('"Key" '((Int32 '"1") (Int32 '"2"))) '('"Rhs" (String '"1,2"))) (AsStructUnordered '('"Key" '((Int32 '"2") (Int32 '"3"))) '('"Rhs" (String '"2,3"))))) (lambda '(row) (SelectMembers row '('"Key" '"Lhs" '"Rhs"))))) '"r") '('Exclusion '"l" '"r" '('"l" '"Key") '('"r" '"Key") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"Lhs" (lambda '(row) (block '(

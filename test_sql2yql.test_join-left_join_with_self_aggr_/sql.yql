@@ -27,7 +27,7 @@
 (let subquerynode1 (block '(
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core subquery0)
           (let core (AssumeColumnOrderPartial (Aggregate core '('"bar") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"foo")))))) '()) '('"bar")))
@@ -45,7 +45,7 @@
           (return core)
         )))
         (return select)
-      )) '"b") '('Inner '"a" '"b" '('"a" '"foo" '"a" '"bar") '('"b" '"foo" '"b" '"bar") '()) '()))
+      ))) '"b") '('Inner '"a" '"b" '('"a" '"foo" '"a" '"bar") '('"b" '"foo" '"b" '"bar") '()) '()))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"a.bar") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"a.bar")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -68,7 +68,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '('Left '"a" '"b" '('"a" '"bar") '('"b" '"bar") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '('Left '"a" '"b" '('"a" '"bar") '('"b" '"bar") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

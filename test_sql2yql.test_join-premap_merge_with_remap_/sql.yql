@@ -43,7 +43,7 @@
   (let table3 (Right! x))
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '((RemoveSystemMembers table2) '"pd") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"pd") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table3)
           (let core (PersistableRepr (block '(
@@ -63,7 +63,7 @@
           (return core)
         )))
         (return select)
-      )) '"m2") '('Left '"pd" '"m2" '('"pd" '"BaseNo" '"pd" '"PhraseID") '('"m2" '"BaseNo" '"m2" '"PhraseID") '()) '()))
+      ))) '"m2") '('Left '"pd" '"m2" '('"pd" '"BaseNo" '"pd" '"PhraseID") '('"m2" '"BaseNo" '"m2" '"PhraseID") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"pd.BaseNo" (lambda '(row) (block '(

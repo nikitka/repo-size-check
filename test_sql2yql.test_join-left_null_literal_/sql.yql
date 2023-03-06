@@ -5,7 +5,7 @@
 (let world (block '(
   (let values (block '(
     (let select (block '(
-      (let core (EquiJoin '((ToList (AsList (AsStruct '('"x" (Int32 '"1"))))) '"a") '((ToList (AsList (AsStructUnordered '('"x" (Int32 '"1")) '('"y" (Null))))) '"b") '('Left '"a" '"b" '('"a" '"x") '('"b" '"x") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers (ToList (AsList (AsStruct '('"x" (Int32 '"1")))))) '"a") '((RemoveSystemMembers (ToList (AsList (AsStructUnordered '('"x" (Int32 '"1")) '('"y" (Null)))))) '"b") '('Left '"a" '"b" '('"a" '"x") '('"b" '"x") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

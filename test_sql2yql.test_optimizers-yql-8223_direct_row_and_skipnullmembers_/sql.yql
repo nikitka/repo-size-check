@@ -37,7 +37,7 @@
   (let table2 (Right! x))
   (return '(world (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"t") '((block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"t") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core table2)
           (let core (OrderedFilter core (lambda '(row) (Coalesce ("!=" (Member row '"key") (String '"")) (Bool 'false)))))
@@ -58,7 +58,7 @@
           (return core)
         )))
         (return select)
-      )) '"info") '('Inner '"t" '"info" '('"t" '"key") '('"info" '"key") '()) '()))
+      ))) '"info") '('Inner '"t" '"info" '('"t" '"key") '('"info" '"key") '()) '()))
       (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn '((String '"023") (String '"150")) (SqlColumn row '"key" '"t") '('('ansi))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

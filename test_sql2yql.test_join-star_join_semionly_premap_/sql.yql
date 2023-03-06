@@ -97,7 +97,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (EquiJoin '(subquery0 '"a") '(subquery1 '"b") '(subquery2 '"c") '('LeftOnly '('LeftSemi '"a" '"b" '('"a" '"k1") '('"b" '"k2") '()) '"c" '('"a" '"k1") '('"c" '"k3") '()) '()))
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers subquery1) '"b") '((RemoveSystemMembers subquery2) '"c") '('LeftOnly '('LeftSemi '"a" '"b" '('"a" '"k1") '('"b" '"k2") '()) '"c" '('"a" '"k1") '('"c" '"k3") '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
