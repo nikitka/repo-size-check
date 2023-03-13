@@ -1,0 +1,8 @@
+USE plato;
+INSERT INTO Output
+    WITH MONOTONIC_KEYS
+SELECT
+    1 AS key
+ORDER BY
+    key;
+
