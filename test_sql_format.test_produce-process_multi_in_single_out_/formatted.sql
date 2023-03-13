@@ -1,5 +1,4 @@
 /* syntax version 1 *//* postgres can not */
-PRAGMA Dq.EnableDqReplicate = "1";
 $udf = YQL::@@
 (lambda '(stream)
     (PartitionByKey stream
@@ -19,17 +18,13 @@ $udf = YQL::@@
     )
 )
 @@;
-$i = (
-    PROCESS plato.Input0, (
-        SELECT
-            *
-        FROM plato.Input0
-        WHERE key > "100"
-    )
-    USING $udf(TableRows())
-);
-
-SELECT
-    *
-FROM $i;
+INSERT INTO plato.Output
+    WITH TRUNCATE
+PROCESS plato.Input0, (
+    SELECT
+        *
+    FROM plato.Input0
+    WHERE key > "100"
+)
+USING $udf(TableRows());
 
