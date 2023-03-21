@@ -4,7 +4,7 @@
 (import core_module '"/lib/yql/core.yql")
 (let world (block '(
   (let sink (DataSink '"rtmr" '"plato"))
-  (let world (Write! world sink (Key '('tablescheme (String '"Output"))) (Void) '('('mode 'create) '('columns '('('"a" (OptionalType (DataType 'Int32))) '('"b" (OptionalType (DataType 'String))) '('"c" (OptionalType (DataType 'Json))) '('"d" (OptionalType (ListType (DataType 'Uint64)))) '('"e" (DataType 'Double)) '('"f" (OptionalType (DataType 'Float))) '('"g" (OptionalType (DataType 'String))))) '('partitionby '('"a" '"b")) '('orderby '('('"e" '0) '('"f" '0) '('"g" '1))))))
+  (let world (Write! world sink (Key '('tablescheme (String '"Output"))) (Void) '('('mode 'create) '('columns '('('"a" (AsOptionalType (DataType 'Int32))) '('"b" (AsOptionalType (DataType 'String))) '('"c" (AsOptionalType (DataType 'Json))) '('"d" (AsOptionalType (ListType (DataType 'Uint64)))) '('"e" (DataType 'Double)) '('"f" (AsOptionalType (DataType 'Float))) '('"g" (AsOptionalType (DataType 'String))))) '('notnull '('"e")) '('partitionby '('"a" '"b")) '('orderby '('('"e" '0) '('"f" '0) '('"g" '1))))))
   (return world)
 )))
 (let world (block '(

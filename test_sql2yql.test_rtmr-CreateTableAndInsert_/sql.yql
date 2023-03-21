@@ -4,7 +4,7 @@
 (import core_module '"/lib/yql/core.yql")
 (let world (block '(
   (let sink (DataSink '"rtmr" '"plato"))
-  (let world (Write! world sink (Key '('tablescheme (String '"Output"))) (Void) '('('mode 'create) '('columns '('('"key" (OptionalType (DataType 'String))) '('"value" (OptionalType (DataType 'String))))) '('primarykey '('"key")))))
+  (let world (Write! world sink (Key '('tablescheme (String '"Output"))) (Void) '('('mode 'create) '('columns '('('"key" (AsOptionalType (DataType 'String))) '('"value" (AsOptionalType (DataType 'String))))) '('primarykey '('"key")))))
   (return world)
 )))
 (let world (block '(
