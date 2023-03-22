@@ -3,5 +3,5 @@
 -- In this case exception must be raised.
 $json = CAST("{}" AS Json);
 SELECT
-    JSON_VALUE ($json, "strict $.key" RETURNING Uint16 DEFAULT - 123 ON ERROR);
+    JSON_VALUE ($json, "strict $.key" RETURNING Uint16 DEFAULT -123 ON ERROR);
 

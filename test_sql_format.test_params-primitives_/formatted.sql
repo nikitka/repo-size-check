@@ -28,11 +28,11 @@ DECLARE $x22 AS Void;
 DECLARE $x23 AS Decimal (21, 8);
 SELECT
     2 * $x1,
-    - $x2 * 10,
+    -$x2 * 10,
     NOT $x3,
-    - $x4,
+    -$x4,
     $x5 || "2018",
-    - $x6,
+    -$x6,
     $x7 + 1,
     Length($x8),
     Unicode::GetLength($x9),

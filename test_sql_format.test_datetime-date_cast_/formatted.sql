@@ -75,13 +75,13 @@ SELECT
     CAST(1l AS Date);
 
 SELECT
-    CAST(- 1 AS Date);
+    CAST(-1 AS Date);
 
 SELECT
     CAST(1 / 1 AS Date);
 
 SELECT
-    CAST(- 1 / 1 AS Date);
+    CAST(-1 / 1 AS Date);
 
 /* postgres can not */
 SELECT
@@ -160,13 +160,13 @@ SELECT
     CAST(1l AS Date);
 
 SELECT
-    CAST(- 1 AS Date);
+    CAST(-1 AS Date);
 
 SELECT
     CAST(1 / 1 AS Date);
 
 SELECT
-    CAST(- 1 / 1 AS Date);
+    CAST(-1 / 1 AS Date);
 
 SELECT
     CAST(1 / 0 AS Date);
@@ -187,13 +187,13 @@ SELECT
     CAST(1l AS Datetime);
 
 SELECT
-    CAST(- 1 AS Datetime);
+    CAST(-1 AS Datetime);
 
 SELECT
     CAST(1 / 1 AS Datetime);
 
 SELECT
-    CAST(- 1 / 1 AS Datetime);
+    CAST(-1 / 1 AS Datetime);
 
 SELECT
     CAST(1 / 0 AS Datetime);
@@ -214,13 +214,13 @@ SELECT
     CAST(1l AS Timestamp);
 
 SELECT
-    CAST(- 1 AS Timestamp);
+    CAST(-1 AS Timestamp);
 
 SELECT
     CAST(1 / 1 AS Timestamp);
 
 SELECT
-    CAST(- 1 / 1 AS Timestamp);
+    CAST(-1 / 1 AS Timestamp);
 
 SELECT
     CAST(1 / 0 AS Timestamp);
@@ -232,22 +232,22 @@ SELECT
     CAST(1u AS Interval);
 
 SELECT
-    CAST(- 1 AS Interval);
+    CAST(-1 AS Interval);
 
 SELECT
     CAST(1ul AS Interval);
 
 SELECT
-    CAST(- 1l AS Interval);
+    CAST(-1l AS Interval);
 
 SELECT
-    CAST(- 1 AS Interval);
+    CAST(-1 AS Interval);
 
 SELECT
     CAST(1 / 1 AS Interval);
 
 SELECT
-    CAST(- 1 / 1 AS Interval);
+    CAST(-1 / 1 AS Interval);
 
 SELECT
     CAST(1 / 0 AS Interval);

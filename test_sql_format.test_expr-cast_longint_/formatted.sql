@@ -1,5 +1,5 @@
 /* postgres can not */
-$value = CAST(- 7 AS Decimal (10, 0));
+$value = CAST(-7 AS Decimal (10, 0));
 SELECT
     $value AS binary,
     CAST($value AS String) AS to_string,

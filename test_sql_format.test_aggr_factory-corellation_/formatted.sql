@@ -7,7 +7,7 @@ SELECT
             AsTuple(
                 AsAtom("res"), $f(
                     ListItemType(TypeOf($t)), ($z) -> {
-                        RETURN AsTuple($z.a, - $z.a)
+                        RETURN AsTuple($z.a, -$z.a)
                     }
                 )
             )
@@ -17,7 +17,7 @@ SELECT
 USE plato;
 INSERT INTO @a
 SELECT
-    AsTuple(a, - a) AS aa
+    AsTuple(a, -a) AS aa
 FROM as_table($t);
 
 COMMIT;

@@ -5,7 +5,7 @@ PRAGMA warning("disable", "1108");
 SELECT
     YQL::RangeComputeFor(
         Struct<x: UInt32>,
-        ($row) -> ($row.x IN (1, 2, - 1)),
+        ($row) -> ($row.x IN (1, 2, -1)),
         AsTuple(AsAtom("x"))
     );
 
@@ -13,7 +13,7 @@ SELECT
 SELECT
     YQL::RangeComputeFor(
         Struct<x: UInt32>,
-        ($row) -> ($row.x IN ListFromRange(- 1, 3)),
+        ($row) -> ($row.x IN ListFromRange(-1, 3)),
         AsTuple(AsAtom("x"))
     );
 
@@ -21,7 +21,7 @@ SELECT
 SELECT
     YQL::RangeComputeFor(
         Struct<x: UInt32>,
-        ($row) -> (($row.x IN Just(AsSet(- 1, 1, 2))) ?? FALSE),
+        ($row) -> (($row.x IN Just(AsSet(-1, 1, 2))) ?? FALSE),
         AsTuple(AsAtom("x"))
     );
 
@@ -29,7 +29,7 @@ SELECT
 SELECT
     YQL::RangeComputeFor(
         Struct<x: UInt32>,
-        ($row) -> (($row.x IN (- 1, 10u, 20, 1 / 0)) ?? FALSE),
+        ($row) -> (($row.x IN (-1, 10u, 20, 1 / 0)) ?? FALSE),
         AsTuple(AsAtom("x"))
     );
 

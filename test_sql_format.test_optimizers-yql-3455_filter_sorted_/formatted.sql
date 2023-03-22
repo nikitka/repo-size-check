@@ -17,7 +17,7 @@ FROM (
         *
     FROM Input
     ORDER BY
-        - CAST(subkey AS Int32)
+        -CAST(subkey AS Int32)
     LIMIT 5
 );
 

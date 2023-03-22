@@ -5,7 +5,7 @@ PRAGMA warning("disable", "1108");
 SELECT
     YQL::RangeComputeFor(
         Struct<x: UInt32>,
-        ($row) -> ($row.x IN ListFromRange(- 100, 100)),
+        ($row) -> ($row.x IN ListFromRange(-100, 100)),
         AsTuple(AsAtom("x"))
     );
 

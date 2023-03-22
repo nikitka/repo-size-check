@@ -1,6 +1,6 @@
 /* postgres can not */-- not supported on windows
 $value = "1000000000000";
-$negative = - 1000000000000;
+$negative = -1000000000000;
 $longint = YQL::StrictFromString($value, AsAtom("Decimal"), AsAtom("32"), AsAtom("0"));
 $negative_longint = CAST($negative AS Decimal (32, 0));
 $add = $longint + CAST("1111111111111111111111111111111" AS Decimal (32, 0));

@@ -34,7 +34,7 @@ SELECT
     1ut,
     1.,
     2.f,
-    Math::Round(3.14f, - 3),
+    Math::Round(3.14f, -3),
     1.e2f,
     1.0e2f;
 
@@ -47,7 +47,7 @@ SELECT
     1Ut,
     1.,
     2.f,
-    Math::Round(3.14F, - 3),
+    Math::Round(3.14F, -3),
     1.e2f,
     1.0E2F;
 

@@ -60,13 +60,13 @@ SELECT
     CAST(1l AS TzDate);
 
 SELECT
-    CAST(- 1 AS TzDate);
+    CAST(-1 AS TzDate);
 
 SELECT
     CAST(1 / 1 AS TzDate);
 
 SELECT
-    CAST(- 1 / 1 AS TzDate);
+    CAST(-1 / 1 AS TzDate);
 
 SELECT
     CAST(1ut AS TzDatetime);
@@ -84,13 +84,13 @@ SELECT
     CAST(1l AS TzDatetime);
 
 SELECT
-    CAST(- 1 AS TzDatetime);
+    CAST(-1 AS TzDatetime);
 
 SELECT
     CAST(1 / 1 AS TzDatetime);
 
 SELECT
-    CAST(- 1 / 1 AS TzDatetime);
+    CAST(-1 / 1 AS TzDatetime);
 
 SELECT
     CAST(1 / 0 AS TzDatetime);
@@ -111,13 +111,13 @@ SELECT
     CAST(1l AS TzTimestamp);
 
 SELECT
-    CAST(- 1 AS TzTimestamp);
+    CAST(-1 AS TzTimestamp);
 
 SELECT
     CAST(1 / 1 AS TzTimestamp);
 
 SELECT
-    CAST(- 1 / 1 AS TzTimestamp);
+    CAST(-1 / 1 AS TzTimestamp);
 
 SELECT
     CAST(1 / 0 AS TzTimestamp);

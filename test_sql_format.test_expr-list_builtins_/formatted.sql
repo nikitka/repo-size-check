@@ -4,7 +4,7 @@ $other_list = AsList(4);
 $bool_list = AsList(TRUE, FALSE, TRUE);
 $struct_list = AsList(
     AsStruct(1 AS one, 2 AS two),
-    AsStruct(- 1 AS one, - 2 AS two)
+    AsStruct(-1 AS one, -2 AS two)
 );
 $script = @@
 def formula(a, b, c, d):

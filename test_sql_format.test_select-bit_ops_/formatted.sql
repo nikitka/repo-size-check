@@ -7,6 +7,6 @@ SELECT
     LENGTH(key) > > 1 AS shr_res,
     LENGTH(key) |<< 15 AS rotl_res,
     LENGTH(key) > > | 15 AS rotr_res,
-    ~ LENGTH(key) AS not_res
+    ~LENGTH(key) AS not_res
 FROM plato.Input;
 

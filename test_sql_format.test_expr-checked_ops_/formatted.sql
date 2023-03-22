@@ -6,8 +6,8 @@ SELECT
 
 SELECT
     5 - 3,
-    - 120t - 100t,
-    - 9223372036854775807L - 2l;
+    -120t - 100t,
+    -9223372036854775807L - 2l;
 
 SELECT
     5 * 3,
@@ -23,5 +23,5 @@ SELECT
     100t % 200ut;
 
 SELECT
-    - CAST("-128" AS int8);
+    -CAST("-128" AS int8);
 

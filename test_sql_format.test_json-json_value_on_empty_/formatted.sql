@@ -21,6 +21,6 @@ SELECT
 SELECT
     JSON_VALUE (
         $json,
-        "lax $.key" RETURNING Uint16 DEFAULT - 123 ON EMPTY DEFAULT 456 ON ERROR
+        "lax $.key" RETURNING Uint16 DEFAULT -123 ON EMPTY DEFAULT 456 ON ERROR
     );
 

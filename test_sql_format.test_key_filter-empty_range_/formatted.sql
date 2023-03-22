@@ -2,22 +2,22 @@ USE plato;
 SELECT
     *
 FROM InputInt8
-WHERE value < - 4 AND value > 10;
+WHERE value < -4 AND value > 10;
 
 SELECT
     *
 FROM InputInt16
-WHERE value < - 4 AND value > 10;
+WHERE value < -4 AND value > 10;
 
 SELECT
     *
 FROM InputInt32
-WHERE value < - 4 AND value > 10;
+WHERE value < -4 AND value > 10;
 
 SELECT
     *
 FROM InputInt64
-WHERE value < - 4 AND value > 10;
+WHERE value < -4 AND value > 10;
 
 SELECT
     *

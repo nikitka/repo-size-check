@@ -6,7 +6,7 @@ SELECT
     AsTuple() == AsTuple();
 
 SELECT
-    AsTuple(0xffffffffu) == AsTuple(- 1);
+    AsTuple(0xffffffffu) == AsTuple(-1);
 
 SELECT
     AsTuple(1, 2 / 0) < AsTuple(10, 1);
