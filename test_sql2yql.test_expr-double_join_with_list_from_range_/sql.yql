@@ -1,0 +1,123 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (block '(
+            (let select (block '(
+              (let core (AsList (AsStruct)))
+              (let core (PersistableRepr (block '(
+                (let projectCoreType (TypeOf core))
+                (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"lst" (lambda '(row) (block '(
+                  (let res (ListFromRange (Uint16 '"1") (Uint16 '"333")))
+                  (return res)
+                )))))))
+                (return core)
+              ))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let core (OrderedFlatMap core (lambda '(row) (block '(
+            (let res (FlattenByColumns 'list row 'lst))
+            (return res)
+          )))))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"lst")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_RowNumber0 (RowNumber (TypeOf core)))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"lst" (lambda '(row) (block '(
+          (let res (Member row '"lst"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rn" (lambda '(row) (block '(
+          (let res (Member row '_yql_RowNumber0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
+          (let res ("+" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"3")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"age1" (lambda '(row) (block '(
+          (let res ("+" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"7")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"u") '((RemoveSystemMembers subquery0) '"l1") '((RemoveSystemMembers subquery0) '"l2") '('Inner '('Inner '"u" '"l1" '('"u" '"age") '('"l1" '"lst") '()) '"l2" '('"u" '"age1") '('"l2" '"lst") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"u" (lambda '(row) (block '(
+          (let res (DivePrefixMembers row '('"u.")))
+          (return res)
+        ))) '('('divePrefix '('"u.")))) (SqlProjectItem projectCoreType '"rn1" (lambda '(row) (block '(
+          (let res (SqlColumn row '"rn" '"l1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"rn2" (lambda '(row) (block '(
+          (let res (SqlColumn row '"rn" '"l2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
