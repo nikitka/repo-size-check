@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Avg1 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int8)))))) '('Avg2 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Uint16)))))) '('Avg3 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Avg4 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") (Uint32 '"0")))))) '('Avg5 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"2"))))) '('Avg6 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Member row '"key") (Null)))))) '('Avg7 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Member row '"key") (Null))))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Avg1 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int8)))))) '('Avg2 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Uint16)))))) '('Avg3 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Avg4 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") (Uint32 '"0")))))) '('Avg5 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"2"))))) '('Avg6 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Member row '"key") (Null)))))) '('Avg7 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Member row '"key") (Null)))))) '('Avg8 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("==" (Member row '"key") (Uint32 '"10"))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
@@ -36,6 +36,9 @@
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
           (let res (Member row 'Avg7))
           (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (Member row 'Avg8))
+          (return res)
         )))))))
         (return core)
       ))))
@@ -46,7 +49,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8")))))
     (return (Commit! world result_sink))
   )))
   (return world)
