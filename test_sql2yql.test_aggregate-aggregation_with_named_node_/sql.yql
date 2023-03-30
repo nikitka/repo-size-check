@@ -30,7 +30,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Percentile0 (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Double '"0.1"))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Percentile0 (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Double '"0.1"))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"quantile" (lambda '(row) (block '(

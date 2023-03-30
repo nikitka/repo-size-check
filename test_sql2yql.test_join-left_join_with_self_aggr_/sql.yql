@@ -30,7 +30,7 @@
       (let core (EquiJoin '((RemoveSystemMembers subquery0) '"a") '((RemoveSystemMembers (block '(
         (let select (block '(
           (let core subquery0)
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"bar") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"foo")))))) '()) '('"bar")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"bar") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"foo")))))) '()) '('"bar")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"bar" (lambda '(row) (block '(
@@ -46,7 +46,7 @@
         )))
         (return select)
       ))) '"b") '('Inner '"a" '"b" '('"a" '"foo" '"a" '"bar") '('"b" '"foo" '"b" '"bar") '()) '()))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"a.bar") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"a.bar")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"a.bar") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"a.bar")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"bar" (lambda '(row) (block '(

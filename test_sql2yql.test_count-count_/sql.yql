@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"a") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"b")) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"a")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"a") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"b")) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"a")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
@@ -41,7 +41,7 @@
   (let output (block '(
     (let select (block '(
       (let core table1)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"b") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"b")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"b") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"b")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"b" (lambda '(row) (block '(
@@ -74,7 +74,7 @@
   (let output (block '(
     (let select (block '(
       (let core table2)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"c") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"c")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"c") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"c")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
@@ -107,7 +107,7 @@
   (let output (block '(
     (let select (block '(
       (let core table3)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"d") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"d")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"d") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"d")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"d" (lambda '(row) (block '(
@@ -140,7 +140,7 @@
   (let output (block '(
     (let select (block '(
       (let core table4)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"e") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"e")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"e") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"a")) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"e")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"e" (lambda '(row) (block '(

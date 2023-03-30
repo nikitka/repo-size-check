@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (NewMTRand (Int32 '"1"))))))) '()) '('"key")) (lambda '(row) (Coalesce (">" (SqlAccess 'struct (NextMtRand (Member row 'Some0)) '"0" '('"yson_strict" '"yson_fast")) (Int32 '"100")) (Bool 'false)))))
+      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (NewMTRand (Int32 '"1"))))))) '()) '('"key")) (lambda '(row) (Coalesce (">" (SqlAccess 'struct (NextMtRand (Member row 'Some0)) '"0" '('"yson_strict" '"yson_fast")) (Int32 '"100")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

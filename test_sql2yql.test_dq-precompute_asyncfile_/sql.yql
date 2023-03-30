@@ -10,7 +10,7 @@
     (let select (block '(
       (let core table0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn (Apply (Udf 'File.ByLines (Void) (TupleType (TupleType (DataType 'String)) (StructType) (TupleType))) (FilePath '"list.txt")) (Member row '"key") '('('warnNoAnsi))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

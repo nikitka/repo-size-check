@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'key) 'key ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

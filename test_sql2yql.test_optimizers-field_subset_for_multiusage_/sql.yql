@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn '((String '"1") (String '"2") (String '"3") (String '"4")) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1"))))) '('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1"))))) '('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -42,7 +42,7 @@
   (let output (block '(
     (let select (block '(
       (let core table1)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1"))))) '('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1"))))) '('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(

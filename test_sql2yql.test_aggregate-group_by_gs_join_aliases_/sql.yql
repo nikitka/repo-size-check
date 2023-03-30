@@ -14,7 +14,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1" '"k2")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1" '"k2")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -44,7 +44,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k1") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k1")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -75,7 +75,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 (SqlColumn row '"key" '"a")) 'k2) 'k2 (SqlColumn row '"subkey" '"b"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"k2") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k2")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k2") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k2")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

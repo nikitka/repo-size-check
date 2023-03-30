@@ -33,7 +33,7 @@
             )))
             (return select)
           )))
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"a") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"b")) (lambda '(row) (PersistableRepr row))) '"b") '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"c"))))) '('('Median0 'Percentile0) (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"c")) '((Double '0.5) (Double '"0.8"))))) '()) '('"a")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"a") '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"b"))) (lambda '(row) (PersistableRepr row))) '"b") '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"c"))))) '('('Median0 'Percentile0) (Apply (bind aggregate_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"c")) '((Double '0.5) (Double '"0.8"))))) '()) '('"a")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(

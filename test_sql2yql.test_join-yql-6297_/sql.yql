@@ -52,7 +52,7 @@
     (let select (block '(
       (let core (EquiJoin '((RemoveSystemMembers subquery0) '"diff") '((RemoveSystemMembers subquery0) '"taskSuite") '((RemoveSystemMembers subquery0) '"pedestrian") '('Left '('Inner '"diff" '"taskSuite" '('"diff" '"previousId") '('"taskSuite" '"id") '()) '"pedestrian" '('"diff" '"taskId") '('"pedestrian" '"id") '()) '()))
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlColumn row '"id" '"diff") (Int32 '"1")) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

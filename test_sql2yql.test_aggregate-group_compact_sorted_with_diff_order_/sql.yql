@@ -159,7 +159,7 @@
   (let output (block '(
     (let select (block '(
       (let core table8)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key" '"subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key" '"subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -192,7 +192,7 @@
   (let output (block '(
     (let select (block '(
       (let core table9)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key" '"subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key" '"subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -258,7 +258,7 @@
   (let output (block '(
     (let select (block '(
       (let core table11)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey" '"value") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key")))))) '('('compact))) '('"subkey" '"value")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey" '"value") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '('('compact))) '('"subkey" '"value")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

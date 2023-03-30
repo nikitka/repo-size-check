@@ -31,7 +31,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

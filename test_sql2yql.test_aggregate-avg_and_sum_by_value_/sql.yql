@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"value") '('('Avg0 (Apply (bind aggregate_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '('"value")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"value") '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"subkey") (DataType 'Int32))))))) '()) '('"value")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

@@ -12,7 +12,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1"))) 'vl) 'vl (Substring (Member row '"value") (Int32 '"2") (Int32 '"1")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kf" '"vf") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kf" '"vf")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kf" '"vf") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kf" '"vf")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -52,7 +52,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1"))) 'vl) 'vl (Substring (Member row '"value") (Int32 '"2") (Int32 '"1")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kf" '"vl") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kf" '"vl")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kf" '"vl") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kf" '"vl")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -92,7 +92,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1"))) 'vl) 'vl (Substring (Member row '"value") (Int32 '"2") (Int32 '"1")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kl" '"vf") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kl" '"vf")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kl" '"vf") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kl" '"vf")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -132,7 +132,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1"))) 'vl) 'vl (Substring (Member row '"value") (Int32 '"2") (Int32 '"1")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kl" '"vl") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kl" '"vl")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kl" '"vl") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kl" '"vl")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

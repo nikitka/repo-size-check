@@ -8,7 +8,7 @@
   (let values (OrderedMap (block '(
     (let select (block '(
       (let core table1)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key" '"subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key" '"subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

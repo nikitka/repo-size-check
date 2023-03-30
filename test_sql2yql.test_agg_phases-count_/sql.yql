@@ -26,7 +26,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (AggregateCombine core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateCombine core '('"key") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -82,7 +82,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery2)
-      (let core (AssumeColumnOrderPartial (AggregateCombineState core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateCombineState core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -138,7 +138,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery4)
-      (let core (AssumeColumnOrderPartial (AggregateMergeState core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateMergeState core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -194,7 +194,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery6)
-      (let core (AssumeColumnOrderPartial (AggregateMergeFinalize core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateMergeFinalize core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Member row '"a"))) (lambda '() (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"a")))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -267,7 +267,7 @@
         )))
         (return select)
       )))
-      (let core (AssumeColumnOrderPartial (AggregateMergeManyFinalize core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Unwrap (Member row '"a")))) (lambda '() (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Unwrap (Member row '"a"))))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateMergeManyFinalize core '('"key") '('('Count0 (AggOverState (lambda '(row) (PersistableRepr (Unwrap (Member row '"a")))) (lambda '() (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Unwrap (Member row '"a"))))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
@@ -323,7 +323,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (AggregateFinalize core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key")))
+      (let core (AssumeColumnOrderPartial (AggregateFinalize core '('"key") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '('('compact))) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

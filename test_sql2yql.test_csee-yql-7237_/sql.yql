@@ -48,7 +48,7 @@
             (let $list (ListSkipWhile "$in" (lambda '(item) (Coalesce (Apply "$lambda" item) (Bool 'false)))))
             (return (If (Coalesce (HasItems "$list") (Bool 'false)) (SqlAccess 'dict "$list" (Int32 '"0") '('"yson_strict" '"yson_fast")) "$lowered_manufacturer"))
           ))) (Member row '"manufacturer")))))))
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"man") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"man")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"man") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"man")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"man" (lambda '(row) (block '(

@@ -12,7 +12,7 @@
       (let core (block '(
         (let select (block '(
           (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"key") '('"b" '"key") '()) '()))
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"a.key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"b")))))) '()) '('"a.key")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"a.key") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"b")))))) '()) '('"a.key")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(

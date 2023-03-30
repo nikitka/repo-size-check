@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row '_yql_preagg_Count0) '_yql_preagg_Count0 (SqlCall '"Math.Round" '((PositionalArgs (SafeCast (Member row '"key") (DataType 'Int32))))))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Count0")) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Count0")) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Count0"))) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Count0")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

@@ -11,7 +11,7 @@
       (return (UnionAll (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey" '"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"subkey" '"key")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey" '"key") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"subkey" '"key")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -36,7 +36,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"key")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"key")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -62,7 +62,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"subkey")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"subkey")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -88,7 +88,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

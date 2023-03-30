@@ -32,7 +32,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"Category") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"Category")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"Category") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"Category")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"Category" (lambda '(row) (block '(

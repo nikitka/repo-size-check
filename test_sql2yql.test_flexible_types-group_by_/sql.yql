@@ -45,7 +45,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"int32") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value"))))) '('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"int32")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"int32") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value"))))) '('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"int32")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"int32" (lambda '(row) (block '(

@@ -36,7 +36,7 @@
       (return (UnionAll (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key" '"subkey")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key" '"subkey")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -69,7 +69,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"key")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -103,7 +103,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value_from_a"))))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Count1 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

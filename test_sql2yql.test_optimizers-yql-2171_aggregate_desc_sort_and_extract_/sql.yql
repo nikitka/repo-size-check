@@ -34,7 +34,7 @@
     (let select (block '(
       (let core subquery0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'age_dec) 'age_dec ("/" (Member row '"age") (Int32 '"10")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"age_dec") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"age_dec")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"age_dec") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"age_dec")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"age_dec" (lambda '(row) (block '(

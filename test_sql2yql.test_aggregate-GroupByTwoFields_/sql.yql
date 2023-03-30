@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"a" '"b") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"c"))))) '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"d")))))) '()) '('"a" '"b")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"a" '"b") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"c"))))) '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"d")))))) '()) '('"a" '"b")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"sum_c" (lambda '(row) (block '(

@@ -34,7 +34,7 @@
     (let select (block '(
       (let core subquery0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (And (Not (Not (Exists (Member row '"host")))) ("==" (Member row '"recordType") (String '"RESULT"))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"ip" '"host") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"ip" '"host")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"ip" '"host") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"ip" '"host")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"ip" (lambda '(row) (block '(
@@ -61,7 +61,7 @@
     (let select (block '(
       (let core subquery0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (And (Not (Not (Exists (Member row '"host")))) ("==" (Member row '"recordType") (String '"BAN_DETECTED"))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"ip" '"host") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"ip" '"host")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"ip" '"host") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"ip" '"host")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"ip" (lambda '(row) (block '(

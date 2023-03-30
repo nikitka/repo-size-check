@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"key")) (lambda '(row) (PersistableRepr row))) '"key") '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"key"))) (lambda '(row) (PersistableRepr row))) '"key") '('Count1 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"dist" (lambda '(row) (block '(

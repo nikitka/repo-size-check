@@ -14,7 +14,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '('"kk" '"sk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '('"kk" '"sk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -40,7 +40,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '('"kk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '('"kk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -67,7 +67,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"subkey" '"t2")))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

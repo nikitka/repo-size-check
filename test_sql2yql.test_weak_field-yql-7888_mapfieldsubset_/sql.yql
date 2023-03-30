@@ -68,7 +68,7 @@
         )))
         (return world)
       ))))) (lambda '(row) (SelectMembers row '('"strongest_id")))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id")) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id"))) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"native_users" (lambda '(row) (block '(
@@ -156,7 +156,7 @@
         (return world)
       ))))) (lambda '(row) (SelectMembers row '('"key" '"strongest_id")))))
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"click")) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id")) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"strongest_id"))) (lambda '(row) (PersistableRepr row))) '"strongest_id")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"native_users_with_click" (lambda '(row) (block '(

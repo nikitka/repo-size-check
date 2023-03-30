@@ -35,7 +35,7 @@
       (let core (block '(
         (let select (block '(
           (let core subquery0)
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase" '"attr") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"urlBase" '"attr")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase" '"attr") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"urlBase" '"attr")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"urlBase" (lambda '(row) (block '(
@@ -54,7 +54,7 @@
         )))
         (return select)
       )))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"dupsCount"))))) '('MaxBy0 (Apply (bind aggregate_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"dupsCount")) (lambda '(row) (AsStructUnordered '('"dupsCount" (Member row '"dupsCount")) '('"attr" (Member row '"attr"))))))) '()) '('"urlBase")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"urlBase") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"dupsCount"))))) '('MaxBy0 (Apply (bind aggregate_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"dupsCount")) (lambda '(row) (AsStructUnordered '('"dupsCount" (Member row '"dupsCount")) '('"attr" (Member row '"attr"))))))) '()) '('"urlBase")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"urlBase" (lambda '(row) (block '(

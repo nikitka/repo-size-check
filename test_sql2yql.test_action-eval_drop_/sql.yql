@@ -8,7 +8,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"Path")))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"Path")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

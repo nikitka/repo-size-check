@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SafeCast (Member row '"key") (DataType 'Uint32))) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Uint32))) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"mod")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SafeCast (Member row '"key") (DataType 'Uint32))) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Uint32))) (Uint64 '0))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"mod")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
@@ -43,7 +43,7 @@
         (return res)
       )))))
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'ss) 'ss ("+" (Member row '"its") (Member row '"itk")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"ss") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"cc"))))) '('Sum1 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"mod")))))) '()) '('"ss")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"ss") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"cc"))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"mod")))))) '()) '('"ss")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"sc" (lambda '(row) (block '(

@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (WeakField row 'Int64 '('subkey)))))) '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (WeakField row 'String '('value))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (WeakField row 'Int64 '('subkey)))))) '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (WeakField row 'String '('value))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

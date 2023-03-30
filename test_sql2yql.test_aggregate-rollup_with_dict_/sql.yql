@@ -12,7 +12,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'val) 'val (SqlAccess 'dict (Member row '"dict") (String '"c") '('"yson_strict" '"yson_fast")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"val") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"val")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"val") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"val")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -38,7 +38,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'val) 'val (SqlAccess 'dict (Member row '"dict") (String '"c") '('"yson_strict" '"yson_fast")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

@@ -105,7 +105,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (ToList (AsList)) (lambda '(row) (SelectMembers row '()))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
@@ -130,7 +130,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (ToList (AsList)) (lambda '(row) (SelectMembers row '('"x")))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
@@ -158,7 +158,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (ToList (AsList)) (lambda '(row) (SelectMembers row '('"x")))))
-      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count1 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")) (lambda '(row) (Coalesce (">" (Member row 'Count0) (Int32 '"1")) (Bool 'false)))))
+      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('Count1 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")) (lambda '(row) (Coalesce (">" (Member row 'Count0) (Int32 '"1")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(

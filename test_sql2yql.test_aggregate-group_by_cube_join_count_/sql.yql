@@ -14,7 +14,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"sk" '"kk") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"sk" '"kk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"sk" '"kk") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"sk" '"kk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -44,7 +44,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"kk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -75,7 +75,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"sk") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"sk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"sk") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"sk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -106,7 +106,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

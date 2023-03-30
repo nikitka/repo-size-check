@@ -14,7 +14,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'k) 'k (SqlColumn row '"key" '"a"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"k" '"b.subkey") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k" '"b.subkey")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k" '"b.subkey") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k" '"b.subkey")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -44,7 +44,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'k) 'k (SqlColumn row '"key" '"a"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"k") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"k") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '('"k")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -75,7 +75,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'k) 'k (SqlColumn row '"key" '"a"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"a")))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

@@ -10,7 +10,7 @@
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'ki) 'ki (Member row '"key"))))))
       (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn '((String '"075") (String '"150")) (Member row '"ki") '('('warnNoAnsi))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"ki") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"ki")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"ki") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"ki")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"ki" (lambda '(row) (block '(

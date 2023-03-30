@@ -27,7 +27,7 @@
         )))
         (return select)
       ))) '"B") '('Left '"A" '"B" '('"A" '"key") '('"B" '"key") '()) '()))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"A.key" '"B.subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"A.key" '"B.subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"A.key" '"B.subkey") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"A.key" '"B.subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

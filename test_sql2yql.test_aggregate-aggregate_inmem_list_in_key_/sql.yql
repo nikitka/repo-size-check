@@ -48,7 +48,7 @@
         )))
         (return select)
       ))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
@@ -178,7 +178,7 @@
         )))
         (return select)
       ))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x" '"y")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x" '"y")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(

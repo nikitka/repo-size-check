@@ -11,7 +11,7 @@
     (let select (block '(
       (let core (EquiJoin '((RemoveSystemMembers table0) '"Input1") '((RemoveSystemMembers table1) '"Input3") '('Inner '"Input1" '"Input3" '('"Input1" '"key") '('"Input3" '"key") '()) '()))
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'keyz) 'keyz (SqlColumn row '"key" '"Input1"))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"keyz") '('('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"Input3")))))) '()) '('"keyz")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"keyz") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"value" '"Input3")))))) '()) '('"keyz")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"keyz" (lambda '(row) (block '(

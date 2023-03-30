@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (Or ("==" (Member row '"key") (String '"075")) ("==" (Member row '"key") (String '"150"))) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"subkey")) (lambda '(row) (PersistableRepr row))) '"subkey")) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"subkey"))) (lambda '(row) (PersistableRepr row))) '"subkey")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(

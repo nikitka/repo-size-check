@@ -118,7 +118,7 @@
     (let select (block '(
       (let core table3)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'x) 'x (Member row (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"value")))) (DataType 'String)))))))))
-      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"key")))) (DataType 'String)))))))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")) (lambda '(row) (Coalesce ("!=" (Member row 'Min0) (String '"")) (Bool 'false)))))
+      (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"key")))) (DataType 'String)))))))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")) (lambda '(row) (Coalesce ("!=" (Member row 'Min0) (String '"")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(

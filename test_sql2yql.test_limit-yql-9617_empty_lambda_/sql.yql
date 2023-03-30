@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (Member row '"key") (String '"999")) (Bool 'false)))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

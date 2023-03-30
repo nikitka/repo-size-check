@@ -40,7 +40,7 @@
       (return (UnionAll (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"lst")))))) '()) '('"key")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"lst")))))) '()) '('"key")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -66,7 +66,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"lst")))))) '()) '('"key" '"subkey")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"lst")))))) '()) '('"key" '"subkey")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

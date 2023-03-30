@@ -25,7 +25,7 @@
         )))
         (return select)
       )))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"value") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"val"))))) '('Avg0 (Apply (bind aggregate_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"val")))))) '()) '('"value")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"value") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"val"))))) '('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"val")))))) '()) '('"value")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(

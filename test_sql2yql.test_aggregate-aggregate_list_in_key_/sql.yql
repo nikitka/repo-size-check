@@ -73,7 +73,7 @@
   (let output (block '(
     (let select (block '(
       (let core table1)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
@@ -237,7 +237,7 @@
   (let output (block '(
     (let select (block '(
       (let core table3)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x" '"y")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"x" '"y")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
@@ -270,7 +270,7 @@
   (let output (block '(
     (let select (block '(
       (let core table4)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"z")) (lambda '(row) (PersistableRepr row))) '"z")) '()) '('"x" '"y")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"z"))) (lambda '(row) (PersistableRepr row))) '"z")) '()) '('"x" '"y")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
@@ -303,7 +303,7 @@
   (let output (block '(
     (let select (block '(
       (let core table5)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"z"))))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"z")) (lambda '(row) (PersistableRepr row))) '"z")) '()) '('"x" '"y")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"x" '"y") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"z"))))) '('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"z"))) (lambda '(row) (PersistableRepr row))) '"z")) '()) '('"x" '"y")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(

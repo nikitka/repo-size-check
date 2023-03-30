@@ -12,7 +12,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'm0) 'm0 (SafeCast (Member row '"key") (DataType 'Uint32))) 'm1) 'm1 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'm2) 'm2 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0" '"m1" '"m2") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0" '"m1" '"m2")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0" '"m1" '"m2") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0" '"m1" '"m2")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -46,7 +46,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'm0) 'm0 (SafeCast (Member row '"key") (DataType 'Uint32))) 'm1) 'm1 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'm2) 'm2 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0" '"m1") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0" '"m1")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0" '"m1") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0" '"m1")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -81,7 +81,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'm0) 'm0 (SafeCast (Member row '"key") (DataType 'Uint32))) 'm1) 'm1 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'm2) 'm2 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"m0") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"m0")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -117,7 +117,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'm0) 'm0 (SafeCast (Member row '"key") (DataType 'Uint32))) 'm1) 'm1 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'm2) 'm2 ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

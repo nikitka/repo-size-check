@@ -10,7 +10,7 @@
   (let output (block '(
     (let select (block '(
       (let core (EquiJoin '((RemoveSystemMembers table2) '"a") '((RemoveSystemMembers table3) '"b") '('Inner '"a" '"b" '('"a" '"k1") '('"b" '"k1") '()) '()))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
@@ -43,7 +43,7 @@
           (let output (block '(
             (let select (block '(
               (let core (EquiJoin '((RemoveSystemMembers table0) '"a") '((RemoveSystemMembers table1) '"b") '('Inner '"a" '"b" '('"a" '"k1") '('"b" '"k1") '()) '('('strict_keys))))
-              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
+              (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
               (let core (PersistableRepr (block '(
                 (let projectCoreType (TypeOf core))
                 (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

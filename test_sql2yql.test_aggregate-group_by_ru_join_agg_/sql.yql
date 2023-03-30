@@ -14,7 +14,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk" '"sk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk" '"sk") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk" '"sk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -40,7 +40,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"kk") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '('"kk")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -67,7 +67,7 @@
         (let core composite)
         (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kk) 'kk (SqlColumn row '"key" '"t1")) 'sk) 'sk (SqlColumn row '"subkey" '"t1"))))))
         (let preaggregated core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '()))
+        (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (SqlColumn row '"subkey" '"t2") (DataType 'Uint32))))))) '()) '()))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

@@ -10,7 +10,7 @@
       (let core (block '(
         (let select (block '(
           (let core table0)
-          (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Avg0 (Apply (bind aggregate_module '"avg_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"subkey")))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"subkey")))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"avg_key" (lambda '(row) (block '(

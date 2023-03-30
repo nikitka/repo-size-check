@@ -10,7 +10,7 @@
       (let core (block '(
         (let select (block '(
           (let core table0)
-          (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void))))) '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key" '"subkey")) (lambda '(row) (Coalesce (And ("<" (Member row 'Count0) (Int32 '"100")) (">" (Member row '"subkey") (String '"0"))) (Bool 'false)))))
+          (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key" '"subkey")) (lambda '(row) (Coalesce (And ("<" (Member row 'Count0) (Int32 '"100")) (">" (Member row '"subkey") (String '"0"))) (Bool 'false)))))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

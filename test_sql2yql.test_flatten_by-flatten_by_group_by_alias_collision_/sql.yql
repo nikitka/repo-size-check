@@ -11,7 +11,7 @@
         (return res)
       )))))
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'subkey) 'subkey (SafeCast (Member row '"subkey") (DataType 'String)))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '('"subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '('"subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(

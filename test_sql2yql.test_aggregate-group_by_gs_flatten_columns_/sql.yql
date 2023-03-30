@@ -38,7 +38,7 @@
       (return (UnionAll (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"k1"))))) '('Some1 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"k2")))))) '()) '('"key")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"k1"))))) '('Some1 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"k2")))))) '()) '('"key")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(
@@ -68,7 +68,7 @@
       )) (block '(
         (let core composite)
         (let origcore core)
-        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"k1"))))) '('Some1 (Apply (bind aggregate_module '"some_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"k2")))))) '()) '('"key" '"subkey")))
+        (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"k1"))))) '('Some1 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"k2")))))) '()) '('"key" '"subkey")))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let addCompositTerms (lambda '(row) (block '(

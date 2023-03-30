@@ -9,7 +9,7 @@
     (let select (block '(
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'group0) 'group0 (SqlAccess 'dict (Member row '"dict") (String '"a") '('"yson_strict" '"yson_fast")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"group0") '('('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"group0")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"group0") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"group0")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"s" (lambda '(row) (block '(

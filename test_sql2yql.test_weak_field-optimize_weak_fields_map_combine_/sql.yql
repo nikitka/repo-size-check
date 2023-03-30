@@ -10,7 +10,7 @@
     (let select (block '(
       (let core table0)
       (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'subkey) 'subkey (WeakField row 'Int64 '('subkey)))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Min0 (Apply (bind aggregate_module '"min_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Max0 (Apply (bind aggregate_module '"max_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (WeakField row 'String '('value))))))) '()) '('"subkey")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"subkey") '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (WeakField row 'String '('value))))))) '()) '('"subkey")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
