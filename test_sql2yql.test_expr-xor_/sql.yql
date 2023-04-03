@@ -1,0 +1,46 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (OrderedMap (ToList (AsList (AsStructUnordered '('"o1" (Bool '"false")) '('"o2" (Bool '"false"))) (AsStructUnordered '('"o1" (Bool '"true")) '('"o2" (Bool '"true"))) (AsStructUnordered '('"o1" (Bool '"true")) '('"o2" (Bool '"false"))) (AsStructUnordered '('"o1" (Bool '"false")) '('"o2" (Bool '"true"))) (AsStructUnordered '('"o1" (Bool '"true")) '('"o2" (Null))) (AsStructUnordered '('"o1" (Bool '"false")) '('"o2" (Null))) (AsStructUnordered '('"o1" (Null)) '('"o2" (Bool '"true"))) (AsStructUnordered '('"o1" (Null)) '('"o2" (Bool '"false"))))) (lambda '(row) (SelectMembers row '('"o1" '"o2")))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"xor" (lambda '(row) (block '(
+          (let res (Xor (Member row '"o1") (Member row '"o2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_same_o1" (lambda '(row) (block '(
+          (let res (Xor (Member row '"o1") (Member row '"o1")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_same_o2" (lambda '(row) (block '(
+          (let res (Xor (Member row '"o2") (Member row '"o2")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_triple_dups" (lambda '(row) (block '(
+          (let res (Xor (Xor (Xor (Member row '"o1") (Member row '"o2")) (Member row '"o1")) (Xor (Xor (Member row '"o2") (Member row '"o1")) (Member row '"o2"))))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"xor_with_unwraps" (lambda '(row) (block '(
+          (let res (Xor (Xor (Member row '"o1") (Member row '"o2")) (Xor (Unwrap (Member row '"o1")) (Unwrap (Member row '"o2")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"xor" '"xor_same_o1" '"xor_same_o2" '"xor_triple_dups" '"xor_with_unwraps")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
