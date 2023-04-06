@@ -64,10 +64,10 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"dict" (lambda '(row) (block '(
-          (let res (ToDict (Member row '"items") (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (Member row '"items") (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"multi_dict" (lambda '(row) (block '(
-          (let res (ToDict (Member row '"items") (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (let res (ToDict (Member row '"items") (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)))
           (return res)
         )))))))
         (return core)

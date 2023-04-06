@@ -10,7 +10,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (AsList (AsDict '((Uint32 '"100") (Int32 '"100"))) (ToDict (AsList '((Int32 '"1") (Uint32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) (AsDict '((Int32 '"2") (Uint32 '"2"))) (Dict (DictType (DataType 'Int32) (DataType 'Uint32))) (Dict (DictType (DataType 'Int32) (DataType 'Uint32)) '((Int32 '"3") (Uint32 '"3")))))
+          (let res (AsList (AsDict '((Uint32 '"100") (Int32 '"100"))) (ToDict (AsList '((Int32 '"1") (Uint32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (AsDict '((Int32 '"2") (Uint32 '"2"))) (Dict (DictType (DataType 'Int32) (DataType 'Uint32))) (Dict (DictType (DataType 'Int32) (DataType 'Uint32)) '((Int32 '"3") (Uint32 '"3")))))
           (return res)
         )))))))
         (return core)

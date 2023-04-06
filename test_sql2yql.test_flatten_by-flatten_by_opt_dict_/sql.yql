@@ -18,7 +18,7 @@
         )))) (SqlProjectItem projectCoreType '"dk" (lambda '(row) (block '(
           (let res (Just (ToDict (ListEnumerate (ListTake (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
             (return arg)
-          )))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          )))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"lv" (lambda '(row) (block '(
           (let res (ListTake (ListSort (Member row 'AggregateList1) (Bool 'true) (lambda '(arg) (block '(

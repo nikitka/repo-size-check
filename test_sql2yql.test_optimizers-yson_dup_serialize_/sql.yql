@@ -40,11 +40,11 @@
           (let res (Apply (lambda '("$x") (block '(
             (return (ToDict (ListMap (DictItems "$x") (lambda '("$i") (block '(
               (return '((SqlAccess 'struct "$i" '"0" '('"yson_strict" '"yson_fast")) (SqlCall '"Yson2.Serialize" '((PositionalArgs (SqlAccess 'struct "$i" '"1" '('"yson_strict" '"yson_fast")))))))
-            )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+            )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           ))) (Apply (lambda '("$x") (block '(
             (return (ToDict (ListMap (DictItems "$x") (lambda '("$i") (block '(
               (return '((SqlAccess 'struct "$i" '"0" '('"yson_strict" '"yson_fast")) (SqlCall '"Yson2.Serialize" '((PositionalArgs (SqlAccess 'struct "$i" '"1" '('"yson_strict" '"yson_fast")))))))
-            )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+            )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           ))) (SqlCall '"Yson2.ConvertToDict" '((PositionalArgs (Yson '"{a=1;b=2}") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))))
           (return res)
         )))))))

@@ -9,16 +9,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))))))
         (return core)
@@ -42,10 +42,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
           (return res)
         )))))))
         (return core)
@@ -69,10 +69,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
+          (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void)) '((Variant (Uint32 '"2") '"1" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32)))) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"2") '"0" (VariantType (TupleType (DataType 'Int32) (DataType 'Uint32))))))
           (return res)
         )))))))
         (return core)

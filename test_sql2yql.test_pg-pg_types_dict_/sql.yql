@@ -12,13 +12,13 @@
           (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'date))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)))
           (return res)
         )))))))
         (return core)
@@ -45,13 +45,13 @@
           (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Sorted 'Many)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (let res (ToDict (AsList '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"0")) '((AsList (PgConst '"2012-01-01" (PgType 'text))) (Int32 '"1"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)))
           (return res)
         )))))))
         (return core)

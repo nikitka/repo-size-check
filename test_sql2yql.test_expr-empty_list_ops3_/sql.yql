@@ -35,10 +35,10 @@
           (let res (Apply (bind core_module '"ListAggregate") (AsList) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
-          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (let res (ToDict (AsList) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ToSet") (AsList)))
@@ -103,10 +103,10 @@
           (let res (Apply (bind core_module '"ListAggregate") (Just (AsList)) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
-          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
-          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'Many)))
+          (let res (ToDict (Just (AsList)) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ToSet") (Just (AsList))))

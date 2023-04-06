@@ -9,16 +9,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictKeys (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (DictPayloads (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictPayloads (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (DictItems (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictItems (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))))))
         (return core)
@@ -42,7 +42,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '()))
+          (let res (Lookup (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '()))
           (return res)
         )))))))
         (return core)
@@ -66,7 +66,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '()))
+          (let res (Contains (ToDict (AsList '('() (Void)) '('() (Void)) '('() (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '()))
           (return res)
         )))))))
         (return core)
@@ -195,16 +195,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictKeys (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (DictPayloads (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictPayloads (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (DictItems (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictItems (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))))))
         (return core)
@@ -228,10 +228,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"2"))))
+          (let res (Lookup (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"2"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"3"))))
+          (let res (Lookup (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"3"))))
           (return res)
         )))))))
         (return core)
@@ -255,10 +255,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"2"))))
+          (let res (Contains (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"2"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"3"))))
+          (let res (Contains (ToDict (AsList '('((Int32 '"1")) (Void)) '('((Int32 '"2")) (Void)) '('((Int32 '"2")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"3"))))
           (return res)
         )))))))
         (return core)
@@ -401,16 +401,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)))
+          (let res (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictKeys (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (DictPayloads (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictPayloads (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (DictItems (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One))))
+          (let res (DictItems (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
         )))))))
         (return core)
@@ -434,10 +434,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"1") (Int32 '"2"))))
+          (let res (Lookup (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"1") (Int32 '"2"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Lookup (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"1") (Int32 '"4"))))
+          (let res (Lookup (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"1") (Int32 '"4"))))
           (return res)
         )))))))
         (return core)
@@ -461,10 +461,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"1") (Int32 '"2"))))
+          (let res (Contains (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"1") (Int32 '"2"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Contains (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Hashed 'One)) '((Int32 '"1") (Int32 '"4"))))
+          (let res (Contains (ToDict (AsList '('((Int32 '"1") (Int32 '"2")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void)) '('((Int32 '"1") (Int32 '"3")) (Void))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) '((Int32 '"1") (Int32 '"4"))))
           (return res)
         )))))))
         (return core)
