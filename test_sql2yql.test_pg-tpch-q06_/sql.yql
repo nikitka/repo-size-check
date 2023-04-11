@@ -1,5 +1,6 @@
 (
 (let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let world (Configure! world (DataSource 'dq '$all) 'Attr '"enabledqreplicate" '"1"))
 (let read0 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"lineitem"))) (Void) '()))
 (let world (Left! read0))
 (let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"revenue" (Void) (lambda '() (PgAgg '"sum" '() (PgOp '"*" (PgColumnRef '"l_extendedprice") (PgColumnRef '"l_discount"))))))) '('from '('((Right! read0) '"lineitem" '()))) '('join_ops '('())) '('where (PgWhere (Void) (lambda '() (PgAnd (PgAnd (PgAnd (PgOp '">=" (PgColumnRef '"l_shipdate") (PgCast (PgConst '"1994-01-01" (PgType 'text)) (PgType '"date"))) (PgOp '"<" (PgColumnRef '"l_shipdate") (PgOp '"+" (PgCast (PgConst '"1994-01-01" (PgType 'text)) (PgType '"date")) (PgCast (PgConst '"1" (PgType 'text)) (PgType '"interval") (PgCall 'intervaltypmodin '() (PgArray (PgConst '"4" (PgType 'cstring)))))))) (PgBetween (PgColumnRef '"l_discount") (PgCast (PgOp '"-" (PgConst '0.06 (PgType 'float8)) (PgConst '0.01 (PgType 'float8))) (PgType '"numeric")) (PgCast (PgOp '"+" (PgConst '0.06 (PgType 'float8)) (PgConst '0.01 (PgType 'float8))) (PgType '"numeric")))) (PgOp '"<" (PgColumnRef '"l_quantity") (PgCast (PgConst '24 (PgType 'int4)) (PgType '"numeric"))))))))))) '('set_ops '('push)))))

@@ -1,5 +1,6 @@
 (
 (let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let world (Configure! world (DataSource 'dq '$all) 'Attr '"enabledqreplicate" '"1"))
 (let read0 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"supplier"))) (Void) '()))
 (let world (Left! read0))
 (let read1 (Read! world (DataSource '"yt" '"plato") (Key '('table (String '"nation"))) (Void) '()))
