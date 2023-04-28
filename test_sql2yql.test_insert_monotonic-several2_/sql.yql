@@ -1,0 +1,64 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('"monotonickeys") '('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table3 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('"monotonickeys") '('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

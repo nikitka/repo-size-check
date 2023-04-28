@@ -1,0 +1,34 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Int32 '"1"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('"monotonickeys") '('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
