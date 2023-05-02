@@ -1,0 +1,129 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"key" (Just (Just (String '"foo")))) '('"subkey" (Just (String '"bar"))) '('"value" (Int32 '"1"))) (AsStructUnordered '('"key" (Just (Nothing (OptionalType (DataType 'String))))) '('"subkey" (Just (String '"two"))) '('"value" (Int32 '"2"))) (AsStructUnordered '('"key" (Nothing (OptionalType (OptionalType (DataType 'String))))) '('"subkey" (Just (String '"three"))) '('"value" (Int32 '"3"))) (AsStructUnordered '('"key" (Nothing (OptionalType (OptionalType (DataType 'String))))) '('"subkey" (Nothing (OptionalType (DataType 'String)))) '('"value" (Int32 '"4"))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"strings") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (ToList (AsList (AsStructUnordered '('"key" (Just (Just '((Int32 '"1") (Int32 '"2"))))) '('"subkey" (Just '((Int32 '"3") (Int32 '"4")))) '('"value" (Int32 '"1"))) (AsStructUnordered '('"key" (Just (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32)))))) '('"subkey" (Just '((Int32 '"4") (Int32 '"5")))) '('"value" (Int32 '"2"))) (AsStructUnordered '('"key" (Nothing (OptionalType (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32)))))) '('"subkey" (Just '((Int32 '"5") (Int32 '"6")))) '('"value" (Int32 '"3"))) (AsStructUnordered '('"key" (Nothing (OptionalType (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32)))))) '('"subkey" (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32))))) '('"value" (Int32 '"4"))))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"tuples") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"strings") (Void) '()))
+  (let table2 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Coalesce (Member row '"key") (Member row '"subkey")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Coalesce (Member row '"subkey") (String '"xxx")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"tuples") (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+          (let res (Member row '"value"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Coalesce (Member row '"key") (Member row '"subkey")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Coalesce (Member row '"subkey") '((Int32 '"100") (Int32 '"500"))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"value")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"value" '"column1" '"column2")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
