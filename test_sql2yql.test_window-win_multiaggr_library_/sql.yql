@@ -1,6 +1,6 @@
 (
-(library "multiaggr_subq.sql")
 (library "agg_factory.sql")
+(library "multiaggr_subq.sql")
 (import aggregate_module '"/lib/yql/aggregate.yql")
 (import window_module '"/lib/yql/window.yql")
 (import core_module '"/lib/yql/core.yql")

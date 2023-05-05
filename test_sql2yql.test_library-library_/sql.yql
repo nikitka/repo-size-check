@@ -1,6 +1,6 @@
 (
-(library "lib1.sql")
 (library "lib2.sql")
+(library "lib1.sql")
 (import aggregate_module '"/lib/yql/aggregate.yql")
 (import window_module '"/lib/yql/window.yql")
 (import core_module '"/lib/yql/core.yql")
