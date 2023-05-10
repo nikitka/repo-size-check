@@ -1,0 +1,57 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table1 (Right! x))
+  (let values (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (block '(
+        (let partitioning core)
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_RowNumber0 (RowNumber (TypeOf partitioning))) '('_yql_Lag0 (Lag (TypeOf partitioning) (lambda '(row) (Member row '"value")))) '('_yql_Lead0 (Lead (TypeOf partitioning) (lambda '(row) (Member row '"value"))))))))
+        (let partitioning (CalcOverWindow partitioning '() (SortTraits (TypeOf partitioning) (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"key")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Rank0 (Rank (TypeOf partitioning) (lambda '(row) (Member row '"value")) '('('ansi)))) '('_yql_DenseRank0 (DenseRank (TypeOf partitioning) (lambda '(row) (Member row '"value")) '('('ansi))))))))
+        (return partitioning)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          (let res (Member row '"key"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row '_yql_RowNumber0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lag0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row '_yql_Lead0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row '_yql_Rank0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row '_yql_DenseRank0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let values (Unordered values))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
