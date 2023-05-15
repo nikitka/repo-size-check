@@ -12,7 +12,7 @@ SELECT
     length("foo");
 
 SELECT
-    Math::Abs(-1);
+    Math::Pi();
 
 $f = () -> {
     RETURN () -> {

@@ -11,7 +11,7 @@ def f(f):
 (import window_module '"/lib/yql/window.yql")
 (import core_module '"/lib/yql/core.yql")
 (let world (block '(
-  (let x (Read! world (DataSource '"yt" '"plato") (Key '('table (MrTableRange '"" (lambda '(item) (Apply (Apply (ScriptUdf 'Python3 '"f" (CallableType '() '((CallableType '() '((DataType 'Bool)) '((DataType 'String)))) '((DataType 'Bool))) scriptudf0) (SqlCall '"String.StartsWith" '((PositionalArgs (String '"testfets") (String '"test"))))) item)) '""))) (Void) '('('"ignorenonexisting"))))
+  (let x (Read! world (DataSource '"yt" '"plato") (Key '('table (MrTableRange '"" (lambda '(item) (Apply (Apply (ScriptUdf 'Python3 '"f" (CallableType '() '((CallableType '() '((DataType 'Bool)) '((DataType 'String)))) '((DataType 'Bool))) scriptudf0) (Apply (Udf '"Re2.Match" '((String '"test.*") (Null))) (String '"testfets"))) item)) '""))) (Void) '('('"ignorenonexisting"))))
   (let table0 (Right! x))
   (let output (block '(
     (let select (block '(
