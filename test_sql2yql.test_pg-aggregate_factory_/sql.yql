@@ -6,7 +6,7 @@
   (let output (block '(
     (let select (block '(
       (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"x" (PgConst '"a" (PgType 'text)))) (AsStruct '('"x" (PgConst '"b" (PgType 'text)))) (AsStruct '('"x" (PgConst '"c" (PgType 'text)))))) '('"x")))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('string_agg0 (PgAggregationTraits 'string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('string_agg0 (AggApply 'pg_string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

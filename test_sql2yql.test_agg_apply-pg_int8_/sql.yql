@@ -1,0 +1,50 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"key" (Int64 '"1"))) (AsStruct '('"key" (Int64 '"2"))) (AsStruct '('"key" (Int64 '"3"))))) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('count0 (AggApply 'pg_count (ListItemType (TypeOf core)) (lambda '(row)))) '('count1 (AggApply 'pg_count (ListItemType (TypeOf core)) (lambda '(row) (Member row '"key")))) '('min0 (AggApply 'pg_min (ListItemType (TypeOf core)) (lambda '(row) (Member row '"key")))) '('max0 (AggApply 'pg_max (ListItemType (TypeOf core)) (lambda '(row) (Member row '"key")))) '('sum0 (AggApply 'pg_sum (ListItemType (TypeOf core)) (lambda '(row) (Member row '"key")))) '('avg0 (AggApply 'pg_avg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"key"))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'count1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row 'min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row 'max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row 'sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row 'avg0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
