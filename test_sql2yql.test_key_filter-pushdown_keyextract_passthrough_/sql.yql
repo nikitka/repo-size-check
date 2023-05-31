@@ -11,10 +11,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-          (let res (Concat (String '"ZZZ") (Member row '"key")))
+          (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
-          (let res (Member row '"subkey"))
+          (let res (Concat (String '"ZZZ") (Member row '"key")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))

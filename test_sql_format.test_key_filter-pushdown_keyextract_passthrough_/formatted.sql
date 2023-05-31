@@ -2,8 +2,8 @@
 USE plato;
 $src =
     SELECT
-        "ZZZ" || key AS key,
-        subkey,
+        key,
+        "ZZZ" || key AS subkey,
         value,
     FROM Input
         AS u
