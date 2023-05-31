@@ -1,0 +1,189 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"mapjoinlimit" '"1m"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"lookupjoinlimit" '"64k"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"lookupjoinmaxrows" '"100"))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ID" (lambda '(row) (block '(
+          (let res (Just (Utf8 '"fooo")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ID")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"T1") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let values (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"text" (lambda '(row) (block '(
+          (let res (String '"t"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"tags" (lambda '(row) (block '(
+          (let res (Yson '"{}"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ID" (lambda '(row) (block '(
+          (let res (String '"foo"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ID")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let sink (DataSink '"yt" '"plato"))
+    (let world (Write! world sink (TempTable '"T2") values '('('mode 'append))))
+    (return world)
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"T1") (Void) '()))
+  (let table3 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table3)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ID" (lambda '(row) (block '(
+          (let res (Member row '"ID"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"T2") (Void) '()))
+  (let table2 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table2)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Not (SqlIn subquery0 (Member row '"ID") '('('tableSource) '('ansi)))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ID" (lambda '(row) (block '(
+          (let res (Member row '"ID"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (TempTable '"T2") (Void) '()))
+  (let table4 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table4)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn subquery1 (Member row '"ID") '('('tableSource) '('ansi))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"text" (lambda '(row) (block '(
+          (let res (Concat (SqlPlainColumnOrType row '"text") (String '"a")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"tags" (lambda '(row) (block '(
+          (let res (Member row '"tags"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"text" '"tags")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
