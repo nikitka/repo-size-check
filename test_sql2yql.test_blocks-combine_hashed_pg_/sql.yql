@@ -1,0 +1,73 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"config") '"UseBlocks"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"usepartitionsbykeysforfinalagg" '"false"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'group0) 'group0 (Size (Member row '"d")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"group0") '('('count0 (AggApply 'pg_count (ListItemType (TypeOf core)) (lambda '(row)))) '('count1 (AggApply 'pg_count (ListItemType (TypeOf core)) (lambda '(row) (Member row '"a")))) '('sum0 (AggApply 'pg_sum (ListItemType (TypeOf core)) (lambda '(row) (Member row '"c")))) '('min0 (AggApply 'pg_min (ListItemType (TypeOf core)) (lambda '(row) (Member row '"a")))) '('max0 (AggApply 'pg_max (ListItemType (TypeOf core)) (lambda '(row) (Member row '"a")))) '('min1 (AggApply 'pg_min (ListItemType (TypeOf core)) (lambda '(row) (Member row '"c")))) '('max1 (AggApply 'pg_max (ListItemType (TypeOf core)) (lambda '(row) (Member row '"c")))) '('avg0 (AggApply 'pg_avg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"c")))) '('avg1 (AggApply 'pg_avg (ListItemType (TypeOf core)) (lambda '(row) (PgCast (PgConst '"1" (PgType 'int4)) (PgType 'int4))))) '('avg2 (AggApply 'pg_avg (ListItemType (TypeOf core)) (lambda '(row) (PgCast (PgConst '"1" (PgType 'int4)) (PgType 'int8))))) '('avg3 (AggApply 'pg_avg (ListItemType (TypeOf core)) (lambda '(row) (PgCast (PgConst '"1" (PgType 'int4)) (PgType 'float8))))) '('regr_count0 (AggApply 'pg_regr_count (ListItemType (TypeOf core)) (lambda '(row) (PgConst '"1.0" (PgType 'float8)) (PgConst '"1.0" (PgType 'float8)))))) '()) '('"group0")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Member row 'count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+          (let res (Member row 'count1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          (let res (Member row 'sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (Member row 'min0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (Member row 'max0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (Member row 'min1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+          (let res (Member row 'max1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+          (let res (Member row 'avg0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+          (let res (Member row 'avg1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+          (let res (Member row 'avg2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+          (let res (Member row 'avg3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+          (let res (Member row 'regr_count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
