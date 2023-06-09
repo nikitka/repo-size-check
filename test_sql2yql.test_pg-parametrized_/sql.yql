@@ -1,0 +1,11 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"text_col" (Void) (lambda '() $p1)) (PgResultItem '"text_col_2" (Void) (lambda '() $p2)))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(declare $p2 (PgType 'text))
+(declare $p1 (PgType 'text))
+(return world)
+)
