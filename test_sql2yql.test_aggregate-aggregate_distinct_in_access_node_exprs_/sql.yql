@@ -14,7 +14,7 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"foo" (lambda '(row) (block '(
-          (let res (SqlAccess 'dict (Member row 'AggregateList0) ("-" (Member row 'Count0) (Int32 '"1")) '('"yson_strict" '"yson_fast")))
+          (let res (SqlAccess 'dict (Member row 'AggregateList0) ("-MayWarn" (Member row 'Count0) (Int32 '"1")) '('"yson_strict" '"yson_fast")))
           (return res)
         )))))))
         (return core)

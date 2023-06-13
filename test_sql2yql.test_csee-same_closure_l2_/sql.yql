@@ -11,9 +11,9 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (ListMap (AsList (Int32 '"1") (Int32 '"2")) (lambda '("$x") (block '(
             (return (ListExtend (ListMap (AsList (Int32 '"100") (Int32 '"101")) (lambda '("$y") (block '(
-              (return ("+" "$x" "$y"))
+              (return ("+MayWarn" "$x" "$y"))
             )))) (ListMap (AsList (Int32 '"100") (Int32 '"101")) (lambda '("$y") (block '(
-              (return ("+" "$x" "$y"))
+              (return ("+MayWarn" "$x" "$y"))
             ))))))
           )))))
           (return res)

@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'groupTribit) 'groupTribit ("%" (TableRecord (DependsOn row)) (Int32 '"3")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'groupTribit) 'groupTribit ("%MayWarn" (TableRecord (DependsOn row)) (Int32 '"3")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"groupTribit") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"groupTribit")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

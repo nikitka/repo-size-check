@@ -40,10 +40,10 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"key_diff" (lambda '(row) (block '(
-          (let res ("-" (Member row '"key") (Member row '_yql_Lag0)))
+          (let res ("-MayWarn" (Member row '"key") (Member row '_yql_Lag0)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey_diff" (lambda '(row) (block '(
-          (let res ("-" (Member row '"subkey") (Member row '_yql_Lag1)))
+          (let res ("-MayWarn" (Member row '"subkey") (Member row '_yql_Lag1)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"row" (lambda '(row) (block '(
           (let res (Member row '_yql_RowNumber0))

@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'mod_k) 'mod_k ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'mod_sk) 'mod_sk ("%" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'mod_k) 'mod_k ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'mod_sk) 'mod_sk ("%MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")))))))
       (let core (Filter (AssumeColumnOrderPartial (Aggregate core '('"mod_sk" '"mod_k") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"mod_sk" '"mod_k")) (lambda '(row) (Coalesce ("==" (Member row '"mod_k") (Int32 '"7")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

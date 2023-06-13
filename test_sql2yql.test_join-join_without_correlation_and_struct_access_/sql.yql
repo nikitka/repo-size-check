@@ -11,7 +11,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
-          (let res ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
+          (let res ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"struct_field" (lambda '(row) (block '(
           (let res (AsStructUnordered '('"kk" (Member row '"key")) '('"sk" (Member row '"subkey"))))
@@ -32,7 +32,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
-        (let row (AddMember row '"_equijoin_column_0" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
+        (let row (AddMember row '"_equijoin_column_0" ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
         (return row)
       ))))) '"Input") '((RemoveSystemMembers subquery0) '"d") '('Inner '"Input" '"d" '('"Input" '"_equijoin_column_0") '('"d" '"mod") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"Input._equijoin_column_0"))

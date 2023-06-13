@@ -12,11 +12,11 @@
           (let res (Aggregate (AsList (AsStruct '('"a" (Int32 '"1"))) (AsStruct '('"a" (Int32 '"2")))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
             (return (Int32 '"1"))
           ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$_item" "$_parent") (block '(
-            (return ("+" (Int32 '"1") "$state"))
+            (return ("+MayWarn" (Int32 '"1") "$state"))
           ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-            (return ("+" "$state1" "$state2"))
+            (return ("+MayWarn" "$state1" "$state2"))
           ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-            (return ("+" "$state1" "$state2"))
+            (return ("+MayWarn" "$state1" "$state2"))
           ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
             (return "$state")
           ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(
@@ -49,21 +49,21 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Aggregate (AsList (AsStruct '('"a" ("/" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/" (Int32 '"2") (Int32 '"0"))))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
+          (let res (Aggregate (AsList (AsStruct '('"a" ("/MayWarn" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/MayWarn" (Int32 '"2") (Int32 '"0"))))) '() '('('"res" (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
             (return (Int32 '"1"))
           ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$_item" "$_parent") (block '(
-            (return ("+" (Int32 '"1") "$state"))
+            (return ("+MayWarn" (Int32 '"1") "$state"))
           ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-            (return ("+" "$state1" "$state2"))
+            (return ("+MayWarn" "$state1" "$state2"))
           ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-            (return ("+" "$state1" "$state2"))
+            (return ("+MayWarn" "$state1" "$state2"))
           ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
             (return "$state")
           ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(
             (return "$state")
           ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(
             (return "$state")
-          ))) state)) (Int32 '"0"))) (ListItemType (TypeOf (AsList (AsStruct '('"a" ("/" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/" (Int32 '"2") (Int32 '"0"))))))) (lambda '("$z") (block '(
+          ))) state)) (Int32 '"0"))) (ListItemType (TypeOf (AsList (AsStruct '('"a" ("/MayWarn" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/MayWarn" (Int32 '"2") (Int32 '"0"))))))) (lambda '("$z") (block '(
             (return (SqlAccess 'struct "$z" '"a" '('"yson_strict" '"yson_fast")))
           ))))))))
           (return res)
@@ -85,7 +85,7 @@
 (let world (block '(
   (let values (block '(
     (let select (block '(
-      (let core (ToList (AsList (AsStruct '('"a" ("/" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/" (Int32 '"2") (Int32 '"0")))))))
+      (let core (ToList (AsList (AsStruct '('"a" ("/MayWarn" (Int32 '"1") (Int32 '"0")))) (AsStruct '('"a" ("/MayWarn" (Int32 '"2") (Int32 '"0")))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
@@ -120,11 +120,11 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
         (return (Int32 '"1"))
       ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$_item" "$_parent") (block '(
-        (return ("+" (Int32 '"1") "$state"))
+        (return ("+MayWarn" (Int32 '"1") "$state"))
       ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
         (return "$state")
       ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(
@@ -161,11 +161,11 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
         (return (Int32 '"1"))
       ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$_item" "$_parent") (block '(
-        (return ("+" (Int32 '"1") "$state"))
+        (return ("+MayWarn" (Int32 '"1") "$state"))
       ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
         (return "$state")
       ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(

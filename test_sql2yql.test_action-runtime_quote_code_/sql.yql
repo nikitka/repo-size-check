@@ -22,13 +22,13 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
           (let res (FormatCode (QuoteCode (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           ))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
           (let res (ListMap (ListFromRange (Int32 '"1") (Int32 '"4")) (lambda '("$x") (block '(
             (return (FormatCode (QuoteCode (lambda '("$y") (block '(
-              (return ("+" "$x" "$y"))
+              (return ("+MayWarn" "$x" "$y"))
             ))))))
           )))))
           (return res)

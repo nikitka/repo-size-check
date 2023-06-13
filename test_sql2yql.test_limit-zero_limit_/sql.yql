@@ -41,7 +41,7 @@
       ))))
       (return core)
     )))
-    (let select (Take select (Coalesce (Coalesce (SafeCast ("*" (Double '"0.1") (Int32 '"0")) (DataType 'Uint64)) (Int32 '"0")) (Uint64 '18446744073709551615))))
+    (let select (Take select (Coalesce (Coalesce (SafeCast ("*MayWarn" (Double '"0.1") (Int32 '"0")) (DataType 'Uint64)) (Int32 '"0")) (Uint64 '18446744073709551615))))
     (let select (RemoveSystemMembers select))
     (return select)
   )))

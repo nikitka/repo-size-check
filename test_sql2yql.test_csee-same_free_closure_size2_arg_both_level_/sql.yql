@@ -9,13 +9,13 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res '((FlatMap ("/" (Int32 '"3") (Int32 '"1")) (lambda '("$x") (block '(
-            (return ("+" "$x" (FlatMap ("/" (Int32 '"1") (Int32 '"1")) (lambda '("$y") (block '(
-              (return (Just ("+" "$x" "$y")))
+          (let res '((FlatMap ("/MayWarn" (Int32 '"3") (Int32 '"1")) (lambda '("$x") (block '(
+            (return ("+MayWarn" "$x" (FlatMap ("/MayWarn" (Int32 '"1") (Int32 '"1")) (lambda '("$y") (block '(
+              (return (Just ("+MayWarn" "$x" "$y")))
             ))))))
-          )))) (FlatMap ("/" (Int32 '"4") (Int32 '"1")) (lambda '("$x") (block '(
-            (return ("+" "$x" (FlatMap ("/" (Int32 '"1") (Int32 '"1")) (lambda '("$y") (block '(
-              (return (Just ("+" "$x" "$y")))
+          )))) (FlatMap ("/MayWarn" (Int32 '"4") (Int32 '"1")) (lambda '("$x") (block '(
+            (return ("+MayWarn" "$x" (FlatMap ("/MayWarn" (Int32 '"1") (Int32 '"1")) (lambda '("$y") (block '(
+              (return (Just ("+MayWarn" "$x" "$y")))
             ))))))
           ))))))
           (return res)

@@ -12,7 +12,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-          (let res ("+" (Member row 'Avg0) (Double '"0.3")))
+          (let res ("+MayWarn" (Member row 'Avg0) (Double '"0.3")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
           (let res (SafeCast (Member row 'Sum0) (DataType 'String)))

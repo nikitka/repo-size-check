@@ -10,7 +10,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table0 (lambda '(row) (block '(
-        (let row (AddMember row '"_equijoin_column_0" ("+" (SafeCast (Member row '"subkey") (DataType 'Int32)) (Int32 '"1"))))
+        (let row (AddMember row '"_equijoin_column_0" ("+MayWarn" (SafeCast (Member row '"subkey") (DataType 'Int32)) (Int32 '"1"))))
         (return row)
       ))))) '"A") '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
         (let row (AddMember row '"_equijoin_column_1" (SafeCast (Member row '"subkey") (DataType 'Int32))))

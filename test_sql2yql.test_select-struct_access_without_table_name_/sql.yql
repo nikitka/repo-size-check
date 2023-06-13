@@ -11,7 +11,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
-          (let res ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
+          (let res ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"struct_field" (lambda '(row) (block '(
           (let res (AsStructUnordered '('"kk" (Member row '"key")) '('"sk" (Member row '"subkey"))))

@@ -21,22 +21,22 @@
           (let res (Coalesce (Member row '"k2") (Int32 '"0")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (Coalesce (Member row '"k2") ("/" (Int32 '"1") (Int32 '"0"))))
+          (let res (Coalesce (Member row '"k2") ("/MayWarn" (Int32 '"1") (Int32 '"0"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
-          (let res (Coalesce ("/" (Int32 '"1") (Int32 '"2")) (Member row '"k2")))
+          (let res (Coalesce ("/MayWarn" (Int32 '"1") (Int32 '"2")) (Member row '"k2")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
-          (let res (Coalesce ("/" (Int32 '"1") (Int32 '"2")) (Member row '"k1")))
+          (let res (Coalesce ("/MayWarn" (Int32 '"1") (Int32 '"2")) (Member row '"k1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res (Coalesce ("/" (Member row '"k1") (Int32 '"0")) (Int32 '"1")))
+          (let res (Coalesce ("/MayWarn" (Member row '"k1") (Int32 '"0")) (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
-          (let res (Coalesce ("/" (Member row '"k1") (Int32 '"0")) (Member row '"k1")))
+          (let res (Coalesce ("/MayWarn" (Member row '"k1") (Int32 '"0")) (Member row '"k1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
-          (let res (Coalesce ("/" (Member row '"k1") (Int32 '"2")) (Int32 '"0")))
+          (let res (Coalesce ("/MayWarn" (Member row '"k1") (Int32 '"2")) (Int32 '"0")))
           (return res)
         )))))))
         (return core)

@@ -8,7 +8,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0))) '('AggregateList2 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0)))) '()) '('"mod")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

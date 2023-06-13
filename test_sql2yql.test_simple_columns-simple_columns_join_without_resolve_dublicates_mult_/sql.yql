@@ -8,17 +8,17 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"5")) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"5")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (DataType 'String)))
+          (let res (SafeCast ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
-          (let res ("*" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")))
+          (let res ("*MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Concat (String '"data: ") (Member row '"value")))

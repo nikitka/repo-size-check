@@ -10,12 +10,12 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (AsList (ListMap (AsList (Int32 '"1") (Int32 '"2")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Int32 '"1")))
+            (return ("+MayWarn" "$x" (Int32 '"1")))
           )))) (ListMap (AsList (Int32 '"3") (Int32 '"4")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$x") (block '(
-              (return ("+" "$x" (Int32 '"1")))
+            (return ("+MayWarn" "$x" (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$x") (block '(
+              (return ("+MayWarn" "$x" (Int32 '"1")))
             )))) (Int32 '"0") (lambda '("$a" "$b") (block '(
-              (return ("+" "$a" "$b"))
+              (return ("+MayWarn" "$a" "$b"))
             ))))))
           ))))))
           (return res)

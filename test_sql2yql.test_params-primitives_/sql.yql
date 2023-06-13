@@ -32,10 +32,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("*" (Int32 '"2") "$x1"))
+          (let res ("*MayWarn" (Int32 '"2") "$x1"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res ("*" (Minus "$x2") (Int32 '"10")))
+          (let res ("*MayWarn" (Minus "$x2") (Int32 '"10")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (Not "$x3"))
@@ -50,7 +50,7 @@
           (let res (Minus "$x6"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res ("+" "$x7" (Int32 '"1")))
+          (let res ("+MayWarn" "$x7" (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
           (let res (Size "$x8"))

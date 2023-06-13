@@ -14,7 +14,7 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"eval" (lambda '(row) (block '(
-          (let res ("/" (SafeCast (Member row '"key") (DataType 'Int64)) (Int32 '"100")))
+          (let res ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Int64)) (Int32 '"100")))
           (return res)
         )))))))
         (return core)

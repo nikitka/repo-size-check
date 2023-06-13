@@ -5,7 +5,7 @@
 (let world (block '(
   (let output (block '(
     (let select (block '(
-      (let core (ToList (AsList (AsStructUnordered '('"x" ("/" (Int32 '"1") (Int32 '"0"))) '('"y" ("/" (Int32 '"2") (Int32 '"0")))) (AsStructUnordered '('"x" ("/" (Int32 '"1") (Int32 '"0"))) '('"y" (Int32 '"1"))) (AsStructUnordered '('"x" (Int32 '"1")) '('"y" ("/" (Int32 '"1") (Int32 '"0")))) (AsStructUnordered '('"x" (Int32 '"2")) '('"y" (Int32 '"2"))) (AsStructUnordered '('"x" (Int32 '"3")) '('"y" (Int32 '"3"))) (AsStructUnordered '('"x" (Int32 '"4")) '('"y" (Int32 '"4"))) (AsStructUnordered '('"x" (Int32 '"5")) '('"y" (Int32 '"5"))))))
+      (let core (ToList (AsList (AsStructUnordered '('"x" ("/MayWarn" (Int32 '"1") (Int32 '"0"))) '('"y" ("/MayWarn" (Int32 '"2") (Int32 '"0")))) (AsStructUnordered '('"x" ("/MayWarn" (Int32 '"1") (Int32 '"0"))) '('"y" (Int32 '"1"))) (AsStructUnordered '('"x" (Int32 '"1")) '('"y" ("/MayWarn" (Int32 '"1") (Int32 '"0")))) (AsStructUnordered '('"x" (Int32 '"2")) '('"y" (Int32 '"2"))) (AsStructUnordered '('"x" (Int32 '"3")) '('"y" (Int32 '"3"))) (AsStructUnordered '('"x" (Int32 '"4")) '('"y" (Int32 '"4"))) (AsStructUnordered '('"x" (Int32 '"5")) '('"y" (Int32 '"5"))))))
       (let core (OrderedFilter core (lambda '(row) (Coalesce (Not (Or ("<" (Member row '"x") (Int32 '"3")) (">" (Member row '"y") (Int32 '"3")))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

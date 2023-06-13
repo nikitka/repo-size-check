@@ -10,7 +10,7 @@
       (let composite table0)
       (return (UnionAll (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"vf" '"kf" '"kl") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"vf" '"kf" '"kl")))
         (let core (PersistableRepr (block '(
@@ -44,7 +44,7 @@
         (return core)
       )) (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"vf" '"kl") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"vf" '"kl")))
         (let core (PersistableRepr (block '(
@@ -79,7 +79,7 @@
         (return core)
       )) (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"vf" '"kf") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"vf" '"kf")))
         (let core (PersistableRepr (block '(
@@ -114,7 +114,7 @@
         (return core)
       )) (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'kf) 'kf ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'kl) 'kl ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10"))) 'vf) 'vf (Substring (Member row '"value") (Int32 '"0") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"vf") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Size (Member row '"value"))))))) '()) '('"vf")))
         (let core (PersistableRepr (block '(

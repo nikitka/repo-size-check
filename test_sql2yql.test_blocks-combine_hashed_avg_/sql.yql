@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") ("-" (Uint32 '"4") (Member row '"subkey"))))))) '('Avg1 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Avg2 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Uint32 '"1"))))) '('Avg3 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") (Uint32 '"0"))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Uint32 '"1") ("-MayWarn" (Uint32 '"4") (Member row '"subkey"))))))) '('Avg1 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Avg2 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Uint32 '"1"))))) '('Avg3 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Uint32 '"1") (Uint32 '"0"))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

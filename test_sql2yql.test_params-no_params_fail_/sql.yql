@@ -10,7 +10,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("*" (Int32 '"2") "$x"))
+          (let res ("*MayWarn" (Int32 '"2") "$x"))
           (return res)
         )))))))
         (return core)

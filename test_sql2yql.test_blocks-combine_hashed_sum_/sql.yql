@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") ("-" (Uint32 '"4") (Member row '"subkey"))))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Sum2 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Uint32 '"1"))))) '('Sum3 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Uint32 '"1") (Uint32 '"0"))))))) '()) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Uint32 '"1") ("-MayWarn" (Uint32 '"4") (Member row '"subkey"))))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Sum2 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Uint32 '"1"))))) '('Sum3 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Uint32 '"1") (Uint32 '"0"))))))) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

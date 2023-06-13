@@ -38,7 +38,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-          (let res ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Uint32 '"100")))
+          (let res ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Uint32 '"100")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
           (let res (Member row '"subkey"))

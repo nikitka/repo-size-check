@@ -90,7 +90,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Uint32))) (lambda '("$row") (block '(
-            (return (Coalesce (SqlIn '((Int32 '"-1") (Uint32 '"10") (Int32 '"20") ("/" (Int32 '"1") (Int32 '"0"))) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) (Bool '"false")))
+            (return (Coalesce (SqlIn '((Int32 '"-1") (Uint32 '"10") (Int32 '"20") ("/MayWarn" (Int32 '"1") (Int32 '"0"))) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) (Bool '"false")))
           ))) '('"x")))
           (return res)
         )))))))

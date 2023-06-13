@@ -15,7 +15,7 @@
           (let res (Member row '"value"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-          (let res ("+" (Member row 'Avg0) (Double '"0.3")))
+          (let res ("+MayWarn" (Member row 'Avg0) (Double '"0.3")))
           (return res)
         )))))))
         (return core)

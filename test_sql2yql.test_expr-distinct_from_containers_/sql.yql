@@ -9,22 +9,22 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (IsNotDistinctFrom '((Int32 '"1") (Int32 '"2")) '((Int32 '"1") (Int32 '"2") ("/" (Int32 '"1") (Int32 '"0")))))
+          (let res (IsNotDistinctFrom '((Int32 '"1") (Int32 '"2")) '((Int32 '"1") (Int32 '"2") ("/MayWarn" (Int32 '"1") (Int32 '"0")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (IsNotDistinctFrom (AsStructUnordered '('"a" ("/" (Int32 '"1") (Int32 '"0"))) '('"b" (Nothing (OptionalType (DataType 'String)))) '('"c" (Int32 '"1"))) (AsStructUnordered '('"c" (Uint32 '"1")) '('"d" ("/" (Uint32 '"1") (Uint32 '"0"))) '('"e" (Nothing (OptionalType (DataType 'Utf8)))))))
+          (let res (IsNotDistinctFrom (AsStructUnordered '('"a" ("/MayWarn" (Int32 '"1") (Int32 '"0"))) '('"b" (Nothing (OptionalType (DataType 'String)))) '('"c" (Int32 '"1"))) (AsStructUnordered '('"c" (Uint32 '"1")) '('"d" ("/MayWarn" (Uint32 '"1") (Uint32 '"0"))) '('"e" (Nothing (OptionalType (DataType 'Utf8)))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (IsNotDistinctFrom (AsList (Int32 '"1") (Int32 '"2") (Null)) (AsList (Int32 '"1") (Int32 '"2") (Just ("/" (Int32 '"1") (Int32 '"0"))))))
+          (let res (IsNotDistinctFrom (AsList (Int32 '"1") (Int32 '"2") (Null)) (AsList (Int32 '"1") (Int32 '"2") (Just ("/MayWarn" (Int32 '"1") (Int32 '"0"))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (IsDistinctFrom (AsDict '((Int32 '"1") (Null))) (AsDict '((Uint32 '"1") ("/" (Int32 '"2") (Int32 '"0"))))))
+          (let res (IsDistinctFrom (AsDict '((Int32 '"1") (Null))) (AsDict '((Uint32 '"1") ("/MayWarn" (Int32 '"2") (Int32 '"0"))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
-          (let res (IsDistinctFrom (Variant ("/" (Int32 '"1") (Int32 '"0")) '"1" (VariantType (TupleType (DataType 'Int32) (OptionalType (DataType 'Int32))))) (Variant (Null) '"1" (VariantType (TupleType (DataType 'Int64) (NullType))))))
+          (let res (IsDistinctFrom (Variant ("/MayWarn" (Int32 '"1") (Int32 '"0")) '"1" (VariantType (TupleType (DataType 'Int32) (OptionalType (DataType 'Int32))))) (Variant (Null) '"1" (VariantType (TupleType (DataType 'Int64) (NullType))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
-          (let res (IsNotDistinctFrom (Variant ("/" (Int32 '"1") (Int32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Int32)))))) (Variant (Null) '"b" (VariantType (StructType '('"a" (DataType 'Int64)) '('"b" (NullType)))))))
+          (let res (IsNotDistinctFrom (Variant ("/MayWarn" (Int32 '"1") (Int32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Int32)))))) (Variant (Null) '"b" (VariantType (StructType '('"a" (DataType 'Int64)) '('"b" (NullType)))))))
           (return res)
         )))))))
         (return core)

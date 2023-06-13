@@ -10,7 +10,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'k1) 'k1 ("+" (Member row '"key") (Uint32 '"1")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'k1) 'k1 ("+MayWarn" (Member row '"key") (Uint32 '"1")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"k1") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey")))))) '()) '('"k1")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -41,7 +41,7 @@
   (let output (block '(
     (let select (block '(
       (let core table1)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+" (Member row '"key") (Uint32 '"2")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+MayWarn" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+MayWarn" (Member row '"key") (Uint32 '"2")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey")))))) '()) '('"k1" '"k2")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -75,7 +75,7 @@
   (let output (block '(
     (let select (block '(
       (let core table2)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+" (Member row '"key") (Uint32 '"3")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+MayWarn" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+MayWarn" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+MayWarn" (Member row '"key") (Uint32 '"3")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2" '"k3") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey")))))) '()) '('"k1" '"k2" '"k3")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -112,7 +112,7 @@
   (let output (block '(
     (let select (block '(
       (let core table3)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+" (Member row '"key") (Uint32 '"3"))) 'k4) 'k4 ("+" (Member row '"key") (Uint32 '"4")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+MayWarn" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+MayWarn" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+MayWarn" (Member row '"key") (Uint32 '"3"))) 'k4) 'k4 ("+MayWarn" (Member row '"key") (Uint32 '"4")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2" '"k3" '"k4") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey")))))) '()) '('"k1" '"k2" '"k3" '"k4")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -152,7 +152,7 @@
   (let output (block '(
     (let select (block '(
       (let core table4)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+" (Member row '"key") (Uint32 '"3"))) 'k4) 'k4 ("+" (Member row '"key") (Uint32 '"4"))) 'k5) 'k5 ("+" (Member row '"key") (Uint32 '"5")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'k1) 'k1 ("+MayWarn" (Member row '"key") (Uint32 '"1"))) 'k2) 'k2 ("+MayWarn" (Member row '"key") (Uint32 '"2"))) 'k3) 'k3 ("+MayWarn" (Member row '"key") (Uint32 '"3"))) 'k4) 'k4 ("+MayWarn" (Member row '"key") (Uint32 '"4"))) 'k5) 'k5 ("+MayWarn" (Member row '"key") (Uint32 '"5")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"k1" '"k2" '"k3" '"k4" '"k5") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey")))))) '()) '('"k1" '"k2" '"k3" '"k4" '"k5")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

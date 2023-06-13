@@ -10,23 +10,23 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (AsList (ListMap (AsList (Int32 '"3") (Int32 '"4")) (lambda '("$x") (block '(
-            (return ("+" ("+" "$x" (Fold (AsList (Int32 '"9") (Int32 '"10")) (Int32 '"1") (lambda '("$c" "$d") (block '(
-              (return ("+" ("+" "$c" "$d") (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$y") (block '(
-                (return ("+" "$x" (Fold (AsList (Int32 '"11") (Int32 '"12")) (Int32 '"2") (lambda '("$e" "$f") (block '(
-                  (return ("+" ("+" "$e" "$f") "$y"))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Fold (AsList (Int32 '"9") (Int32 '"10")) (Int32 '"1") (lambda '("$c" "$d") (block '(
+              (return ("+MayWarn" ("+MayWarn" "$c" "$d") (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$y") (block '(
+                (return ("+MayWarn" "$x" (Fold (AsList (Int32 '"11") (Int32 '"12")) (Int32 '"2") (lambda '("$e" "$f") (block '(
+                  (return ("+MayWarn" ("+MayWarn" "$e" "$f") "$y"))
                 ))))))
               )))) (Int32 '"0") (lambda '("$a" "$b") (block '(
-                (return ("+" ("+" "$a" "$b") (Fold (AsList (Int32 '"13") (Int32 '"14")) (Int32 '"3") (lambda '("$i" "$j") (block '(
-                  (return ("+" ("+" "$i" "$j") "$a"))
+                (return ("+MayWarn" ("+MayWarn" "$a" "$b") (Fold (AsList (Int32 '"13") (Int32 '"14")) (Int32 '"3") (lambda '("$i" "$j") (block '(
+                  (return ("+MayWarn" ("+MayWarn" "$i" "$j") "$a"))
                 ))))))
               ))))))
             ))))) (Fold (ListMap (AsList (Int32 '"7") (Int32 '"8")) (lambda '("$y") (block '(
-              (return ("+" "$x" (Fold (AsList (Int32 '"11") (Int32 '"12")) (Int32 '"2") (lambda '("$e" "$f") (block '(
-                (return ("+" ("+" "$e" "$f") "$y"))
+              (return ("+MayWarn" "$x" (Fold (AsList (Int32 '"11") (Int32 '"12")) (Int32 '"2") (lambda '("$e" "$f") (block '(
+                (return ("+MayWarn" ("+MayWarn" "$e" "$f") "$y"))
               ))))))
             )))) (Int32 '"0") (lambda '("$a" "$b") (block '(
-              (return ("+" ("+" "$a" "$b") (Fold (AsList (Int32 '"13") (Int32 '"14")) (Int32 '"3") (lambda '("$i" "$j") (block '(
-                (return ("+" ("+" "$i" "$j") "$a"))
+              (return ("+MayWarn" ("+MayWarn" "$a" "$b") (Fold (AsList (Int32 '"13") (Int32 '"14")) (Int32 '"3") (lambda '("$i" "$j") (block '(
+                (return ("+MayWarn" ("+MayWarn" "$i" "$j") "$a"))
               ))))))
             ))))))
           ))))))

@@ -21,7 +21,7 @@
           (let res (SqlIn '((Int32 '"1") (Int32 '"3") (Int32 '"4")) (Double '"3.14") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"pi_in_expr" (lambda '(row) (block '(
-          (let res (SqlIn '((Int32 '"1") (Int32 '"3") (Int32 '"4") ("+" (Int32 '"3") (Double '"0.14"))) (Double '"3.14") '('('warnNoAnsi))))
+          (let res (SqlIn '((Int32 '"1") (Int32 '"3") (Int32 '"4") ("+MayWarn" (Int32 '"3") (Double '"0.14"))) (Double '"3.14") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"end" (lambda '(row) (block '(
           (let res (String '"end"))

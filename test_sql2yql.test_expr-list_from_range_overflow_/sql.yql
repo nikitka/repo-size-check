@@ -15,10 +15,10 @@
           (let res (ListFromRange (Uint8 '"1") (Uint8 '"254") (Uint8 '"11")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (ListFromRange (Int8 '"127") ("-" (Int8 '"-127") (Int8 '"1")) (Int8 '"-1")))
+          (let res (ListFromRange (Int8 '"127") ("-MayWarn" (Int8 '"-127") (Int8 '"1")) (Int8 '"-1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (ListFromRange (Int8 '"127") ("-" (Int8 '"-127") (Int8 '"1")) ("-" (Int8 '"-127") (Int8 '"1"))))
+          (let res (ListFromRange (Int8 '"127") ("-MayWarn" (Int8 '"-127") (Int8 '"1")) ("-MayWarn" (Int8 '"-127") (Int8 '"1"))))
           (return res)
         )))))))
         (return core)

@@ -18,25 +18,25 @@
           (let res (SafeCast (Inc (Abs (SafeCast (Int64 '"-1000000000000") (DataType 'Decimal '"32" '"0")))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"add" (lambda '(row) (block '(
-          (let res (SafeCast (Minus ("+" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0")))) (DataType 'String)))
+          (let res (SafeCast (Minus ("+MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0")))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"div" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (let res (SafeCast ("/MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
-          (let res (SafeCast ("%" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (let res (SafeCast ("%MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"mul" (lambda '(row) (block '(
-          (let res (SafeCast ("*" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int64 '"333333333333333333") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (let res (SafeCast ("*MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int64 '"333333333333333333") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"sub" (lambda '(row) (block '(
-          (let res (SafeCast ("-" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
+          (let res (SafeCast ("-MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (String '"1111111111111111111111111111111") (DataType 'Decimal '"32" '"0"))) (DataType 'String)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"eq" (lambda '(row) (block '(
           (let res ("==" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (Abs (SafeCast (Int64 '"-1000000000000") (DataType 'Decimal '"32" '"0")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"cmp" (lambda '(row) (block '(
-          (let res ("<=" ("/" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0")))
+          (let res ("<=" ("/MayWarn" (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0") (SafeCast (Int32 '"1111") (DataType 'Decimal '"32" '"0"))) (StrictFromString (String '"1000000000000") '"Decimal" '"32" '"0")))
           (return res)
         )))))))
         (return core)

@@ -15,13 +15,13 @@
           (return res)
         ))) '('('addPrefix '"t."))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x" "$z" "$func") (block '(
-            (let $v ("+" ("*" (Int32 '"10") "$z") "$x"))
+            (let $v ("+MayWarn" ("*MayWarn" (Int32 '"10") "$z") "$x"))
             (let $shift (lambda '("$item" "$sk") (block '(
               (return (ShiftLeft "$item" (Apply "$func" "$sk")))
             ))))
             (return (Apply "$shift" "$v" "$z"))
           ))) (SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"subkey") (DataType 'Uint64)) (lambda '("$item") (block '(
-            (return (Coalesce (SafeCast ("%" "$item" (Int32 '"4")) (DataType 'Uint8)) (Int32 '"0")))
+            (return (Coalesce (SafeCast ("%MayWarn" "$item" (Int32 '"4")) (DataType 'Uint8)) (Int32 '"0")))
           )))))
           (return res)
         )))))))

@@ -18,7 +18,7 @@
                 (let $db_name (Apply (lambda '("$val") (block '(
                   (return (SqlCall '"Unicode.Fold" '((PositionalArgs (SafeCast "$val" (DataType 'Utf8))))))
                 ))) "$db_name"))
-                (return ("<" (SqlCall '"Unicode.LevensteinDistance" '((PositionalArgs "$org_name" "$db_name"))) ("*" (Double '"0.2") (SqlCall '"Unicode.GetLength" '((PositionalArgs "$org_name"))))))
+                (return ("<" (SqlCall '"Unicode.LevensteinDistance" '((PositionalArgs "$org_name" "$db_name"))) ("*MayWarn" (Double '"0.2") (SqlCall '"Unicode.GetLength" '((PositionalArgs "$org_name"))))))
               ))) item) (Bool 'false)))))
             )))))) (Int32 '"0")))
           ))) (AsList (String '"1") (String '"2")) (AsList (String '"nets"))))

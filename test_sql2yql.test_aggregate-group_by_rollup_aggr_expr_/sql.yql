@@ -56,7 +56,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"approved_share" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("/" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
+            (let res ("/MayWarn" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
             (return res)
           )))) (SqlProjectItem projectCoreType '"total" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
@@ -90,7 +90,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"approved_share" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("/" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
+            (let res ("/MayWarn" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
             (return res)
           )))) (SqlProjectItem projectCoreType '"total" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
@@ -125,7 +125,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"approved_share" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("/" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
+            (let res ("/MayWarn" (SafeCast (Member row 'CountIf1) (DataType 'Double)) (Member row 'Count0)))
             (return res)
           )))) (SqlProjectItem projectCoreType '"total" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))

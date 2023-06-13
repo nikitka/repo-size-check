@@ -9,7 +9,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"1" (PgType 'int4)) (PgConst '"2" (PgType 'int4))))
+          (let res ("+MayWarn" (PgConst '"1" (PgType 'int4)) (PgConst '"2" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
           (let res (Plus (PgConst '"1" (PgType 'int4))))
@@ -18,70 +18,70 @@
           (let res (PgConst '"-1" (PgType 'int4)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"1" (PgType 'int4)) (PgConst '"2" (PgType 'int4))))
+          (let res ("-MayWarn" (PgConst '"1" (PgType 'int4)) (PgConst '"2" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
-          (let res ("*" (PgConst '"3" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
+          (let res ("*MayWarn" (PgConst '"3" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
-          (let res ("/" (PgConst '"7" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
+          (let res ("/MayWarn" (PgConst '"7" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res ("%" (PgConst '"7" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
+          (let res ("%MayWarn" (PgConst '"7" (PgType 'int4)) (PgConst '"4" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
           (let res (Concat (PgConst '"a" (PgType 'text)) (PgConst '"b" (PgType 'text))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"2001-09-28" (PgType 'date)) (Int32 '"7")))
+          (let res ("+MayWarn" (PgConst '"2001-09-28" (PgType 'date)) (Int32 '"7")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"1 hour" (PgType 'interval))))
+          (let res ("+MayWarn" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"1 hour" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"03:00" (PgType 'time))))
+          (let res ("+MayWarn" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"03:00" (PgType 'time))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"1 day" (PgType 'interval)) (PgConst '"1 hour" (PgType 'interval))))
+          (let res ("+MayWarn" (PgConst '"1 day" (PgType 'interval)) (PgConst '"1 hour" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"2001-09-28 01:00" (PgType 'timestamp)) (PgConst '"23 hours" (PgType 'interval))))
+          (let res ("+MayWarn" (PgConst '"2001-09-28 01:00" (PgType 'timestamp)) (PgConst '"23 hours" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
-          (let res ("+" (PgConst '"01:00" (PgType 'time)) (PgConst '"3 hours" (PgType 'interval))))
+          (let res ("+MayWarn" (PgConst '"01:00" (PgType 'time)) (PgConst '"3 hours" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
           (let res (Minus (PgConst '"23 hours" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"2001-10-01" (PgType 'date)) (PgConst '"2001-09-28" (PgType 'date))))
+          (let res ("-MayWarn" (PgConst '"2001-10-01" (PgType 'date)) (PgConst '"2001-09-28" (PgType 'date))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"2001-10-01" (PgType 'date)) (Int32 '"7")))
+          (let res ("-MayWarn" (PgConst '"2001-10-01" (PgType 'date)) (Int32 '"7")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"1 hour" (PgType 'interval))))
+          (let res ("-MayWarn" (PgConst '"2001-09-28" (PgType 'date)) (PgConst '"1 hour" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"05:00" (PgType 'time)) (PgConst '"03:00" (PgType 'time))))
+          (let res ("-MayWarn" (PgConst '"05:00" (PgType 'time)) (PgConst '"03:00" (PgType 'time))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"05:00" (PgType 'time)) (PgConst '"2 hours" (PgType 'interval))))
+          (let res ("-MayWarn" (PgConst '"05:00" (PgType 'time)) (PgConst '"2 hours" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"2001-09-28 23:00" (PgType 'timestamp)) (PgConst '"23 hours" (PgType 'interval))))
+          (let res ("-MayWarn" (PgConst '"2001-09-28 23:00" (PgType 'timestamp)) (PgConst '"23 hours" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"1 day" (PgType 'interval)) (PgConst '"1 hour" (PgType 'interval))))
+          (let res ("-MayWarn" (PgConst '"1 day" (PgType 'interval)) (PgConst '"1 hour" (PgType 'interval))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
-          (let res ("-" (PgConst '"2001-09-29 03:00" (PgType 'timestamp)) (PgConst '"2001-07-27 12:00" (PgType 'timestamp))))
+          (let res ("-MayWarn" (PgConst '"2001-09-29 03:00" (PgType 'timestamp)) (PgConst '"2001-07-27 12:00" (PgType 'timestamp))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
-          (let res ("*" (PgConst '"1 second" (PgType 'interval)) (Double '"900.0")))
+          (let res ("*MayWarn" (PgConst '"1 second" (PgType 'interval)) (Double '"900.0")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
-          (let res ("/" (PgConst '"1 hour" (PgType 'interval)) (Double '"1.5")))
+          (let res ("/MayWarn" (PgConst '"1 hour" (PgType 'interval)) (Double '"1.5")))
           (return res)
         )))))))
         (return core)

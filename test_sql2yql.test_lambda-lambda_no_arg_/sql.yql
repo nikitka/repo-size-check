@@ -10,7 +10,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (ListFilter (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"4") (Int32 '"5")) (lambda '(item) (Coalesce (Apply (lambda '("$item") (block '(
-            (return (Not ("==" ("%" "$item" (Apply (lambda '() (block '(
+            (return (Not ("==" ("%MayWarn" "$item" (Apply (lambda '() (block '(
               (return (Int32 '"2"))
             ))))) (Int32 '"0"))))
           ))) item) (Bool 'false)))))

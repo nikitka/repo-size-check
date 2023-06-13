@@ -10,7 +10,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (ListFlatMap (AsList (Int32 '"1") (Int32 '"2") (Null)) (lambda '("$x") (block '(
-            (return ("+" (Int32 '"10") "$x"))
+            (return ("+MayWarn" (Int32 '"10") "$x"))
           )))))
           (return res)
         )))))))

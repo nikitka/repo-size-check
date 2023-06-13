@@ -16,7 +16,7 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"sks" (lambda '(row) (block '(
-          (let res ("+" (Member row 'Sum0) (Member row 'Sum1)))
+          (let res ("+MayWarn" (Member row 'Sum0) (Member row 'Sum1)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"kl" (lambda '(row) (block '(
           (let res (Member row 'AggregateList0))

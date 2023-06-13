@@ -633,7 +633,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'Date)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'Date)))
           (return res)
         )))))))
         (return core)
@@ -657,7 +657,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'Date)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'Date)))
           (return res)
         )))))))
         (return core)
@@ -1305,7 +1305,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'Date)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'Date)))
           (return res)
         )))))))
         (return core)
@@ -1329,7 +1329,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'Date)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'Date)))
           (return res)
         )))))))
         (return core)
@@ -1353,7 +1353,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'Date)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'Date)))
           (return res)
         )))))))
         (return core)
@@ -1521,7 +1521,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'Datetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'Datetime)))
           (return res)
         )))))))
         (return core)
@@ -1545,7 +1545,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'Datetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'Datetime)))
           (return res)
         )))))))
         (return core)
@@ -1569,7 +1569,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'Datetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'Datetime)))
           (return res)
         )))))))
         (return core)
@@ -1737,7 +1737,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'Timestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'Timestamp)))
           (return res)
         )))))))
         (return core)
@@ -1761,7 +1761,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'Timestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'Timestamp)))
           (return res)
         )))))))
         (return core)
@@ -1785,7 +1785,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'Timestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'Timestamp)))
           (return res)
         )))))))
         (return core)
@@ -1953,7 +1953,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'Interval)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'Interval)))
           (return res)
         )))))))
         (return core)
@@ -1977,7 +1977,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'Interval)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'Interval)))
           (return res)
         )))))))
         (return core)
@@ -2001,7 +2001,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'Interval)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'Interval)))
           (return res)
         )))))))
         (return core)

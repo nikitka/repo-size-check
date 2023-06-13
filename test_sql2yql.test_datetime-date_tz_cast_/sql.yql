@@ -513,7 +513,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'TzDate)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'TzDate)))
           (return res)
         )))))))
         (return core)
@@ -537,7 +537,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'TzDate)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'TzDate)))
           (return res)
         )))))))
         (return core)
@@ -705,7 +705,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'TzDatetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'TzDatetime)))
           (return res)
         )))))))
         (return core)
@@ -729,7 +729,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'TzDatetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'TzDatetime)))
           (return res)
         )))))))
         (return core)
@@ -753,7 +753,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'TzDatetime)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'TzDatetime)))
           (return res)
         )))))))
         (return core)
@@ -921,7 +921,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"1")) (DataType 'TzTimestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'TzTimestamp)))
           (return res)
         )))))))
         (return core)
@@ -945,7 +945,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"-1") (Int32 '"1")) (DataType 'TzTimestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"-1") (Int32 '"1")) (DataType 'TzTimestamp)))
           (return res)
         )))))))
         (return core)
@@ -969,7 +969,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SafeCast ("/" (Int32 '"1") (Int32 '"0")) (DataType 'TzTimestamp)))
+          (let res (SafeCast ("/MayWarn" (Int32 '"1") (Int32 '"0")) (DataType 'TzTimestamp)))
           (return res)
         )))))))
         (return core)

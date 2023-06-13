@@ -13,7 +13,7 @@
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
-              (let res (If (Coalesce ("==" (Member row '"key") (String '"0")) (Bool 'false)) (Null) ("/" (SafeCast (Member row '"subkey") (DataType 'Int32)) (SafeCast (Member row '"key") (DataType 'Int32)))))
+              (let res (If (Coalesce ("==" (Member row '"key") (String '"0")) (Bool 'false)) (Null) ("/MayWarn" (SafeCast (Member row '"subkey") (DataType 'Int32)) (SafeCast (Member row '"key") (DataType 'Int32)))))
               (return res)
             )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
               (let res (Member row '"value"))

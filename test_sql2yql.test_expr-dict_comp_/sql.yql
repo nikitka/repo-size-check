@@ -9,7 +9,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res '(("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"3")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")) '((Int32 '"3") (Int32 '"4")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"2") (Int32 '"2")))) ("==" (AsDict '((Uint32 '"1") (Int64 '"2"))) (AsDict '((Uint32 '"1") (Just (Uint32 '"2"))))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") ("/" (Int32 '"2") (Int32 '"0")))))))
+          (let res '(("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"3")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")) '((Int32 '"3") (Int32 '"4")))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"2") (Int32 '"2")))) ("==" (AsDict '((Uint32 '"1") (Int64 '"2"))) (AsDict '((Uint32 '"1") (Just (Uint32 '"2"))))) ("==" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") ("/MayWarn" (Int32 '"2") (Int32 '"0")))))))
           (return res)
         )))))))
         (return core)
@@ -33,7 +33,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res '(("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"3")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")) '((Int32 '"3") (Int32 '"4")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"2") (Int32 '"2")))) ("!=" (AsDict '((Uint32 '"1") (Int64 '"2"))) (AsDict '((Uint32 '"1") (Just (Uint32 '"2"))))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") ("/" (Int32 '"2") (Int32 '"0")))))))
+          (let res '(("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"3")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") (Int32 '"2")) '((Int32 '"3") (Int32 '"4")))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"2") (Int32 '"2")))) ("!=" (AsDict '((Uint32 '"1") (Int64 '"2"))) (AsDict '((Uint32 '"1") (Just (Uint32 '"2"))))) ("!=" (AsDict '((Int32 '"1") (Uint32 '"2"))) (AsDict '((Int32 '"1") ("/MayWarn" (Int32 '"2") (Int32 '"0")))))))
           (return res)
         )))))))
         (return core)

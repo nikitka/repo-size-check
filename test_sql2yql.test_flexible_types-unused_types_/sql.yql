@@ -36,7 +36,7 @@
           ))) (SqlPlainColumnOrType row '"integer")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"int_plus_one" (lambda '(row) (block '(
-          (let res ("+" (SqlPlainColumnOrType row '"integer") (Int32 '"1")))
+          (let res ("+MayWarn" (SqlPlainColumnOrType row '"integer") (Int32 '"1")))
           (return res)
         )))))))
         (return core)

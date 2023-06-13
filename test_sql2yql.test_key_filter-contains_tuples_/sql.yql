@@ -64,7 +64,7 @@
   (let output (block '(
     (let select (block '(
       (let core table2)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn '('((String '"075") (String '"1") (Uint32 '"3") (String '"abc")) '((String '"023") (String '"3") ("+" ("+" (Int32 '"1") (Int32 '"1")) (Int32 '"1")) (String '"aaa"))) '((Member row '"key") (Member row '"subkey") ("+" (Int32 '"1") (Int32 '"2")) (Member row '"value")) '('('warnNoAnsi))) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn '('((String '"075") (String '"1") (Uint32 '"3") (String '"abc")) '((String '"023") (String '"3") ("+MayWarn" ("+MayWarn" (Int32 '"1") (Int32 '"1")) (Int32 '"1")) (String '"aaa"))) '((Member row '"key") (Member row '"subkey") ("+MayWarn" (Int32 '"1") (Int32 '"2")) (Member row '"value")) '('('warnNoAnsi))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

@@ -13,7 +13,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"sks" (lambda '(row) (block '(
-          (let res ("+" (Member row 'Sum0) (Member row 'Sum1)))
+          (let res ("+MayWarn" (Member row 'Sum0) (Member row 'Sum1)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"kl" (lambda '(row) (block '(
           (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(

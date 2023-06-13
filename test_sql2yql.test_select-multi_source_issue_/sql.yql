@@ -78,7 +78,7 @@
           (let res (Member row 'Count0))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res ("/" (Member row 'Count1) (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)))
+          (let res ("/MayWarn" (Member row 'Count1) (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)))
           (return res)
         )))))))
         (return core)
@@ -106,7 +106,7 @@
           (let res (Member row 'Count0))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res ("/" (Member row 'Count1) (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)))
+          (let res ("/MayWarn" (Member row 'Count1) (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)))
           (return res)
         )))))))
         (return core)

@@ -18,10 +18,10 @@
           (let res (Concat (Member row '"a") (PgConst '"x" (PgType 'text))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res ("+" (Member row '"c") (Member row '"c")))
+          (let res ("+MayWarn" (Member row '"c") (Member row '"c")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res ("*" (Member row '"c") (PgConst '"10" (PgType 'int4))))
+          (let res ("*MayWarn" (Member row '"c") (PgConst '"10" (PgType 'int4))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
           (let res (PgCall '"upper" '() (Member row '"a")))

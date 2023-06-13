@@ -29,12 +29,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("==" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("==" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("==" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("==" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
@@ -83,12 +83,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("!=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("!=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("!=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("!=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
@@ -137,12 +137,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
@@ -191,12 +191,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) ("<=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
@@ -245,12 +245,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
@@ -299,12 +299,12 @@
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))
             (return (Apply "$f"))
-          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">=" (Variant ("/" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
+          ))) (Uint32 '"1")) '"c" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32)))))) (">=" (Variant ("/MayWarn" (Uint32 '"1") (Uint32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
             )))))

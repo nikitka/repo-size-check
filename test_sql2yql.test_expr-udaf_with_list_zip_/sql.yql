@@ -11,19 +11,19 @@
       ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$item" "$_parent") (block '(
         (return (Apply (lambda '("$l1" "$l2") (block '(
           (return (ListMap (ListZip "$l1" "$l2") (lambda '("$x") (block '(
-            (return ("+" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
+            (return ("+MayWarn" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
           )))))
         ))) "$state" "$item"))
       ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
         (return (Apply (lambda '("$l1" "$l2") (block '(
           (return (ListMap (ListZip "$l1" "$l2") (lambda '("$x") (block '(
-            (return ("+" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
+            (return ("+MayWarn" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
           )))))
         ))) "$state1" "$state2"))
       ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
         (return (Apply (lambda '("$l1" "$l2") (block '(
           (return (ListMap (ListZip "$l1" "$l2") (lambda '("$x") (block '(
-            (return ("+" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
+            (return ("+MayWarn" (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast"))))
           )))))
         ))) "$state1" "$state2"))
       ))) one two)))) (lambda '(state) state) (lambda '(state) state) (lambda '(state) state) (Null))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"list_col")))))) '()) '()))

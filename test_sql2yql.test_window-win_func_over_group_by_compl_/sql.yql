@@ -45,7 +45,7 @@
           (let res (Member row '"region"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"region_2" (lambda '(row) (block '(
-          (let res ("+" (Member row '"region") (Int32 '"2")))
+          (let res ("+MayWarn" (Member row '"region") (Int32 '"2")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"avg_age" (lambda '(row) (block '(
           (let res (Member row 'Avg0))

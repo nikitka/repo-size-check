@@ -26,7 +26,7 @@
         (let select (RemovePrefixMembers select '('data._yql_)))
         (return select)
       )))
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'hundred_keys) 'hundred_keys ("/" (SafeCast (Member row '"dkey") (DataType 'Uint32)) (Int32 '"100")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'hundred_keys) 'hundred_keys ("/MayWarn" (SafeCast (Member row '"dkey") (DataType 'Uint32)) (Int32 '"100")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"hundred_keys") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"data.subkey") (DataType 'Uint32))))))) '()) '('"hundred_keys")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

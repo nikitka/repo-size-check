@@ -23,7 +23,7 @@
               (let res (SafeCast (Member row '"subkey") (DataType 'Timestamp)))
               (return res)
             )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
-              (let res ("+" (Int32 '"1000") (Coalesce (SafeCast (Member row '"value") (DataType 'Uint64)) (Int32 '"0"))))
+              (let res ("+MayWarn" (Int32 '"1000") (Coalesce (SafeCast (Member row '"value") (DataType 'Uint64)) (Int32 '"0"))))
               (return res)
             )))))))
             (return core)
@@ -43,7 +43,7 @@
               (let res (SafeCast (Member row '"subkey") (DataType 'Timestamp)))
               (return res)
             )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
-              (let res ("+" (Int32 '"2000") (Coalesce (SafeCast (Member row '"value") (DataType 'Uint64)) (Int32 '"0"))))
+              (let res ("+MayWarn" (Int32 '"2000") (Coalesce (SafeCast (Member row '"value") (DataType 'Uint64)) (Int32 '"0"))))
               (return res)
             )))))))
             (return core)

@@ -34,7 +34,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"quantile" (lambda '(row) (block '(
-          (let res ("*" (Double '"0.1") (Int32 '"100")))
+          (let res ("*MayWarn" (Double '"0.1") (Int32 '"100")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"key_q" (lambda '(row) (block '(
           (let res (Member row 'Percentile0))

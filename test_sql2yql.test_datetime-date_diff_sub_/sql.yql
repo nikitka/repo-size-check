@@ -9,7 +9,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Date '"11323") (Datetime '"978307200")))
+          (let res ("-MayWarn" (Date '"11323") (Datetime '"978307200")))
           (return res)
         )))))))
         (return core)
@@ -33,7 +33,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Date '"11323") (Timestamp '"978307200000000")))
+          (let res ("-MayWarn" (Date '"11323") (Timestamp '"978307200000000")))
           (return res)
         )))))))
         (return core)
@@ -57,7 +57,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Datetime '"978307200") (Timestamp '"978307200000000")))
+          (let res ("-MayWarn" (Datetime '"978307200") (Timestamp '"978307200000000")))
           (return res)
         )))))))
         (return core)
@@ -81,7 +81,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Datetime '"978307200") (Date '"11323")))
+          (let res ("-MayWarn" (Datetime '"978307200") (Date '"11323")))
           (return res)
         )))))))
         (return core)
@@ -105,7 +105,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Timestamp '"978307200000000") (Date '"11323")))
+          (let res ("-MayWarn" (Timestamp '"978307200000000") (Date '"11323")))
           (return res)
         )))))))
         (return core)
@@ -129,7 +129,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("-" (Timestamp '"978307200000000") (Datetime '"978307200")))
+          (let res ("-MayWarn" (Timestamp '"978307200000000") (Datetime '"978307200")))
           (return res)
         )))))))
         (return core)

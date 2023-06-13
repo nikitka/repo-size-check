@@ -15,7 +15,7 @@
           (return res)
         ))) '('('addPrefix '"t."))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x" "$z") (block '(
-            (let $v ("+" ("*" (Int32 '"10") "$z") "$x"))
+            (let $v ("+MayWarn" ("*MayWarn" (Int32 '"10") "$z") "$x"))
             (let $shift (lambda '("$item") (block '(
               (return (ShiftLeft "$item" (Int32 '"1")))
             ))))

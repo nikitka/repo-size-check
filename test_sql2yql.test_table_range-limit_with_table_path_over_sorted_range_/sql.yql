@@ -17,7 +17,7 @@
           (let res (Member row '"value"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"path" (lambda '(row) (block '(
-          (let res (Substring (TablePath (DependsOn row)) (Null) (SafeCast ("-" (Size (TablePath (DependsOn row))) (Int32 '"1")) (DataType 'Uint32))))
+          (let res (Substring (TablePath (DependsOn row)) (Null) (SafeCast ("-MayWarn" (Size (TablePath (DependsOn row))) (Int32 '"1")) (DataType 'Uint32))))
           (return res)
         )))))))
         (return core)

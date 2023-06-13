@@ -9,16 +9,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Not (Exists ("/" (Int32 '"1") (Int32 '"0")))))
+          (let res (Not (Exists ("/MayWarn" (Int32 '"1") (Int32 '"0")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Not (Exists ("/" (Int32 '"1") (Int32 '"0")))))
+          (let res (Not (Exists ("/MayWarn" (Int32 '"1") (Int32 '"0")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (Not (Not (Exists ("/" (Int32 '"1") (Int32 '"0"))))))
+          (let res (Not (Not (Exists ("/MayWarn" (Int32 '"1") (Int32 '"0"))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (Not (Not (Exists ("/" (Int32 '"1") (Int32 '"0"))))))
+          (let res (Not (Not (Exists ("/MayWarn" (Int32 '"1") (Int32 '"0"))))))
           (return res)
         )))))))
         (return core)

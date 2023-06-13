@@ -45,7 +45,7 @@
                 (let core (PersistableRepr (block '(
                   (let projectCoreType (TypeOf core))
                   (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-                    (let res ("+" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+                    (let res ("+MayWarn" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
                     (return res)
                   )))))))
                   (return core)
@@ -124,7 +124,7 @@
                 (let core (PersistableRepr (block '(
                   (let projectCoreType (TypeOf core))
                   (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-                    (let res ("+" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+                    (let res ("+MayWarn" "$n" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
                     (return res)
                   )))))))
                   (return core)

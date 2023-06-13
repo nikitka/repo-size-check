@@ -18,12 +18,12 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (Map (AsList) (lambda '("$x") (block '(
-            (return ("*" "$x" (Int32 '"2")))
+            (return ("*MayWarn" "$x" (Int32 '"2")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
           (let res (FlatMap (AsList) (lambda '("$x") (block '(
-            (return (Just ("*" "$x" (Int32 '"2"))))
+            (return (Just ("*MayWarn" "$x" (Int32 '"2"))))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
@@ -33,12 +33,12 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
           (let res (OrderedMap (AsList) (lambda '("$x") (block '(
-            (return ("*" "$x" (Int32 '"2")))
+            (return ("*MayWarn" "$x" (Int32 '"2")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
           (let res (OrderedFlatMap (AsList) (lambda '("$x") (block '(
-            (return (Just ("*" "$x" (Int32 '"2"))))
+            (return (Just ("*MayWarn" "$x" (Int32 '"2"))))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
@@ -48,12 +48,12 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
           (let res (ListMap (AsList) (lambda '("$x") (block '(
-            (return ("*" "$x" (Int32 '"2")))
+            (return ("*MayWarn" "$x" (Int32 '"2")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
           (let res (ListFlatMap (AsList) (lambda '("$x") (block '(
-            (return (Just ("*" "$x" (Int32 '"2"))))
+            (return (Just ("*MayWarn" "$x" (Int32 '"2"))))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
@@ -121,12 +121,12 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column29" (lambda '(row) (block '(
           (let res (ListMap (Just (AsList)) (lambda '("$x") (block '(
-            (return ("*" "$x" (Int32 '"2")))
+            (return ("*MayWarn" "$x" (Int32 '"2")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column30" (lambda '(row) (block '(
           (let res (ListFlatMap (Just (AsList)) (lambda '("$x") (block '(
-            (return (Just ("*" "$x" (Int32 '"2"))))
+            (return (Just ("*MayWarn" "$x" (Int32 '"2"))))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column31" (lambda '(row) (block '(

@@ -9,7 +9,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (ListFromRange (Date '"18993") (Just (Date '"19052")) ("*" (Interval '"86400000000") (Uint32 '"2"))))
+          (let res (ListFromRange (Date '"18993") (Just (Date '"19052")) ("*MayWarn" (Interval '"86400000000") (Uint32 '"2"))))
           (return res)
         )))))))
         (return core)

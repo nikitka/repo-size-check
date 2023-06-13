@@ -13,7 +13,7 @@
           (let res (Not (Exists (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (OptionalType (DataType 'Int32))) '('"y" (OptionalType (DataType 'Int32))) '('"z" (OptionalType (DataType 'String))) '('"t" (OptionalType (DataType 'String)))) "$pred" '('"x" '"y")))
           ))) (lambda '("$row") (block '(
-            (return (Coalesce (">" ("+" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) (Int32 '"0")) (Bool '"false")))
+            (return (Coalesce (">" ("+MayWarn" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) (Int32 '"0")) (Bool '"false")))
           )))))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(

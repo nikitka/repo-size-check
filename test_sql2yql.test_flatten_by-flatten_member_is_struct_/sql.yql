@@ -30,7 +30,7 @@
         (let res (FlattenByColumns 'auto row '('kkstr 'kkstritem)))
         (return res)
       )))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("==" ("%" (Member row '"kkstritem") (Int32 '"10")) (Int32 '"0")))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("<" (Member row '"kkstritem") (Int32 '"100")))))) '('CountIf2 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"kkstritem") (Int32 '"900"))))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CountIf0 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("==" ("%MayWarn" (Member row '"kkstritem") (Int32 '"10")) (Int32 '"0")))))) '('CountIf1 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr ("<" (Member row '"kkstritem") (Int32 '"100")))))) '('CountIf2 (Apply (bind aggregate_module '"count_if_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (">" (Member row '"kkstritem") (Int32 '"900"))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"count_dec" (lambda '(row) (block '(

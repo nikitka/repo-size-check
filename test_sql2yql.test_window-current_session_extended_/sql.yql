@@ -9,12 +9,12 @@
     (let select (block '(
       (let core table0)
       (let core (OrderedFlatMap core (lambda '(row) (AsList row))))
-      (let core (CalcOverSessionWindow core '('"user") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Coalesce (SafeCast (Member row '"ts") (DataType 'String)) (String '"null"))) (Uint64 '0))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1"))))))) (SessionWindowTraits (TypeOf core) (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr ("+" (Member row '"ts") (Int32 '"1"))))) (lambda '("$row") (block '(
+      (let core (CalcOverSessionWindow core '('"user") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Coalesce (SafeCast (Member row '"ts") (DataType 'String)) (String '"null"))) (Uint64 '0))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1"))))))) (SessionWindowTraits (TypeOf core) (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr ("+MayWarn" (Member row '"ts") (Int32 '"1"))))) (lambda '("$row") (block '(
         (return (AsStructUnordered '('"value" (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))) '('"count" (Int32 '"1"))))
       ))) (lambda '("$row" "$state") (block '(
-        (let $state (AsStructUnordered '('"count" ("+" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) '('"value" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))))
-        (let $state (AsStructUnordered '('"count" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast"))) '('"value" ("+" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))))))
-        (return '(("==" (Unwrap ("%" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"2"))) (Int32 '"1")) "$state"))
+        (let $state (AsStructUnordered '('"count" ("+MayWarn" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) '('"value" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))))
+        (let $state (AsStructUnordered '('"count" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast"))) '('"value" ("+MayWarn" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))))))
+        (return '(("==" (Unwrap ("%MayWarn" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"2"))) (Int32 '"1")) "$state"))
       ))) (lambda '("$_row" "$state") (block '(
         (return (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))
       )))) '('"group_w_1")))

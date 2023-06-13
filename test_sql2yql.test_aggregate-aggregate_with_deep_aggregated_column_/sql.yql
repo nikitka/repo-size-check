@@ -33,7 +33,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"region") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (And (">=" ("%" (Member row '"age") (Uint32 '"10")) (Uint32 '"1")) ("<=" ("%" (Member row '"age") (Uint32 '"10")) ("%" (Member row '"region") (Uint32 '"10")))) (Bool 'false)) (Member row '"age") (Uint32 '"0"))))))) '()) '('"region")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"region") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (And (">=" ("%MayWarn" (Member row '"age") (Uint32 '"10")) (Uint32 '"1")) ("<=" ("%MayWarn" (Member row '"age") (Uint32 '"10")) ("%MayWarn" (Member row '"region") (Uint32 '"10")))) (Bool 'false)) (Member row '"age") (Uint32 '"0"))))))) '()) '('"region")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(

@@ -23,7 +23,7 @@
         (let select (RemoveSystemMembers select))
         (return select)
       )))
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'sk) 'sk ("%" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"2")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'sk) 'sk ("%MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"2")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"sk") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0)))) '()) '('"key" '"sk")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

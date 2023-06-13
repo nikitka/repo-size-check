@@ -43,7 +43,7 @@
           (return core)
         )))
         (let select (OrderedFlatMap select (lambda '(row) (block '(
-          (let res (OptionalIf (< (Random (DependsOn row)) (/ (Coalesce (SafeCast (Ensure (Ensure ("*" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (<= (Ensure ("*" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (Double '100)) (String '"Sampling rate is over 100%")) (DataType 'Double)) (Double '0)) (Double '100))) row))
+          (let res (OptionalIf (< (Random (DependsOn row)) (/ (Coalesce (SafeCast (Ensure (Ensure ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (<= (Ensure ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (Double '100)) (String '"Sampling rate is over 100%")) (DataType 'Double)) (Double '0)) (Double '100))) row))
           (return res)
         )))))
         (let select (RemoveSystemMembers select))

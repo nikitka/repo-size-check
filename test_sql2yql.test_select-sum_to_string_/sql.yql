@@ -17,7 +17,7 @@
           (let res (Member row '"subkey"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
-          (let res (SafeCast ("+" (Int32 '"1") (Int32 '"1")) (DataType 'String)))
+          (let res (SafeCast ("+MayWarn" (Int32 '"1") (Int32 '"1")) (DataType 'String)))
           (return res)
         )))))))
         (return core)

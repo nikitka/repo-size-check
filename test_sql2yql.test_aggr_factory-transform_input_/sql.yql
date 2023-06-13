@@ -60,7 +60,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Apply (bind core_module '"AggregateTransformInput") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)) (lambda '("$x") (block '(
-            (return ("*" "$x" (Int32 '"2")))
+            (return ("*MayWarn" "$x" (Int32 '"2")))
           ))))))
           (return res)
         )))))))

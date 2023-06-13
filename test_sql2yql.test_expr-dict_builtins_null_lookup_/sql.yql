@@ -9,16 +9,16 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Contains (AsDict '(("/" (Int32 '"1") (Int32 '"1")) (String '"bar"))) (Null)))
+          (let res (Contains (AsDict '(("/MayWarn" (Int32 '"1") (Int32 '"1")) (String '"bar"))) (Null)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (Contains (AsDict '(("/" (Int32 '"1") (Int32 '"0")) (String '"baz"))) (Null)))
+          (let res (Contains (AsDict '(("/MayWarn" (Int32 '"1") (Int32 '"0")) (String '"baz"))) (Null)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (Lookup (AsDict '(("/" (Int32 '"1") (Int32 '"1")) (String '"bar"))) (Null)))
+          (let res (Lookup (AsDict '(("/MayWarn" (Int32 '"1") (Int32 '"1")) (String '"bar"))) (Null)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (Lookup (AsDict '(("/" (Int32 '"1") (Int32 '"0")) (String '"baz"))) (Null)))
+          (let res (Lookup (AsDict '(("/MayWarn" (Int32 '"1") (Int32 '"0")) (String '"baz"))) (Null)))
           (return res)
         )))))))
         (return core)
@@ -51,16 +51,16 @@
           (let res (Contains (AsDict '('((Int32 '"1") (String '"key")) '((Int32 '"1") (String '"value")))) (Just '((Int32 '"1") (String '"key")))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (Contains (AsDict '('(("/" (Int32 '"1") (Int32 '"1")) (String '"key")) '(("/" (Int32 '"2") (Int32 '"1")) (String '"value")))) '((Null) (String '"key"))))
+          (let res (Contains (AsDict '('(("/MayWarn" (Int32 '"1") (Int32 '"1")) (String '"key")) '(("/MayWarn" (Int32 '"2") (Int32 '"1")) (String '"value")))) '((Null) (String '"key"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
-          (let res (Contains (AsDict '('(("/" (Int32 '"1") (Int32 '"0")) (String '"key")) '((Int32 '"123") (String '"value")))) '((Null) (String '"key"))))
+          (let res (Contains (AsDict '('(("/MayWarn" (Int32 '"1") (Int32 '"0")) (String '"key")) '((Int32 '"123") (String '"value")))) '((Null) (String '"key"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
-          (let res (Lookup (AsDict '('(("/" (Int32 '"1") (Int32 '"1")) (String '"key")) '(("/" (Int32 '"2") (Int32 '"1")) (String '"value")))) '((Null) (String '"key"))))
+          (let res (Lookup (AsDict '('(("/MayWarn" (Int32 '"1") (Int32 '"1")) (String '"key")) '(("/MayWarn" (Int32 '"2") (Int32 '"1")) (String '"value")))) '((Null) (String '"key"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res (Lookup (AsDict '('(("/" (Int32 '"1") (Int32 '"0")) (String '"key")) '((Int32 '"123") (String '"value")))) '((Null) (String '"key"))))
+          (let res (Lookup (AsDict '('(("/MayWarn" (Int32 '"1") (Int32 '"0")) (String '"key")) '((Int32 '"123") (String '"value")))) '((Null) (String '"key"))))
           (return res)
         )))))))
         (return core)

@@ -15,7 +15,7 @@ def majority_vote(values):
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'val) 'val ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"2")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'val) 'val ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"2")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"val") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))) '()) '('"val")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

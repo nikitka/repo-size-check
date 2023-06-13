@@ -15,10 +15,10 @@
           (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"100") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) ("/" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
+          (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) ("/MayWarn" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) ("/" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
+          (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) ("/MayWarn" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
           (let res (SqlIn '((Int32 '"1") (Int32 '"2") (Int32 '"3")) (Null) '('('warnNoAnsi))))
@@ -30,10 +30,10 @@
           (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"100") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
-          (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) ("/" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
+          (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) ("/MayWarn" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
-          (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) ("/" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
+          (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) ("/MayWarn" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
           (let res (SqlIn (Just '((Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Null) '('('warnNoAnsi))))
@@ -45,10 +45,10 @@
           (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) (Int32 '"100") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
-          (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) ("/" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
+          (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) ("/MayWarn" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
-          (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) ("/" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
+          (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) ("/MayWarn" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
           (let res (SqlIn (Nothing (OptionalType (TupleType (DataType 'Int32) (DataType 'Int32) (DataType 'Int32)))) (Null) '('('warnNoAnsi))))
@@ -60,10 +60,10 @@
           (let res (SqlIn (Null) (Int32 '"100") '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
-          (let res (SqlIn (Null) ("/" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
+          (let res (SqlIn (Null) ("/MayWarn" (Int32 '"1") (Int32 '"1")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
-          (let res (SqlIn (Null) ("/" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
+          (let res (SqlIn (Null) ("/MayWarn" (Int32 '"1") (Int32 '"0")) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
           (let res (SqlIn (Null) (Null) '('('warnNoAnsi))))

@@ -57,7 +57,7 @@
           (let res (Xor (Xor ("<" (Int32 '"1") (Int32 '"2")) (Member row '"b1")) (Xor (Xor (Member row '"b2") (Member row '"ob1")) (Member row '"ob2"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"chain3" (lambda '(row) (block '(
-          (let res (Or (Or ("<" ("/" (Int32 '"1") (Int32 '"0")) (Int32 '"1")) (Member row '"b1")) (Or (Or (Member row '"b2") (Member row '"ob1")) (Member row '"ob2"))))
+          (let res (Or (Or ("<" ("/MayWarn" (Int32 '"1") (Int32 '"0")) (Int32 '"1")) (Member row '"b1")) (Or (Or (Member row '"b2") (Member row '"ob1")) (Member row '"ob2"))))
           (return res)
         )))))))
         (return core)

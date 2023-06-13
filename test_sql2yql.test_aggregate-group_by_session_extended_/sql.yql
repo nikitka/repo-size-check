@@ -12,9 +12,9 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '('"group0" '"user") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Coalesce (Member row '"ts") (Int32 '"100500"))) (Uint64 '0))) '('Count0 (Apply (bind aggregate_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '('('session '('"group0" (SessionWindowTraits (TypeOf core) (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"ts")))) (lambda '("$row") (block '(
         (return (AsStructUnordered '('"value" (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))) '('"count" (Int32 '"1"))))
       ))) (lambda '("$row" "$state") (block '(
-        (let $state (AsStructUnordered '('"count" ("+" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) '('"value" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))))
-        (let $state (AsStructUnordered '('"count" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast"))) '('"value" ("+" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))))))
-        (return '(("==" (Unwrap ("%" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"2"))) (Int32 '"1")) "$state"))
+        (let $state (AsStructUnordered '('"count" ("+MayWarn" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) '('"value" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))))
+        (let $state (AsStructUnordered '('"count" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast"))) '('"value" ("+MayWarn" (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")) (Coalesce (SqlAccess 'struct "$row" '"ts" '('"yson_strict" '"yson_fast")) (Int32 '"0"))))))
+        (return '(("==" (Unwrap ("%MayWarn" (SqlAccess 'struct "$state" '"count" '('"yson_strict" '"yson_fast")) (Int32 '"2"))) (Int32 '"1")) "$state"))
       ))) (lambda '("$_row" "$state") (block '(
         (return (SqlAccess 'struct "$state" '"value" '('"yson_strict" '"yson_fast")))
       )))))))) '('"group0" '"user")))

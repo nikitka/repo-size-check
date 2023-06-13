@@ -10,37 +10,37 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Apply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
           (let res (Apply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") (Int32 '"2") (Int32 '"3")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (Apply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") (Int32 '"4") (Int32 '"5") (Int32 '"6")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
           (let res (NamedApply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") '((Int32 '"1")) (AsStruct)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
           (let res (NamedApply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") '((Int32 '"1") (Int32 '"2")) (AsStruct)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
           (let res (NamedApply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") '((Int32 '"1") (Int32 '"2") (Int32 '"3")) (AsStruct)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
           (let res (NamedApply (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return ("+" ("+" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))) (Coalesce "$z" (Int32 '"0"))))
           ))) '"2") '((Int32 '"1") (Int32 '"2") (Int32 '"3") (Int32 '"4")) (AsStruct)))
           (return res)
         )))))))

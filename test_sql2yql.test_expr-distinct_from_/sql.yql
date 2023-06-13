@@ -18,7 +18,7 @@
           (let res (IsDistinctFrom (Null) (Null)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (IsDistinctFrom (Just ("+" (Int32 '"1") (Int32 '"2"))) (Nothing (OptionalType (DataType 'Int32)))))
+          (let res (IsDistinctFrom (Just ("+MayWarn" (Int32 '"1") (Int32 '"2"))) (Nothing (OptionalType (DataType 'Int32)))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
           (let res (IsNotDistinctFrom (Nothing (OptionalType (OptionalType (DataType 'Int32)))) (Just (Nothing (OptionalType (DataType 'Int32))))))

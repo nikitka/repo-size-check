@@ -10,12 +10,12 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Apply (WithOptionalArgs (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" (Coalesce "$y" (Int32 '"0"))))
+            (return ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))))
           ))) '1) (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
           (let res (Apply (WithOptionalArgs (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" (Coalesce "$y" (Int32 '"0"))))
+            (return ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))))
           ))) '1) (Int32 '"2") (Int32 '"3")))
           (return res)
         )))))))

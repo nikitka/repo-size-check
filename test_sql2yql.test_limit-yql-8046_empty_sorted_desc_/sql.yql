@@ -97,7 +97,7 @@
       (return core)
     )))
     (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"key")))))
-    (let select (Take select (Coalesce (If (Coalesce ("<" (Coalesce (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0) (Int32 '"0")) (Int32 '"2")) (Bool 'false)) (Coalesce ("-" (Int32 '"2") (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)) (Int32 '"0")) (Int32 '"0")) (Uint64 '18446744073709551615))))
+    (let select (Take select (Coalesce (If (Coalesce ("<" (Coalesce (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0) (Int32 '"0")) (Int32 '"2")) (Bool 'false)) (Coalesce ("-MayWarn" (Int32 '"2") (Member (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0)) 'column0)) (Int32 '"0")) (Int32 '"0")) (Uint64 '18446744073709551615))))
     (return select)
   ))))
 )))

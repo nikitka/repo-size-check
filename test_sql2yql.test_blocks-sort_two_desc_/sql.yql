@@ -16,7 +16,7 @@
           (let res (Member row '"key"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"subkey1" (lambda '(row) (block '(
-          (let res ("+" (Member row '"subkey") (Int32 '"0")))
+          (let res ("+MayWarn" (Member row '"subkey") (Int32 '"0")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))

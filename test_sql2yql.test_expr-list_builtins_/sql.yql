@@ -53,7 +53,7 @@ def formula(a, b, c, d):
           (return res)
         )))) (SqlProjectItem projectCoreType '"flatmap" (lambda '(row) (block '(
           (let res (ListFlatMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
-            (return ("/" "$item" (Int32 '"0")))
+            (return ("/MayWarn" "$item" (Int32 '"0")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"filter" (lambda '(row) (block '(
@@ -105,122 +105,122 @@ def formula(a, b, c, d):
           (return res)
         )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
           (let res (ListFold (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"6") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column26" (lambda '(row) (block '(
           (let res (ListFold (AsList) (Int32 '"3") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column27" (lambda '(row) (block '(
           (let res (ListFold (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"6") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column28" (lambda '(row) (block '(
           (let res (ListFold (Just (AsList)) (Int32 '"3") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column29" (lambda '(row) (block '(
           (let res (ListFold (Null) (Int32 '"3") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column30" (lambda '(row) (block '(
           (let res (ListFold1 (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$x") (block '(
-            (return ("*" (Int32 '"4") "$x"))
+            (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column31" (lambda '(row) (block '(
           (let res (ListFold1 (AsList) (lambda '("$x") (block '(
-            (return ("*" (Int32 '"4") "$x"))
+            (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column32" (lambda '(row) (block '(
           (let res (ListFold1 (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$x") (block '(
-            (return ("*" (Int32 '"4") "$x"))
+            (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column33" (lambda '(row) (block '(
           (let res (ListFold1 (Just (AsList)) (lambda '("$x") (block '(
-            (return ("*" (Int32 '"4") "$x"))
+            (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column34" (lambda '(row) (block '(
           (let res (ListFold1 (Null) (lambda '("$x") (block '(
-            (return ("*" (Int32 '"4") "$x"))
+            (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column35" (lambda '(row) (block '(
           (let res (ListFoldMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"1") (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column36" (lambda '(row) (block '(
           (let res (ListFoldMap (AsList) (Int32 '"1") (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column37" (lambda '(row) (block '(
           (let res (ListFoldMap (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"1") (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column38" (lambda '(row) (block '(
           (let res (ListFoldMap (Just (AsList)) (Int32 '"1") (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column39" (lambda '(row) (block '(
           (let res (ListFoldMap (Null) (Int32 '"1") (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column40" (lambda '(row) (block '(
           (let res (ListFold1Map (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$i") (block '(
-            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+            (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column41" (lambda '(row) (block '(
           (let res (ListFold1Map (AsList) (lambda '("$i") (block '(
-            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+            (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column42" (lambda '(row) (block '(
           (let res (ListFold1Map (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$i") (block '(
-            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+            (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column43" (lambda '(row) (block '(
           (let res (ListFold1Map (Just (AsList)) (lambda '("$i") (block '(
-            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+            (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column44" (lambda '(row) (block '(
           (let res (ListFold1Map (Null) (lambda '("$i") (block '(
-            (return '(("+" "$i" (Int32 '"1")) ("+" "$i" (Int32 '"2"))))
+            (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
-            (return '(("*" "$i" "$s") ("+" "$i" "$s")))
+            (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
         )))))))

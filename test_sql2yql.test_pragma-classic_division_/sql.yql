@@ -9,7 +9,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("/" (Int32 '"1") (Int32 '"2")))
+          (let res ("/MayWarn" (Int32 '"1") (Int32 '"2")))
           (return res)
         )))))))
         (return core)
@@ -33,7 +33,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("/" (SafeCast (Int32 '"3") (DataType 'Double)) (Int32 '"4")))
+          (let res ("/MayWarn" (SafeCast (Int32 '"3") (DataType 'Double)) (Int32 '"4")))
           (return res)
         )))))))
         (return core)
@@ -57,7 +57,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("/" (Int32 '"5") (Int32 '"6")))
+          (let res ("/MayWarn" (Int32 '"5") (Int32 '"6")))
           (return res)
         )))))))
         (return core)
@@ -82,7 +82,7 @@
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
           (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-            (let res ("/" (SafeCast (Int32 '"8") (DataType 'Double)) "$value"))
+            (let res ("/MayWarn" (SafeCast (Int32 '"8") (DataType 'Double)) "$value"))
             (return res)
           )))))))
           (return core)
@@ -108,7 +108,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("/" (Int32 '"10") (Int32 '"11")))
+          (let res ("/MayWarn" (Int32 '"10") (Int32 '"11")))
           (return res)
         )))))))
         (return core)

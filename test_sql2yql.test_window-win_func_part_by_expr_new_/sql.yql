@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember row 'key_mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember row 'key_mod ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
       (let core (CalcOverWindow core '('"key_mod") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('AggregateList0 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0))) '('AggregateList1 (Apply (bind window_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

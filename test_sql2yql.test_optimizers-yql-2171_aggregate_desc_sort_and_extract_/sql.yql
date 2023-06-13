@@ -33,7 +33,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'age_dec) 'age_dec ("/" (Member row '"age") (Int32 '"10")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'age_dec) 'age_dec ("/MayWarn" (Member row '"age") (Int32 '"10")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"age_dec") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"age_dec")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -59,7 +59,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers subquery1) '"top") '((RemoveSystemMembers (OrderedMap subquery0 (lambda '(row) (block '(
-        (let row (AddMember row '"_equijoin_column_0" ("/" (Member row '"age") (Int32 '"10"))))
+        (let row (AddMember row '"_equijoin_column_0" ("/MayWarn" (Member row '"age") (Int32 '"10"))))
         (return row)
       ))))) '"info") '('Inner '"top" '"info" '('"top" '"age_dec") '('"info" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"info._equijoin_column_0"))

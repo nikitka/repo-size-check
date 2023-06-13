@@ -10,7 +10,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (ListMap (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")) (WithOptionalArgs (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" (Coalesce "$y" (Int32 '"0"))))
+            (return ("+MayWarn" "$x" (Coalesce "$y" (Int32 '"0"))))
           ))) '1)))
           (return res)
         )))))))
@@ -36,7 +36,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Fold (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"0") (WithOptionalArgs (lambda '("$x" "$y" "$z") (block '(
-            (return (Coalesce ("+" ("+" "$x" "$y") "$z") (Int32 '"100")))
+            (return (Coalesce ("+MayWarn" ("+MayWarn" "$x" "$y") "$z") (Int32 '"100")))
           ))) '1)))
           (return res)
         )))))))

@@ -12,7 +12,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"dbl_sum" (lambda '(row) (block '(
-          (let res ("*" (Int32 '"2") (Member row 'Sum0)))
+          (let res ("*MayWarn" (Int32 '"2") (Member row 'Sum0)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
           (let res (Member row 'Count0))

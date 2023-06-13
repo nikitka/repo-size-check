@@ -70,10 +70,10 @@
           (let res (Member row '"value"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"age" (lambda '(row) (block '(
-          (let res ("+" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"3")))
+          (let res ("+MayWarn" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"3")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"age1" (lambda '(row) (block '(
-          (let res ("+" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"7")))
+          (let res ("+MayWarn" (SafeCast (Member row '"key") (DataType 'Uint16)) (Uint16 '"7")))
           (return res)
         )))))))
         (return core)

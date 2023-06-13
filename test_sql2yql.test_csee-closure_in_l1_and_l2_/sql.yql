@@ -10,16 +10,16 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (AsList (ListMap (AsList (Int32 '"3") (Int32 '"4")) (lambda '("$x") (block '(
-            (return ("+" ("+" "$x" (Fold (AsList (Int32 '"9") (Int32 '"10")) (Int32 '"1") (lambda '("$c" "$d") (block '(
-              (return ("+" ("+" "$c" "$d") (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$y") (block '(
-                (return ("+" "$x" "$y"))
+            (return ("+MayWarn" ("+MayWarn" "$x" (Fold (AsList (Int32 '"9") (Int32 '"10")) (Int32 '"1") (lambda '("$c" "$d") (block '(
+              (return ("+MayWarn" ("+MayWarn" "$c" "$d") (Fold (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$y") (block '(
+                (return ("+MayWarn" "$x" "$y"))
               )))) (Int32 '"0") (lambda '("$a" "$b") (block '(
-                (return ("+" "$a" "$b"))
+                (return ("+MayWarn" "$a" "$b"))
               ))))))
             ))))) (Fold (ListMap (AsList (Int32 '"7") (Int32 '"8")) (lambda '("$y") (block '(
-              (return ("+" "$x" "$y"))
+              (return ("+MayWarn" "$x" "$y"))
             )))) (Int32 '"0") (lambda '("$a" "$b") (block '(
-              (return ("+" "$a" "$b"))
+              (return ("+MayWarn" "$a" "$b"))
             ))))))
           ))))))
           (return res)

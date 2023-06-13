@@ -61,7 +61,7 @@
   (let output (block '(
     (let select (block '(
       (let core (ToList (AsList)))
-      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'y) 'y ("+" (Int32 '"1") (Member row '"x")))))))
+      (let core (OrderedFlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'y) 'y ("+MayWarn" (Int32 '"1") (Member row '"x")))))))
       (let core (OrderedFlatMap core (lambda '(row) (block '(
         (let res (FlattenByColumns 'optional row 'y))
         (return res)

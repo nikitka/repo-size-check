@@ -11,11 +11,11 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('UDAF0 (Apply (bind aggregate_module '"udaf_traits_factory") (TypeOf core) (lambda '(row) (Size (Member row '"key"))) (lambda '(value parent) (NamedApply (lambda '("$item" "$_parent") (block '(
         (return "$item")
       ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$item" "$_parent") (block '(
-        (return ("+" "$item" "$state"))
+        (return ("+MayWarn" "$item" "$state"))
       ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
         (return "$state")
       ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(

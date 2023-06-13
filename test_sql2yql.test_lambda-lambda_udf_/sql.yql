@@ -15,11 +15,11 @@
           (return res)
         ))) '()) (SqlProjectItem projectCoreType '"linear" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x" "$z") (block '(
-            (let $v ("+" ("*" (Int32 '"10") "$z") "$x"))
+            (let $v ("+MayWarn" ("*MayWarn" (Int32 '"10") "$z") "$x"))
             (let $shift (lambda '("$item") (block '(
               (return (ShiftLeft "$item" (Int32 '"1")))
             ))))
-            (let $res (SqlCall '"Math.Floor" '((PositionalArgs ("*" (SqlCall '"Math.Pi" '((PositionalArgs))) (Apply "$shift" "$v"))))))
+            (let $res (SqlCall '"Math.Floor" '((PositionalArgs ("*MayWarn" (SqlCall '"Math.Pi" '((PositionalArgs))) (Apply "$shift" "$v"))))))
             (return "$res")
           ))) (SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"subkey") (DataType 'Uint64))))
           (return res)

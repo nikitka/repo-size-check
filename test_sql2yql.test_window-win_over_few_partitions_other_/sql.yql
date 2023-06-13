@@ -35,7 +35,7 @@
       (let core subquery0)
       (let core (block '(
         (let partitioning core)
-        (let partitioning (CalcOverWindow partitioning '('"subkey") (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr ("%" (Member row '"key") (Int32 '"3"))) (PersistableRepr (Member row '"key"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Min0 (Apply (bind window_module '"min_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key")))))))))
+        (let partitioning (CalcOverWindow partitioning '('"subkey") (SortTraits (TypeOf partitioning) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr ("%MayWarn" (Member row '"key") (Int32 '"3"))) (PersistableRepr (Member row '"key"))))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum1 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Min0 (Apply (bind window_module '"min_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Max0 (Apply (bind window_module '"max_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"key")))))))))
         (let partitioning (CalcOverWindow partitioning '('"key") (SortTraits (TypeOf partitioning) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Sum0 (Apply (bind window_module '"sum_traits_factory") (TypeOf partitioning) (lambda '(row) (PersistableRepr (Member row '"subkey")))))))))
         (return partitioning)
       )))
@@ -48,7 +48,7 @@
           (let res (Member row 'Sum0))
           (return res)
         )))) (SqlProjectItem projectCoreType '"dbl_sum" (lambda '(row) (block '(
-          (let res ("*" (Int32 '"2") (Member row 'Sum1)))
+          (let res ("*MayWarn" (Int32 '"2") (Member row 'Sum1)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"c" (lambda '(row) (block '(
           (let res (Member row 'Count0))

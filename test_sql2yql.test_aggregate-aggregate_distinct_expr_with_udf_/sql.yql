@@ -13,7 +13,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlCall '"Math.Round" '((PositionalArgs ("/" (Member row 'Count0) (Double '"100.0")) (Int32 '"-2")))))
+          (let res (SqlCall '"Math.Round" '((PositionalArgs ("/MayWarn" (Member row 'Count0) (Double '"100.0")) (Int32 '"-2")))))
           (return res)
         )))))))
         (return core)

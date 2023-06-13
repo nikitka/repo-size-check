@@ -8,7 +8,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (CalcOverWindow core '('"key") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Rank0 (Rank (TypeOf core) (lambda '(row) (Member row '"subkey")) '())) '('_yql_DenseRank0 (DenseRank (TypeOf core) (lambda '(row) (Member row '"subkey")) '())) '('_yql_Rank1 (Rank (TypeOf core) (lambda '(row) ("%" ("/" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"2"))) '())) '('_yql_DenseRank1 (DenseRank (TypeOf core) (lambda '(row) ("%" ("/" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"2"))) '()))))))
+      (let core (CalcOverWindow core '('"key") (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"subkey")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('_yql_Rank0 (Rank (TypeOf core) (lambda '(row) (Member row '"subkey")) '())) '('_yql_DenseRank0 (DenseRank (TypeOf core) (lambda '(row) (Member row '"subkey")) '())) '('_yql_Rank1 (Rank (TypeOf core) (lambda '(row) ("%MayWarn" ("/MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"2"))) '())) '('_yql_DenseRank1 (DenseRank (TypeOf core) (lambda '(row) ("%MayWarn" ("/MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"10")) (Int32 '"2"))) '()))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"rank_noarg" (lambda '(row) (block '(

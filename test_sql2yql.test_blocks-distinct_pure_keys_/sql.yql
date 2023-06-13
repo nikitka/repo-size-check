@@ -11,7 +11,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row '_yql_preagg_Count0) '_yql_preagg_Count0 (Unwrap ("/" (Member row '"subkey") (Uint32 '"2")))) '_yql_preagg_Sum0) '_yql_preagg_Sum0 (Unwrap ("/" (Member row '"subkey") (Uint32 '"2"))))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row '_yql_preagg_Count0) '_yql_preagg_Count0 (Unwrap ("/MayWarn" (Member row '"subkey") (Uint32 '"2")))) '_yql_preagg_Sum0) '_yql_preagg_Sum0 (Unwrap ("/MayWarn" (Member row '"subkey") (Uint32 '"2"))))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"subkey"))) (lambda '(row) (PersistableRepr row))) '"subkey") '('Sum0 (AggApply 'sum (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"subkey"))) (lambda '(row) (PersistableRepr row))) '"subkey") '('Count1 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Count0"))) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Count0") '('Sum1 (AggApply 'sum (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Sum0"))) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Sum0")) '()) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))

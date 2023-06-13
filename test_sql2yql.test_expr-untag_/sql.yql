@@ -10,7 +10,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Apply (lambda '("$m" "$v") (block '(
-            (return (AsTagged ("/" ("*" ("*" (Untag "$m" '"G") (Untag "$v" '"V")) (Untag "$v" '"V")) (Int32 '"2")) '"E"))
+            (return (AsTagged ("/MayWarn" ("*MayWarn" ("*MayWarn" (Untag "$m" '"G") (Untag "$v" '"V")) (Untag "$v" '"V")) (Int32 '"2")) '"E"))
           ))) (AsTagged (Double '"5.0") '"G") (AsTagged (Double '"10.0") '"V")))
           (return res)
         )))))))

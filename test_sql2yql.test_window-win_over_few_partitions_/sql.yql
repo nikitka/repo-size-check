@@ -14,7 +14,7 @@
           (let res (SafeCast (Member row '"key") (DataType 'Uint32)))
           (return res)
         )))) (SqlProjectItem projectCoreType '"age_decade" (lambda '(row) (block '(
-          (let res ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
+          (let res ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"region" (lambda '(row) (block '(
           (let res (SafeCast (Member row '"subkey") (DataType 'Uint32)))

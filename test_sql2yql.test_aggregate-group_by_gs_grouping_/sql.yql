@@ -10,7 +10,7 @@
       (let composite table0)
       (return (UnionAll (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"key_first") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"key_first")))
         (let core (PersistableRepr (block '(
@@ -41,7 +41,7 @@
         (return core)
       )) (block '(
         (let core composite)
-        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
+        (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember (AddMember (ForceRemoveMember row 'key_first) 'key_first ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))) 'val_first) 'val_first (Substring (Member row '"value") (Int32 '"1") (Int32 '"1")))))))
         (let preaggregated core)
         (let core (AssumeColumnOrderPartial (Aggregate core '('"val_first") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '('"val_first")))
         (let core (PersistableRepr (block '(

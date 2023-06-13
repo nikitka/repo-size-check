@@ -94,7 +94,7 @@
         ))))))
         (let $rec (SqlAccess 'dict (Ensure "$recs" ("==" (Length "$recs") (Uint64 '"1"))) (Int32 '"0") '('"yson_strict" '"yson_fast")))
         (return (Apply (lambda '("$key" "$t1" "$t2" "$t3") (block '(
-          (return (AsStructUnordered '('"key" (SqlAccess 'struct "$key" '"0" '('"yson_strict" '"yson_fast"))) '('"subkey" ("+" ("+" (Coalesce (SafeCast (SqlAccess 'struct "$t1" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0")) (Coalesce (SafeCast (SqlAccess 'struct "$t2" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))) (Coalesce (SafeCast (SqlAccess 'struct "$t3" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))))))
+          (return (AsStructUnordered '('"key" (SqlAccess 'struct "$key" '"0" '('"yson_strict" '"yson_fast"))) '('"subkey" ("+MayWarn" ("+MayWarn" (Coalesce (SafeCast (SqlAccess 'struct "$t1" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0")) (Coalesce (SafeCast (SqlAccess 'struct "$t2" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))) (Coalesce (SafeCast (SqlAccess 'struct "$t3" '"subkey" '('"yson_strict" '"yson_fast")) (DataType 'Int32)) (Int32 '"0"))))))
         ))) "$key" (SqlAccess 'struct "$rec" '"t1" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$rec" '"t2" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$rec" '"t3" '('"yson_strict" '"yson_fast"))))
       ))) (lambda '(row) (RemoveSystemMembers row)))))))
       (return core)

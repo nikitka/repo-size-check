@@ -9,10 +9,10 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("+" (Null) (Int32 '"1")))
+          (let res ("+MayWarn" (Null) (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res ("+" (Null) (Null)))
+          (let res ("+MayWarn" (Null) (Null)))
           (return res)
         )))))))
         (return core)

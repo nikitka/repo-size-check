@@ -8,8 +8,8 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'odd) 'odd ("%" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"2")))))))
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"odd") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("+" (WeakField row 'Int32 '('data3)) (WeakField row 'Uint32 '('datahole3) (Int32 '"999")))))))) '()) '('"odd")))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'odd) 'odd ("%MayWarn" (SafeCast (Member row '"subkey") (DataType 'Uint32)) (Int32 '"2")))))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"odd") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("+MayWarn" (WeakField row 'Int32 '('data3)) (WeakField row 'Uint32 '('datahole3) (Int32 '"999")))))))) '()) '('"odd")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"odd" (lambda '(row) (block '(

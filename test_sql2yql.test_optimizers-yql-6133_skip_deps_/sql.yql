@@ -60,7 +60,7 @@
       (return core)
     )))
     (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"key")))))
-    (let select (Take (Skip select (Coalesce (Coalesce (SafeCast ("*" (SafeCast (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0) (DataType 'Float)) (Double '"0.5")) (DataType 'Uint64)) (Int32 '"1")) (Uint64 '0))) (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
+    (let select (Take (Skip select (Coalesce (Coalesce (SafeCast ("*MayWarn" (SafeCast (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0) (DataType 'Float)) (Double '"0.5")) (DataType 'Uint64)) (Int32 '"1")) (Uint64 '0))) (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
     (let select (RemoveSystemMembers select))
     (return select)
   )))

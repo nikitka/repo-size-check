@@ -52,7 +52,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"ggg3" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("+" ("*" (Int32 '"2") ("+" ("*" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"0"))) ("Uint64" '"0")))
+            (let res ("+MayWarn" ("*MayWarn" (Int32 '"2") ("+MayWarn" ("*MayWarn" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"0"))) ("Uint64" '"0")))
             (return res)
           )))))))
           (return core)
@@ -83,7 +83,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"ggg3" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("+" ("*" (Int32 '"2") ("+" ("*" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"0"))) ("Uint64" '"1")))
+            (let res ("+MayWarn" ("*MayWarn" (Int32 '"2") ("+MayWarn" ("*MayWarn" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"0"))) ("Uint64" '"1")))
             (return res)
           )))))))
           (return core)
@@ -114,7 +114,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"ggg3" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("+" ("*" (Int32 '"2") ("+" ("*" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"1"))) ("Uint64" '"0")))
+            (let res ("+MayWarn" ("*MayWarn" (Int32 '"2") ("+MayWarn" ("*MayWarn" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"1"))) ("Uint64" '"0")))
             (return res)
           )))))))
           (return core)
@@ -146,7 +146,7 @@
             (return res)
           )))) (SqlProjectItem projectCoreType '"ggg3" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
-            (let res ("+" ("*" (Int32 '"2") ("+" ("*" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"1"))) ("Uint64" '"1")))
+            (let res ("+MayWarn" ("*MayWarn" (Int32 '"2") ("+MayWarn" ("*MayWarn" (Int32 '"2") ("Uint64" '"0")) ("Uint64" '"1"))) ("Uint64" '"1")))
             (return res)
           )))))))
           (return core)

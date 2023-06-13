@@ -18,7 +18,7 @@
           (let res row)
           (return res)
         ))) '()) (SqlProjectItem projectCoreType '"position_cnt" (lambda '(row) (block '(
-          (let res ("-" (Member row '_yql_RowNumber0) (Int32 '"1")))
+          (let res ("-MayWarn" (Member row '_yql_RowNumber0) (Int32 '"1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"pkey" (lambda '(row) (block '(
           (let res (Member row '_yql_Lag0))

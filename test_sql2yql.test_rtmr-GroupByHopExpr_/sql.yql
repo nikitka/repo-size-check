@@ -9,7 +9,7 @@
   (let values (block '(
     (let select (block '(
       (let core table1)
-      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"value") (DataType 'Uint64))))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Timestamp))) (Interval '10000000) (EvaluateExpr (Interval '"30000000")) (EvaluateExpr ("/" (Interval '"900000000") (Int32 '"3"))) 'true 'v1)))) '('"key")))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"key") '('('Sum0 (Apply (bind aggregate_module '"sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (SafeCast (Member row '"value") (DataType 'Uint64))))))) '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SafeCast (Member row '"subkey") (DataType 'Timestamp))) (Interval '10000000) (EvaluateExpr (Interval '"30000000")) (EvaluateExpr ("/MayWarn" (Interval '"900000000") (Int32 '"3"))) 'true 'v1)))) '('"key")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

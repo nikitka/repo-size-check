@@ -10,9 +10,9 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (AsList (ListMap (AsList (Int32 '"1") (Int32 '"2")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Int32 '"1")))
+            (return ("+MayWarn" "$x" (Int32 '"1")))
           )))) (ListMap (AsList (Int32 '"1") (Int32 '"2")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Int32 '"1")))
+            (return ("+MayWarn" "$x" (Int32 '"1")))
           ))))))
           (return res)
         )))))))

@@ -10,9 +10,9 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (ListExtend (ListMap (Apply (Udf 'File.ByLines (Void) (TupleType (TupleType (DataType 'Int32)) (StructType) (TupleType))) (FilePath '"keyid.lst")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Int32 '"1")))
+            (return ("+MayWarn" "$x" (Int32 '"1")))
           )))) (ListMap (Apply (Udf 'File.ByLines (Void) (TupleType (TupleType (DataType 'Int32)) (StructType) (TupleType))) (FilePath '"keyid.lst")) (lambda '("$x") (block '(
-            (return ("+" "$x" (Int32 '"2")))
+            (return ("+MayWarn" "$x" (Int32 '"2")))
           ))))))
           (return res)
         )))))))

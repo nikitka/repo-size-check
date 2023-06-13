@@ -60,7 +60,7 @@
           (let res ("<" (Int32 '"7") (Member row '"i64opt")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
-          (let res ("<=" ("/" (Int32 '"1") (Int32 '"0")) (Member row '"ui8opt")))
+          (let res ("<=" ("/MayWarn" (Int32 '"1") (Int32 '"0")) (Member row '"ui8opt")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
           (let res (">" (Int32 '"0") (Member row '"i64")))

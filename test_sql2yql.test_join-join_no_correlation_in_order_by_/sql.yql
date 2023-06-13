@@ -8,7 +8,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"3")) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"3")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(

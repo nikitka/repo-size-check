@@ -6,7 +6,7 @@
   (let output (block '(
     (let select (block '(
       (let core (AssumeColumnOrder (PersistableRepr (AsList (AsStruct '('"key" (Int32 '"1"))) (AsStruct '('"key" (Null))) (AsStruct '('"key" (Int32 '"3"))))) '('"key")))
-      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/" (Int32 '"1") (Int32 '"0"))))))) '()) '()))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Int32 '"1") (Int32 '"0"))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(

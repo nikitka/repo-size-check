@@ -41,11 +41,11 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (bind aggregate_module '"udaf_traits_factory") (ListType type) extractor (lambda '(value parent) (NamedApply (lambda '("$_item" "$_parent") (block '(
         (return (Int32 '"1"))
       ))) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (lambda '("$state" "$_item" "$_parent") (block '(
-        (return ("+" (Int32 '"1") "$state"))
+        (return ("+MayWarn" (Int32 '"1") "$state"))
       ))) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) (NullType) (lambda '() (Void)) (lambda '() (Apply (lambda '("$state1" "$state2") (block '(
-        (return ("+" "$state1" "$state2"))
+        (return ("+MayWarn" "$state1" "$state2"))
       ))) one two)))) (lambda '(state) (Apply (lambda '("$state") (block '(
         (return "$state")
       ))) state)) (lambda '(state) (Apply (lambda '("$state") (block '(

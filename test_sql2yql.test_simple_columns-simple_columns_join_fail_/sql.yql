@@ -8,7 +8,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"5")) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100")) (Int32 '"5")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
@@ -36,7 +36,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers table1) '"Input") '((RemoveSystemMembers (OrderedMap subquery0 (lambda '(row) (block '(
-        (let row (AddMember row '"_equijoin_column_0" (SafeCast ("/" (SafeCast (Member row '"kk") (DataType 'Uint32)) (Int32 '"100")) (DataType 'String))))
+        (let row (AddMember row '"_equijoin_column_0" (SafeCast ("/MayWarn" (SafeCast (Member row '"kk") (DataType 'Uint32)) (Int32 '"100")) (DataType 'String))))
         (return row)
       ))))) '"d") '('Inner '"Input" '"d" '('"Input" '"subkey") '('"d" '"_equijoin_column_0") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"d._equijoin_column_0"))

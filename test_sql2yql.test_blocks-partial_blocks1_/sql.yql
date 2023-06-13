@@ -12,13 +12,13 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("*" (Int32 '"2") ("+" (Member row '"key") (Member row '"subkey"))))
+          (let res ("*MayWarn" (Int32 '"2") ("+MayWarn" (Member row '"key") (Member row '"subkey"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res ("+" ("+" ("+" (Uint64 '"1") (Member row '"key")) (Member row '"key")) (Member row '"key")))
+          (let res ("+MayWarn" ("+MayWarn" ("+MayWarn" (Uint64 '"1") (Member row '"key")) (Member row '"key")) (Member row '"key")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
-          (let res ("+" (Member row '"subkey") (Uint64 '"2")))
+          (let res ("+MayWarn" (Member row '"subkey") (Uint64 '"2")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))

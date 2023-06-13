@@ -10,7 +10,7 @@
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
           (let res (Apply (lambda '("$item") (block '(
-            (return ("+" "$item" "$item"))
+            (return ("+MayWarn" "$item" "$item"))
           ))) (Int32 '"1")))
           (return res)
         )))))))

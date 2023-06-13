@@ -11,7 +11,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"rad" (lambda '(row) (block '(
-          (let res ("*" (SqlCall '"Math.Pi" '((PositionalArgs))) (SafeCast (Member row '"subkey") (DataType 'Double))))
+          (let res ("*MayWarn" (SqlCall '"Math.Pi" '((PositionalArgs))) (SafeCast (Member row '"subkey") (DataType 'Double))))
           (return res)
         )))))))
         (return core)
@@ -30,7 +30,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlCall '"Math.Sqrt" '((PositionalArgs ("+" ("*" (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad"))))) ("*" (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad"))))))))))
+          (let res (SqlCall '"Math.Sqrt" '((PositionalArgs ("+MayWarn" ("*MayWarn" (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad"))))) ("*MayWarn" (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad"))))))))))
           (return res)
         )))))))
         (return core)

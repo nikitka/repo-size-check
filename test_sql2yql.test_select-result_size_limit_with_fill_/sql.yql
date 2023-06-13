@@ -62,7 +62,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("+" (Int32 '"1") (Int32 '"1")))
+          (let res ("+MayWarn" (Int32 '"1") (Int32 '"1")))
           (return res)
         )))))))
         (return core)
@@ -86,7 +86,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res ("+" (Int32 '"2") (Int32 '"2")))
+          (let res ("+MayWarn" (Int32 '"2") (Int32 '"2")))
           (return res)
         )))))))
         (return core)

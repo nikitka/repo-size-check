@@ -8,7 +8,7 @@
   (return '(world (block '(
     (let select (block '(
       (let core table0)
-      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
+      (let core (FlatMap core (lambda '(row) (AsList (AddMember (ForceRemoveMember row 'mod) 'mod ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"10")))))))
       (let core (AssumeColumnOrderPartial (Aggregate core '('"mod") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0))) '('AggregateList2 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"value")) (Uint64 '0)))) '()) '('"mod")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
@@ -46,7 +46,7 @@
   (let output (block '(
     (let select (block '(
       (let core (OrderedMap (EquiJoin '((RemoveSystemMembers (OrderedMap table1 (lambda '(row) (block '(
-        (let row (AddMember row '"_equijoin_column_0" ("/" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
+        (let row (AddMember row '"_equijoin_column_0" ("/MayWarn" (SafeCast (Member row '"key") (DataType 'Uint32)) (Int32 '"100"))))
         (return row)
       ))))) '"Input") '((RemoveSystemMembers subquery0) '"d") '('Inner '"Input" '"d" '('"Input" '"_equijoin_column_0") '('"d" '"mod") '()) '()) (lambda '(row) (block '(
         (let row (ForceRemoveMember row '"Input._equijoin_column_0"))

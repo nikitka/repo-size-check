@@ -9,7 +9,7 @@
   (let output (block '(
     (let select (block '(
       (let core table0)
-      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))) '((WinOnRows '('('begin (EvaluateExpr (Minus "$begin"))) '('end (EvaluateExpr ("+" (Int32 '"1") (Int32 '"1"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))))))
+      (let core (CalcOverWindow core '() (SortTraits (TypeOf core) '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"key")) (PersistableRepr (Member row '"subkey"))))) '((WinOnRows '('('begin (EvaluateExpr (Minus "$begin"))) '('end (EvaluateExpr ("+MayWarn" (Int32 '"1") (Int32 '"1"))))) '('Count0 (Apply (bind window_module '"count_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Void)))))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

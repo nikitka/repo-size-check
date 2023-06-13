@@ -21,22 +21,22 @@
           (let res (Coalesce (Member row '"ob1") (Bool '"false")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
-          (let res (Coalesce (Member row '"ob1") (">" ("/" (Int32 '"1") (Int32 '"0")) (Int32 '"0"))))
+          (let res (Coalesce (Member row '"ob1") (">" ("/MayWarn" (Int32 '"1") (Int32 '"0")) (Int32 '"0"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
-          (let res (Coalesce (">" ("/" (Int32 '"1") (Int32 '"2")) (Int32 '"0")) (Member row '"ob1")))
+          (let res (Coalesce (">" ("/MayWarn" (Int32 '"1") (Int32 '"2")) (Int32 '"0")) (Member row '"ob1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
-          (let res (Coalesce ("==" ("/" (Int32 '"1") (Int32 '"2")) (Int32 '"0")) (Member row '"b1")))
+          (let res (Coalesce ("==" ("/MayWarn" (Int32 '"1") (Int32 '"2")) (Int32 '"0")) (Member row '"b1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
-          (let res (Coalesce (">=" ("/" (Member row '"key") (Int32 '"0")) (Int32 '"0")) (Bool '"true")))
+          (let res (Coalesce (">=" ("/MayWarn" (Member row '"key") (Int32 '"0")) (Int32 '"0")) (Bool '"true")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
-          (let res (Coalesce (">=" ("/" (Member row '"key") (Int32 '"0")) (Int32 '"0")) (Member row '"b1")))
+          (let res (Coalesce (">=" ("/MayWarn" (Member row '"key") (Int32 '"0")) (Int32 '"0")) (Member row '"b1")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
-          (let res (Coalesce (">=" ("/" (Member row '"key") (Int32 '"2")) (Int32 '"0")) (Bool '"false")))
+          (let res (Coalesce (">=" ("/MayWarn" (Member row '"key") (Int32 '"2")) (Int32 '"0")) (Bool '"false")))
           (return res)
         )))))))
         (return core)

@@ -115,7 +115,7 @@
   )))
   (return world)
 ))) world "$i"))))
-(let world (EvaluateFor! world (EvaluateExpr (Map ("/" (Int32 '"1") (Int32 '"1")) (lambda '("$x") (block '(
+(let world (EvaluateFor! world (EvaluateExpr (Map ("/MayWarn" (Int32 '"1") (Int32 '"1")) (lambda '("$x") (block '(
   (return (AsList "$x"))
 ))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
   (let world (block '(
@@ -144,7 +144,7 @@
   )))
   (return world)
 ))) world "$i"))))
-(let world (EvaluateFor! world (EvaluateExpr (Map ("/" (Int32 '"1") (Int32 '"0")) (lambda '("$x") (block '(
+(let world (EvaluateFor! world (EvaluateExpr (Map ("/MayWarn" (Int32 '"1") (Int32 '"0")) (lambda '("$x") (block '(
   (return (AsList "$x"))
 ))))) (lambda '(world "$i") (Apply (lambda '(world "$x") (block '(
   (let world (block '(

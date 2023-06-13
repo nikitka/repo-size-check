@@ -51,26 +51,26 @@
           (return res)
         )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
           (let res (Fold (AsList) (Int32 '"0") (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
           (let res (Fold1 (AsList) (lambda '("$x") (block '(
             (return "$x")
           ))) (lambda '("$x" "$y") (block '(
-            (return ("+" "$x" "$y"))
+            (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
           (let res (FoldMap (AsList) (Int32 '"0") (lambda '("$x" "$y") (block '(
-            (return '(("+" "$x" "$y") "$y"))
+            (return '(("+MayWarn" "$x" "$y") "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
           (let res (Fold1Map (AsList) (lambda '("$x") (block '(
             (return '("$x" "$x"))
           ))) (lambda '("$x" "$y") (block '(
-            (return '(("+" "$x" "$y") "$y"))
+            (return '(("+MayWarn" "$x" "$y") "$y"))
           )))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(

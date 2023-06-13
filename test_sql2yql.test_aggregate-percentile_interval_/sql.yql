@@ -33,7 +33,7 @@
           (let res (Member row '"interval_data"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"interval_data2" (lambda '(row) (block '(
-          (let res ("+" (Member row '"interval_data") (Unwrap (SafeCast (Int32 '"1") (DataType 'Interval)))))
+          (let res ("+MayWarn" (Member row '"interval_data") (Unwrap (SafeCast (Int32 '"1") (DataType 'Interval)))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"optional_interval_data" (lambda '(row) (block '(
           (let res (Just (Member row '"interval_data")))

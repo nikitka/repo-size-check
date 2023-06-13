@@ -11,7 +11,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key_quad" (lambda '(row) (block '(
-          (let res ("%" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"4")))
+          (let res ("%MayWarn" (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"4")))
           (return res)
         )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Coalesce (SafeCast (Member row '"key") (DataType 'Int32)) (Int32 '"0")))

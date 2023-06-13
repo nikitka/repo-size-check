@@ -97,7 +97,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
-          (let res ("/" (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'column0) (SafeCast (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0) (DataType 'Double))))
+          (let res ("/MayWarn" (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'column0) (SafeCast (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0) (DataType 'Double))))
           (return res)
         )))))))
         (return core)

@@ -13,7 +13,7 @@
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
-              (let res ("/" (SafeCast (Member row '"subkey") (DataType 'Double)) (SafeCast (Member row '"key") (DataType 'Double))))
+              (let res ("/MayWarn" (SafeCast (Member row '"subkey") (DataType 'Double)) (SafeCast (Member row '"key") (DataType 'Double))))
               (return res)
             )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
               (let res (Member row '"value"))
