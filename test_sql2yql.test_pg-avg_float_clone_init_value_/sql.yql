@@ -1,6 +1,6 @@
 (
 (let world (Configure! world (DataSource 'config) 'OrderedColumns))
-(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgAgg '"avg" '() (PgColumnRef '"x")))) (PgResultItem '"column1" (Void) (lambda '() (PgAgg '"avg" '() (PgColumnRef '"y")))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1.0 (PgType 'float8)) (PgConst '2.0 (PgType 'float8))) '((PgConst '3.0 (PgType 'float8)) (PgConst '4.0 (PgType 'float8))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())))))) '('set_ops '('push)))))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgAgg '"avg" '() (PgColumnRef '"x")))) (PgResultItem '"column1" (Void) (lambda '() (PgAgg '"avg" '() (PgColumnRef '"y")))))) '('from '('((PgSelect '('('set_items '((PgSetItem '('('values '('column0 'column1) (AsList '((PgConst '1.0 (PgType 'numeric)) (PgConst '2.0 (PgType 'numeric))) '((PgConst '3.0 (PgType 'numeric)) (PgConst '4.0 (PgType 'numeric))))))))) '('set_ops '('push)))) '"a" '('"x" '"y")))) '('join_ops '('())))))) '('set_ops '('push)))))
 (let result_sink (DataSink 'result))
 (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
 (let world (Commit! world result_sink))
