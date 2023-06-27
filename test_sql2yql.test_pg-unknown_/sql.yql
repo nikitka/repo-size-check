@@ -1,0 +1,9 @@
+(
+(let world (Configure! world (DataSource 'config) 'OrderedColumns))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgCast (PgConst '"" (PgType 'text)) (PgType '"unknown")))) (PgResultItem '"column1" (Void) (lambda '() (PgCast (PgCast (PgConst '"" (PgType 'text)) (PgType '"unknown")) (PgType '"text")))))))))) '('set_ops '('push)))))
+(let result_sink (DataSink 'result))
+(let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+(let world (Commit! world result_sink))
+(let world (CommitAll! world))
+(return world)
+)
