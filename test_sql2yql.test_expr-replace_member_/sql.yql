@@ -1,0 +1,52 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let res (Apply (Apply (lambda '("$field" "$function") (block '(
+            (return (lambda '("$struct") (block '(
+              (return (ReplaceMember "$struct" (EvaluateAtom "$field") (Apply "$function" (SqlAccess 'struct "$struct" (EvaluateAtom "$field") '('"yson_strict" '"yson_fast")))))
+            ))))
+          ))) (String '"x") (Apply (lambda '("$index" "$function") (block '(
+            (return (lambda '("$list") (block '(
+              (return (ListMap (ListEnumerate "$list") (lambda '("$pair") (block '(
+                (return (If (Coalesce ("==" (SqlAccess 'struct "$pair" '"0" '('"yson_strict" '"yson_fast")) "$index") (Bool 'false)) (Apply "$function" (SqlAccess 'struct "$pair" '"1" '('"yson_strict" '"yson_fast"))) (SqlAccess 'struct "$pair" '"1" '('"yson_strict" '"yson_fast"))))
+              )))))
+            ))))
+          ))) (Int32 '"0") (Apply (lambda '("$field" "$function") (block '(
+            (return (lambda '("$struct") (block '(
+              (return (ReplaceMember "$struct" (EvaluateAtom "$field") (Apply "$function" (SqlAccess 'struct "$struct" (EvaluateAtom "$field") '('"yson_strict" '"yson_fast")))))
+            ))))
+          ))) (String '"y") (Apply (lambda '("$value") (block '(
+            (return (lambda '("$_item") (block '(
+              (return "$value")
+            ))))
+          ))) (Int32 '"3"))))) (AsStructUnordered '('"x" (AsList (AsStruct '('"y" (Int32 '"2"))))) '('"z" (Int32 '"5")))))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
