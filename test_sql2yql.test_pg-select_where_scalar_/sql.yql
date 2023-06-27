@@ -1,6 +1,6 @@
 (
 (let world (Configure! world (DataSource 'config) 'OrderedColumns))
-(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))) '('where (PgWhere (Void) (lambda '() (PgOr (PgAnd (PgOp '"=" (PgConst '2 (PgType 'int4)) (PgCast (PgCast (Null) (PgType 'text)) (PgType '"int4"))) (PgConst '"t" (PgType 'bool))) (PgConst '"f" (PgType 'bool)))))))))) '('set_ops '('push)))))
+(let output (PgSelect '('('set_items '((PgSetItem '('('result '((PgResultItem '"column0" (Void) (lambda '() (PgConst '1 (PgType 'int4)))))) '('where (PgWhere (Void) (lambda '() (PgOr (PgAnd (PgOp '"=" (PgConst '2 (PgType 'int4)) (PgCast (PgCast (Null) (PgType 'unknown)) (PgType '"int4"))) (PgConst '"t" (PgType 'bool))) (PgConst '"f" (PgType 'bool)))))))))) '('set_ops '('push)))))
 (let result_sink (DataSink 'result))
 (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
 (let world (Commit! world result_sink))
