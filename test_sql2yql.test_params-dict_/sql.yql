@@ -1,5 +1,6 @@
 (
 (declare $x (DictType (DataType 'String) (OptionalType (DataType 'Int64))))
+(declare $x2 (DictType (DataType 'Utf8) (OptionalType (DataType 'Int64))))
 (import aggregate_module '"/lib/yql/aggregate.yql")
 (import window_module '"/lib/yql/window.yql")
 (import core_module '"/lib/yql/core.yql")
@@ -18,6 +19,15 @@
         )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
           (let res (SqlAccess 'dict "$x" (String '"a3") '('"yson_strict" '"yson_fast")))
           (return res)
+        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          (let res (SqlAccess 'dict "$x2" (String '"a1") '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+          (let res (SqlAccess 'dict "$x2" (String '"a2") '('"yson_strict" '"yson_fast")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+          (let res (SqlAccess 'dict "$x2" (String '"a3") '('"yson_strict" '"yson_fast")))
+          (return res)
         )))))))
         (return core)
       ))))
@@ -28,7 +38,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
     (return (Commit! world result_sink))
   )))
   (return world)

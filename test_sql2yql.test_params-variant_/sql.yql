@@ -1,4 +1,5 @@
 (
+(declare $x5 (VariantType (StructType '('"a" (DataType 'String)) '('"b" (DataType 'Int64)))))
 (declare $x4 (VariantType (StructType '('"a" (DataType 'String)) '('"b" (DataType 'Int64)))))
 (declare $x3 (VariantType (StructType '('"a" (DataType 'String)) '('"b" (DataType 'Int64)))))
 (declare $x2 (VariantType (TupleType (DataType 'String) (DataType 'Int64))))
@@ -13,7 +14,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Concat (Concat (SqlAccess 'struct "$x1" '"0" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x2" '"1" '('"yson_strict" '"yson_fast")) (DataType 'String))) (Concat (SqlAccess 'struct "$x3" '"a" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x4" '"b" '('"yson_strict" '"yson_fast")) (DataType 'String)))))
+          (let res (Concat (Concat (SqlAccess 'struct "$x1" '"0" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x2" '"1" '('"yson_strict" '"yson_fast")) (DataType 'String))) (Concat (Concat (SqlAccess 'struct "$x3" '"a" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x4" '"b" '('"yson_strict" '"yson_fast")) (DataType 'String))) (SqlAccess 'struct "$x5" '"a" '('"yson_strict" '"yson_fast")))))
           (return res)
         )))))))
         (return core)
