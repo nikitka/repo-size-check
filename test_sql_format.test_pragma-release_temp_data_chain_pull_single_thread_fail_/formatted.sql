@@ -90,9 +90,7 @@ DEFINE ACTION $action($param) AS
         LIMIT 10
     );
 
-    SELECT
-        *
-    FROM $g;
+    PROCESS $g;
 END DEFINE;
 
 EVALUATE FOR $param IN ListFromRange(1, 2)

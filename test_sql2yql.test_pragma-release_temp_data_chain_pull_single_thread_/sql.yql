@@ -165,22 +165,9 @@
   (let subquery5 (Nth subquerynode5 '1))
   (let world (block '(
     (let output (block '(
-      (let select (block '(
-        (let core subquery5)
-        (let core (PersistableRepr (block '(
-          (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
-            (let res row)
-            (return res)
-          ))) '()))))
-          (return core)
-        ))))
-        (return core)
-      )))
-      (let select (RemoveSystemMembers select))
+      (let select (RemoveSystemMembers subquery5))
       (return select)
     )))
-    (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
       (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
