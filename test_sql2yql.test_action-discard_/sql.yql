@@ -1,0 +1,204 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (RemoveSystemMembers (Apply (lambda '(world) (block '(
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                (let res (Ensure (Int32 '"1") (Bool '"true")))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (let output (Unordered output))
+        (let world (block '(
+          (let result_sink (DataSink 'result))
+          (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref) '('columns '('"column0")))))
+          (return (Commit! world result_sink))
+        )))
+        (return world)
+      )))
+      (let world (block '(
+        (let output (block '(
+          (let select (block '(
+            (let core (WithWorld (AsList (AsStruct)) world))
+            (let core (PersistableRepr (block '(
+              (let projectCoreType (TypeOf core))
+              (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                (let res (Int32 '"2"))
+                (return res)
+              )))))))
+              (return core)
+            ))))
+            (return core)
+          )))
+          (return select)
+        )))
+        (return output)
+      )))
+      (return world)
+    ))) world)))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (UnorderedSubquery (Apply (lambda '(world) (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+          (let table1 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table1)
+              (let core (OrderedFlatMap core (lambda '(row) (block '(
+                (let res (ToSequence (Apply (lambda '("$row") (block '(
+                  (return (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (SqlAccess 'struct "$row" '"value" '('"yson_strict" '"yson_fast")))))
+                ))) (RemoveSystemMembers row))))
+                (return res)
+              )))))
+              (let core (AutoDemux (PersistableRepr core)))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let output (Unordered output))
+          (let world (block '(
+            (let result_sink (DataSink 'result))
+            (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+            (return (Commit! world result_sink))
+          )))
+          (return world)
+        )))
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+          (let table2 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table2)
+              (let core (OrderedFlatMap core (lambda '(row) (block '(
+                (let res (ToSequence (Apply (lambda '("$row") (block '(
+                  (return (AsStructUnordered '('"a" (Int32 '"2")) '('"b" (SqlAccess 'struct "$row" '"value" '('"yson_strict" '"yson_fast")))))
+                ))) (RemoveSystemMembers row))))
+                (return res)
+              )))))
+              (let core (AutoDemux (PersistableRepr core)))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"b")))))
+    (let select (Take select (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (UnorderedSubquery (Apply (lambda '(world) (block '(
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+          (let table4 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table4)
+              (let core (RemoveSystemMembers core))
+              (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (lambda '("$key" "$_yql_anonymous_name_0") (block '(
+                (return (AsStructUnordered '('"a" (Int32 '"1")) '('"b" "$key")))
+              ))) (lambda '(row) (RemoveSystemMembers row)))))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (let output (Unordered output))
+          (let world (block '(
+            (let result_sink (DataSink 'result))
+            (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref))))
+            (return (Commit! world result_sink))
+          )))
+          (return world)
+        )))
+        (let world (block '(
+          (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+          (let table5 (Right! x))
+          (let output (block '(
+            (let select (block '(
+              (let core table5)
+              (let core (RemoveSystemMembers core))
+              (let core (AutoDemux (PartitionsByKeys core (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (Void) (Void) (lambda '(partitionStream) (SqlReduce partitionStream (lambda '(row) (SqlExtractKey row (lambda '(row) (Member row '"key")))) (lambda '("$key" "$_yql_anonymous_name_1") (block '(
+                (return (AsStructUnordered '('"a" (Int32 '"2")) '('"b" "$key")))
+              ))) (lambda '(row) (RemoveSystemMembers row)))))))
+              (return core)
+            )))
+            (return select)
+          )))
+          (return output)
+        )))
+        (return world)
+      ))) world)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+          (let res row)
+          (return res)
+        ))) '()))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"b")))))
+    (let select (Take select (Coalesce (Int32 '"1") (Uint64 '18446744073709551615))))
+    (let select (RemoveSystemMembers select))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
