@@ -1,0 +1,43 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"i32_then" (lambda '(row) (block '(
+          (let res (If (Coalesce ("<" (Int32 '"3") (Int32 '"2")) (Bool 'false)) (Int32 '"13") (Uint32 '"42")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i32_else" (lambda '(row) (block '(
+          (let res (If (Coalesce ("<" (Int32 '"3") (Int32 '"2")) (Bool 'false)) (Uint32 '"13") (Int32 '"42")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i64_then" (lambda '(row) (block '(
+          (let res (If (Coalesce ("<" (Int32 '"3") (Int32 '"2")) (Bool 'false)) (Int64 '"13") (Uint32 '"42")))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i64_else" (lambda '(row) (block '(
+          (let res (If (Coalesce ("<" (Int32 '"3") (Int32 '"2")) (Bool 'false)) (Uint32 '"13") (Int64 '"42")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"i32_then" '"i32_else" '"i64_then" '"i64_else")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
