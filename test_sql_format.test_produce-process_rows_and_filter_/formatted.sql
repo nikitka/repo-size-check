@@ -12,10 +12,10 @@ $udf = Python::processRows(
     $udfScript
 );
 $data = (
-        SELECT
-            key AS Name,
-            value AS Value
-        FROM plato.Input1
+    SELECT
+        key AS Name,
+        value AS Value
+    FROM plato.Input1
 );
 
 $prefix = ">>";

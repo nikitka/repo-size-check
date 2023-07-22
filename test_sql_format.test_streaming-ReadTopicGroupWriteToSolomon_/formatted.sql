@@ -13,10 +13,10 @@ SELECT STREAM
     MAX(Len(Data)) AS max_length,
     SUM(Len(Data)) AS sum
 FROM (
-        SELECT
-            Data,
-            $crc(Data) AS crc
-        FROM pq.test_topic_input
+    SELECT
+        Data,
+        $crc(Data) AS crc
+    FROM pq.test_topic_input
 )
 GROUP BY
     HOP (Just(CurrentUtcTimestamp(TableRow())), "PT5S", "PT5S", "PT5S"),

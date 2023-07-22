@@ -1,13 +1,13 @@
 /* syntax version 1 *//* postgres can not */
 USE plato;
 $input = (
-        SELECT
-            AsStruct(
-                key AS key,
-                Just(subkey) AS subkey,
-                Just(value) AS value
-            ) AS nums
-        FROM Input
+    SELECT
+        AsStruct(
+            key AS key,
+            Just(subkey) AS subkey,
+            Just(value) AS value
+        ) AS nums
+    FROM Input
 );
 
 SELECT

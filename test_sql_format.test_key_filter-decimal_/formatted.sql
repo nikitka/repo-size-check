@@ -18,44 +18,44 @@ COMMIT;
 SELECT
     *
 FROM (
-        SELECT
-            *
-        FROM @decimal
-        WHERE value < Decimal("4.1", 15, 10) AND value > Decimal("10.5", 15, 10)
-        -- empty
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value > Decimal("inf", 15, 10)
-        -- empty
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value < Decimal("-inf", 15, 10)
-        -- empty
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value = Decimal("nan", 15, 10)
-        -- empty
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value = Decimal("inf", 15, 10)
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value = Decimal("-inf", 15, 10)
-        UNION ALL
-        SELECT
-            *
-        FROM @decimal
-        WHERE value > Decimal("3.3", 15, 10) OR value >= Decimal("3.30001", 15, 10)
+    SELECT
+        *
+    FROM @decimal
+    WHERE value < Decimal("4.1", 15, 10) AND value > Decimal("10.5", 15, 10)
+    -- empty
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value > Decimal("inf", 15, 10)
+    -- empty
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value < Decimal("-inf", 15, 10)
+    -- empty
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value = Decimal("nan", 15, 10)
+    -- empty
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value = Decimal("inf", 15, 10)
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value = Decimal("-inf", 15, 10)
+    UNION ALL
+    SELECT
+        *
+    FROM @decimal
+    WHERE value > Decimal("3.3", 15, 10) OR value >= Decimal("3.30001", 15, 10)
 )
 ORDER BY
     value;

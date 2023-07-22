@@ -19,12 +19,12 @@ INSERT INTO Output
 SELECT
     *
 FROM (
-        SELECT
-            *
-        FROM @f1
-        UNION ALL
-        SELECT
-            *
-        FROM @f2
+    SELECT
+        *
+    FROM @f1
+    UNION ALL
+    SELECT
+        *
+    FROM @f2
 );
 

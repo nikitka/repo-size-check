@@ -10,10 +10,10 @@ COMMIT;
 SELECT
     *
 FROM (
-        SELECT
-            *
-        FROM @a
-            TABLESAMPLE BERNOULLI (50.0) REPEATABLE (1)
+    SELECT
+        *
+    FROM @a
+        TABLESAMPLE BERNOULLI (50.0) REPEATABLE (1)
 )
 LIMIT 10;
 

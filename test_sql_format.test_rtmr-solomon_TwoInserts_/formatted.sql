@@ -1,10 +1,10 @@
 USE plato;
 CREATE TABLE tmp (
-        ts Timestamp,
-        value Uint64,
-        label String,
-        PARTITION BY (label),
-        ORDER BY (ts)
+    ts Timestamp,
+    value Uint64,
+    label String,
+    PARTITION BY (label),
+    ORDER BY (ts)
 );
 
 INSERT INTO tmp

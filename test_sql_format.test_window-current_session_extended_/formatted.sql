@@ -18,11 +18,11 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-            PARTITION BY
-                user,
-                SessionWindow(ts + 1, $init, $update, $calculate)
-            ORDER BY
-                ts
+        PARTITION BY
+            user,
+            SessionWindow(ts + 1, $init, $update, $calculate)
+        ORDER BY
+            ts
     )
 ORDER BY
     user,

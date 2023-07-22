@@ -9,14 +9,14 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-            PARTITION COMPACT BY
-                user,
-                SessionWindow(ts, 10) AS ss0
+        PARTITION COMPACT BY
+            user,
+            SessionWindow(ts, 10) AS ss0
     ),
     w1 AS (
-            PARTITION COMPACT BY
-                SessionWindow(ts, 10),
-                user
+        PARTITION COMPACT BY
+            SessionWindow(ts, 10),
+            user
     )
 ORDER BY
     user,

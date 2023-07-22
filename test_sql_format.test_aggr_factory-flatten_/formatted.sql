@@ -16,10 +16,10 @@ $j = AggregateFlatten($i);
 SELECT
     AggregateBy(x, $j)
 FROM (
-        SELECT
-            [1, 2] AS x
-        UNION ALL
-        SELECT
-            [2, 3] AS x
+    SELECT
+        [1, 2] AS x
+    UNION ALL
+    SELECT
+        [2, 3] AS x
 );
 

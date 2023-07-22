@@ -1,21 +1,21 @@
 /* postgres can not */
 USE plato;
 $visitors = (
-        SELECT
-            key,
-            subkey,
-            value
-        FROM Input
-        WHERE subkey != ""
+    SELECT
+        key,
+        subkey,
+        value
+    FROM Input
+    WHERE subkey != ""
 );
 
 $over_threshold = (
-        SELECT
-            key,
-            subkey,
-            value
-        FROM $visitors
-        WHERE key > "070"
+    SELECT
+        key,
+        subkey,
+        value
+    FROM $visitors
+    WHERE key > "070"
 );
 
 $clean = (
@@ -25,14 +25,14 @@ $clean = (
 );
 
 $tail = (
-        SELECT
-            key,
-            subkey,
-            value
-        FROM $visitors
-        ORDER BY
-            key DESC
-        LIMIT IF($clean ?? 0 < 2, 2 - $clean ?? 0, 0)
+    SELECT
+        key,
+        subkey,
+        value
+    FROM $visitors
+    ORDER BY
+        key DESC
+    LIMIT IF($clean ?? 0 < 2, 2 - $clean ?? 0, 0)
 );
 
 INSERT INTO Output

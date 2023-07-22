@@ -7,11 +7,11 @@ SELECT
     aggregate_list(x) OVER w,
     bool_and(x) OVER w
 FROM (
-        SELECT
-            NULL AS x
-        UNION ALL
-        SELECT
-            NULL AS x
+    SELECT
+        NULL AS x
+    UNION ALL
+    SELECT
+        NULL AS x
 )
 WINDOW
     w AS (
@@ -26,11 +26,11 @@ SELECT
     aggregate_list(x) OVER w,
     bool_and(x) OVER w
 FROM (
-        SELECT
-            NULL AS x
-        UNION ALL
-        SELECT
-            NULL AS x
+    SELECT
+        NULL AS x
+    UNION ALL
+    SELECT
+        NULL AS x
 )
 WINDOW
     w AS (

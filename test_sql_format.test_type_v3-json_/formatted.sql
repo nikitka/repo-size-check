@@ -5,11 +5,11 @@ INSERT INTO Output
 SELECT
     *
 FROM (
-        SELECT
-            Json(@@{"a": 4.7, "c": "abc"}@@) AS j
-        UNION ALL
-        SELECT
-            Json(@@{"d": "fff"}@@) AS j
+    SELECT
+        Json(@@{"a": 4.7, "c": "abc"}@@) AS j
+    UNION ALL
+    SELECT
+        Json(@@{"d": "fff"}@@) AS j
 );
 
 COMMIT;

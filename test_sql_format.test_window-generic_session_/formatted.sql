@@ -8,12 +8,12 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-            PARTITION BY
-                user,
-                SessionWindow(ts, 10)
-            ORDER BY
-                ts
-            ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+        PARTITION BY
+            user,
+            SessionWindow(ts, 10)
+        ORDER BY
+            ts
+        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
     )
 ORDER BY
     user,

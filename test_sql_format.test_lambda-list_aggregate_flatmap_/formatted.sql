@@ -8,13 +8,13 @@ $subst = ($names, $indices) -> {
     );
 };
 $table = (
-        SELECT
-            AsList("a", "b") AS names,
-            AsList(0, 0, 1) AS indices
-        UNION ALL
-        SELECT
-            AsList("c", "d") AS names,
-            AsList(0, 1, 1) AS indices
+    SELECT
+        AsList("a", "b") AS names,
+        AsList(0, 0, 1) AS indices
+    UNION ALL
+    SELECT
+        AsList("c", "d") AS names,
+        AsList(0, 1, 1) AS indices
 );
 
 SELECT

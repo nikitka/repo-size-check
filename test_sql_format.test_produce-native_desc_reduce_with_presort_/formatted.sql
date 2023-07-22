@@ -7,14 +7,14 @@ $udf = YQL::@@(lambda '(key stream) (AsStruct
 SELECT
     *
 FROM (
-        REDUCE Input1
-        PRESORT
-            value DESC
-        ON
-            key,
-            subkey
-        USING $udf(value)
-    --YtReduce
+    REDUCE Input1
+    PRESORT
+        value DESC
+    ON
+        key,
+        subkey
+    USING $udf(value)
+--YtReduce
 )
 ORDER BY
     key,
@@ -23,14 +23,14 @@ ORDER BY
 SELECT
     *
 FROM (
-        REDUCE Input1
-        PRESORT
-            subkey DESC,
-            value DESC
-        ON
-            key
-        USING $udf(value)
-    --YtReduce
+    REDUCE Input1
+    PRESORT
+        subkey DESC,
+        value DESC
+    ON
+        key
+    USING $udf(value)
+--YtReduce
 )
 ORDER BY
     key,
@@ -39,14 +39,14 @@ ORDER BY
 SELECT
     *
 FROM (
-        REDUCE Input1
-        PRESORT
-            value
-        ON
-            key,
-            subkey
-        USING $udf(value)
-    --YtMapReduce
+    REDUCE Input1
+    PRESORT
+        value
+    ON
+        key,
+        subkey
+    USING $udf(value)
+--YtMapReduce
 )
 ORDER BY
     key,
@@ -55,14 +55,14 @@ ORDER BY
 SELECT
     *
 FROM (
-        REDUCE concat(Input1, Input2)
-        PRESORT
-            value DESC
-        ON
-            key,
-            subkey
-        USING $udf(value)
-    --YtMapReduce
+    REDUCE concat(Input1, Input2)
+    PRESORT
+        value DESC
+    ON
+        key,
+        subkey
+    USING $udf(value)
+--YtMapReduce
 )
 ORDER BY
     key,

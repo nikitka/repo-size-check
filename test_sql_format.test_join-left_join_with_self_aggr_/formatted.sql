@@ -45,12 +45,12 @@ $b =
     FROM $a
         AS a
     INNER JOIN (
-            SELECT
-                bar,
-                min(foo) AS foo
-            FROM $a
-            GROUP BY
-                bar
+        SELECT
+            bar,
+            min(foo) AS foo
+        FROM $a
+        GROUP BY
+            bar
     )
         AS b
     USING (foo, bar)

@@ -39,24 +39,24 @@ $manufacturer_name_fix = ($manufacturer) -> {
     RETURN IF(ListHasItems($list), $list[0], $lowered_manufacturer);
 };
 $manufacturers_whitelist = (
+    SELECT
+        man AS manufacturer
+    FROM (
         SELECT
-            man AS manufacturer
-        FROM (
-                SELECT
-                    man,
-                    COUNT(*) AS cnt
-                FROM @push_final
-                GROUP BY
-                    $manufacturer_name_fix(manufacturer) AS man
-        )
-        WHERE cnt > 1000
+            man,
+            COUNT(*) AS cnt
+        FROM @push_final
+        GROUP BY
+            $manufacturer_name_fix(manufacturer) AS man
+    )
+    WHERE cnt > 1000
 );
 
 $push_final_preprocessing = (
-        SELECT
-            $manufacturer_name_fix(manufacturer) AS manufacturer,
-            state
-        FROM @push_final
+    SELECT
+        $manufacturer_name_fix(manufacturer) AS manufacturer,
+        state
+    FROM @push_final
 );
 
 SELECT
@@ -67,9 +67,9 @@ SELECT
 FROM $push_final_preprocessing
     AS L
 LEFT JOIN (
-        SELECT
-            manufacturer AS fixed_manufacturer
-        FROM $manufacturers_whitelist
+    SELECT
+        manufacturer AS fixed_manufacturer
+    FROM $manufacturers_whitelist
 )
     AS R
 ON (L.manufacturer = R.fixed_manufacturer);

@@ -3,15 +3,15 @@ $foo = ($x) -> {
     RETURN AsTuple($x, $x);
 };
 $ids = (
+    SELECT
+        AGGREGATE_LIST(id)
+    FROM (
         SELECT
-            AGGREGATE_LIST(id)
-        FROM (
-                SELECT
-                    "1" AS id
-                UNION ALL
-                SELECT
-                    "2" AS id
-        )
+            "1" AS id
+        UNION ALL
+        SELECT
+            "2" AS id
+    )
 );
 
 $first_ids, $second_ids = $foo(unwrap($ids));

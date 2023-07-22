@@ -3,9 +3,9 @@ PRAGMA DisableSimpleColumns;
 USE plato;
 PRAGMA yt.MapJoinLimit = "10M";
 $sizes = (
-        SELECT
-            0 AS id
-        FROM Input
+    SELECT
+        0 AS id
+    FROM Input
 );
 
 SELECT

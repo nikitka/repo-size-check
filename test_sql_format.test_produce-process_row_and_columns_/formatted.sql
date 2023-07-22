@@ -8,11 +8,11 @@ $udf = Python::processRow(
     $udfScript
 );
 $data = (
-        SELECT
-            key AS Name,
-            value AS Value,
-            subkey AS Tag
-        FROM plato.Input0
+    SELECT
+        key AS Name,
+        value AS Value,
+        subkey AS Tag
+    FROM plato.Input0
 );
 
 $separator = "|";

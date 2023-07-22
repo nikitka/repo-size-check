@@ -17,9 +17,9 @@ SELECT
 FROM @source
 WINDOW
     `w` AS (
-            PARTITION BY
-                `Permalink`
-            ORDER BY
-                `Date`
+        PARTITION BY
+            `Permalink`
+        ORDER BY
+            `Date`
     );
 

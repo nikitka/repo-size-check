@@ -7,14 +7,14 @@ $list =
                 lst
         ) AS rn
     FROM (
+        SELECT
+            *
+        FROM (
             SELECT
-                *
-            FROM (
-                    SELECT
-                        ListFromRange(1us, 333us) AS lst
-            )
-                FLATTEN LIST BY
-                    lst
+                ListFromRange(1us, 333us) AS lst
+        )
+            FLATTEN LIST BY
+                lst
     );
 
 $usr =

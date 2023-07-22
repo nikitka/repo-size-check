@@ -3,19 +3,19 @@ INSERT INTO plato.Output
 SELECT
     *
 FROM (
+    SELECT
+        lag(data) OVER w
+    FROM (
         SELECT
-            lag(data) OVER w
-        FROM (
-            SELECT
-                TableRow() AS data,
+            TableRow() AS data,
+            key
+        FROM plato.Input
+    )
+    WINDOW
+        w AS (
+            PARTITION BY
                 key
-            FROM plato.Input
         )
-        WINDOW
-            w AS (
-                PARTITION BY
-                    key
-            )
 )
     FLATTEN COLUMNS;
 

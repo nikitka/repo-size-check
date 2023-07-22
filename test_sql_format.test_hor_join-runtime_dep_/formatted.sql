@@ -12,15 +12,15 @@ COMMIT;
 SELECT
     *
 FROM (
-        SELECT
-            key,
-            '' AS value
-        FROM @ttt
-        UNION ALL
-        SELECT
-            0 AS key,
-            value
-        FROM @ttt
+    SELECT
+        key,
+        '' AS value
+    FROM @ttt
+    UNION ALL
+    SELECT
+        0 AS key,
+        value
+    FROM @ttt
 )
     AS x
 ORDER BY

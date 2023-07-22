@@ -9,10 +9,10 @@ SELECT
     AGGREGATE_BY(x, $Agg_sum),
     AGGREGATE_BY(x, $Agg_max)
 FROM (
-        SELECT
-            2 AS x
-        UNION ALL
-        SELECT
-            3 AS x
+    SELECT
+        2 AS x
+    UNION ALL
+    SELECT
+        3 AS x
 );
 

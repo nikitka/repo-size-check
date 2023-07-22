@@ -121,17 +121,17 @@ ORDER BY
 -- []
 -- 2, 4, 6, null
 $extraDict = (
-        SELECT
-            2 AS key
-        UNION ALL
-        SELECT
-            4 AS key
-        UNION ALL
-        SELECT
-            6 AS key
-        UNION ALL
-        SELECT
-            NULL AS key
+    SELECT
+        2 AS key
+    UNION ALL
+    SELECT
+        4 AS key
+    UNION ALL
+    SELECT
+        6 AS key
+    UNION ALL
+    SELECT
+        NULL AS key
 );
 
 SELECT

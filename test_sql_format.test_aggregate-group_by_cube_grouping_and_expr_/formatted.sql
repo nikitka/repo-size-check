@@ -5,11 +5,11 @@ SELECT
     value,
     2 * (2 * grouping(key) + grouping(subkey)) + grouping(value) AS ggg3,
 FROM (
-        SELECT
-            subkey,
-            value,
-            CAST(key AS Int32) AS opt,
-        FROM plato.Input
+    SELECT
+        subkey,
+        value,
+        CAST(key AS Int32) AS opt,
+    FROM plato.Input
 )
 GROUP BY
     Unwrap(opt) AS key,

@@ -5,13 +5,13 @@ PRAGMA yt.MapJoinLimit = "1m";
 SELECT
     *
 FROM (
-        SELECT
-            *
-        FROM plato.Input
-            AS a
-        INNER JOIN plato.Input
-            AS b
-        ON a.key = b.key
+    SELECT
+        *
+    FROM plato.Input
+        AS a
+    INNER JOIN plato.Input
+        AS b
+    ON a.key = b.key
 )
     TABLESAMPLE BERNOULLI (30);
 

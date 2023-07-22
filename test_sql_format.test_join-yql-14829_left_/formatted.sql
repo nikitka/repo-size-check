@@ -20,13 +20,13 @@ ORDER BY
 
 COMMIT;
 $xy_left = (
-        SELECT
-            x.id AS id
-        FROM ANY @x
-            AS x
-        LEFT JOIN ANY @y
-            AS y
-        ON x.id == y.id
+    SELECT
+        x.id AS id
+    FROM ANY @x
+        AS x
+    LEFT JOIN ANY @y
+        AS y
+    ON x.id == y.id
 );
 
 SELECT

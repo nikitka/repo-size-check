@@ -7,11 +7,11 @@ SELECT
     aggregate_list(x),
     bool_and(x)
 FROM (
-        SELECT
-            NULL AS x
-        UNION ALL
-        SELECT
-            NULL AS x
+    SELECT
+        NULL AS x
+    UNION ALL
+    SELECT
+        NULL AS x
 );
 
 SELECT
@@ -22,13 +22,13 @@ SELECT
     aggregate_list(x),
     bool_and(x)
 FROM (
-        SELECT
-            NULL AS x,
-            1 AS y
-        UNION ALL
-        SELECT
-            NULL AS x,
-            2 AS y
+    SELECT
+        NULL AS x,
+        1 AS y
+    UNION ALL
+    SELECT
+        NULL AS x,
+        2 AS y
 )
 GROUP BY
     y;

@@ -1,11 +1,11 @@
 /* postgres can not */
 USE plato;
 $data = (
-        SELECT
-            CAST(key AS uint32) % 10 AS mod,
-            (key AS kk, subkey AS sk) AS struct_field,
-            value
-        FROM Input
+    SELECT
+        CAST(key AS uint32) % 10 AS mod,
+        (key AS kk, subkey AS sk) AS struct_field,
+        value
+    FROM Input
 );
 
 --INSERT INTO Output

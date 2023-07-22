@@ -1,12 +1,12 @@
 /* syntax version 1 *//* postgres can not */
 USE plato;
 $dictList = (
-        SELECT
-            AsDict(AsTuple(value, CAST(subkey AS Int32))) AS `dict`,
-            AsDict(AsTuple("z", "a"), AsTuple("y", "b")) AS d,
-            subkey,
-            value
-        FROM Input
+    SELECT
+        AsDict(AsTuple(value, CAST(subkey AS Int32))) AS `dict`,
+        AsDict(AsTuple("z", "a"), AsTuple("y", "b")) AS d,
+        subkey,
+        value
+    FROM Input
 );
 
 SELECT

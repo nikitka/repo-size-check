@@ -9,15 +9,15 @@ $data = (
 );
 
 $top_users_by_age_dec = (
-        SELECT
-            age_dec,
-            COUNT(1) AS age_dec_count
-        FROM $data
-        GROUP BY
-            age / 10 AS age_dec
-        ORDER BY
-            age_dec_count DESC
-        LIMIT 2
+    SELECT
+        age_dec,
+        COUNT(1) AS age_dec_count
+    FROM $data
+    GROUP BY
+        age / 10 AS age_dec
+    ORDER BY
+        age_dec_count DESC
+    LIMIT 2
 );
 
 --INSERT INTO Output

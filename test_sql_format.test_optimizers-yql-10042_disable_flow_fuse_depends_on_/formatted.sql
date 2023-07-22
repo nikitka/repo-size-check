@@ -4,10 +4,10 @@ SELECT
     RandomNumber(a) AS first,
     RandomNumber(b) AS second
 FROM (
-        SELECT
-            key AS a,
-            key AS b
-        FROM Input0
+    SELECT
+        key AS a,
+        key AS b
+    FROM Input0
 )
 ORDER BY
     first,

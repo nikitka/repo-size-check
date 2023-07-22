@@ -11,9 +11,9 @@ COMMIT;
 SELECT
     count(*)
 FROM (
-        SELECT
-            *
-        FROM @src
-        WHERE StartsWith(key, "\xff\xff") AND EndsWith(key, "5")
+    SELECT
+        *
+    FROM @src
+    WHERE StartsWith(key, "\xff\xff") AND EndsWith(key, "5")
 );
 

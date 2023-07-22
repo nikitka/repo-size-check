@@ -20,8 +20,8 @@ SELECT
         $merge
     )
 FROM (
-        SELECT
-            CAST(LENGTH(value) AS Int64) AS item
-        FROM plato.Input
+    SELECT
+        CAST(LENGTH(value) AS Int64) AS item
+    FROM plato.Input
 );
 

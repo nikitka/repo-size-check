@@ -6,12 +6,12 @@ SELECT
     countIf(kkstritem < 100) AS count_small,
     countIf(kkstritem > 900) AS count_huge
 FROM (
-        SELECT
-            keyitem.kk AS kkstr
-        FROM Input
-            AS d
-            FLATTEN BY
-                key AS keyitem
+    SELECT
+        keyitem.kk AS kkstr
+    FROM Input
+        AS d
+        FLATTEN BY
+            key AS keyitem
 )
     FLATTEN BY
         kkstr AS kkstritem;

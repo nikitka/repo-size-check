@@ -1,9 +1,9 @@
 /* syntax version 1 *//* postgres can not */
 USE plato;
 $list = (
-        SELECT
-            aggregate_list(key)
-        FROM Input
+    SELECT
+        aggregate_list(key)
+    FROM Input
 );
 
 DEFINE ACTION $echo($x) AS

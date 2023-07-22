@@ -10,10 +10,10 @@ SELECT
 FROM AS_TABLE($data);
 
 $input = (
-        SELECT
-            *
-        FROM AS_TABLE($data)
-        WHERE Key > 1
+    SELECT
+        *
+    FROM AS_TABLE($data)
+    WHERE Key > 1
 );
 
 SELECT

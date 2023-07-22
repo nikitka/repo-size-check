@@ -9,17 +9,17 @@ $i = (
 SELECT
     *
 FROM (
-        SELECT
-            1 AS key,
-            subkey,
-            value
-        FROM $i
-        UNION ALL
-        SELECT
-            2 AS key,
-            subkey,
-            value
-        FROM $i
+    SELECT
+        1 AS key,
+        subkey,
+        value
+    FROM $i
+    UNION ALL
+    SELECT
+        2 AS key,
+        subkey,
+        value
+    FROM $i
 )
     AS x
 ORDER BY

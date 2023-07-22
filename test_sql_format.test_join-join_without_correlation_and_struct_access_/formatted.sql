@@ -2,10 +2,10 @@ PRAGMA DisableSimpleColumns;
 /* postgres can not */
 USE plato;
 $data = (
-        SELECT
-            CAST(key AS uint32) % 10 AS mod,
-            (key AS kk, subkey AS sk) AS struct_field
-        FROM Input
+    SELECT
+        CAST(key AS uint32) % 10 AS mod,
+        (key AS kk, subkey AS sk) AS struct_field
+    FROM Input
 );
 
 --INSERT INTO Output

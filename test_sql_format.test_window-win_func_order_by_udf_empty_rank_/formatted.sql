@@ -9,10 +9,10 @@ SELECT
 FROM Input
 WINDOW
     w AS (
-            PARTITION BY
-                key
-            ORDER BY
-                String::Base64Encode(subkey) DESC
+        PARTITION BY
+            key
+        ORDER BY
+            String::Base64Encode(subkey) DESC
     )
 ORDER BY
     key,

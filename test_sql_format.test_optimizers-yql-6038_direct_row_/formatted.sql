@@ -20,21 +20,21 @@ $count = (
 );
 
 $users_0 = (
-        SELECT
-            ListFromRange(0, 3) AS lst,
-            TableRecordIndex() AS idx,
-            subkey
-        FROM Input
-            AS t
+    SELECT
+        ListFromRange(0, 3) AS lst,
+        TableRecordIndex() AS idx,
+        subkey
+    FROM Input
+        AS t
 );
 
 $users = (
-        SELECT
-            CAST(Random(idx + x) AS Uint64) % $count AS j,
-            subkey
-        FROM $users_0
-            FLATTEN BY
-                lst AS x
+    SELECT
+        CAST(Random(idx + x) AS Uint64) % $count AS j,
+        subkey
+    FROM $users_0
+        FLATTEN BY
+            lst AS x
 );
 
 SELECT

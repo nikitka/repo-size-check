@@ -11,10 +11,9 @@ JOIN plato.Input
 USING (key)
 GROUP BY
     GROUPING SETS (
-            (a.key AS k1, b.subkey AS k2),
-            (k1),
-            (b.subkey)
-    )
+        (a.key AS k1, b.subkey AS k2),
+        (k1),
+        (b.subkey))
 ORDER BY
     k1,
     kk2;

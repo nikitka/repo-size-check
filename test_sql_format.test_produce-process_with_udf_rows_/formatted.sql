@@ -10,10 +10,10 @@ def process():
 @@
 );
 $users = (
-        SELECT
-            `key` AS age,
-            `value` AS name
-        FROM plato.Input0
+    SELECT
+        `key` AS age,
+        `value` AS name
+    FROM plato.Input0
 );
 
 PROCESS $users

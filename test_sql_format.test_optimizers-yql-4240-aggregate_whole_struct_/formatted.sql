@@ -13,14 +13,14 @@ SELECT
     SUM(dupsCount) AS allDocs,
     MAX_BY(AsStruct(dupsCount AS dupsCount, attr AS attr), dupsCount) AS best
 FROM (
-        SELECT
-            urlBase,
-            attr,
-            count(*) AS dupsCount
-        FROM $data
-        GROUP BY
-            urlBase,
-            attr
+    SELECT
+        urlBase,
+        attr,
+        count(*) AS dupsCount
+    FROM $data
+    GROUP BY
+        urlBase,
+        attr
 )
 GROUP BY
     urlBase

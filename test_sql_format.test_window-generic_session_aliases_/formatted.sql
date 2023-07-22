@@ -9,20 +9,20 @@ SELECT
 FROM plato.Input
 WINDOW
     w AS (
-            PARTITION BY
-                user,
-                SessionWindow(ts, 10) AS ss0
-            ORDER BY
-                ts
-            ROWS BETWEEN 10 PRECEDING AND 10 FOLLOWING
+        PARTITION BY
+            user,
+            SessionWindow(ts, 10) AS ss0
+        ORDER BY
+            ts
+        ROWS BETWEEN 10 PRECEDING AND 10 FOLLOWING
     ),
     w1 AS (
-            PARTITION BY
-                SessionWindow(ts, 10),
-                user
-            ORDER BY
-                ts
-            ROWS BETWEEN 100 PRECEDING AND 100 FOLLOWING
+        PARTITION BY
+            SessionWindow(ts, 10),
+            user
+        ORDER BY
+            ts
+        ROWS BETWEEN 100 PRECEDING AND 100 FOLLOWING
     )
 ORDER BY
     user,

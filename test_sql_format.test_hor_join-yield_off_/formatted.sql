@@ -12,11 +12,11 @@ $f = Python::f(Callable<(Stream<Struct<key: String, subkey: String, value: Strin
 SELECT
     *
 FROM (
-        PROCESS Input
-        USING $f(TableRows(), 1)
-        UNION ALL
-        PROCESS Input
-        USING $f(TableRows(), 2)
+    PROCESS Input
+    USING $f(TableRows(), 1)
+    UNION ALL
+    PROCESS Input
+    USING $f(TableRows(), 2)
 )
     AS x
 ORDER BY

@@ -6,11 +6,11 @@ SELECT
     min_by(empty, length(sub), 2) AS empty_result,
     max_by(key, empty, 2) AS empty_by
 FROM (
-        SELECT
-            CAST(key AS int) AS key,
-            Unwrap(CAST(subkey AS int)) AS sub,
-            value AS value,
-            CAST(value AS int) AS empty
-        FROM plato.Input
+    SELECT
+        CAST(key AS int) AS key,
+        Unwrap(CAST(subkey AS int)) AS sub,
+        value AS value,
+        CAST(value AS int) AS empty
+    FROM plato.Input
 );
 
