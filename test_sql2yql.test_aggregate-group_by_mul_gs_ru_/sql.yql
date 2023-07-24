@@ -18,11 +18,11 @@
           (let addCompositTerms (lambda '(row) (block '(
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"kf"))
             (return res)
@@ -57,11 +57,11 @@
             (let row (AddMember row '"vl" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'vl) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"kf"))
             (return res)
@@ -97,11 +97,11 @@
             (let row (AddMember row '"vl" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'vl) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"kf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"kf"))
             (return res)
@@ -132,7 +132,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"kf" '"kl" '"vf" '"vl" '"gggg")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"kf" '"kl" '"vf" '"vl" '"gggg")))))
     (return (Commit! world result_sink))
   )))
   (return world)

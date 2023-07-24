@@ -9,12 +9,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32))) (lambda '("$row") (block '(
             (return (Or (Or (">" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Int32 '"2")) (And ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Int32 '"2")) (">=" (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (Int32 '"10")))) (And ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Int32 '"0")) ("<" (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (Int32 '"10")))))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -24,7 +24,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -35,12 +35,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32))) (lambda '("$row") (block '(
             (return (Or (And (">" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Int32 '"10")) (">" (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (Int32 '"1"))) ("<" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Int32 '"5"))))
           ))) '('"x" '"y")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -50,7 +50,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

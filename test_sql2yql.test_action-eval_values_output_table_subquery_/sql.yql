@@ -8,10 +8,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Concat (SafeCast (SqlCall '"Unicode.ToUpper" '((PositionalArgs (Utf8 '"o")))) (DataType 'String)) (String '"utpu")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -26,7 +26,7 @@
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))
-    (let world (Write! world sink (Key '('table (String (EvaluateAtom (Concat (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0) (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"T")))) (DataType 'String))))))) values '('('mode 'append))))
+    (let world (Write! world sink (Key '('table (String (EvaluateAtom (Concat (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"T")))) (DataType 'String))))))) values '('('mode 'append))))
     (return world)
   )))
   (return world)

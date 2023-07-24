@@ -8,7 +8,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (Apply (lambda '("$field" "$function") (block '(
             (return (lambda '("$struct") (block '(
               (return (ReplaceMember "$struct" (EvaluateAtom "$field") (Apply "$function" (SqlAccess 'struct "$struct" (EvaluateAtom "$field") '('"yson_strict" '"yson_fast")))))
@@ -29,7 +29,7 @@
             ))))
           ))) (Int32 '"3"))))) (AsStructUnordered '('"x" (AsList (AsStruct '('"y" (Int32 '"2"))))) '('"z" (Int32 '"5")))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -39,7 +39,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

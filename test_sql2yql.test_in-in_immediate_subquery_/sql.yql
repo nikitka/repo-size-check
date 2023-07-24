@@ -10,10 +10,10 @@
       (let core table1)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Concat (Member row '"key") (String '"0")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -59,10 +59,10 @@
       (let core table3)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Concat (Member row '"key") (String '"0")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)

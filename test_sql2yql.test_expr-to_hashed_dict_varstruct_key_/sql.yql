@@ -8,16 +8,16 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -27,7 +27,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -38,13 +38,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -54,7 +54,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -65,13 +65,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -81,7 +81,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -92,16 +92,16 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -111,7 +111,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -122,13 +122,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -138,7 +138,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -149,13 +149,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'Many)) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -165,7 +165,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -176,28 +176,28 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One"))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -207,7 +207,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -218,21 +218,21 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One")) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One")) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -242,7 +242,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -253,21 +253,21 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One")) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"One")) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -277,7 +277,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -288,28 +288,28 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictKeys (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictPayloads (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (DictItems (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many"))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -319,7 +319,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -330,21 +330,21 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many")) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Lookup (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many")) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -354,7 +354,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -365,21 +365,21 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many")) (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Contains (ToDict (AsList '((Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"foo")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"bar")) '((Variant (Uint32 '"2") '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32))))) (String '"baz"))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"0" '('"yson_strict" '"yson_fast")))
           ))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"1" '('"yson_strict" '"yson_fast")))
           ))) '('"Compact" '"Hashed" '"Many")) (Variant (Int32 '"2") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (DataType 'Uint32)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -389,7 +389,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

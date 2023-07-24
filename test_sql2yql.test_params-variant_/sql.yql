@@ -13,10 +13,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Concat (Concat (SqlAccess 'struct "$x1" '"0" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x2" '"1" '('"yson_strict" '"yson_fast")) (DataType 'String))) (Concat (Concat (SqlAccess 'struct "$x3" '"a" '('"yson_strict" '"yson_fast")) (SafeCast (SqlAccess 'struct "$x4" '"b" '('"yson_strict" '"yson_fast")) (DataType 'String))) (SqlAccess 'struct "$x5" '"a" '('"yson_strict" '"yson_fast")))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -26,7 +26,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

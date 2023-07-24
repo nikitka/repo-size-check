@@ -8,34 +8,34 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet (Int32 '"2") (Int32 '"3") (Null)) (Int32 '"1") '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (Dict (DictType (DataType 'Int32) (VoidType))) (Null) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet (Null)) (Null) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet (Int32 '"1")) (Null) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet '((Int32 '"1") (Int32 '"1")) '((Int32 '"2") (Int32 '"2"))) '((Int32 '"1") (Null)) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet '((Int32 '"2") (Int32 '"2")) '((Int32 '"3") (Int32 '"3"))) '((Int32 '"1") (Null)) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet '((Int32 '"1") (Null)) '((Int32 '"2") (Int32 '"2"))) '((Int32 '"1") (Int32 '"2")) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet '((Null) (Int32 '"1")) '((Int32 '"2") (Int32 '"1"))) '((Int32 '"1") (Int32 '"2")) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet '((Int32 '"1") (Null)) '((Int32 '"2") (Int32 '"1"))) '((Int32 '"1") (Int32 '"2")) '('('ansi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -45,7 +45,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -56,13 +56,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Just (Int32 '"1")) '('('ansi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn (AsSet (Just (Int32 '"2")) (Just (Int32 '"3"))) (Int32 '"1") '('('ansi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -72,7 +72,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

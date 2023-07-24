@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"Path")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -26,7 +26,7 @@
 (let subquery0 (Nth subquerynode0 '1))
 (let world (block '(
   (let sink (DataSink '"yt" '"plato"))
-  (let world (Write! world sink (Key '('table (String (EvaluateAtom (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0))))) (Void) '('('mode 'drop))))
+  (let world (Write! world sink (Key '('table (String (EvaluateAtom (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))))) (Void) '('('mode 'drop))))
   (return world)
 )))
 (let world (block '(

@@ -10,31 +10,31 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (EndsWith (String '"abc") (String '"")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (StringContains (String '"qqq") (String '"q")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%q%q%q%")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (String '"qqq")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (EndsWith (String '"def") (String '"f")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (EndsWith (String '"def") (String '"f")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (And (">=" (Size (String '"foo")) (Uint32 '"6")) (StartsWith (String '"foo") (String '"foo")) (EndsWith (String '"foo") (String '"foo"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (And (">=" (Size (String '"foofoo")) (Uint32 '"6")) (StartsWith (String '"foofoo") (String '"foo")) (EndsWith (String '"foofoo") (String '"foo"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (And (EndsWith (String '"abcxzfoo") (String '"foo")) (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%x_foo")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (String '"abcxzfoo"))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -44,7 +44,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

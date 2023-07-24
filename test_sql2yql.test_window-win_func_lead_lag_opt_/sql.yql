@@ -101,10 +101,10 @@
       (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (Null))))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_Lead0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -114,7 +114,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -205,10 +205,10 @@ def deserialize(serialized):
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('UDAF0 (Apply (bind aggregate_module '"udaf_traits_factory") (ListType (StructMemberType (ListItemType (TypeOf core)) '"item")) (lambda '(row) row) (lambda '(value parent) (NamedApply (ScriptUdf 'Python3 '"create" (CallableType '() '((ResourceType '"Python3")) '((DataType 'Int64))) scriptudf0) '(value) (AsStruct) (DependsOn parent))) (lambda '(value state parent) (NamedApply (ScriptUdf 'Python3 '"add" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((DataType 'Int64) '"")) scriptudf1) '(state value) (AsStruct) (DependsOn parent))) (lambda '(one two) (IfType (ScriptUdf 'Python3 '"merge" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((ResourceType '"Python3") '"")) scriptudf2) (NullType) (lambda '() (Void)) (lambda '() (Apply (ScriptUdf 'Python3 '"merge" (CallableType '() '((ResourceType '"Python3")) '((ResourceType '"Python3")) '((ResourceType '"Python3") '"")) scriptudf2) one two)))) (lambda '(state) (Apply (ScriptUdf 'Python3 '"get_result" (CallableType '() '((DataType 'String)) '((ResourceType '"Python3"))) scriptudf3) state)) (lambda '(state) (Apply (ScriptUdf 'Python3 '"serialize" (CallableType '() '((DataType 'String)) '((ResourceType '"Python3"))) scriptudf4) state)) (lambda '(state) (Apply (ScriptUdf 'Python3 '"deserialize" (CallableType '() '((ResourceType '"Python3")) '((DataType 'String))) scriptudf5) state)) (Null)) '"item")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'UDAF0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -218,7 +218,7 @@ def deserialize(serialized):
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

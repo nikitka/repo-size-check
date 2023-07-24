@@ -19,22 +19,22 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_RowNumber0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_Lag0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_Lead0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_Rank0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row '_yql_DenseRank0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)

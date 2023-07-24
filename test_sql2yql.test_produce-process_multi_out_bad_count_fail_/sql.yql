@@ -14,10 +14,10 @@ def MyFunc(list):
       (let core table0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RemoveSystemMembers row))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -33,7 +33,7 @@ def MyFunc(list):
   (return '(world (EnsureTupleSize (block '(
     (let select (block '(
       (let inputRowsList table1)
-      (let core (SqlProcess (ScriptUdf 'Python3 '"MyFunc" (CallableType '('"0") '((StreamType (VariantType (TupleType (TypeOf (Unwrap (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0))) (TypeOf (Unwrap (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0))))))) '((StreamType (TypeOf (Unwrap (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))))) scriptudf0) (RemoveSystemMembers inputRowsList) '0))
+      (let core (SqlProcess (ScriptUdf 'Python3 '"MyFunc" (CallableType '('"0") '((StreamType (VariantType (TupleType (TypeOf (Unwrap (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))) (TypeOf (Unwrap (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))))))) '((StreamType (TypeOf (Unwrap (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))))))) scriptudf0) (RemoveSystemMembers inputRowsList) '0))
       (let core (AutoDemux (PersistableRepr core)))
       (return core)
     )))

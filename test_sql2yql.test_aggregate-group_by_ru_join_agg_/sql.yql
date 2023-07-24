@@ -28,11 +28,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"sk"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -55,11 +55,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"sk"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -83,11 +83,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"sk"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -98,7 +98,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"kk" '"sk" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"kk" '"sk" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

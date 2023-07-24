@@ -10,14 +10,14 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"a" (OptionalType (DataType 'Int32))) '('"b" (DataType 'String))) (lambda '("$row") (block '(
             (return (Coalesce (SqlIn (ListMap (ListExtend (ListFromRange (Int32 '"0") (Int32 '"5000")) (ListFromRange (Int32 '"0") (Int32 '"5000")) (ListFromRange (Int32 '"5000") (Int32 '"10000"))) (lambda '("$x") (block '(
               (return '((SafeCast "$x" (DataType 'String)) "$x"))
             )))) '((SqlAccess 'struct "$row" '"b" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"a" '('"yson_strict" '"yson_fast"))) '('('warnNoAnsi))) (Bool '"false")))
           ))) '('"a" '"b")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -27,7 +27,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

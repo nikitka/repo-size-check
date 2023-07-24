@@ -9,10 +9,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('string_agg0 (AggApply 'pg_string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'string_agg0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -22,7 +22,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -34,10 +34,10 @@
       (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"x")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('string_agg0 (PgWindowTraits 'string_agg (ListItemType (TypeOf core)) (lambda '(row) (Member row '"x") (PgConst '"," (PgType 'text)))))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'string_agg0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -47,7 +47,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -59,10 +59,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'string_agg (ListItemType type) extractor)) (ListType type) extractor)) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr '((Member row '"x") (PgConst '"," (PgType 'text)))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -72,7 +72,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -87,10 +87,10 @@
       ))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr '((Member row '"x") (PgConst '"," (PgType 'text)))))))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -100,7 +100,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -112,10 +112,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (lambda '(type extractor) (Apply (lambda '(type extractor) (PgAggregationTraitsTuple 'max (ListItemType type) extractor)) (ListType type) extractor)) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -125,7 +125,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -140,10 +140,10 @@
       ))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x")))))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -153,7 +153,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

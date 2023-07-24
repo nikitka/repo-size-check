@@ -15,13 +15,13 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key_mod" (lambda '(row) (block '(
           (let res (Member row '"key_mod"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateList0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateList1))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -31,7 +31,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key_mod" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key_mod" '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

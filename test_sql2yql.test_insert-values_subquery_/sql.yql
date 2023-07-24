@@ -26,7 +26,7 @@
 (let world (Nth subquerynode0 '0))
 (let subquery0 (Nth subquerynode0 '1))
 (let world (block '(
-  (let values (PersistableRepr '((AsStruct '('"key" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'key))))))
+  (let values (PersistableRepr '((AsStruct '('"key" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))))))
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))

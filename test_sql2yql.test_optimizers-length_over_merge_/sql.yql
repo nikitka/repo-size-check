@@ -36,10 +36,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -77,10 +77,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"1")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -97,7 +97,7 @@
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"cnt" (lambda '(row) (block '(
-          (let res ("/MayWarn" (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'column0) (SafeCast (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0) (DataType 'Double))))
+          (let res ("/MayWarn" (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0))) (SafeCast (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0))) (DataType 'Double))))
           (return res)
         )))))))
         (return core)

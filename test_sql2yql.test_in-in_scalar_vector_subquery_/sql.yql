@@ -8,10 +8,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"1"))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -22,10 +22,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"2"))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -74,13 +74,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery0 (String '"1") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery0 (String '"2") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -90,7 +90,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -101,10 +101,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery0 (String '"3") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -114,7 +114,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -125,13 +125,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"1") '('('warnNoAnsi))))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)))) (String '"1") '('('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"2") '('('warnNoAnsi))))
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)))) (String '"2") '('('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -141,7 +141,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -152,10 +152,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"3") '('('warnNoAnsi))))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)))) (String '"3") '('('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -165,7 +165,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -204,7 +204,7 @@
   (let output (block '(
     (let select (block '(
       (let core table1)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'subkey)) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)))) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
@@ -278,13 +278,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery2 (String '"1") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery2 (String '"2") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -294,7 +294,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -305,10 +305,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn subquery2 (String '"3") '('('tableSource) '('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -318,7 +318,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -329,13 +329,13 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"1") '('('warnNoAnsi))))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)))) (String '"1") '('('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"2") '('('warnNoAnsi))))
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)))) (String '"2") '('('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -345,7 +345,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -356,10 +356,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'subkey)) (String '"3") '('('warnNoAnsi))))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)))) (String '"3") '('('warnNoAnsi))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -369,7 +369,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -408,7 +408,7 @@
   (let output (block '(
     (let select (block '(
       (let core table5)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn (AsList (Member (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)) 'subkey)) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (SqlIn (AsList (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0)))) (Member row '"subkey") '('('warnNoAnsi))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

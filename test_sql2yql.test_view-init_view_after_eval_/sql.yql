@@ -40,14 +40,14 @@
       (let core table2)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ChooseMembers") (RemoveSystemMembers row) (ListFilter (ListMap (StructTypeComponents (ListItemType (TypeHandle (TypeOf subquery1)))) (lambda '("$x") (block '(
             (return (SqlAccess 'struct "$x" '"Name" '('"yson_strict" '"yson_fast")))
           )))) (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
             (return (">" "$x" (String '"k")))
           ))) item) (Bool 'false))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -57,7 +57,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

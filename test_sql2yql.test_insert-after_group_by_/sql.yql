@@ -5,7 +5,7 @@
 (let world (block '(
   (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
   (let table1 (Right! x))
-  (let values (OrderedMap (block '(
+  (let values (OrderedSqlRename (block '(
     (let select (block '(
       (let core table1)
       (let core (AssumeColumnOrderPartial (Aggregate core '('"key" '"subkey") '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"value")))))) '()) '('"key" '"subkey")))
@@ -17,17 +17,17 @@
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
           (let res (Member row '"subkey"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Max0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
     )))
     (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"key")))))
     (return select)
-  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"value" (Member row '"column2"))))))
+  )) '('"key" '"subkey" '"value")))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))
     (let world (Write! world sink (Key '('table (String '"Output"))) values '('('mode 'append))))

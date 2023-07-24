@@ -8,25 +8,25 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsNotDistinctFrom '((Int32 '"1") (Int32 '"2")) '((Int32 '"1") (Int32 '"2") ("/MayWarn" (Int32 '"1") (Int32 '"0")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsNotDistinctFrom (AsStructUnordered '('"a" ("/MayWarn" (Int32 '"1") (Int32 '"0"))) '('"b" (Nothing (OptionalType (DataType 'String)))) '('"c" (Int32 '"1"))) (AsStructUnordered '('"c" (Uint32 '"1")) '('"d" ("/MayWarn" (Uint32 '"1") (Uint32 '"0"))) '('"e" (Nothing (OptionalType (DataType 'Utf8)))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsNotDistinctFrom (AsList (Int32 '"1") (Int32 '"2") (Null)) (AsList (Int32 '"1") (Int32 '"2") (Just ("/MayWarn" (Int32 '"1") (Int32 '"0"))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsDistinctFrom (AsDict '((Int32 '"1") (Null))) (AsDict '((Uint32 '"1") ("/MayWarn" (Int32 '"2") (Int32 '"0"))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsDistinctFrom (Variant ("/MayWarn" (Int32 '"1") (Int32 '"0")) '"1" (VariantType (TupleType (DataType 'Int32) (OptionalType (DataType 'Int32))))) (Variant (Null) '"1" (VariantType (TupleType (DataType 'Int64) (NullType))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (IsNotDistinctFrom (Variant ("/MayWarn" (Int32 '"1") (Int32 '"0")) '"b" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Int32)))))) (Variant (Null) '"b" (VariantType (StructType '('"a" (DataType 'Int64)) '('"b" (NullType)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -36,7 +36,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -41,7 +41,7 @@
           (let res (Member row 'Count0))
           (return res)
         )))) (SqlProjectItem projectCoreType '"part_percent" (lambda '(row) (block '(
-          (let res ("/MayWarn" ("*MayWarn" (Double '"100.") (Member row 'Count1)) (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)))
+          (let res ("/MayWarn" ("*MayWarn" (Double '"100.") (Member row 'Count1)) (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))))
           (return res)
         )))))))
         (return core)

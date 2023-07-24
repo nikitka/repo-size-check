@@ -31,10 +31,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -48,7 +48,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">" (Member row '"subkey") (String '"1")) (">" (Member row '"key") (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'column0))) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">" (Member row '"subkey") (String '"1")) (">" (Member row '"key") (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0))))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(

@@ -44,13 +44,13 @@
       (let core (CalcOverWindow core '() (SortTraits (TypeOf core) (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"y")))) '((WinOnRows '('('begin (Void)) '('end (Int32 '0))) '('Median0 (Apply (bind window_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Double '0.5))) '('Median1 (Apply (bind window_module '"percentile_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (Double '0.5)))))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Median0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Median1))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -60,7 +60,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

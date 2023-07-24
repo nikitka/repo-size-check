@@ -19,16 +19,16 @@ def majority_vote(values):
       (let core (AssumeColumnOrderPartial (Aggregate core '('"val") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"subkey")) (Uint64 '0)))) '()) '('"val")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"val" (lambda '(row) (block '(
           (let res (Member row '"val"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (ScriptUdf 'Python3 '"majority_vote" (CallableType '() '((DataType 'String)) '((ListType (OptionalType (DataType 'String))))) scriptudf0) (Member row 'AggregateList0)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -38,7 +38,7 @@ def majority_vote(values):
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"val" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"val" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

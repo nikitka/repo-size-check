@@ -18,11 +18,11 @@
           (let addCompositTerms (lambda '(row) (block '(
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"vf"))
             (return res)
@@ -53,11 +53,11 @@
             (let row (AddMember row '"kf" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'kf) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"vf"))
             (return res)
@@ -88,11 +88,11 @@
             (let row (AddMember row '"kl" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'kl) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"vf"))
             (return res)
@@ -124,11 +124,11 @@
             (let row (AddMember row '"kl" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'kl) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"vf" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"vf"))
             (return res)
@@ -155,7 +155,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"vf" '"kf" '"kl" '"ggg3")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"vf" '"kf" '"kl" '"ggg3")))))
     (return (Commit! world result_sink))
   )))
   (return world)

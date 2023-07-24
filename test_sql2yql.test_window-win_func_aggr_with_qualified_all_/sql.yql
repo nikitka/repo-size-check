@@ -44,10 +44,10 @@
         ))) '()) (SqlProjectItem projectCoreType '"subkey_sum" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum1))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)

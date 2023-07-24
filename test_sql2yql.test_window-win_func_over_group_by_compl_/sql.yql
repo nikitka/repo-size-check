@@ -62,10 +62,10 @@
         )))) (SqlProjectItem projectCoreType '"prev_region_list" (lambda '(row) (block '(
           (let res (Member row '_yql_Lag1))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"test"))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -75,7 +75,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"prefix" '"region" '"region_2" '"avg_age" '"sum_age" '"sum_by_avg_age" '"prev_region" '"prev_region_list" '"column8")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"prefix" '"region" '"region_2" '"avg_age" '"sum_age" '"sum_by_avg_age" '"prev_region" '"prev_region_list" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

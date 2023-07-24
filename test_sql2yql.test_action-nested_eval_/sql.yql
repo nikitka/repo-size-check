@@ -8,7 +8,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (FormatType (EvaluateType (SqlAccess 'struct (AsStructUnordered '('"KekFromString" (Callable (CallableType '() '((StructType '('"kek" (DataType 'Int32)))) '((DataType 'String))) (lambda '("$string") (block '(
             (return (Apply (lambda '("$struct") (block '(
               (return (EvaluateCode (FuncCode (String '"AsStruct") (ListMap (StructTypeComponents (TypeHandle (TypeOf "$struct"))) (lambda '("$_component") (block '(
@@ -19,7 +19,7 @@
             )))) "$string")))
           ))))) '('"IntHandle" (TypeHandle (DataType 'Int32)))) '"IntHandle" '('"yson_strict" '"yson_fast")))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -29,7 +29,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

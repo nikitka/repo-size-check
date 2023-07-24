@@ -33,10 +33,10 @@
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"hundred_keys" (lambda '(row) (block '(
           (let res (Member row '"hundred_keys"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -46,7 +46,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"hundred_keys" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"hundred_keys" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

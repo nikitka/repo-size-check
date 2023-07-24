@@ -45,17 +45,17 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '('"bus") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SqlColumn row '"uk" '"b")) (Uint64 '0))) '('AggregateList1 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SqlColumn row '"uk" '"b")) (Uint64 '0)))) '()) '('"bus")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
             (return arg)
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListSort (Member row 'AggregateList1) (Bool 'true) (lambda '(arg) (block '(
             (return arg)
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"bus" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"bus" (lambda '(row) (block '(
           (let res (Member row '"bus"))
           (return res)
         )))))))
@@ -68,7 +68,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"bus")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '"bus")))))
     (return (Commit! world result_sink))
   )))
   (return world)

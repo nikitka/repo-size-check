@@ -62,10 +62,10 @@
       )))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlCall '"Yson2.SerializeText" '((PositionalArgs (SqlCall '"Yson2.From" '((PositionalArgs (RemoveSystemMembers row))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)

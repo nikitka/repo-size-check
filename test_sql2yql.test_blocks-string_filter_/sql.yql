@@ -15,10 +15,10 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("+MayWarn" (Member row '"key") (Member row '"subkey")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"value_utf" (lambda '(row) (block '(
@@ -34,7 +34,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"column1" '"value" '"value_utf")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '('auto) '"value" '"value_utf")))))
     (return (Commit! world result_sink))
   )))
   (return world)

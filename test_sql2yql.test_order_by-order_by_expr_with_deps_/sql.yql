@@ -11,12 +11,12 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Uint64 '0)))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
             (return arg)
           )))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -42,7 +42,7 @@
       ))))
       (return core)
     )))
-    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Apply (bind core_module '"IndexOf") (Coalesce (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0) (AsList)) (Member row '"key"))))))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Apply (bind core_module '"IndexOf") (Coalesce (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (AsList)) (Member row '"key"))))))
     (let select (RemoveSystemMembers select))
     (return select)
   )))

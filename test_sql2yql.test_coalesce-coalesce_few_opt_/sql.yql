@@ -10,73 +10,73 @@
       (let core table0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"first"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"first_null") (Int32 '"22")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"first_num") (Int32 '"33")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"first_null") (Int32 '"122")) (Int32 '"42")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"first_num") (Int32 '"133")) (Int32 '"43")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"first_null") (Int32 '"222")) (Int32 '"442")) (Int32 '"100500")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"first_num") (Int32 '"233")) (Int32 '"443")) (Int32 '"100501")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"second"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"second_null") (Int32 '"22")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"second_num") (Int32 '"33")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"second_null") (Int32 '"122")) (Int32 '"42")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"second_num") (Int32 '"133")) (Int32 '"43")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"second_null") (Int32 '"222")) (Int32 '"442")) (Int32 '"100500")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"second_num") (Int32 '"233")) (Int32 '"443")) (Int32 '"100501")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"third"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"third_null") (Int32 '"22")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"third_num") (Int32 '"33")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"third_null") (Int32 '"122")) (Int32 '"42")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Member row '"third_num") (Int32 '"133")) (Int32 '"43")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"third_null") (Int32 '"222")) (Int32 '"442")) (Int32 '"100500")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Coalesce (Coalesce (Member row '"third_num") (Int32 '"233")) (Int32 '"443")) (Int32 '"100501")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"end"))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -86,7 +86,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

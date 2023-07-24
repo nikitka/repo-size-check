@@ -17,12 +17,12 @@
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"kk" (lambda '(row) (block '(
           (let res (Member row '"kk"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListSort (Member row 'AggregateList0) (Bool 'true) (lambda '(arg) (block '(
             (return arg)
           )))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -32,7 +32,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"kk" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"kk" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -17,11 +17,11 @@
           (let addCompositTerms (lambda '(row) (block '(
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"key"))
             (return res)
@@ -29,11 +29,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"subkey"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res ("Uint64" '"0"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -47,11 +47,11 @@
             (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"key"))
             (return res)
@@ -59,11 +59,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"subkey"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res ("Uint64" '"1"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -77,11 +77,11 @@
             (let row (AddMember row '"key" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf origcore)) 'key) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Sum0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"key"))
             (return res)
@@ -89,11 +89,11 @@
             (let row (Apply addCompositTerms row))
             (let res (Member row '"subkey"))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+          )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res ("Uint64" '"2"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -104,7 +104,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"key" '"subkey" '"column3")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"key" '"subkey" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

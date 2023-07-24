@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -43,7 +43,7 @@
           (return core)
         )))
         (let select (OrderedFlatMap select (lambda '(row) (block '(
-          (let res (OptionalIf (< (Random (DependsOn row)) (/ (Coalesce (SafeCast (Ensure (Ensure ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (<= (Ensure ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (>= ("*MayWarn" (Int32 '"5") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (Double '100)) (String '"Sampling rate is over 100%")) (DataType 'Double)) (Double '0)) (Double '100))) row))
+          (let res (OptionalIf (< (Random (DependsOn row)) (/ (Coalesce (SafeCast (Ensure (Ensure ("*MayWarn" (Int32 '"5") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (>= ("*MayWarn" (Int32 '"5") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (<= (Ensure ("*MayWarn" (Int32 '"5") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (>= ("*MayWarn" (Int32 '"5") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (Double '0)) (String '"Expected sampling rate to be nonnegative")) (Double '100)) (String '"Sampling rate is over 100%")) (DataType 'Double)) (Double '0)) (Double '100))) row))
           (return res)
         )))))
         (let select (RemoveSystemMembers select))

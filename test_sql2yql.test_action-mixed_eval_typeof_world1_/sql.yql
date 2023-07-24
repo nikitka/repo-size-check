@@ -54,10 +54,10 @@
           ))) (RemoveSystemMembers row) (AsList (String '"")))) (Uint64 '0)))) '()) '()))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Member row 'AggregateList0))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

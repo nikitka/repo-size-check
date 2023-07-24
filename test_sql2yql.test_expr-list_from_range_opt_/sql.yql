@@ -8,85 +8,85 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Int32 '"3")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Just (Int32 '"3"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Just (Int32 '"1")) (Just (Int32 '"3"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Int32 '"3") (Int32 '"1")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Int32 '"3") (Just (Int32 '"1"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Int32 '"3") (Nothing (OptionalType (DataType 'Int32)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Just (Int32 '"3")) (Just (Int32 '"1"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Double '"1.2") (Double '"3.2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Double '"1.2") (Just (Double '"3.2"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Just (Double '"1.2")) (Just (Double '"3.2"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Just (Double '"3.2"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Nothing (OptionalType (DataType 'Uint64)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Double '"1.2") (Just (Double '"3.2")) (Double '"0.4")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Double '"1.2") (Double '"3.2") (Just (Double '"0.4"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Just (Double '"1.2")) (Double '"3.2") (Just (Double '"0.4"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Double '"1.2") (Double '"3.2") (Nothing (OptionalType (DataType 'Double)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Just (Double '"1.2")) (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Just (Int32 '"1")) (Null) (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Double '"1.2") (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Int32 '"1") (Null) (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Null) (Null) (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Interval '"1000000") (Interval '"1000000")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Interval '"60000000") (Just (Interval '"60000000"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Interval '"60000000") (Interval '"120000000") (Just (Interval '"10000000"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Interval '"1000000") (Interval '"60000000") (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFromRange (Interval '"1000000") (Interval '"4000000") (Nothing (OptionalType (DataType 'Interval)))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -96,7 +96,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21" '"column22" '"column23" '"column24" '"column25")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

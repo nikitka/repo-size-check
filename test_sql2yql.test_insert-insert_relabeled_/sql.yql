@@ -5,7 +5,7 @@
 (let world (block '(
   (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
   (let table1 (Right! x))
-  (let values (OrderedMap (block '(
+  (let values (OrderedSqlRename (block '(
     (let select (block '(
       (let core table1)
       (let core (PersistableRepr (block '(
@@ -19,16 +19,16 @@
         )))) (SqlProjectItem projectCoreType '"new_value" (lambda '(row) (block '(
           (let res (Member row '"value"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (String '"x"))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
     )))
     (return select)
-  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"new_value" (Member row '"new_value")) '('"one_more_value" (Member row '"column3"))))))
+  )) '('"key" '"subkey" '"new_value" '"one_more_value")))
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))

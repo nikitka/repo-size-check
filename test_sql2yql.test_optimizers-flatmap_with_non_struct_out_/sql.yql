@@ -18,12 +18,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Length (ToDict (ListMap subquery0 (lambda '("$x") (block '(
             (return '((SqlAccess 'struct "$x" '"key" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$x" '"subkey" '('"yson_strict" '"yson_fast"))))
           )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -33,7 +33,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

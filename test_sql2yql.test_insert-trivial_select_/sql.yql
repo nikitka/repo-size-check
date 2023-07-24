@@ -5,7 +5,7 @@
 (let world (block '(
   (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
   (let table1 (Right! x))
-  (let values (OrderedMap (block '(
+  (let values (AssumeColumnOrder (OrderedMap (block '(
     (let select (block '(
       (let core table1)
       (let core (PersistableRepr (block '(
@@ -25,7 +25,7 @@
       (return core)
     )))
     (return select)
-  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"value" (Member row '"value"))))))
+  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"value" (Member row '"value"))))) '('"key" '"subkey" '"value")))
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))

@@ -8,14 +8,14 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x") (block '(
             (return (ListMap "$x" (Udf '"Yson2.Serialize" (Void) (TupleType (TupleType) (StructType) (TupleType)))))
           ))) (Apply (lambda '("$x") (block '(
             (return (ListMap "$x" (Udf '"Yson2.Serialize" (Void) (TupleType (TupleType) (StructType) (TupleType)))))
           ))) (SqlCall '"Yson2.ConvertToList" '((PositionalArgs (Yson '"[1;2;3]") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -25,7 +25,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -36,7 +36,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x") (block '(
             (return (ToDict (ListMap (DictItems "$x") (lambda '("$i") (block '(
               (return '((SqlAccess 'struct "$i" '"0" '('"yson_strict" '"yson_fast")) (SqlCall '"Yson2.Serialize" '((PositionalArgs (SqlAccess 'struct "$i" '"1" '('"yson_strict" '"yson_fast")))))))
@@ -47,7 +47,7 @@
             )))) (lambda '(val) (Nth val '0)) (lambda '(val) (Nth val '1)) '('Auto 'One)))
           ))) (SqlCall '"Yson2.ConvertToDict" '((PositionalArgs (Yson '"{a=1;b=2}") (NamedApply (Udf 'Yson2.Options) '() (AsStructUnordered '('"AutoConvert" (Bool '"false")) '('"Strict" (Bool '"true"))))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -57,7 +57,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

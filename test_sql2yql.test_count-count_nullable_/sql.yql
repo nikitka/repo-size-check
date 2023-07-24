@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '('"value") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32))))))) '()) '('"value")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))
           (return res)
         )))))))
@@ -27,7 +27,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"value")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"value")))))
     (return (Commit! world result_sink))
   )))
   (return world)

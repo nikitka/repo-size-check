@@ -12,7 +12,7 @@
           (let core table0)
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Apply (lambda '("$row") (block '(
                 (let $members (ListFilter (Apply (bind core_module '"StructMembers") "$row") (lambda '(item) (Coalesce (Apply (lambda '("$x") (block '(
                   (return (Not (Not (Exists (Find "$x" (String '"key") (Null))))))
@@ -20,7 +20,7 @@
                 (return (Apply (bind core_module '"ChooseMembers") "$row" "$members"))
               ))) (RemoveSystemMembers row)))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

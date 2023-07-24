@@ -13,7 +13,7 @@
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"t" (lambda '(row) (block '(
           (let res (FlattenMembers '('"t." row)))
           (return res)
-        ))) '('('addPrefix '"t."))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('addPrefix '"t."))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$x" "$z") (block '(
             (let $v ("+MayWarn" ("*MayWarn" (Int32 '"10") "$z") "$x"))
             (let $shift (lambda '("$item") (block '(
@@ -22,7 +22,7 @@
             (return (Apply "$shift" "$v"))
           ))) (SafeCast (Member row '"key") (DataType 'Uint64)) (SafeCast (Member row '"subkey") (DataType 'Uint64))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -33,7 +33,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"t.") '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('prefix '"t.") '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

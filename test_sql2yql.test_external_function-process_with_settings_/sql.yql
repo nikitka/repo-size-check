@@ -11,10 +11,10 @@
       (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (String '"foo_init_state")) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SafeCast (Member row '"setting") (DataType 'Json)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -31,7 +31,7 @@
     (let select (block '(
       (let inputRowsList table1)
       (let inputRowsList (Map (RemoveSystemMembers inputRowsList) (lambda '(row) '((RemoveSystemMembers row)))))
-      (let transform (SqlExternalFunction (String '"YANDEX-CLOUD") (String '"foo:$latest") '('('"concurrency" (Int32 '"3")) '('"connection" (String '"my-yc-fold3nf")) '('"init" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) '('"input_type" (StructType '('"a" (DataType 'Int32)))) '('"optimize_for" (String '"CALLS")) '('"output_type" (StructType '('"b" (DataType 'Int32)))))))
+      (let transform (SqlExternalFunction (String '"YANDEX-CLOUD") (String '"foo:$latest") '('('"concurrency" (Int32 '"3")) '('"connection" (String '"my-yc-fold3nf")) '('"init" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) '('"input_type" (StructType '('"a" (DataType 'Int32)))) '('"optimize_for" (String '"CALLS")) '('"output_type" (StructType '('"b" (DataType 'Int32)))))))
       (let core (Apply transform inputRowsList))
       (let core (AutoDemux (PersistableRepr core)))
       (return core)

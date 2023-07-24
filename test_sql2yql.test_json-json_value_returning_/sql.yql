@@ -8,17 +8,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": true
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": true
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Bool)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -28,7 +28,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -39,17 +39,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": "string"
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": "string"
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Utf8)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -59,7 +59,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -70,17 +70,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int64)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -90,7 +90,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -101,17 +101,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123.456
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123.456
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Double)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -121,7 +121,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -132,57 +132,57 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int8)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Uint8)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int16)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Uint16)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int32)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Uint32)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int64)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Uint64)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Double)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Float)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -192,7 +192,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -203,17 +203,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123.456
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Double)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123.456
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Float)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -223,7 +223,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -234,17 +234,17 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": "string"
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Utf8)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": "string"
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'String)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -254,7 +254,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -265,28 +265,28 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "date": 18312,
     "datetime": 1582223316,
     "timestamp": 1582223316529631
 }@@) (DataType 'Json)) (Utf8 '"strict $.date") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Date)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "date": 18312,
     "datetime": 1582223316,
     "timestamp": 1582223316529631
 }@@) (DataType 'Json)) (Utf8 '"strict $.datetime") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Datetime)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "date": 18312,
     "datetime": 1582223316,
     "timestamp": 1582223316529631
 }@@) (DataType 'Json)) (Utf8 '"strict $.timestamp") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Timestamp)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -296,7 +296,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -307,14 +307,14 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "date": 18312,
     "datetime": 1582223316,
     "timestamp": 1582223316529631
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'Int16)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -324,7 +324,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -335,12 +335,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (SafeCast (String '@@{
     "key": 123
 }@@) (DataType 'Json)) (Utf8 '"strict $.key") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null) (DataType 'String)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -350,7 +350,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

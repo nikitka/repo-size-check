@@ -84,67 +84,67 @@
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"t" (lambda '(row) (block '(
           (let res row)
           (return res)
-        ))) '()) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '()) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"fl1") (Member row '"fl2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"fl1") (Member row '"key")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"fl2") (Double '"2.0")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"fl2") (Member row '"db2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"db1") (Member row '"db2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("<=" (Member row '"db2") (Member row '"key")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"db1") (Member row '"fl2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"db2") (Float '"1.0")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("<" (Member row '"b1") (Member row '"b2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (Member row '"b1") (Bool '"true")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">=" (Bool '"false") (Member row '"b2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("<" (Member row '"d1") (Member row '"d2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (Member row '"d1") (Member row '"dt1")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (Member row '"ts2") (Member row '"d2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">=" (Member row '"d1") (Date '"19358")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (Member row '"ts1") (Member row '"d1")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">=" (Member row '"ts2") (Member row '"dt2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("<=" (Timestamp '"1672876800000000") (Member row '"d2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("<" (Member row '"i1") (Member row '"i2")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (">" (Member row '"i2") (Interval '"3540000000")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)

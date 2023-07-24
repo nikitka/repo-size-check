@@ -30,7 +30,7 @@
   (let output (block '(
     (let select (block '(
       (let core table2)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'subkey)) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (Member row '"key") (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

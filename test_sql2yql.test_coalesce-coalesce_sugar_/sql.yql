@@ -32,10 +32,10 @@
       (let core subquery0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (If (Coalesce ("<" (Member row '"eval") (Int32 '"5")) (Bool 'false)) (Member row '"eval") (SafeCast (Null) (DataType 'Int64))) (Int32 '"-1")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
         )))))))
@@ -48,7 +48,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"key")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"key")))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -8,10 +8,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlAccess 'struct (AsStructUnordered '('"foo" (String '"1")) '('"bar" (Int32 '"2"))) (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"foo")))) (DataType 'String))) '('"yson_strict" '"yson_fast")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -21,7 +21,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -37,10 +37,10 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"value")))) (DataType 'String)))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -50,7 +50,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -66,10 +66,10 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlAccess 'struct (RemoveSystemMembers row) (EvaluateAtom (SafeCast (SqlCall '"Unicode.ToLower" '((PositionalArgs (Utf8 '"value")))) (DataType 'String))) '('"yson_strict" '"yson_fast")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -79,7 +79,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -124,10 +124,10 @@
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"x" (lambda '(row) (block '(
           (let res (Member row '"x"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -137,7 +137,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"x" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"x" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -5,7 +5,7 @@
 (let world (block '(
   (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
   (let table1 (Right! x))
-  (let values (OrderedMap (block '(
+  (let values (AssumeColumnOrder (OrderedMap (block '(
     (let select (block '(
       (let core table1)
       (let core (PersistableRepr (block '(
@@ -25,7 +25,7 @@
       (return core)
     )))
     (return select)
-  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"value" (Member row '"value"))))))
+  )) (lambda '(row) (AsStruct '('"key" (Member row '"key")) '('"subkey" (Member row '"subkey")) '('"value" (Member row '"value"))))) '('"key" '"subkey" '"value")))
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))
@@ -46,16 +46,16 @@
       (let core table2)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"key") (String '"")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"subkey") (String '"")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Coalesce (Member row '"value") (String '"")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -65,7 +65,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

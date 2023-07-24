@@ -73,7 +73,7 @@
   (let output (block '(
     (let select (block '(
       (let core subquery0)
-      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">" (Member row '"subkey") (String '"0")) ("!=" (Member row '"key") (Member (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0)) 'key))) (Bool 'false)))))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">" (Member row '"subkey") (String '"0")) ("!=" (Member row '"key") (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0))))) (Bool 'false)))))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
         (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(

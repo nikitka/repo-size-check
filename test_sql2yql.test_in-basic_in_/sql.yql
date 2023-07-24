@@ -10,22 +10,22 @@
       (let core table0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn '((Int32 '"1") (Int32 '"2")) (Int32 '"1") '('('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Not (SqlIn '((Int32 '"1") (Int32 '"2")) (Int32 '"3") '('('warnNoAnsi)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlIn '((Member row '"key") (Member row '"subkey") (Member row '"value")) (String '"1") '('('warnNoAnsi))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Not (SqlIn '((Member row '"key") (Member row '"subkey") (Member row '"value")) (Member row '"key") '('('warnNoAnsi)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Not (SqlIn (AsList (Member row '"subkey")) (Member row '"key") '('('warnNoAnsi)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"optional_key_i32" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"optional_key_i32" (lambda '(row) (block '(
           (let res (SqlIn '((Int32 '"1") (Int32 '"2")) (SafeCast (Member row '"subkey") (DataType 'Int32)) '('('warnNoAnsi))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"optional_key_i64" (lambda '(row) (block '(
@@ -50,7 +50,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"optional_key_i32" '"optional_key_i64" '"optional_key_ui32" '"optional_key_ui64" '"optional_key_to_larger_type")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '"optional_key_i32" '"optional_key_i64" '"optional_key_ui32" '"optional_key_ui64" '"optional_key_to_larger_type")))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -16,10 +16,10 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let res (Member row '"key"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (AsList (Member row '"subkey")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))
           (return res)
         )))))))

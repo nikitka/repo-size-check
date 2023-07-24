@@ -10,10 +10,10 @@
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Just (AsStructUnordered '('"col1" (Int32 '"1")) '('"col2" (Null)) '('"col3" (Just (Int32 '"3"))) '('"col4" (PgConst '"4" (PgType 'int4))))))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

@@ -10,10 +10,10 @@
           (let core (AsList (AsStruct)))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (FlattenMembers '('"" (Apply (bind core_module '"ChooseMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (Int32 '"2")) '('"c" (Int32 '"3")) '('"d" (Int32 '"4"))) (AsList (String '"a") (String '"b")))) '('"" (AsStruct '('"remain" (Apply (bind core_module '"RemoveMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (Int32 '"2")) '('"c" (Int32 '"3")) '('"d" (Int32 '"4"))) (AsList (String '"a") (String '"b"))))))))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

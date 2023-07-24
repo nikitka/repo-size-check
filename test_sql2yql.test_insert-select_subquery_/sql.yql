@@ -26,21 +26,21 @@
 (let world (Nth subquerynode0 '0))
 (let subquery0 (Nth subquerynode0 '1))
 (let world (block '(
-  (let values (OrderedMap (block '(
+  (let values (OrderedSqlRename (block '(
     (let select (block '(
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
-          (let res (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'key))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
     )))
     (return select)
-  )) (lambda '(row) (AsStruct '('"key" (Member row '"column0"))))))
+  )) '('"key")))
   (let values (Unordered values))
   (let world (block '(
     (let sink (DataSink '"yt" '"plato"))

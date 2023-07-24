@@ -23,10 +23,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"min_by_traits_factory1") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'MultiAggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -36,7 +36,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -62,10 +62,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MultiAggregateBy0 (MultiAggregate (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"nums"))) (lambda '(type extractor) (Apply (bind aggregate_module '"max_by_traits_factory2") (ListType type) (lambda '(row) (Nth (Apply extractor row) '1)) (lambda '(row) (Nth (Apply extractor row) '0)) (Int32 '"2")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'MultiAggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -75,7 +75,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

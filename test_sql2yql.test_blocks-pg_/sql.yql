@@ -23,10 +23,10 @@
         )))) (SqlProjectItem projectCoreType '"d" (lambda '(row) (block '(
           (let res (Member row '"d"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Size (Member row '"d")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -36,7 +36,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a" '"b" '"c" '"d" '"column4")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"a" '"b" '"c" '"d" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

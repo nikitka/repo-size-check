@@ -41,10 +41,10 @@
         )))) (SqlProjectItem projectCoreType '"mod_key" (lambda '(row) (block '(
           (let res (SqlAccess 'struct (Member row '"struct_field") '"kk" '('"yson_strict" '"yson_fast")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlAccess 'struct (Member row '"struct_field") '"sk" '('"yson_strict" '"yson_fast")))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
           (let res (Member row '"value"))
           (return res)
         )))))))
@@ -57,7 +57,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"mod" '"mod_key" '"column2" '"value")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"mod" '"mod_key" '('auto) '"value")))))
     (return (Commit! world result_sink))
   )))
   (return world)

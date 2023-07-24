@@ -54,17 +54,17 @@
 )))
 (let world (Nth subquerynode0 '0))
 (let subquery0 (Nth subquerynode0 '1))
-(let world (If! world (Coalesce (">" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'count) (Int32 '"1")) (Bool 'false)) (block '(
+(let world (If! world (Coalesce (">" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (Int32 '"1")) (Bool 'false)) (block '(
   (let world (block '(
     (let output (block '(
       (let select (block '(
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"1"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -74,24 +74,24 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)
   )))
   (return world)
 ))))
-(let world (If! world (Coalesce (Not (">" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'count) (Int32 '"1"))) (Bool 'false)) (block '(
+(let world (If! world (Coalesce (Not (">" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (Int32 '"1"))) (Bool 'false)) (block '(
   (let world (block '(
     (let output (block '(
       (let select (block '(
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"2"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -101,24 +101,24 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)
   )))
   (return world)
 ))))
-(let world (If! world (Coalesce (">" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'count) (Int32 '"1")) (Bool 'false)) (block '(
+(let world (If! world (Coalesce (">" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (Int32 '"1")) (Bool 'false)) (block '(
   (let world (block '(
     (let output (block '(
       (let select (block '(
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"3"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -128,7 +128,7 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)
@@ -141,10 +141,10 @@
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"4"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -154,24 +154,24 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)
   )))
   (return world)
 ))))
-(let world (If! world (Coalesce (Not (">" (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'count) (Int32 '"1"))) (Bool 'false)) (block '(
+(let world (If! world (Coalesce (Not (">" (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))) (Int32 '"1"))) (Bool 'false)) (block '(
   (let world (block '(
     (let output (block '(
       (let select (block '(
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"5"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -181,7 +181,7 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)
@@ -194,10 +194,10 @@
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res (Int32 '"6"))
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -207,7 +207,7 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)

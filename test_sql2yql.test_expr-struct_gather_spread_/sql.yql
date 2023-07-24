@@ -8,73 +8,73 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"StructMembers") (AsStruct '('"a" (Int32 '"1")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"StructMembers") (Just (AsStruct '('"a" (Int32 '"1"))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"StructMembers") (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"GatherMembers") (AsStruct)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"GatherMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (Int32 '"2")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"GatherMembers") (Just (AsStructUnordered '('"a" (Int32 '"1")) '('"b" (Int32 '"2"))))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"GatherMembers") (Null)))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"RenameMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"c" (Int32 '"2"))) (AsList '((String '"a") (String '"b")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"RenameMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"c" (Int32 '"2"))) (AsList '((String '"a") (String '"b")) '((String '"a") (String '"d")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ForceRenameMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"c" (Int32 '"2"))) (AsList '((String '"a") (String '"b")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ForceRenameMembers") (AsStructUnordered '('"a" (Int32 '"1")) '('"c" (Int32 '"2"))) (AsList '((String '"d") (String '"d")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"RenameMembers") (Just (AsStructUnordered '('"a" (Int32 '"1")) '('"c" (Int32 '"2")))) (AsList '((String '"a") (String '"b")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"RenameMembers") (Null) (AsList '((String '"a") (String '"b")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (AsList '((String '"a") (Int32 '"1"))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (AsList '((String '"a") (Int32 '"1")) '((String '"b") (Int32 '"2"))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column15" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (AsList '((String '"a") (Just (Int32 '"1")))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column16" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (AsList '((String '"a") (Int32 '"1")) '((String '"a") (Int32 '"2"))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column17" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (AsList) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column18" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (Just (AsList '((String '"a") (Int32 '"1")))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column19" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"SpreadMembers") (Null) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column20" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ForceSpreadMembers") (AsList '((String '"a") (Int32 '"1"))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column21" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ForceSpreadMembers") (AsList '((String '"c") (Int32 '"1"))) (AsList (String '"a") (String '"b"))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -84,7 +84,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14" '"column15" '"column16" '"column17" '"column18" '"column19" '"column20" '"column21")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

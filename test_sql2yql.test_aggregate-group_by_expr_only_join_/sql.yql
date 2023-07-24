@@ -48,10 +48,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '('"aval") '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (SqlColumn row '"k" '"a")) (Uint64 '0)))) '()) '('"aval")))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateList0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"aval" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"aval" (lambda '(row) (block '(
           (let res (Member row '"aval"))
           (return res)
         )))))))
@@ -64,7 +64,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"aval")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"aval")))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -29,10 +29,10 @@
       (let core subquery0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlCall '"Math.Sqrt" '((PositionalArgs ("+MayWarn" ("*MayWarn" (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Sin" '((PositionalArgs (Member row '"rad"))))) ("*MayWarn" (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad")))) (SqlCall '"Math.Cos" '((PositionalArgs (Member row '"rad"))))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -42,7 +42,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

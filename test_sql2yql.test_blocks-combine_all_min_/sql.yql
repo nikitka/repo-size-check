@@ -12,52 +12,52 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Min0 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key"))))) '('Min1 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int8)))))) '('Min2 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Uint16)))))) '('Min3 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Int32)))))) '('Min4 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("/MayWarn" (Uint32 '"1") (Uint32 '"0")))))) '('Min5 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Int32 '"2"))))) '('Min6 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Member row '"key") (Null)))))) '('Min7 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Member row '"key") (Null)))))) '('Min8 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Bool '"false"))))) '('Min9 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("==" (Member row '"key") (Uint32 '"10")))))) '('Min10 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (">=" (Member row '"key") (Uint32 '"10")))))) '('Min11 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("==" (Member row '"key") (Uint32 '"20")))))) '('Min12 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Bool '"true") (Null)))))) '('Min13 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce ("==" (Member row '"key") (Uint32 '"100")) (Bool 'false)) (Bool '"true") (Null)))))) '('Min14 (AggApply 'min (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (">=" (Member row '"key") (Uint32 '"10")) (Bool 'false)) (Bool '"true") (Null))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min1))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min2))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min3))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min4))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min5))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min6))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min7))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column8" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min8))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column9" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min9))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column10" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min10))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column11" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min11))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column12" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min12))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column13" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min13))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column14" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Min14))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -67,7 +67,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7" '"column8" '"column9" '"column10" '"column11" '"column12" '"column13" '"column14")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -10,7 +10,7 @@
       (let core table0)
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$row" "$value") (block '(
             (let $type (TypeOf "$row"))
             (let $lambda (EvaluateCode (LambdaCode (lambda '("$r") (block '(
@@ -21,7 +21,7 @@
             (return (Apply "$lambda" "$row"))
           ))) (RemoveSystemMembers row) (String '"*")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -31,7 +31,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

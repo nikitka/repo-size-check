@@ -14,10 +14,10 @@
                   (let core (WithWorld (AsList (AsStruct)) world))
                   (let core (PersistableRepr (block '(
                     (let projectCoreType (TypeOf core))
-                    (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+                    (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
                       (let res "$name")
                       (return res)
-                    )))))))
+                    ))) '('('autoName))))))
                     (return core)
                   ))))
                   (return core)

@@ -10,12 +10,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Uint32))) (lambda '("$row") (block '(
             (return (SqlIn (ListFromRange (Int32 '"-100") (Int32 '"100")) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -25,7 +25,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -36,12 +36,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (OptionalType (DataType 'Int32)))) (lambda '("$row") (block '(
             (return (Coalesce (SqlIn (ListFromRange (Uint64 '"2147483547") (Uint64 '"2147483648")) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) (Bool '"false")))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -51,7 +51,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -62,12 +62,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Date))) (lambda '("$row") (block '(
             (return (Or (SqlIn (ListFromRange (Date '"49308") (Date '"49672")) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Date '"49672"))))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -77,7 +77,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -88,12 +88,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Datetime))) (lambda '("$row") (block '(
             (return (Or ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Datetime '"4291747198")) ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Datetime '"4291747199"))))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -103,7 +103,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -114,12 +114,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'Timestamp))) (lambda '("$row") (block '(
             (return (Or ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Timestamp '"4291747199999998")) ("==" (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (Timestamp '"4291747199999999"))))
           ))) '('"x")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -129,7 +129,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

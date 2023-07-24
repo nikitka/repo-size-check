@@ -8,31 +8,31 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (List (ListType (ListType (DataType 'Int32)))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (List (ListType (DataType 'Int32)))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (List (ListType (DataType 'Int32))) (List (ListType (DataType 'Int32)))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (AsList (Int32 '"1") (Int32 '"2"))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (AsList (Int32 '"1") (Int32 '"2")) (AsList (Int32 '"3"))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column6" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (List (ListType (DataType 'Int32))) (AsList (Int32 '"3"))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column7" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (bind core_module '"ListAggregate") (AsList (AsList (Int32 '"1") (Int32 '"2")) (List (ListType (DataType 'Int32)))) (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"sum_traits_factory") (ListType type) extractor)))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -42,7 +42,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5" '"column6" '"column7")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -82,10 +82,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateBy0 (Apply (Apply (bind core_module '"AggregateFlatten") (lambda '(type extractor) (Apply (bind aggregate_module '"set_traits_factory") (ListType type) extractor (Uint64 '0)))) (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"x")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -95,7 +95,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -13,10 +13,10 @@
           (let core (CalcOverWindow core '() (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lead0 (Lead (TypeOf core) (lambda '(row) (AsStructUnordered '('"a" (Member row '"key")) '('"b" (Member row '"value"))))))))))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Member row '_yql_Lead0))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

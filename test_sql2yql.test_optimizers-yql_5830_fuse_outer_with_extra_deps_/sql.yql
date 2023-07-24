@@ -12,10 +12,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('MaxBy0 (Apply (bind aggregate_module '"max_by_traits_factory1") (TypeOf core) (lambda '(row) (Member row '"subkey")) (lambda '(row) (Member row '"key"))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'MaxBy0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -55,7 +55,7 @@
           (let res (SqlColumn row '"key" '"a"))
           (return res)
         )))) (SqlProjectItem projectCoreType '"max_key" (lambda '(row) (block '(
-          (let res (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0))
+          (let res (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"b.value" (lambda '(row) (block '(
           (let res (SqlColumn row '"value" '"b"))

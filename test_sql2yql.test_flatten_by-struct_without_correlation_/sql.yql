@@ -41,10 +41,10 @@
         (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"mod" (lambda '(row) (block '(
           (let res (Member row '"mod"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlAccess 'struct (Member row '"struct") '"struct" '('"yson_strict" '"yson_fast")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -54,7 +54,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"mod" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('columns '('"mod" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

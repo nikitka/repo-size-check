@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('AggregateList0 (Apply (bind aggregate_module '"list2_traits_factory") (TypeOf core) (lambda '(row) (Member row '"key")) (Uint64 '0)))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'AggregateList0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -24,17 +24,17 @@
 )))
 (let world (Nth subquerynode0 '0))
 (let subquery0 (Nth subquerynode0 '1))
-(let world (EvaluateFor! world (EvaluateExpr (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (lambda '(world "$a") (Apply (lambda '(world "$x") (block '(
+(let world (EvaluateFor! world (EvaluateExpr (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (lambda '(world "$a") (Apply (lambda '(world "$x") (block '(
   (let world (block '(
     (let output (block '(
       (let select (block '(
         (let core (AsList (AsStruct)))
         (let core (PersistableRepr (block '(
           (let projectCoreType (TypeOf core))
-          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let res "$x")
             (return res)
-          )))))))
+          ))) '('('autoName))))))
           (return core)
         ))))
         (return core)
@@ -44,7 +44,7 @@
     (let output (Unordered output))
     (let world (block '(
       (let result_sink (DataSink 'result))
-      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+      (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
       (return (Commit! world result_sink))
     )))
     (return world)

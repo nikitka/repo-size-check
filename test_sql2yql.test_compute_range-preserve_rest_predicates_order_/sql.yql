@@ -10,12 +10,12 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (RangeComputeFor (StructType '('"x" (DataType 'String)) '('"y" (DataType 'String)) '('"z" (DataType 'String))) (lambda '("$row") (block '(
             (return (And (And (">" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((String '"a") (String '"b") (String '"c"))) ("<" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((String '"d") (String '"e") (String '"f")))) (And (And (SqlIn (AsList (String '"t") (String '"u") (String '"v")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi))) (SqlIn (AsList (String '"x") (String '"y") (String '"z")) (SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) '('('warnNoAnsi)))) (Or ("==" (Size (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) (Int32 '"1")) ("==" (Size (Concat (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast")) (String '"x"))) (Int32 '"2"))))))
           ))) '('"x" '"y" '"z")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -25,7 +25,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

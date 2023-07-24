@@ -9,49 +9,49 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (">=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22") (Int32 '"33"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (">" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22") (Int32 '"33"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return ("<" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22") (Int32 '"33"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return ("<=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22") (Int32 '"33"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (And (">" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222") (Int32 '"333"))) ("<=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"333") (Int32 '"444")))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (And (">=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222") (Int32 '"333"))) ("<" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"z" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222") (Int32 '"333")))))
           )))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -61,7 +61,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -72,49 +72,49 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (">=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (">" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return ("<" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return ("<=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"11") (Int32 '"22"))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (And (">" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222"))) ("<=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"333")))))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Apply (lambda '("$pred") (block '(
             (return (RangeComputeFor (StructType '('"x" (DataType 'Int32)) '('"y" (DataType 'Int32)) '('"z" (DataType 'Int32))) "$pred" '('"x" '"y" '"z")))
           ))) (lambda '("$row") (block '(
             (return (And (">=" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222"))) ("<" '((SqlAccess 'struct "$row" '"x" '('"yson_strict" '"yson_fast")) (SqlAccess 'struct "$row" '"y" '('"yson_strict" '"yson_fast"))) '((Int32 '"111") (Int32 '"222")))))
           )))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -124,7 +124,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

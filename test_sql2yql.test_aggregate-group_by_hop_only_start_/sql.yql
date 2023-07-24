@@ -12,10 +12,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '() '('('hopping (HoppingTraits (ListItemType (TypeOf core)) (lambda '(row) (SqlCall '"DateTime2.FromSeconds" '((PositionalArgs (SafeCast (Member row '"ts") (DataType 'Uint32)))))) (Interval '10000000) (Interval '10000000) (Interval '10000000) 'true 'v1)))) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Sub (Member row '_yql_time) (Interval '10000000)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -25,7 +25,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

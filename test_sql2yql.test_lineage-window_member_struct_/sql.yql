@@ -30,10 +30,10 @@
           (let core (CalcOverWindow core '('"key") (Void) '((WinOnRows '('('begin (Void)) '('end (Void))) '('_yql_Lag0 (Lag (TypeOf core) (lambda '(row) (Member row '"data"))))))))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Member row '_yql_Lag0))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)

@@ -92,138 +92,138 @@ def formula(a, b, c, d):
         )))) (SqlProjectItem projectCoreType '"extract" (lambda '(row) (block '(
           (let res (ListExtract (AsList (AsStructUnordered '('"one" (Int32 '"1")) '('"two" (Int32 '"2"))) (AsStructUnordered '('"one" (Int32 '"-1")) '('"two" (Int32 '"-2")))) '"two"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column22" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(
             (return (SafeCast "$item" (DataType 'Double)))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column23" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (List (ListType (TupleType (DataType 'Int64) (DataType 'Double)))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column24" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (List (ListType (TypeOf (String '"foo")))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column25" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"6") (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column26" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold (AsList) (Int32 '"3") (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column27" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"6") (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column28" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold (Just (AsList)) (Int32 '"3") (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column29" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold (Null) (Int32 '"3") (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column30" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1 (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$x") (block '(
             (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column31" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1 (AsList) (lambda '("$x") (block '(
             (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column32" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1 (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$x") (block '(
             (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column33" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1 (Just (AsList)) (lambda '("$x") (block '(
             (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column34" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1 (Null) (lambda '("$x") (block '(
             (return ("*MayWarn" (Int32 '"4") "$x"))
           ))) (lambda '("$x" "$y") (block '(
             (return ("+MayWarn" "$x" "$y"))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column35" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFoldMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (Int32 '"1") (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column36" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFoldMap (AsList) (Int32 '"1") (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column37" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFoldMap (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (Int32 '"1") (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column38" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFoldMap (Just (AsList)) (Int32 '"1") (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column39" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFoldMap (Null) (Int32 '"1") (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column40" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1Map (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$i") (block '(
             (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column41" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1Map (AsList) (lambda '("$i") (block '(
             (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column42" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1Map (Just (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))) (lambda '("$i") (block '(
             (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column43" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1Map (Just (AsList)) (lambda '("$i") (block '(
             (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column44" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListFold1Map (Null) (lambda '("$i") (block '(
             (return '(("+MayWarn" "$i" (Int32 '"1")) ("+MayWarn" "$i" (Int32 '"2"))))
           ))) (lambda '("$i" "$s") (block '(
             (return '(("*MayWarn" "$i" "$s") ("+MayWarn" "$i" "$s")))
           )))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -233,7 +233,7 @@ def formula(a, b, c, d):
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"length" '"extend" '"zip" '"zipall" '"enumerate" '"reverse" '"skip" '"take" '"sort" '"sort_structs" '"map" '"flatmap" '"filter" '"any" '"all" '"max" '"min" '"sum" '"avg" '"uniq" '"concat" '"extract" '"column22" '"column23" '"column24" '"column25" '"column26" '"column27" '"column28" '"column29" '"column30" '"column31" '"column32" '"column33" '"column34" '"column35" '"column36" '"column37" '"column38" '"column39" '"column40" '"column41" '"column42" '"column43" '"column44")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"length" '"extend" '"zip" '"zipall" '"enumerate" '"reverse" '"skip" '"take" '"sort" '"sort_structs" '"map" '"flatmap" '"filter" '"any" '"all" '"max" '"min" '"sum" '"avg" '"uniq" '"concat" '"extract" '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

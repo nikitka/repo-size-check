@@ -15,25 +15,25 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Sum0 (AggApply 'sum (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"subkey"))) (lambda '(row) (PersistableRepr row))) '"subkey") '('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"subkey"))))) '('Count1 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Count0"))) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Count0") '('Avg1 (AggApply 'avg (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"_yql_preagg_Avg0"))) (lambda '(row) (PersistableRepr row))) '"_yql_preagg_Avg0")) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Max0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Avg0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Count1))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Avg1))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -43,7 +43,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4" '"column5")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

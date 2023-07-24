@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SafeCast (Member row '"key") (DataType 'Interval))))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (EnsureType (Member row 'Avg0) (OptionalType (DataType 'Interval))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -24,7 +24,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('discard) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

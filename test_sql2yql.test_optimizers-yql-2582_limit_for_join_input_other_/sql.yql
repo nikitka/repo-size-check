@@ -37,10 +37,10 @@
         )))) (SqlProjectItem projectCoreType '"subkey" (lambda '(row) (block '(
           (let res (Member row '"subkey"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (SqlAccess 'dict (Member row '"_other") (String '"value") '('"yson_strict" '"yson_fast")))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -51,7 +51,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"key" '"subkey" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

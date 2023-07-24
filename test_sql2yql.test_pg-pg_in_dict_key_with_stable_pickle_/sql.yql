@@ -8,10 +8,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (StablePickle (AsSet (AsSet (Int32 '"1") (Int32 '"2")) (AsSet (Int32 '"3") (Int32 '"4")))) (StablePickle (AsSet (AsSet (Int32 '"4") (Int32 '"3")) (AsSet (Int32 '"2") (Int32 '"1"))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -21,7 +21,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -32,10 +32,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (StablePickle (AsSet (AsSet (PgConst '"2020-01-01" (PgType 'date)) (PgConst '"2020-01-02" (PgType 'date))) (AsSet (PgConst '"2020-01-03" (PgType 'date)) (PgConst '"2020-01-04" (PgType 'date))))) (StablePickle (AsSet (AsSet (PgConst '"2020-01-04" (PgType 'date)) (PgConst '"2020-01-03" (PgType 'date))) (AsSet (PgConst '"2020-01-02" (PgType 'date)) (PgConst '"2020-01-01" (PgType 'date)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -45,7 +45,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -56,10 +56,10 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res ("==" (StablePickle (AsSet (AsSet (PgConst '"0001" (PgType 'bit)) (PgConst '"0010" (PgType 'bit))) (AsSet (PgConst '"0100" (PgType 'bit)) (PgConst '"1000" (PgType 'bit))))) (StablePickle (AsSet (AsSet (PgConst '"1000" (PgType 'bit)) (PgConst '"0100" (PgType 'bit))) (AsSet (PgConst '"0010" (PgType 'bit)) (PgConst '"0001" (PgType 'bit)))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -69,7 +69,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

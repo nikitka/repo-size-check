@@ -8,7 +8,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '(("==" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -41,7 +41,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -51,7 +51,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -62,7 +62,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '(("!=" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -95,7 +95,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -105,7 +105,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -116,7 +116,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '(("<" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -149,7 +149,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -159,7 +159,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -170,7 +170,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '(("<=" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -203,7 +203,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -213,7 +213,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -224,7 +224,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '((">" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -257,7 +257,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -267,7 +267,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -278,7 +278,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '((">=" (Variant (Int32 '"1") '"a" (VariantType (StructType '('"a" (DataType 'Int32)) '('"b" (OptionalType (DataType 'Uint32)))))) (Variant (Apply (lambda '("$x") (block '(
             (let $f (Callable (CallableType '('"0") '((TypeOf "$x"))) (lambda '() (block '(
               (return "$x")
@@ -311,7 +311,7 @@
             (return (Apply "$f"))
           ))) (Uint32 '"1")) '"b" (VariantType (StructType '('"b" (DataType 'Int64)) '('"c" (DataType 'Uint32))))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -321,7 +321,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

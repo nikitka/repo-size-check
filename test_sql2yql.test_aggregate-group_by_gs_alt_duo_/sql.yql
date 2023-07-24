@@ -15,11 +15,11 @@
         (let addCompositTerms (lambda '(row) (block '(
           (return row)
         ))))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let row (Apply addCompositTerms row))
           (let res (Member row 'Sum0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
           (let row (Apply addCompositTerms row))
           (let res (Member row '"key"))
           (return res)
@@ -37,7 +37,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"key" '"subkey")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"key" '"subkey")))))
     (return (Commit! world result_sink))
   )))
   (return world)

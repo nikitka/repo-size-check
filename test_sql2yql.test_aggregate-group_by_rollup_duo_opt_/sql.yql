@@ -18,11 +18,11 @@
           (let addCompositTerms (lambda '(row) (block '(
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"k"))
             (return res)
@@ -45,11 +45,11 @@
             (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"k"))
             (return res)
@@ -73,11 +73,11 @@
             (let row (AddMember row '"subkey" (Nothing (MatchType (StructMemberType (ListItemType (TypeOf preaggregated)) 'subkey) 'Optional (lambda '(item) item) (lambda '(item) (OptionalType item))))))
             (return row)
           ))))
-          (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+          (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row 'Count0))
             (return res)
-          )))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
+          ))) '('('autoName))) (SqlProjectItem projectCoreType '"k" (lambda '(row) (block '(
             (let row (Apply addCompositTerms row))
             (let res (Member row '"k"))
             (return res)
@@ -96,7 +96,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"k" '"subkey")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '"k" '"subkey")))))
     (return (Commit! world result_sink))
   )))
   (return world)

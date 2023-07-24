@@ -11,10 +11,10 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"key")))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Max0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -57,7 +57,7 @@
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
             (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"key" (lambda '(row) (block '(
-              (let res (If (Coalesce ("==" (Member row '"key") (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'column0)) (Bool 'false)) (String '"max") (Member row '"key")))
+              (let res (If (Coalesce ("==" (Member row '"key") (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (Bool 'false)) (String '"max") (Member row '"key")))
               (return res)
             )))) (SqlProjectItem projectCoreType '"value" (lambda '(row) (block '(
               (let res (Member row '"value"))

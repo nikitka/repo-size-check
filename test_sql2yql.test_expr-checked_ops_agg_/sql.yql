@@ -9,22 +9,22 @@
       (let core (AssumeColumnOrderPartial (Aggregate core '() '('('CheckedSum0 (Apply (bind aggregate_module '"checked_sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Null))))) '('CheckedSum1 (Apply (bind aggregate_module '"checked_sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Member row '"x"))))) '('CheckedSumIf0 (Apply (bind aggregate_module '"checked_sum_if_traits_factory") (TypeOf core) (lambda '(row) (Member row '"x")) (lambda '(row) (Bool '"true")))) '('CheckedSum2 (Apply (bind aggregate_module '"checked_sum_traits_factory") (TypeOf core) (lambda '(row) (PersistableRepr (Just (Member row '"x")))))) '('CheckedSumIf1 (Apply (bind aggregate_module '"checked_sum_if_traits_factory") (TypeOf core) (lambda '(row) (Just (Member row '"x"))) (lambda '(row) (Bool '"true"))))) '()) '()))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'CheckedSum0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'CheckedSum1))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'CheckedSumIf0))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'CheckedSum2))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'CheckedSumIf1))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -34,7 +34,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0" '"column1" '"column2" '"column3" '"column4")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto) '('auto) '('auto) '('auto) '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

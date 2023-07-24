@@ -17,10 +17,10 @@
         (let core (SqlProject core '((SqlProjectItem projectCoreType '"k1" (lambda '(row) (block '(
           (let res (Member row '"k1"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column1" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -30,7 +30,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"column1")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -51,10 +51,10 @@
         )))) (SqlProjectItem projectCoreType '"k2" (lambda '(row) (block '(
           (let res (Member row '"k2"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column2" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -64,7 +64,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"column2")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -88,10 +88,10 @@
         )))) (SqlProjectItem projectCoreType '"k3" (lambda '(row) (block '(
           (let res (Member row '"k3"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column3" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -101,7 +101,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '"column3")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -128,10 +128,10 @@
         )))) (SqlProjectItem projectCoreType '"k4" (lambda '(row) (block '(
           (let res (Member row '"k4"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column4" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -141,7 +141,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '"k4" '"column4")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '"k4" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -171,10 +171,10 @@
         )))) (SqlProjectItem projectCoreType '"k5" (lambda '(row) (block '(
           (let res (Member row '"k5"))
           (return res)
-        )))) (SqlProjectItem projectCoreType '"column5" (lambda '(row) (block '(
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (Member row 'Sum0))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -184,7 +184,7 @@
   )))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '"k4" '"k5" '"column5")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"k1" '"k2" '"k3" '"k4" '"k5" '('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

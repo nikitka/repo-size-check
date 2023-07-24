@@ -8,14 +8,14 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res '((ListMap (AsList (Int32 '"1") (Int32 '"2")) (lambda '("$_x") (block '(
             (return ("+MayWarn" (Int32 '"3") (Int32 '"4")))
           )))) (ListMap (AsList (Int32 '"5") (Int32 '"6")) (lambda '("$_x") (block '(
             (return ("+MayWarn" (Int32 '"3") (Int32 '"4")))
           ))))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -25,7 +25,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

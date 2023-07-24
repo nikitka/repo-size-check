@@ -8,7 +8,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonValue (JsonQuery (JsonQuery (JsonQuery (SafeCast (String '@@{
     "a": {
         "b": {
@@ -19,7 +19,7 @@
     }
 }@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.b") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.c") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.d") (JsonVariables) 'DefaultValue (Null) 'DefaultValue (Null)))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -29,7 +29,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -40,7 +40,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonExists (JsonQuery (JsonQuery (JsonQuery (SafeCast (String '@@{
     "a": {
         "b": {
@@ -51,7 +51,7 @@
     }
 }@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.b") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.c") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.d") (JsonVariables) (Just (Bool '"false"))))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -61,7 +61,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)
@@ -72,7 +72,7 @@
       (let core (AsList (AsStruct)))
       (let core (PersistableRepr (block '(
         (let projectCoreType (TypeOf core))
-        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (JsonQuery (JsonQuery (JsonQuery (SafeCast (String '@@{
     "a": {
         "b": {
@@ -83,7 +83,7 @@
     }
 }@@) (DataType 'Json)) (Utf8 '"strict $.a") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.b") (JsonVariables) 'NoWrap 'Null 'Null) (Utf8 '"strict $.c") (JsonVariables) 'NoWrap 'Null 'Null))
           (return res)
-        )))))))
+        ))) '('('autoName))))))
         (return core)
       ))))
       (return core)
@@ -93,7 +93,7 @@
   (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
-    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"column0")))))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
     (return (Commit! world result_sink))
   )))
   (return world)

@@ -40,7 +40,7 @@
       ))))
       (return core)
     )))
-    (let select (Take select (Coalesce (Coalesce (EvaluateExpr (Member (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)) 'key)) (Int32 '"0")) (Uint64 '18446744073709551615))))
+    (let select (Take select (Coalesce (Coalesce (EvaluateExpr (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0)))) (Int32 '"0")) (Uint64 '18446744073709551615))))
     (let select (RemoveSystemMembers select))
     (return select)
   )))

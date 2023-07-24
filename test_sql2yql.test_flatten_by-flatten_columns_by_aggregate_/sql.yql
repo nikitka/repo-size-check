@@ -27,10 +27,10 @@
           (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Some0 (AggApply 'some (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"row")))))) '()) '()))
           (let core (PersistableRepr (block '(
             (let projectCoreType (TypeOf core))
-            (let core (SqlProject core '((SqlProjectItem projectCoreType '"column0" (lambda '(row) (block '(
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
               (let res (Unwrap (Member row 'Some0)))
               (return res)
-            )))))))
+            ))) '('('autoName))))))
             (return core)
           ))))
           (return core)
