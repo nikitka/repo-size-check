@@ -1,10 +1,18 @@
 /* syntax version 1 *//* postgres can not */
 DEFINE SUBQUERY $a() AS
+    $_x =
+        SELECT
+            1;
+
     DISCARD SELECT
         ensure(1, TRUE);
 
     SELECT
         2;
+
+    $_y =
+        SELECT
+            2;
 END DEFINE;
 
 PROCESS $a();
