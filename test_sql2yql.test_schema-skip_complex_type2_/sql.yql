@@ -1,0 +1,42 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"inferschema" '""))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"usenativeyttypes" '"1"))
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"defaultmaxjobfails" '"1"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"boobee" (lambda '(row) (block '(
+          (let res (Member row '"boobee"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (Lookup (Member row '"_other") (String '"boobee")))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"boobee")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"boobee" '('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
