@@ -1,0 +1,66 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<=" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) ("-MayWarn" (SafeCast (String '"1998-12-01") (DataType 'Date)) (Interval '"8640000000000"))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_returnflag" '"l_linestatus") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_quantity"))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_extendedprice"))))) '('Sum2 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount"))))))) '('Sum3 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount"))) ("+MayWarn" (Int32 '"1") (Member row '"l_tax"))))))) '('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_quantity"))))) '('Avg1 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_extendedprice"))))) '('Avg2 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_discount"))))) '('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"l_returnflag" '"l_linestatus")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"l_returnflag" (lambda '(row) (block '(
+          (let res (Member row '"l_returnflag"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_linestatus" (lambda '(row) (block '(
+          (let res (Member row '"l_linestatus"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_qty" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_base_price" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_disc_price" (lambda '(row) (block '(
+          (let res (Member row 'Sum2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"sum_charge" (lambda '(row) (block '(
+          (let res (Member row 'Sum3))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg_qty" (lambda '(row) (block '(
+          (let res (Member row 'Avg0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg_price" (lambda '(row) (block '(
+          (let res (Member row 'Avg1))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"avg_disc" (lambda '(row) (block '(
+          (let res (Member row 'Avg2))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"count_order" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"l_returnflag")) (PersistableRepr (Member row '"l_linestatus"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"l_returnflag" '"l_linestatus" '"sum_qty" '"sum_base_price" '"sum_disc_price" '"sum_charge" '"avg_qty" '"avg_price" '"avg_disc" '"count_order")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,118 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"customer")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"c") '((RemoveSystemMembers table1) '"o") '('Inner '"c" '"o" '('"c" '"c_custkey") '('"o" '"o_custkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_mktsegment" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_mktsegment" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderdate" '"o"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_shippriority" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_shippriority" '"o"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderkey" '"o"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table3 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"j1") '((RemoveSystemMembers table3) '"l") '('Inner '"j1" '"l" '('"j1" '"o_orderkey") '('"l" '"l_orderkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_mktsegment" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_mktsegment" '"j1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderdate" '"j1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_shippriority" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_shippriority" '"j1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_orderkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_orderkey" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_discount" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_discount" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_shipdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_shipdate" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_extendedprice" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_extendedprice" '"l"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery1)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (And ("==" (Member row '"c_mktsegment") (String '"MACHINERY")) ("<" (SafeCast (Member row '"o_orderdate") (DataType 'Timestamp)) (Date '"9197"))) (">" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) (Date '"9197"))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_orderkey" '"o_orderdate" '"o_shippriority") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount")))))))) '()) '('"l_orderkey" '"o_orderdate" '"o_shippriority")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"l_orderkey" (lambda '(row) (block '(
+          (let res (Member row '"l_orderkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"revenue" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderdate" (lambda '(row) (block '(
+          (let res (Member row '"o_orderdate"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_shippriority" (lambda '(row) (block '(
+          (let res (Member row '"o_shippriority"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'false) (Bool 'true)) (lambda '(row) '((PersistableRepr (Member row '"revenue")) (PersistableRepr (Member row '"o_orderdate"))))))
+    (let select (Take select (Coalesce (Int32 '"10") (Uint64 '18446744073709551615))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"l_orderkey" '"revenue" '"o_orderdate" '"o_shippriority")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,144 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"customer")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Or (Or (Or ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"31")) ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"29"))) ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"30"))) (Or (Or ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"26")) ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"28"))) (Or ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"25")) ("==" (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")) (String '"15"))))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (Member row '"c_acctbal"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (Member row '"c_custkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"cntrycode" (lambda '(row) (block '(
+          (let res (Substring (Member row '"c_phone") (Uint32 '"0") (Uint32 '"2")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (Member row '"c_acctbal") (Double '"0.00")) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"c_acctbal")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"a" (lambda '(row) (block '(
+          (let res (Member row 'Avg0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"c") '((RemoveSystemMembers subquery1) '"a") '('Cross '"c" '"a" '() '() '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (SqlColumn row '"c_acctbal" '"c") (SqlColumn row '"a" '"a")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_acctbal" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_custkey" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"cntrycode" (lambda '(row) (block '(
+          (let res (SqlColumn row '"cntrycode" '"c"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let subquerynode3 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table5 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery2) '"j") '((RemoveSystemMembers table5) '"o") '('LeftOnly '"j" '"o" '('"j" '"c_custkey") '('"o" '"o_custkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"cntrycode" (lambda '(row) (block '(
+          (let res (SqlColumn row '"cntrycode" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_custkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_acctbal" '"j"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery3)
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"cntrycode") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void))))) '('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"c_acctbal")))))) '()) '('"cntrycode")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"cntrycode" (lambda '(row) (block '(
+          (let res (Member row '"cntrycode"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"numcust" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"totacctbal" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"cntrycode")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"cntrycode" '"numcust" '"totacctbal")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

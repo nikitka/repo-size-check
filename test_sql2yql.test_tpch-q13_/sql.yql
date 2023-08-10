@@ -1,0 +1,86 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let Udf2 (Udf '"Re2.Options"))
+(let Udf1 (Udf '"Re2.PatternFromLike"))
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Not (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%unusual%requests%")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (Member row '"o_comment"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"o_orderkey" (lambda '(row) (block '(
+          (let res (Member row '"o_orderkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_custkey" (lambda '(row) (block '(
+          (let res (Member row '"o_custkey"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"customer")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (EquiJoin '((RemoveSystemMembers table1) '"c") '((RemoveSystemMembers subquery0) '"o") '('Left '"c" '"o" '('"c" '"c_custkey") '('"o" '"o_custkey") '()) '()))
+          (let core (AssumeColumnOrderPartial (Aggregate core '('"c.c_custkey") '('('Count0 (AggApply 'count (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"o_orderkey" '"o")))))) '()) '('"c.c_custkey")))
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (SqlProject core '((SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+              (let res (SqlColumn row '"c_custkey" '"c"))
+              (return res)
+            )))) (SqlProjectItem projectCoreType '"c_count" (lambda '(row) (block '(
+              (let res (Member row 'Count0))
+              (return res)
+            )))))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (return select)
+      )))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"c_count") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"c_count")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"c_count" (lambda '(row) (block '(
+          (let res (Member row '"c_count"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"custdist" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'false) (Bool 'false)) (lambda '(row) '((PersistableRepr (Member row '"custdist")) (PersistableRepr (Member row '"c_count"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"c_count" '"custdist")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

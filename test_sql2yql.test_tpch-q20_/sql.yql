@@ -1,0 +1,170 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">=" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) (Date '"8401")) ("<" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) ("+MayWarn" (Date '"8401") (Interval '"31536000000000")))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_partkey" '"l_suppkey") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_quantity")))))) '()) '('"l_partkey" '"l_suppkey")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"threshold" (lambda '(row) (block '(
+          (let res ("*MayWarn" (Double '"0.5") (Member row 'Sum0)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_partkey" (lambda '(row) (block '(
+          (let res (Member row '"l_partkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_suppkey" (lambda '(row) (block '(
+          (let res (Member row '"l_suppkey"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"part")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table1)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (StartsWith (Member row '"p_name") (String '"maroon")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"p_partkey" (lambda '(row) (block '(
+          (let res (Member row '"p_partkey"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"partsupp")))) (Void) '()))
+  (let table2 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"ps") '((RemoveSystemMembers subquery1) '"p") '('Inner '"ps" '"p" '('"ps" '"ps_partkey") '('"p" '"p_partkey") '('('right 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ps_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_suppkey" '"ps"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ps_availqty" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_availqty" '"ps"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ps_partkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_partkey" '"ps"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let subquerynode3 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery2) '"j") '((RemoveSystemMembers subquery0) '"t") '('Inner '"j" '"t" '('"j" '"ps_partkey" '"j" '"ps_suppkey") '('"t" '"l_partkey" '"t" '"l_suppkey") '('('right 'any))) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (">" (SqlColumn row '"ps_availqty" '"j") (SqlColumn row '"threshold" '"t")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ps_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_suppkey" '"j"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (let core (PersistableRepr (SqlAggregateAll (RemoveSystemMembers core))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let subquerynode4 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"supplier")))) (Void) '()))
+  (let table7 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery3) '"j") '((RemoveSystemMembers table7) '"s") '('Inner '"j" '"s" '('"j" '"ps_suppkey") '('"s" '"s_suppkey") '('('right 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ps_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_suppkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_name" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_address" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_nationkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_nationkey" '"s"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode4 '0))
+(let subquery4 (Nth subquerynode4 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"nation")))) (Void) '()))
+  (let table9 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery4) '"j") '((RemoveSystemMembers table9) '"n") '('Inner '"j" '"n" '('"j" '"s_nationkey") '('"n" '"n_nationkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlColumn row '"n_name" '"n") (String '"VIETNAM")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"s_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_name" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_address" '"j"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"s_name")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"s_name" '"s_address")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

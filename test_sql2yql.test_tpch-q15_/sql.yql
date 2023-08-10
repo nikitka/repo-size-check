@@ -1,0 +1,132 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">=" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) (Date '"9921")) ("<" (SafeCast (Member row '"l_shipdate") (DataType 'Timestamp)) ("+MayWarn" (Date '"9921") (Interval '"7948800000000")))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_suppkey") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount"))))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount")))))))) '()) '('"l_suppkey")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"supplier_no" (lambda '(row) (block '(
+          (let res (Member row '"l_suppkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"total_revenue" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"total_revenue_approx" (lambda '(row) (block '(
+          (let res (SafeCast (Member row 'Sum1) (DataType 'Uint64)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Max0 (AggApply 'max (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"total_revenue_approx")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"max_revenue" (lambda '(row) (block '(
+          (let res (Member row 'Max0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"supplier")))) (Void) '()))
+  (let table2 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table2) '"s") '((RemoveSystemMembers subquery0) '"r") '('Inner '"s" '"r" '('"s" '"s_suppkey") '('"r" '"supplier_no") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"s_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_suppkey" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_name" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_address" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_phone" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_phone" '"s"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"total_revenue" (lambda '(row) (block '(
+          (let res (SqlColumn row '"total_revenue" '"r"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"total_revenue_approx" (lambda '(row) (block '(
+          (let res (SqlColumn row '"total_revenue_approx" '"r"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery2) '"j") '((RemoveSystemMembers subquery1) '"m") '('Inner '"j" '"m" '('"j" '"total_revenue_approx") '('"m" '"max_revenue") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"s_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_suppkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_name" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_address" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"s_phone" (lambda '(row) (block '(
+          (let res (SqlColumn row '"s_phone" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"total_revenue" (lambda '(row) (block '(
+          (let res (SqlColumn row '"total_revenue" '"j"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (SqlColumn row '"s_suppkey")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"s_suppkey" '"s_name" '"s_address" '"s_phone" '"total_revenue")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

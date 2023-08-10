@@ -1,0 +1,78 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"o") '((RemoveSystemMembers table1) '"l") '('Inner '"o" '"l" '('"o" '"o_orderkey") '('"l" '"l_orderkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"l_shipmode" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_shipmode" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderpriority" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderpriority" '"o"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_commitdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_commitdate" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_shipdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_shipdate" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_receiptdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_receiptdate" '"l"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (And (Or ("==" (Member row '"l_shipmode") (String '"MAIL")) ("==" (Member row '"l_shipmode") (String '"TRUCK"))) ("<" (Member row '"l_commitdate") (Member row '"l_receiptdate"))) (And (And ("<" (Member row '"l_shipdate") (Member row '"l_commitdate")) (">=" (SafeCast (Member row '"l_receiptdate") (DataType 'Timestamp)) (Date '"8766"))) ("<" (SafeCast (Member row '"l_receiptdate") (DataType 'Timestamp)) ("+MayWarn" (Date '"8766") (Interval '"31536000000000"))))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_shipmode") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (Or ("==" (Member row '"o_orderpriority") (String '"1-URGENT")) ("==" (Member row '"o_orderpriority") (String '"2-HIGH"))) (Bool 'false)) (Int32 '"1") (Int32 '"0")))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (And ("!=" (Member row '"o_orderpriority") (String '"1-URGENT")) ("!=" (Member row '"o_orderpriority") (String '"2-HIGH"))) (Bool 'false)) (Int32 '"1") (Int32 '"0"))))))) '()) '('"l_shipmode")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"l_shipmode" (lambda '(row) (block '(
+          (let res (Member row '"l_shipmode"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"high_line_count" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"low_line_count" (lambda '(row) (block '(
+          (let res (Member row 'Sum1))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"l_shipmode")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"l_shipmode" '"high_line_count" '"low_line_count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

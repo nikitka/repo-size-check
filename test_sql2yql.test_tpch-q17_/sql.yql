@@ -1,0 +1,92 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core table0)
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"l_partkey") '('('Avg0 (AggApply 'avg (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Member row '"l_quantity")))))) '()) '('"l_partkey")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"threshold" (lambda '(row) (block '(
+          (let res ("*MayWarn" (Double '"0.2") (Member row 'Avg0)))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_partkey" (lambda '(row) (block '(
+          (let res (Member row '"l_partkey"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table1 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"part")))) (Void) '()))
+  (let table2 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table1) '"l") '((RemoveSystemMembers table2) '"p") '('Inner '"l" '"p" '('"l" '"l_partkey") '('"p" '"p_partkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And ("==" (SqlColumn row '"p_brand" '"p") (String '"Brand#35")) ("==" (SqlColumn row '"p_container" '"p") (String '"LG DRUM"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"p_partkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"p_partkey" '"p"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_extendedprice" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_extendedprice" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_quantity" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_quantity" '"l"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"j") '((RemoveSystemMembers subquery0) '"t") '('Inner '"j" '"t" '('"j" '"p_partkey") '('"t" '"l_partkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("<" (SqlColumn row '"l_quantity" '"j") (SqlColumn row '"threshold" '"t")) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (SqlColumn row '"l_extendedprice" '"j")))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"avg_yearly" (lambda '(row) (block '(
+          (let res ("/MayWarn" (Member row 'Sum0) (Double '"7.0")))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"avg_yearly")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

@@ -1,0 +1,197 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"customer")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"c") '((RemoveSystemMembers table1) '"o") '('Inner '"c" '"o" '('"c" '"c_custkey") '('"o" '"o_custkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">=" (SafeCast (SqlColumn row '"o_orderdate" '"o") (DataType 'Timestamp)) (Date '"8735")) ("<" (SafeCast (SqlColumn row '"o_orderdate" '"o") (DataType 'Timestamp)) ("+MayWarn" (Date '"8735") (Interval '"7776000000000")))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_custkey" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_name" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_acctbal" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_address" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_phone" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_phone" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_comment" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_comment" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_nationkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_nationkey" '"c"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderkey" '"o"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table3 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"j") '((RemoveSystemMembers table3) '"l") '('Inner '"j" '"l" '('"j" '"o_orderkey") '('"l" '"l_orderkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce ("==" (SqlColumn row '"l_returnflag" '"l") (String '"R")) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_custkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_name" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_acctbal" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_address" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_phone" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_phone" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_comment" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_comment" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_nationkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_nationkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_extendedprice" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_extendedprice" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_discount" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_discount" '"l"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"nation")))) (Void) '()))
+  (let table5 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery1) '"j") '((RemoveSystemMembers table5) '"n") '('Inner '"j" '"n" '('"j" '"c_nationkey") '('"n" '"n_nationkey") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_custkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_name" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_acctbal" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_address" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_address" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_phone" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_phone" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_comment" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_comment" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_nationkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"c_nationkey" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_extendedprice" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_extendedprice" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_discount" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_discount" '"j"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"n_name" (lambda '(row) (block '(
+          (let res (SqlColumn row '"n_name" '"n"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery2)
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"c_custkey" '"c_name" '"c_acctbal" '"c_phone" '"n_name" '"c_address" '"c_comment") '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (Member row '"l_extendedprice") ("-MayWarn" (Int32 '"1") (Member row '"l_discount")))))))) '()) '('"c_custkey" '"c_name" '"c_acctbal" '"c_phone" '"n_name" '"c_address" '"c_comment")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"c_custkey" (lambda '(row) (block '(
+          (let res (Member row '"c_custkey"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_name" (lambda '(row) (block '(
+          (let res (Member row '"c_name"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"revenue" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_acctbal" (lambda '(row) (block '(
+          (let res (Member row '"c_acctbal"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"n_name" (lambda '(row) (block '(
+          (let res (Member row '"n_name"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_address" (lambda '(row) (block '(
+          (let res (Member row '"c_address"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_phone" (lambda '(row) (block '(
+          (let res (Member row '"c_phone"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"c_comment" (lambda '(row) (block '(
+          (let res (Member row '"c_comment"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'false) (lambda '(row) (PersistableRepr (Member row '"revenue")))))
+    (let select (Take select (Coalesce (Int32 '"20") (Uint64 '18446744073709551615))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"c_custkey" '"c_name" '"revenue" '"c_acctbal" '"n_name" '"c_address" '"c_phone" '"c_comment")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

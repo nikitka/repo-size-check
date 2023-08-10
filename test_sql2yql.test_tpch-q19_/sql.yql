@@ -1,0 +1,41 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"part")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"l") '((RemoveSystemMembers table1) '"p") '('Inner '"l" '"p" '('"l" '"l_partkey") '('"p" '"p_partkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Or (Or (And (And (And ("==" (SqlColumn row '"p_brand" '"p") (String '"Brand#23")) (Or (Or ("==" (SqlColumn row '"p_container" '"p") (String '"SM CASE")) ("==" (SqlColumn row '"p_container" '"p") (String '"SM BOX"))) (Or ("==" (SqlColumn row '"p_container" '"p") (String '"SM PACK")) ("==" (SqlColumn row '"p_container" '"p") (String '"SM PKG"))))) (">=" (SqlColumn row '"l_quantity" '"l") (Int32 '"7"))) (And (And ("<=" (SqlColumn row '"l_quantity" '"l") ("+MayWarn" (Int32 '"7") (Int32 '"10"))) (And (">=" (SqlColumn row '"p_size" '"p") (Int32 '"1")) ("<=" (SqlColumn row '"p_size" '"p") (Int32 '"5")))) (And (Or ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR")) ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR REG"))) ("==" (SqlColumn row '"l_shipinstruct" '"l") (String '"DELIVER IN PERSON"))))) (And (And (And ("==" (SqlColumn row '"p_brand" '"p") (String '"Brand#15")) (Or (Or ("==" (SqlColumn row '"p_container" '"p") (String '"MED BAG")) ("==" (SqlColumn row '"p_container" '"p") (String '"MED BOX"))) (Or ("==" (SqlColumn row '"p_container" '"p") (String '"MED PKG")) ("==" (SqlColumn row '"p_container" '"p") (String '"MED PACK"))))) (">=" (SqlColumn row '"l_quantity" '"l") (Int32 '"17"))) (And (And ("<=" (SqlColumn row '"l_quantity" '"l") ("+MayWarn" (Int32 '"17") (Int32 '"10"))) (And (">=" (SqlColumn row '"p_size" '"p") (Int32 '"1")) ("<=" (SqlColumn row '"p_size" '"p") (Int32 '"10")))) (And (Or ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR")) ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR REG"))) ("==" (SqlColumn row '"l_shipinstruct" '"l") (String '"DELIVER IN PERSON")))))) (And (And (And ("==" (SqlColumn row '"p_brand" '"p") (String '"Brand#44")) (Or (Or ("==" (SqlColumn row '"p_container" '"p") (String '"LG CASE")) ("==" (SqlColumn row '"p_container" '"p") (String '"LG BOX"))) (Or ("==" (SqlColumn row '"p_container" '"p") (String '"LG PACK")) ("==" (SqlColumn row '"p_container" '"p") (String '"LG PKG"))))) (">=" (SqlColumn row '"l_quantity" '"l") (Int32 '"25"))) (And (And ("<=" (SqlColumn row '"l_quantity" '"l") ("+MayWarn" (Int32 '"25") (Int32 '"10"))) (And (">=" (SqlColumn row '"p_size" '"p") (Int32 '"1")) ("<=" (SqlColumn row '"p_size" '"p") (Int32 '"15")))) (And (Or ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR")) ("==" (SqlColumn row '"l_shipmode" '"l") (String '"AIR REG"))) ("==" (SqlColumn row '"l_shipinstruct" '"l") (String '"DELIVER IN PERSON")))))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (SqlColumn row '"l_extendedprice" '"l") ("-MayWarn" (Int32 '"1") (SqlColumn row '"l_discount" '"l")))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"revenue" (lambda '(row) (block '(
+          (let res (Member row 'Sum0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"revenue")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

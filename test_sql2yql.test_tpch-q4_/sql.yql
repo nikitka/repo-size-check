@@ -1,0 +1,72 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"orders")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"o") '((RemoveSystemMembers table1) '"l") '('Inner '"o" '"l" '('"o" '"o_orderkey") '('"l" '"l_orderkey") '('('right 'any))) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"o_orderpriority" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderpriority" '"o"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"o_orderdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"o_orderdate" '"o"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_commitdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_commitdate" '"l"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"l_receiptdate" (lambda '(row) (block '(
+          (let res (SqlColumn row '"l_receiptdate" '"l"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core subquery0)
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (And (">=" (SafeCast (Member row '"o_orderdate") (DataType 'Timestamp)) (Date '"8825")) ("<" (SafeCast (Member row '"o_orderdate") (DataType 'Timestamp)) (SqlCall '"DateTime2.MakeDate" '((PositionalArgs (SqlCall '"DateTime2.ShiftMonths" '((PositionalArgs (Date '"8825") (Int32 '"3"))))))))) ("<" (Member row '"l_commitdate") (Member row '"l_receiptdate"))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"o_orderpriority") '('('Count0 (AggApply 'count_all (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (Void)))))) '()) '('"o_orderpriority")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"o_orderpriority" (lambda '(row) (block '(
+          (let res (Member row '"o_orderpriority"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"order_count" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select (Bool 'true) (lambda '(row) (PersistableRepr (Member row '"o_orderpriority")))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"o_orderpriority" '"order_count")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

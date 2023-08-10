@@ -1,0 +1,77 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let Udf2 (Udf '"Re2.Options"))
+(let Udf1 (Udf '"Re2.PatternFromLike"))
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"partsupp")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"supplier")))) (Void) '()))
+  (let table1 (Right! x))
+  (return '(world (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"ps") '((RemoveSystemMembers table1) '"w") '('Left '"ps" '"w" '('"ps" '"ps_suppkey") '('"w" '"s_suppkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (Not (Apply (AssumeStrict (Udf '"Re2.Match" '((Apply "Udf1" (String '"%Customer%Complaints%")) (NamedApply "Udf2" '() (AsStruct '('"CaseSensitive" (Bool '"true"))))))) (SqlColumn row '"s_comment"))) (Bool 'false)))))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"ps_suppkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_suppkey" '"ps"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"ps_partkey" (lambda '(row) (block '(
+          (let res (SqlColumn row '"ps_partkey" '"ps"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"part")))) (Void) '()))
+  (let table3 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers subquery0) '"j") '((RemoveSystemMembers table3) '"p") '('Inner '"j" '"p" '('"j" '"ps_partkey") '('"p" '"p_partkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (And ("!=" (SqlColumn row '"p_brand" '"p") (String '"Brand#33")) (Not (StartsWith (SqlColumn row '"p_type" '"p") (String '"PROMO POLISHED")))) (Or (Or (Or ("==" (SqlColumn row '"p_size" '"p") (Int32 '"20")) ("==" (SqlColumn row '"p_size" '"p") (Int32 '"27"))) (Or ("==" (SqlColumn row '"p_size" '"p") (Int32 '"11")) ("==" (SqlColumn row '"p_size" '"p") (Int32 '"45")))) (Or (Or ("==" (SqlColumn row '"p_size" '"p") (Int32 '"40")) ("==" (SqlColumn row '"p_size" '"p") (Int32 '"41"))) (Or ("==" (SqlColumn row '"p_size" '"p") (Int32 '"34")) ("==" (SqlColumn row '"p_size" '"p") (Int32 '"36")))))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '('"p.p_brand" '"p.p_type" '"p.p_size") '('('Count0 (AggApply 'count (ListItemType (ListType (StructMemberType (ListItemType (TypeOf core)) '"j.ps_suppkey"))) (lambda '(row) (PersistableRepr row))) '"j.ps_suppkey")) '()) '('"p.p_brand" '"p.p_type" '"p.p_size")))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"p_brand" (lambda '(row) (block '(
+          (let res (SqlColumn row '"p_brand" '"p"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"p_type" (lambda '(row) (block '(
+          (let res (SqlColumn row '"p_type" '"p"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"p_size" (lambda '(row) (block '(
+          (let res (SqlColumn row '"p_size" '"p"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"supplier_cnt" (lambda '(row) (block '(
+          (let res (Member row 'Count0))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'false) (Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"supplier_cnt")) (PersistableRepr (SqlColumn row '"p_brand")) (PersistableRepr (SqlColumn row '"p_type")) (PersistableRepr (SqlColumn row '"p_size"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"p_brand" '"p_type" '"p_size" '"supplier_cnt")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)

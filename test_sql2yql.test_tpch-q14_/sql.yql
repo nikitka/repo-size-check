@@ -1,0 +1,41 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"lineitem")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"part")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"l") '((RemoveSystemMembers table1) '"p") '('Inner '"l" '"p" '('"l" '"l_partkey") '('"p" '"p_partkey") '()) '()))
+      (let core (OrderedFilter core (lambda '(row) (Coalesce (And (">=" (SafeCast (SqlColumn row '"l_shipdate" '"l") (DataType 'Timestamp)) (Date '"8978")) ("<" (SafeCast (SqlColumn row '"l_shipdate" '"l") (DataType 'Timestamp)) ("+MayWarn" (Date '"8978") (Interval '"2678400000000")))) (Bool 'false)))))
+      (let core (AssumeColumnOrderPartial (Aggregate core '() '('('Sum0 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr (If (Coalesce (StartsWith (SqlColumn row '"p_type" '"p") (String '"PROMO")) (Bool 'false)) ("*MayWarn" (SqlColumn row '"l_extendedprice" '"l") ("-MayWarn" (Int32 '"1") (SqlColumn row '"l_discount" '"l"))) (Int32 '"0")))))) '('Sum1 (AggApply 'sum (ListItemType (TypeOf core)) (lambda '(row) (PersistableRepr ("*MayWarn" (SqlColumn row '"l_extendedprice" '"l") ("-MayWarn" (Int32 '"1") (SqlColumn row '"l_discount" '"l")))))))) '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (SqlProject core '((SqlProjectItem projectCoreType '"promo_revenue" (lambda '(row) (block '(
+          (let res ("/MayWarn" ("*MayWarn" (Double '"100.00") (Member row 'Sum0)) (Member row 'Sum1)))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"promo_revenue")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
