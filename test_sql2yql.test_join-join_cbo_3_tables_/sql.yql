@@ -34,9 +34,9 @@
       ))))
       (return core)
     )))
+    (let select (Sort select '((Bool 'true) (Bool 'true) (Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"value" '"i1")) (PersistableRepr (SqlColumn row '"value" '"i2")) (PersistableRepr (SqlColumn row '"value" '"i3")) (PersistableRepr (SqlColumn row '"value" '"i4"))))))
     (return select)
   )))
-  (let output (Unordered output))
   (let world (block '(
     (let result_sink (DataSink 'result))
     (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"i1.value" '"i2.value" '"i3.value" '"i4.value")))))

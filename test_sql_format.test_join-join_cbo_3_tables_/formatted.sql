@@ -15,5 +15,10 @@ JOIN Input3
 ON i1.key = i3.key
 JOIN Input4
     AS i4
-ON i1.key = i4.key;
+ON i1.key = i4.key
+ORDER BY
+    i1.value,
+    i2.value,
+    i3.value,
+    i4.value;
 
