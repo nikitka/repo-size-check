@@ -1,0 +1,393 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStructUnordered '('"dt" (Int32 '"4")) '('"host" (String '"fqdn1")) '('"key" (Int32 '"14"))))))
+          (let match_recognize ("block" '(
+            (let input core)
+            (let partitionKeySelector (lambda '(row) '()))
+            (let partitionColumns '())
+            (let sortTraits (Void))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '()))
+            (let rowsPerMatch '"RowsPerMatch_OneRow")
+            (let skipTo '('AfterMatchSkip_NextRow '""))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let subset '"")
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Bool '"true"))
+            )))))
+            (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
+            (return res)
+          )))
+          (let core match_recognize)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (RemoveSystemMembers row))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let subquerynode1 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStructUnordered '('"dt" (Int32 '"4")) '('"host" (String '"fqdn1")) '('"key" (Int32 '"14"))))))
+          (let match_recognize ("block" '(
+            (let input core)
+            (let partitionKeySelector (lambda '(row) '()))
+            (let partitionColumns '())
+            (let sortTraits (Void))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"Measure1") (lambda '("$_yql_anonymous_name_0" "$_yql_anonymous_name_1") (block '(
+              (return (String '"SomeString"))
+            )))))
+            (let rowsPerMatch '"RowsPerMatch_OneRow")
+            (let skipTo '('AfterMatchSkip_NextRow '""))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let subset '"")
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Bool '"true"))
+            )))))
+            (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
+            (return res)
+          )))
+          (let core match_recognize)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (RemoveSystemMembers row))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode1 '0))
+(let subquery1 (Nth subquerynode1 '1))
+(let subquerynode2 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStructUnordered '('"dt" (Int32 '"4")) '('"host" (String '"fqdn1")) '('"key" (Int32 '"14"))))))
+          (let match_recognize ("block" '(
+            (let input core)
+            (let partitionKeySelector (lambda '(row) '((Member row '"dt"))))
+            (let partitionColumns '('"dt"))
+            (let sortTraits (Void))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '()))
+            (let rowsPerMatch '"RowsPerMatch_OneRow")
+            (let skipTo '('AfterMatchSkip_NextRow '""))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let subset '"")
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Bool '"true"))
+            )))))
+            (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
+            (return res)
+          )))
+          (let core match_recognize)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (RemoveSystemMembers row))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode2 '0))
+(let subquery2 (Nth subquerynode2 '1))
+(let subquerynode3 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStructUnordered '('"dt" (Int32 '"4")) '('"host" (String '"fqdn1")) '('"key" (Int32 '"14"))))))
+          (let match_recognize ("block" '(
+            (let input core)
+            (let partitionKeySelector (lambda '(row) '((Member row '"host"))))
+            (let partitionColumns '('"host"))
+            (let sortTraits (Void))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"Measure1") (lambda '("$_yql_anonymous_name_0" "$_yql_anonymous_name_1") (block '(
+              (return (String '"SomeString"))
+            )))))
+            (let rowsPerMatch '"RowsPerMatch_OneRow")
+            (let skipTo '('AfterMatchSkip_NextRow '""))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let subset '"")
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Bool '"true"))
+            )))))
+            (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
+            (return res)
+          )))
+          (let core match_recognize)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (RemoveSystemMembers row))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode3 '0))
+(let subquery3 (Nth subquerynode3 '1))
+(let subquerynode4 (block '(
+  (return '(world (block '(
+    (let select (block '(
+      (let core (block '(
+        (let select (block '(
+          (let core (ToList (AsList (AsStructUnordered '('"dt" (Int32 '"4")) '('"host" (String '"fqdn1")) '('"key" (Int32 '"14"))))))
+          (let match_recognize ("block" '(
+            (let input core)
+            (let partitionKeySelector (lambda '(row) '((Member row '"host") (Member row '"dt"))))
+            (let partitionColumns '('"host" '"dt"))
+            (let sortTraits (Void))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"S" '"I") (lambda '("$_yql_anonymous_name_0" "$_yql_anonymous_name_1") (block '(
+              (return (String '"SomeString"))
+            ))) (lambda '("$_yql_anonymous_name_2" "$_yql_anonymous_name_3") (block '(
+              (return (Int32 '"345"))
+            )))))
+            (let rowsPerMatch '"RowsPerMatch_OneRow")
+            (let skipTo '('AfterMatchSkip_NextRow '""))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let subset '"")
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Bool '"true"))
+            )))))
+            (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
+            (return res)
+          )))
+          (let core match_recognize)
+          (let core (PersistableRepr (block '(
+            (let projectCoreType (TypeOf core))
+            (let core (OrderedSqlProject core '((SqlProjectStarItem projectCoreType '"" (lambda '(row) (block '(
+              (let res row)
+              (return res)
+            ))) '()))))
+            (return core)
+          ))))
+          (return core)
+        )))
+        (let select (RemoveSystemMembers select))
+        (return select)
+      )))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (RemoveSystemMembers row))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode4 '0))
+(let subquery4 (Nth subquerynode4 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SingleMember (SqlAccess 'dict (Take subquery0 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SingleMember (SqlAccess 'dict (Take subquery1 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SingleMember (SqlAccess 'dict (Take subquery2 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SingleMember (SqlAccess 'dict (Take subquery3 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (FormatType (TypeOf (SingleMember (SqlAccess 'dict (Take subquery4 (Uint64 '1)) (Uint64 '0))))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
