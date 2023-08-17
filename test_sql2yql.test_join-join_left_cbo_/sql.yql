@@ -1,0 +1,42 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let world (Configure! world (DataSource '"yt" '"$all") '"Attr" '"costbasedoptimizer" '"PG"))
+(let world (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input1")))) (Void) '()))
+  (let table0 (Right! x))
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input2")))) (Void) '()))
+  (let table1 (Right! x))
+  (let output (block '(
+    (let select (block '(
+      (let core (EquiJoin '((RemoveSystemMembers table0) '"i1") '((RemoveSystemMembers table1) '"i2") '('Left '"i1" '"i2" '('"i1" '"key") '('"i2" '"key") '()) '()))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"i1.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"i1"))
+          (return res)
+        )))) (SqlProjectItem projectCoreType '"i2.value" (lambda '(row) (block '(
+          (let res (SqlColumn row '"value" '"i2"))
+          (return res)
+        )))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (let select (Sort select '((Bool 'true) (Bool 'true)) (lambda '(row) '((PersistableRepr (SqlColumn row '"value" '"i1")) (PersistableRepr (SqlColumn row '"value" '"i2"))))))
+    (return select)
+  )))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('"i1.value" '"i2.value")))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
