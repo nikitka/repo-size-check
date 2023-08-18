@@ -13,13 +13,17 @@
             (let partitionKeySelector (lambda '(row) '()))
             (let partitionColumns '())
             (let sortTraits (Void))
-            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '()))
+            (let measures (MatchRecognizeMeasures (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1") '('"B" '"1" '"1" '"1" '"1") '('"C" '"1" '"1" '"1" '"1"))) '()))
             (let rowsPerMatch '"RowsPerMatch_OneRow")
             (let skipTo '('AfterMatchSkip_NextRow '""))
-            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
+            (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1") '('"B" '"1" '"1" '"1" '"1") '('"C" '"1" '"1" '"1" '"1"))))
             (let subset '"")
-            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+            (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1") '('"B" '"1" '"1" '"1" '"1") '('"C" '"1" '"1" '"1" '"1"))) '('"A" '"B" '"C") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
+              (return (Null))
+            ))) (lambda '("$_yql_anonymous_name_7" "$_yql_anonymous_name_8" "$_yql_anonymous_name_9") (block '(
               (return (Bool '"true"))
+            ))) (lambda '("$_yql_anonymous_name_10" "$_yql_anonymous_name_11" "$_yql_anonymous_name_12") (block '(
+              (return (Just (Bool '"true")))
             )))))
             (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
             (return res)
@@ -72,7 +76,7 @@
             (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
             (let subset '"")
             (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
-              (return (Bool '"true"))
+              (return (Null))
             )))))
             (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
             (return res)
@@ -123,7 +127,7 @@
             (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
             (let subset '"")
             (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
-              (return (Bool '"true"))
+              (return (Null))
             )))))
             (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
             (return res)
@@ -176,7 +180,7 @@
             (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
             (let subset '"")
             (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
-              (return (Bool '"true"))
+              (return (Null))
             )))))
             (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
             (return res)
@@ -231,7 +235,7 @@
             (let pattern (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))))
             (let subset '"")
             (let define (MatchRecognizeDefines (ListItemType (TypeOf core)) (MatchRecognizePattern '('('"A" '"1" '"1" '"1" '"1"))) '('"A") (lambda '("$_yql_anonymous_name_4" "$_yql_anonymous_name_5" "$_yql_anonymous_name_6") (block '(
-              (return (Bool '"true"))
+              (return (Null))
             )))))
             (let res (MatchRecognize input partitionKeySelector partitionColumns sortTraits (MatchRecognizeParams measures rowsPerMatch skipTo pattern define)))
             (return res)
