@@ -1,0 +1,104 @@
+(
+(import aggregate_module '"/lib/yql/aggregate.yql")
+(import window_module '"/lib/yql/window.yql")
+(import core_module '"/lib/yql/core.yql")
+(let subquerynode0 (block '(
+  (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"Input")))) (Void) '()))
+  (let table0 (Right! x))
+  (return '(world (block '(
+    (let select (RemoveSystemMembers table0))
+    (return select)
+  ))))
+)))
+(let world (Nth subquerynode0 '0))
+(let subquery0 (Nth subquerynode0 '1))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (ShuffleByKeys subquery0 (lambda '("$_yql_anonymous_name_0") (block '(
+            (return (String '"dsdsa"))
+          ))) (lambda '("$_yql_anonymous_name_1") (block '(
+            (return (AsList (Int32 '"1")))
+          )))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (ShuffleByKeys subquery0 (lambda '("$_yql_anonymous_name_2") (block '(
+            (return (Int32 '"12"))
+          ))) (lambda '("$_yql_anonymous_name_3") (block '(
+            (return (Just (Int32 '"2")))
+          )))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let output (block '(
+    (let select (block '(
+      (let core (AsList (AsStruct)))
+      (let core (PersistableRepr (block '(
+        (let projectCoreType (TypeOf core))
+        (let core (OrderedSqlProject core '((SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
+          (let res (ShuffleByKeys subquery0 (lambda '("$_yql_anonymous_name_4") (block '(
+            (return (Bool '"true"))
+          ))) (lambda '("$_yql_anonymous_name_5") (block '(
+            (return (ToStream (AsList (Int32 '"3"))))
+          )))))
+          (return res)
+        ))) '('('autoName))))))
+        (return core)
+      ))))
+      (return core)
+    )))
+    (return select)
+  )))
+  (let output (Unordered output))
+  (let world (block '(
+    (let result_sink (DataSink 'result))
+    (let world (Write! world result_sink (Key) output '('('type) '('autoref) '('columns '('('auto))))))
+    (return (Commit! world result_sink))
+  )))
+  (return world)
+)))
+(let world (block '(
+  (let world (CommitAll! world))
+  (return world)
+)))
+(return world)
+)
