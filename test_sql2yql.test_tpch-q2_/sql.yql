@@ -4,7 +4,6 @@
 (import core_module '"/lib/yql/core.yql")
 (let Udf2 (Udf '"Re2.Options"))
 (let Udf1 (Udf '"Re2.PatternFromLike"))
-(let world (Configure! world (DataSource '"dq" '"$all") '"Attr" '"enabledqreplicate" '"1"))
 (let subquerynode0 (block '(
   (let x (Read! world (DataSource '"yt" '"plato") (MrTableConcat (Key '('table (String '"region")))) (Void) '()))
   (let table0 (Right! x))

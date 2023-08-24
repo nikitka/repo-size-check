@@ -1,5 +1,4 @@
 USE plato;
-PRAGMA dq.EnableDqReplicate = "1";
 SELECT
     key,
     COUNT(*) AS cnt,

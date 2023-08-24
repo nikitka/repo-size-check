@@ -1,6 +1,5 @@
 USE plato;
 PRAGMA DisableSimpleColumns;
-PRAGMA Dq.EnableDqReplicate = "1";
 SELECT
     cust.customer_id,
     cntr.country_name

@@ -1,8 +1,6 @@
-PRAGMA dq.EnableDqReplicate = "1";
 -- TPC-H/TPC-R Important Stock Identification Query (Q11)
 -- TPC TPC-H Parameter Substitution (Version 2.17.2 build 0)
 -- using 1680793381 as a seed to the RNG
-PRAGMA dq.EnableDqReplicate = "1";
 PRAGMA DisableSimpleColumns;
 $join1 = (
     SELECT

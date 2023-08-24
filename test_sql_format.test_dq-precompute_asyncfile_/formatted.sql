@@ -1,5 +1,4 @@
 USE plato;
-PRAGMA dq.EnableDqReplicate;
 $a =
     SELECT
         max(key)

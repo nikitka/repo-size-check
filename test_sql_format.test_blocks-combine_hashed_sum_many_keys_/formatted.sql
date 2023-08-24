@@ -1,6 +1,5 @@
 PRAGMA UseBlocks;
 PRAGMA EmitAggApply;
-PRAGMA dq.EnableDqReplicate = "1";
 USE plato;
 SELECT
     k1,

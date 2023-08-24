@@ -1,4 +1,3 @@
-PRAGMA dq.EnableDqReplicate = "1";
 -- TPC-H/TPC-R Minimum Cost Supplier Query (Q2)
 -- using 1680793381 as a seed to the RNG
 $r = (

@@ -1,6 +1,5 @@
 /* syntax version 1 *//* postgres can not */
 USE plato;
-PRAGMA Dq.EnableDqReplicate = "1";
 $udf = YQL::@@
 (lambda '(key stream)
     (PartitionByKey stream
