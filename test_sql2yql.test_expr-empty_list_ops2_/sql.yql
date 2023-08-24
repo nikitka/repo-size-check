@@ -80,9 +80,7 @@
           (let res (Apply (bind core_module '"IndexOf") (AsList) (Int32 '"1")))
           (return res)
         ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList) (lambda '(arg) (block '(
-            (return arg)
-          ))) (lambda '(item) (Void)) '('Hashed 'One))))
+          (let res (ListUniq (AsList)))
           (return res)
         ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListAny (AsList)))
@@ -150,9 +148,7 @@
           (let res (ListTake (Just (AsList)) (Int32 '"1")))
           (return res)
         ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (Just (AsList)) (lambda '(arg) (block '(
-            (return arg)
-          ))) (lambda '(item) (Void)) '('Hashed 'One))))
+          (let res (ListUniq (Just (AsList))))
           (return res)
         ))) '('('autoName))) (SqlProjectItem projectCoreType '"" (lambda '(row) (block '(
           (let res (ListAny (Just (AsList))))

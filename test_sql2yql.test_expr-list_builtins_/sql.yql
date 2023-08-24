@@ -80,9 +80,7 @@ def formula(a, b, c, d):
           (let res (ListAvg (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"uniq" (lambda '(row) (block '(
-          (let res (DictKeys (ToDict (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '(arg) (block '(
-            (return arg)
-          ))) (lambda '(item) (Void)) '('Hashed 'One))))
+          (let res (ListUniq (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3"))))
           (return res)
         )))) (SqlProjectItem projectCoreType '"concat" (lambda '(row) (block '(
           (let res (ListConcat (ListMap (AsList (Int32 '"3") (Int32 '"1") (Int32 '"2") (Int32 '"3")) (lambda '("$item") (block '(

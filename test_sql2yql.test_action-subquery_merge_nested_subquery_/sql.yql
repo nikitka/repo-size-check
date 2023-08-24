@@ -8,9 +8,7 @@
       (let world (block '(
         (let output (block '(
           (let select (block '(
-            (let core (UnorderedSubquery (Apply (SubqueryExtendFor (EvaluateExpr (Unwrap (DictKeys (ToDict "$dirs" (lambda '(arg) (block '(
-              (return arg)
-            ))) (lambda '(item) (Void)) '('Hashed 'One))))) (lambda '(world "$dir") (block '(
+            (let core (UnorderedSubquery (Apply (SubqueryExtendFor (EvaluateExpr (Unwrap (ListUniq "$dirs"))) (lambda '(world "$dir") (block '(
               (let world (block '(
                 (let x (Read! world (DataSource '"yt" '"plato") (MrFolder (EvaluateAtom "$dir") '"") (Void) '()))
                 (let table0 (Right! x))
